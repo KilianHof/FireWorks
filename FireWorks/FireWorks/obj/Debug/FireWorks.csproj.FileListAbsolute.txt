@@ -1,0 +1,7 @@
+C:\Users\khof\source\repos\FireWorks\FireWorks\bin\Debug\FireWorks.exe.config
+C:\Users\khof\source\repos\FireWorks\FireWorks\bin\Debug\FireWorks.exe
+C:\Users\khof\source\repos\FireWorks\FireWorks\bin\Debug\FireWorks.pdb
+C:\Users\khof\source\repos\FireWorks\FireWorks\obj\Debug\FireWorks.csprojAssemblyReference.cache
+C:\Users\khof\source\repos\FireWorks\FireWorks\obj\Debug\FireWorks.csproj.CoreCompileInputs.cache
+C:\Users\khof\source\repos\FireWorks\FireWorks\obj\Debug\FireWorks.exe
+C:\Users\khof\source\repos\FireWorks\FireWorks\obj\Debug\FireWorks.pdb
