@@ -23,8 +23,6 @@ namespace FireWorks
             FileIO filer = new FileIO();
             filer.WriteObject(test, _Path);
             Console.ReadLine();
-            TUI t = new TUI();
-            
 
         }
     }

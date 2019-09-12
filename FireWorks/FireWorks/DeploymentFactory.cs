@@ -55,6 +55,7 @@ namespace FireWorks
                         break;
                     case "1":
                         veh[i] = new FireTruck("hi", 1, 2, true, 232);
+                        
                         break;
                     case "2":
                         veh[i] = new Ambulance("hi", 1, 2, 232);
