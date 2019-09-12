@@ -10,6 +10,8 @@ namespace FireWorks
 {
     class Program
     {
+        private const string _Path = @"C:\FireWorks\Deployments.txt";
+
         static void Main(string[] args)
         {
             //@"C:\FireWorks\Deployments.txt"
@@ -18,7 +20,8 @@ namespace FireWorks
             //Authenticator.LogIn();
 
             Deployment test = AskForDeployment();
-            FileWriter.WriteToFile(test, @"C:\FireWorks\Deployments.txt");
+            FileIO.WriteToFile(test, _Path);
+            Console.WriteLine(GetLastDeploymentNumber());
             Console.ReadLine();
 
         }
@@ -35,12 +38,14 @@ namespace FireWorks
             string hum = Console.ReadLine();
             Console.WriteLine("Comments?");
             string com = Console.ReadLine();
-            // todo add get number
-            return DeploymentFactory.NewDeployment(loc, veh, res, hum, com, 3);
+            int num = GetLastDeploymentNumber()+1;
+            return DeploymentFactory.NewDeployment(loc, veh, res, hum, com, num);
         }
-        public static int GetLastDeployment()
+        public static int GetLastDeploymentNumber()
         {
-            return 0;
+            int lineCount = File.ReadLines(_Path).Count();
+            Deployment last = FileIO.ReadObjectFromFile(_Path,lineCount);
+            return last.Number;
         }
     }
 }
