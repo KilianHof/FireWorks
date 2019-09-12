@@ -15,12 +15,12 @@ namespace FireWorks
         public object Human { get; set; }
         public string Comment { get; set; }
         public int Number { get; set; }
-        private static int counter = 1;
+
         public Deployment() //null
         {
 
         }
-        public Deployment(string Loc, object Veh, object Res, object Hum, string Com )
+        public Deployment(string Loc, object Veh, object Res, object Hum, string Com, int Num)
         {
             DateAndTime = DateTime.Now.ToString("dddd, dd MMMM yyyy HH:mm:ss");
             Location = Loc;
@@ -28,8 +28,7 @@ namespace FireWorks
             Resources = Res;
             Human = Hum;
             Comment = Com;
-            Number = counter;
-            counter++;
+            Number = Num;
         }
     }
 }

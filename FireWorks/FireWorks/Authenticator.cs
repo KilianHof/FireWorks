@@ -9,14 +9,10 @@ namespace FireWorks
 {
     class Authenticator
     {
-        public Authenticator()
-        {
 
-        }
-        public bool LogIn()
+        public static bool LogIn()
         {
             bool IsValidSuccess = CheckPIN();
-            Console.WriteLine(IsValidSuccess);
             if (IsValidSuccess)
             {
                 return true;
@@ -63,17 +59,14 @@ namespace FireWorks
         }
         public static bool ValidateInput(string Input)
         {
-            bool IsValid = true;
-            if (!(Input.Length == 4))
-                IsValid = false;
+            if (!(Input.Length == 4)) 
+                return false;
             for (int i = 0; i < Input.Length; i++)
             {
                 if (!char.IsDigit(Input[i]))
-                {
-                    IsValid = false;
-                }
+                    return false;
             }
-            return IsValid;
+            return true;
         }
         public static bool GetYesNo()
         {
