@@ -20,6 +20,8 @@ namespace FireWorks
             //Authenticator.LogIn();
 
             Deployment test = AskForDeployment();
+            Console.WriteLine(test.FireFighters[0].ToString());
+            Console.WriteLine(JSONConverter.ObjectToJSON(test));
             FileIO.WriteToFile(test, _Path);
             Console.ReadLine();
 
@@ -34,7 +36,7 @@ namespace FireWorks
             Console.WriteLine("What resources were used?");
             object[] res = new string[] { Console.ReadLine() };
             Console.WriteLine("Who was send?");
-            FireFighter[] Ff = new FireFighter[] {new FireFighter("hallo","ibims",12),new FireFighter("hallo", "ibims", 12) };
+            FireFighter[] Ff = { new FireFighter("hallo", "ibims", 12), new FireFighter("hallo", "ibims", 12) };
             Console.WriteLine("Comments?");
             string com = Console.ReadLine();
             int num = GetLastDeploymentNumber() + 1;
