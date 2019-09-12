@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FireWorks
 {
-    public abstract class Vehicles
+    public class Vehicles
     {
         public string Type { get; set; }   
         public int EnginePower { get; set; }
