@@ -5,7 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FireWorks
-{
+{   
+    /// <summary>
+    /// Deployment onbject contains all the information of a given Deployment
+    /// </summary>
     class Deployment
     {
         public string DateAndTime { get; set; }
@@ -20,6 +23,15 @@ namespace FireWorks
         {
 
         }
+        /// <summary>
+        /// Constructor for Deployments
+        /// </summary>
+        /// <param name="Loc">Location</param>
+        /// <param name="Veh">Vehicles</param>
+        /// <param name="Res">Resources</param>
+        /// <param name="Hum">Humans</param>
+        /// <param name="Com">Comment</param>
+        /// <param name="Num">Number</param>
         public Deployment(string Loc, object Veh, object Res, object Hum, string Com, int Num)
         {
             DateAndTime = DateTime.Now.ToString("dddd, dd MMMM yyyy HH:mm:ss");
