@@ -45,10 +45,13 @@ namespace FireWorks
             Console.WriteLine("How Many personel was send?");
             int amount = int.Parse(Console.ReadLine());
             FireFighter[] Ff = new FireFighter[amount];
-            Console.WriteLine("Who was send?");
+            Console.WriteLine("Who was send?");                     // read from file?
             for (int i = 0; i < amount; i++)
             {
-                Ff[i] = new FireFighter(Console.ReadLine(), Console.ReadLine(), int.Parse(Console.ReadLine()));
+                Ff[i] = new FireFighter(
+                                        Console.ReadLine(),
+                                        Console.ReadLine(),
+                              int.Parse(Console.ReadLine()));
             }
 
             Console.WriteLine("Comments?");
