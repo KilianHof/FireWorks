@@ -19,7 +19,7 @@ namespace FireWorks
         /// <param name="loc">Location.</param>
         /// <param name="veh">Vehicles</param>
         /// <param name="res">Resources</param>
-        /// <param name="hum">Humans</param>
+        /// <param name="Ff">FireFighter</param>
         /// <param name="com">Comment</param>
         /// <param name="num">Number</param>
         /// <returns></returns>
