@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FireWorks
-{   
+{
     /// <summary>
     /// Deployment onbject contains all the information of a given Deployment
     /// </summary>

@@ -10,7 +10,7 @@ namespace FireWorks
     /// Factroy for creating Deployment objects.
     /// </summary>
     class DeploymentFactory
-    {   
+    {
         /// <summary>
         /// Calls the Constructor of Deployment objects with needed params.
         /// </summary>

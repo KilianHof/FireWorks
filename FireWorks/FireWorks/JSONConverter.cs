@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 namespace FireWorks
-{ 
+{
     /// <summary>
     /// Wrapper for JSON conversion.
     /// </summary>

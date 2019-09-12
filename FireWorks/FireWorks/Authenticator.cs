@@ -11,7 +11,7 @@ namespace FireWorks
     /// Authenticator is being used to verify and Login users.
     /// </summary>
     class Authenticator
-    {   
+    {
         /// <summary>
         /// Calls helper functions to ask for a PIN
         /// </summary>
@@ -78,7 +78,7 @@ namespace FireWorks
         /// <returns>Returns true for a Valid format.</returns>
         public static bool ValidateInput(string Input)
         {
-            if (!(Input.Length == 4)) 
+            if (!(Input.Length == 4))
                 return false;
             for (int i = 0; i < Input.Length; i++)
             {
@@ -100,5 +100,4 @@ namespace FireWorks
                 return false;
         }
     }
-
 }

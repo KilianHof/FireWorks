@@ -12,20 +12,14 @@ namespace FireWorks
     {
         static void Main(string[] args)
         {
+            //@"C:\FireWorks\Deployments.txt"
             //Console.WriteLine("1234".GetHashCode());
             //Console.WriteLine("Hello and welcome to FireWorks! \n Please Enter a four digit PIN to continue.");
             //Authenticator.LogIn();
 
-
             Deployment test = AskForDeployment();
-            FileWriter.WriteToFile(test , @"C:\FireWorks\Deployments.txt");
+            FileWriter.WriteToFile(test, @"C:\FireWorks\Deployments.txt");
             Console.ReadLine();
-
-            //@"C:\FireWorks\Deployments.txt"
-
-
-
-
 
         }
 
@@ -42,8 +36,11 @@ namespace FireWorks
             Console.WriteLine("Comments?");
             string com = Console.ReadLine();
             // todo add get number
-            return DeploymentFactory.NewDeployment(loc,veh,res,hum,com,3);
+            return DeploymentFactory.NewDeployment(loc, veh, res, hum, com, 3);
         }
-       
+        public static int GetLastDeployment()
+        {
+            return 0;
+        }
     }
 }
