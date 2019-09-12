@@ -14,5 +14,9 @@ namespace FireWorks
             FirstName = fname;
             Id = id;
         }
+        public override string ToString()
+        {
+            return FirstName + " " + LastName + " " + Id; 
+        }
     }
 }

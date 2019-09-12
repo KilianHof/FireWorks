@@ -34,11 +34,11 @@ namespace FireWorks
             Console.WriteLine("What resources were used?");
             object[] res = new string[] { Console.ReadLine() };
             Console.WriteLine("Who was send?");
-            object[] hum = new string[] { Console.ReadLine() };
+            FireFighter[] Ff = new FireFighter[] {new FireFighter("hallo","ibims",12),new FireFighter("hallo", "ibims", 12) };
             Console.WriteLine("Comments?");
             string com = Console.ReadLine();
             int num = GetLastDeploymentNumber() + 1;
-            return DeploymentFactory.NewDeployment(loc, veh, res, hum, com, num);
+            return DeploymentFactory.NewDeployment(loc, veh, res, Ff, com, num);
         }
         public static int GetLastDeploymentNumber()
         {

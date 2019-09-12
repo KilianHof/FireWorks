@@ -11,6 +11,10 @@ namespace FireWorks
         protected int Id { get; set; }
         protected string FirstName { get; set; }
         protected string LastName { get; set; }
-        //public abstract string FullName();
+
+        public Human()
+        {
+        }
+        public abstract override string ToString();
     }
 }

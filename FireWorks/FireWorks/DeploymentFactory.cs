@@ -21,9 +21,9 @@ namespace FireWorks
         /// <param name="com">Comment</param>
         /// <param name="num">Number</param>
         /// <returns></returns>
-        public static Deployment NewDeployment(string loc, object[] veh, object[] res, object[] hum, string com, int num)
+        public static Deployment NewDeployment(string loc, object[] veh, object[] res, FireFighter[] Ff, string com, int num)
         {
-            return new Deployment(loc, veh, res, hum, com, num);
+            return new Deployment(loc, veh, res, Ff, com, num);
         }
     }
 }

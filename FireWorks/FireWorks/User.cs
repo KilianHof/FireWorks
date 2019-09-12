@@ -19,5 +19,9 @@ namespace FireWorks
             PIN = pin;
             Status = status;
         }
+        public override string ToString()
+        {
+            return FirstName + " " + LastName + " " + Id + " " + PIN + " " + Status;
+        }
     }
 }
