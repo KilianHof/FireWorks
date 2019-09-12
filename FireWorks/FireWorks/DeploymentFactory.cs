@@ -27,6 +27,10 @@ namespace FireWorks
         {
             return new Deployment(loc, veh, res, Ff, com, num);
         }
+        /// <summary>
+        /// Prompts the user to enter a new Deployment object.
+        /// </summary>
+        /// <returns>The generated Deployment object.</returns>
         public static Deployment PromptDeployment()
         {
             Console.WriteLine("Where?");
@@ -40,18 +44,24 @@ namespace FireWorks
 
             Console.WriteLine("How Many personel was send?");
             int amount = int.Parse(Console.ReadLine());
-
             FireFighter[] Ff = new FireFighter[amount];
             Console.WriteLine("Who was send?");
             for (int i = 0; i < amount; i++)
             {
                 Ff[i] = new FireFighter(Console.ReadLine(), Console.ReadLine(), int.Parse(Console.ReadLine()));
             }
+
             Console.WriteLine("Comments?");
             string com = Console.ReadLine();
+
             int num = GetLastDeploymentNumber() + 1;
+
             return new Deployment(loc, veh, res, Ff, com, num);
         }
+        /// <summary>
+        /// Used to retrieve the last saved Deployment number to generate the next one.
+        /// </summary>
+        /// <returns>Number of last saved Deployment.</returns>
         public static int GetLastDeploymentNumber()
         {
             int lineCount = File.ReadLines(_Path).Count();
