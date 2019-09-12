@@ -8,10 +8,15 @@ using System.Threading.Tasks;
 
 namespace FireWorks
 {
-    class Authenticator
+    public class Authenticator
     {
         public static object StatusCheck(Human CurrentUser)
         {
+
+
+            Console.WriteLine(CurrentUser.Status);
+
+
             if (CurrentUser.Status == 0)
             {
                 Console.WriteLine("Nutzerkonto gesperrt.");
@@ -32,6 +37,7 @@ namespace FireWorks
                 Console.ReadLine();
                 return CurrentUser;
             }
+
             else
             {
                 Console.WriteLine("Nutzerstatus Invalid.");
@@ -43,21 +49,21 @@ namespace FireWorks
         }
 
 
-            public static object LogIn(Human CurrentUser)
+            public static String LogIn()
         {
-
+            String SCurrentUser = "";
+            Human CurrentUser = new Human();
             Console.Write("Please enter PIN:");
             String PINenter = Console.ReadLine();
             PINenter = "\"PIN\":\"" + PINenter + "\",\""; //Absicherung
-            string read = "";
             using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Users.txt"))
-                while (read.IndexOf(PINenter) == -1)
+                while (SCurrentUser.IndexOf(PINenter) == -1)
                 {
 
 
-                    read = UserText.ReadLine();
+                    SCurrentUser = UserText.ReadLine();
 
-                    if (read == null)
+                    if (SCurrentUser == null)
                     {
                         Console.WriteLine("Falscher PIN.");
                         Console.ReadLine();
@@ -65,12 +71,12 @@ namespace FireWorks
                     }
                 }
 
-            Console.WriteLine(read);
-            Console.ReadLine();
+            Console.WriteLine(CurrentUser.Status);
 
-            CurrentUser = JsonConvert.DeserializeObject<Human>(read);
 
-            return CurrentUser;
+            Console.WriteLine(CurrentUser.Status);
+
+            return SCurrentUser;
         }
     }
 }

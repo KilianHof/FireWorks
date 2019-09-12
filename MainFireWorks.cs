@@ -10,15 +10,17 @@ namespace FireWorks
 {
     class MainFireWorks
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
 
 
 
 
             Human CurrentUser = new Human();
+            var SCurrentUser = Authenticator.LogIn();
+            Console.WriteLine(CurrentUser);
 
-            Authenticator.LogIn(CurrentUser);
+            CurrentUser = JsonConvert.DeserializeObject<Human>(SCurrentUser);
 
             Authenticator.StatusCheck(CurrentUser);
 

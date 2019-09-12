@@ -12,7 +12,12 @@ namespace Fireworks
 
     public class Deployment
     {
-        public DateTime Date { get; set; } // Einsatzdatum
-        
+        public string Date { get; set; } // Einsatzdatum
+        public string Location { get; set; } // Einsatzort
+        public object Vehicles { get; set; } // Einsatzfahrzeuge
+        public object Resources { get; set; } // Einsatzmittel
+        public object Human { get; set; } // Einsatz-Anwesende
+        public string Comment { get; set; } // Kommentar
+        public int Number { get; set; } // Einsatz-ID
     }
 }
