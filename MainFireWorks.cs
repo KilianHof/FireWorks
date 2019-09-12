@@ -16,17 +16,10 @@ namespace FireWorks
         {
 
 
-            Deployment test = new Deployment();
-            string testtext;
-            using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Deployments.txt"))
-            testtext = UserText.ReadLine();
-                    test = JsonConvert.DeserializeObject<Deployment>(testtext);
-            Console.WriteLine(test.Location+test.Date);
-                
+            
 
             Human CurrentUser = new Human();
             var SCurrentUser = Authenticator.LogIn();
-            Console.WriteLine(CurrentUser);
 
             CurrentUser = JsonConvert.DeserializeObject<Human>(SCurrentUser);
 
@@ -47,7 +40,8 @@ namespace FireWorks
                 //}
                 if (Answer == "d")
                 {
-                    DeploymentListing.DeploymentDetail();
+                Console.Clear();
+                DeploymentListing.DeploymentDetail();
                 }
 
 

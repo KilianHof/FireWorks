@@ -26,7 +26,6 @@ namespace FireWorks
 
         public static void DeploymentDetail()
         {
-            Console.Clear();
             String Deploytext = "";
             Deployment DetailDeployment = new Deployment();
             Console.Write("Einsatz ID:");
@@ -67,10 +66,9 @@ namespace FireWorks
         {
 
             int i = 0;
-            Console.WriteLine("Wie viele Einsätze sollen Maximal gezeigt werden?");
+            Console.WriteLine("Wie viele Einsätze sollen maximal gezeigt werden?");
             int.TryParse(Console.ReadLine(), out int number);
             number += 1;
-            string read;
             String SDeployments = "";
             using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Deployments.txt"))
 
@@ -117,15 +115,40 @@ namespace FireWorks
                 number -= 1;
             }
 
+
+            Console.Write("In die Detailansicht übergehen?");
+            if (GetYesNo())
+            {
+                DeploymentDetail();
+                return;
+            }
+
+
             return;
 
         }
 
         //public static void DeploymentSearch();
-        
 
-        
 
+
+        public static bool GetYesNo() //Funktion zum y/n Abfragen.
+        {
+            Console.WriteLine("(y/n)");
+            string answer;
+            answer = Console.ReadLine();
+            if (answer.Equals("y"))
+            {
+                return true;
+            }
+            if (answer.Equals("n"))
+            {
+                return false;
+            }
+            Console.WriteLine("Bitte geben sie y oder n ein");
+            return GetYesNo();
+
+        }
     }
 
 }
