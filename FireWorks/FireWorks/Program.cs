@@ -20,7 +20,8 @@ namespace FireWorks
             //Authenticator.LogIn();
 
             Deployment test = DeploymentFactory.PromptDeployment();
-            FileIO.WriteToFile(test, _Path);
+            FileIO filer = new FileIO();
+            filer.WriteObject(test, _Path);
             Console.ReadLine();
 
         }

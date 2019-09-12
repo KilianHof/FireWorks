@@ -10,14 +10,20 @@ namespace FireWorks
     /// <summary>
     /// Wrapper for writing to a file.
     /// </summary>
-    class FileIO
+    class FileIO : IDataLayer
     {
         /// <summary>
         /// Writing an object as JSON to a file. If it doesnt exist its being created and then written to.
         /// </summary>
         /// <param name="o"> The object you want to write into a file.</param>
         /// <param name="path">The file that is being written to.</param>
-        public static void WriteToFile(object o, string path)
+        public FileIO()
+        {
+
+        }
+
+
+        public void WriteObject(object o, string path)
         {
             string Json = JSONConverter.ObjectToJSON(o) + Environment.NewLine;
             try
@@ -47,7 +53,7 @@ namespace FireWorks
         /// <param name="path">Where the file is located.</param>
         /// <param name="line">The line to be read.</param>
         /// <returns>Deployment object from specified line.</returns>
-        public static Deployment ReadObjectFromFile(string path,int line)
+        public Deployment ReadObject(string path,int line)
         {
             if (!(line == 0))
             {

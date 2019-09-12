@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FireWorks
 {
-    class User : Human
+    class User : Human 
     {
         public string PIN { get; set; }
         public string Status { get; set; }
