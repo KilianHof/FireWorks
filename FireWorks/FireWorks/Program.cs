@@ -19,34 +19,10 @@ namespace FireWorks
             //Console.WriteLine("Hello and welcome to FireWorks! \n Please Enter a four digit PIN to continue.");
             //Authenticator.LogIn();
 
-            Deployment test = AskForDeployment();
-            Console.WriteLine(test.FireFighters[0].ToString());
-            Console.WriteLine(JSONConverter.ObjectToJSON(test));
+            Deployment test = DeploymentFactory.PromptDeployment();
             FileIO.WriteToFile(test, _Path);
             Console.ReadLine();
 
-        }
-
-        public static Deployment AskForDeployment()
-        {
-            Console.WriteLine("Where?");
-            string loc = Console.ReadLine();
-            Console.WriteLine("Which vehicles were used?");
-            object[] veh = new string[] { Console.ReadLine() };
-            Console.WriteLine("What resources were used?");
-            object[] res = new string[] { Console.ReadLine() };
-            Console.WriteLine("Who was send?");
-            FireFighter[] Ff = { new FireFighter("hallo", "ibims", 12), new FireFighter("hallo", "ibims", 12) };
-            Console.WriteLine("Comments?");
-            string com = Console.ReadLine();
-            int num = GetLastDeploymentNumber() + 1;
-            return DeploymentFactory.NewDeployment(loc, veh, res, Ff, com, num);
-        }
-        public static int GetLastDeploymentNumber()
-        {
-            int lineCount = File.ReadLines(_Path).Count();
-            Deployment last = FileIO.ReadObjectFromFile(_Path, lineCount);
-            return last.Number;
         }
     }
 }
