@@ -49,9 +49,13 @@ namespace FireWorks
         /// <returns>Deployment object from specified line.</returns>
         public static Deployment ReadObjectFromFile(string path,int line)
         {
-            string json = File.ReadLines(path).Skip(line - 1).Take(1).First();
-            Deployment o = (Deployment) JSONConverter.JSONToObject(json);
-            return o;
+            if (!(line == 0))
+            {
+                string json = File.ReadLines(path).Skip(line - 1).Take(1).First();
+                Deployment o = (Deployment)JSONConverter.JSONToObject(json);
+                return o;
+            }
+            return new Deployment();
         }
     }
 }

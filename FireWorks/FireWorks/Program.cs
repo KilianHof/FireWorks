@@ -21,7 +21,6 @@ namespace FireWorks
 
             Deployment test = AskForDeployment();
             FileIO.WriteToFile(test, _Path);
-            Console.WriteLine(GetLastDeploymentNumber());
             Console.ReadLine();
 
         }
@@ -31,11 +30,11 @@ namespace FireWorks
             Console.WriteLine("Where?");
             string loc = Console.ReadLine();
             Console.WriteLine("Which vehicles were used?");
-            string[] veh = new string[] { Console.ReadLine() };
+            object[] veh = new string[] { Console.ReadLine() };
             Console.WriteLine("What resources were used?");
-            string[] res = new string[] { Console.ReadLine() };
+            object[] res = new string[] { Console.ReadLine() };
             Console.WriteLine("Who was send?");
-            string[] hum = new string[] { Console.ReadLine() };
+            object[] hum = new string[] { Console.ReadLine() };
             Console.WriteLine("Comments?");
             string com = Console.ReadLine();
             int num = GetLastDeploymentNumber() + 1;

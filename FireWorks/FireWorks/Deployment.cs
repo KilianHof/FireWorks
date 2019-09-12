@@ -21,7 +21,7 @@ namespace FireWorks
 
         public Deployment() //null
         {
-
+            Number = 0;
         }
         /// <summary>
         /// Constructor for Deployments
