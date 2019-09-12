@@ -38,13 +38,13 @@ namespace FireWorks
             string hum = Console.ReadLine();
             Console.WriteLine("Comments?");
             string com = Console.ReadLine();
-            int num = GetLastDeploymentNumber()+1;
+            int num = GetLastDeploymentNumber() + 1;
             return DeploymentFactory.NewDeployment(loc, veh, res, hum, com, num);
         }
         public static int GetLastDeploymentNumber()
         {
             int lineCount = File.ReadLines(_Path).Count();
-            Deployment last = FileIO.ReadObjectFromFile(_Path,lineCount);
+            Deployment last = FileIO.ReadObjectFromFile(_Path, lineCount);
             return last.Number;
         }
     }
