@@ -41,6 +41,12 @@ namespace FireWorks
                 Console.WriteLine(e.Message);
             }
         }
+        /// <summary>
+        /// Reads a specific line and turns it into Deployment object 
+        /// </summary>
+        /// <param name="path">Where the file is located.</param>
+        /// <param name="line">The line to be read.</param>
+        /// <returns>Deployment object from specified line.</returns>
         public static Deployment ReadObjectFromFile(string path,int line)
         {
             string json = File.ReadLines(path).Skip(line - 1).Take(1).First();
