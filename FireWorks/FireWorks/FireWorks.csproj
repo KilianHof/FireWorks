@@ -52,6 +52,7 @@
     <Compile Include="Human.cs" />
     <Compile Include="FileIO.cs" />
     <Compile Include="IDataLayer.cs" />
+    <Compile Include="IUserLayer.cs" />
     <Compile Include="JSONConverter.cs" />
     <Compile Include="DeploymentFactory.cs" />
     <Compile Include="Deployment.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Resources.cs" />
     <Compile Include="ToolCarrier.cs" />
     <Compile Include="Hose.cs" />
+    <Compile Include="TUI.cs" />
     <Compile Include="TurntableLadder.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Vehicles.cs" />
