@@ -31,15 +31,25 @@ namespace FireWorks
             CurrentUser = JsonConvert.DeserializeObject<Human>(SCurrentUser);
 
             Authenticator.StatusCheck(CurrentUser);
-
             Console.Clear();
-            Console.WriteLine("(e)insatzliste / Einsatz(s)uche");
-            String Answer = Console.ReadLine();
+            String Answer;
+            
+                Console.WriteLine("(e)insatzliste / Einsatz(s)uche / (d)etailierte Anzeige");
+                Answer = Console.ReadLine();
 
-           if (Answer == "e")
-            {
-                DeploymentListing.DeploymentList();
-            }
+                if (Answer == "e")
+                {
+                    DeploymentListing.DeploymentList();
+                }
+                //if (Answer == "s")
+                //{
+                //    DeploymentListing.DeploymentSearch();
+                //}
+                if (Answer == "d")
+                {
+                    DeploymentListing.DeploymentDetail();
+                }
+
 
             Console.ReadLine();
 

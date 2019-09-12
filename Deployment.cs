@@ -23,6 +23,46 @@ namespace FireWorks
 
     public class DeploymentListing
     {
+
+        public static void DeploymentDetail()
+        {
+            Console.Clear();
+            String Deploytext = "";
+            Deployment DetailDeployment = new Deployment();
+            Console.Write("Einsatz ID:");
+            String IDenter = Console.ReadLine();
+            IDenter = "\"Number\":" + IDenter + "}"; //Absicherung
+            using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Deployments.txt"))
+                while (Deploytext.IndexOf(IDenter) == -1)
+                {
+
+
+                    Deploytext = UserText.ReadLine();
+                    
+                    if (Deploytext == null)
+                    {
+                        Console.WriteLine("Ungültige ID");
+                        Console.ReadLine();
+                        return;
+                    }
+
+
+                    
+
+                }
+                    DetailDeployment = JsonConvert.DeserializeObject<Deployment>(Deploytext);
+                    Console.Clear();
+                    Console.WriteLine("Einsatz-ID:      " + DetailDeployment.Number);
+                    Console.WriteLine("Einsatz-Ort:     " + DetailDeployment.Location);
+                    Console.WriteLine("Fahrzeuge:       " + DetailDeployment.Vehicles);
+                    // Extrawerte für Fahrzeuge hier
+                    Console.WriteLine("Einsatzmittel:   " + DetailDeployment.Resources);
+                    Console.WriteLine("Einsatzkräfte:   " + DetailDeployment.Human);
+                    // Hier "Schlauchlängen"
+                    Console.WriteLine("Kommentar:       " + DetailDeployment.Comment);
+            return;
+        }
+
         public static void DeploymentList()
         {
 
@@ -33,23 +73,23 @@ namespace FireWorks
             string read;
             String SDeployments = "";
             using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Deployments.txt"))
-          
+
 
                 while (SDeployments != null)
                 {
 
 
-                   SDeployments  = UserText.ReadLine();
+                    SDeployments = UserText.ReadLine();
 
                     i += 1;
 
                 }
 
-                Deployment[] Deployments = new Deployment[i];
+            Deployment[] Deployments = new Deployment[i];
             i = 0;
             SDeployments = "";
             using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Deployments.txt"))
-         
+
                 while (SDeployments != null)
                 {
 
@@ -60,7 +100,7 @@ namespace FireWorks
                         Deployments[i] = JsonConvert.DeserializeObject<Deployment>(SDeployments);
                     }
                     i += 1;
-                    
+
                 }
             i -= 1;
             int iMax = i;
@@ -69,17 +109,23 @@ namespace FireWorks
             {
                 if (number > iMax)
                 {
-                    Console.WriteLine("Es sind nur "+iMax+" Einträge vorhanden.");
+                    Console.WriteLine("Es sind nur " + iMax + " Einträge vorhanden.");
                     DeploymentList();
                     break;
                 }
-                Console.WriteLine("Datum: "+Deployments[number].Date + "    Ort: "+Deployments[number].Location+"    ID:"+Deployments[number].Number);
+                Console.WriteLine("Datum: " + Deployments[number].Date + "    Ort: " + Deployments[number].Location + "    ID:" + Deployments[number].Number);
                 number -= 1;
             }
 
             return;
-            
+
         }
+
+        //public static void DeploymentSearch();
+        
+
+        
+
     }
 
 }
