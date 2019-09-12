@@ -13,9 +13,9 @@ namespace FireWorks
     {
         public string DateAndTime { get; set; }
         public string Location { get; set; }
-        public object Vehicles { get; set; }
-        public object Resources { get; set; }
-        public object Human { get; set; }
+        public object[] Vehicles { get; set; }
+        public object[] Resources { get; set; }
+        public object[] Human { get; set; }
         public string Comment { get; set; }
         public int Number { get; set; }
 
@@ -32,7 +32,7 @@ namespace FireWorks
         /// <param name="Hum">Humans</param>
         /// <param name="Com">Comment</param>
         /// <param name="Num">Number</param>
-        public Deployment(string Loc, object Veh, object Res, object Hum, string Com, int Num)
+        public Deployment(string Loc, object[] Veh, object[] Res, object[] Hum, string Com, int Num)
         {
             DateAndTime = DateTime.Now.ToString("dddd, dd MMMM yyyy HH:mm:ss");
             Location = Loc;
