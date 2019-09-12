@@ -4,7 +4,9 @@ Circlon Testproject
 
 ToDo:
 
-Login-Interface // Vorerst abgeschlossen
+Login-Interface // Abgeschlossen
+
+Einsatzliste // Weitesgehend fertig
 
 Fahrzeugliste
 
@@ -12,9 +14,8 @@ E.Mittelliste
 
 Einheitenliste
 
-Einsatzgeneration
-
 Adminfunktionen
 
-ToDo-Liste fertigstellen
+Einsatzgeneration
 
+ToDo-Liste fertigstellen // Weitesgehend fertig
