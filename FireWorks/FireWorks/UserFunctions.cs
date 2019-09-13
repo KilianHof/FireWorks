@@ -14,7 +14,7 @@ namespace FireWorks
         private static FileIO _filer;
 
         private static string[] _path;  // Deploy Employ Vehicles Res
-        public UserFunctions(TUI t,FileIO filer, string[] path) { _t = t; _filer = filer; _path = path; }
+        public UserFunctions(TUI t, FileIO filer, string[] path) { _t = t; _filer = filer; _path = path; }
         public void Foo(string mode)
         {
             string selection;
@@ -22,6 +22,7 @@ namespace FireWorks
             {
                 case "ADMIN":
                     ShowAdminOptions();
+                    AdminMode(_t.GetString());
                     AdminMode(_t.GetString());
                     break;
                 case "USER":
@@ -33,7 +34,7 @@ namespace FireWorks
                     break;
             }
         }
-    public int Valid(int num, int from, int to)
+        public int Valid(int num, int from, int to)
         {
             while (num < from || num > to)
             {
@@ -57,56 +58,117 @@ namespace FireWorks
                                "(3)Edit\n" +
                                "(4)Delete\n");
                     int mode = Valid(_t.GetInt(), 1, 4);
-                    
-                    ProcessList(mode,GetList(dataSet));
+
+                    select(dataSet, mode);
                     break;
                 case "-q":
                     System.Environment.Exit(1);
                     break;
             }
         }
-        public void ProcessList(int mode,List<Human> employees)
+        public void select(int dataSet, int mode)
         {
-            switch (mode)
+            switch (dataSet)
             {
                 case 1:
-                    int c = 1;
-                    foreach (var ele in employees)
-                    {
-                        _t.Display("("+c+") "+ele.ToString() + "\n");
-                            c++;
-                    }
+                    List<Human> emp = GetList<Human>(dataSet);
+                    ProcessList<Human>(mode, emp, dataSet);
                     break;
                 case 2:
-                    _t.Display("Generate new Employee." + "\n");
 
-                    User user = new User("yeah", "boiiii", 2, "USER", "15947562");
-                    _filer.WriteObject(user, _path[1]);
+                    List<Vehicle> veh = GetList<Vehicle>(dataSet);
+                    ProcessList<Vehicle>(mode, veh, dataSet);
                     break;
                 case 3:
-                    _t.Display("Edit Employee." + "\n");
-                    break;
-                case 4:
-                    _t.Display("Delete Employee." + "\n");
 
+                    List<Resources> res = GetList<Resources>(dataSet);
+                    ProcessList<Resources>(mode, res, dataSet);
                     break;
             }
         }
-        public List<Human> GetList(int file)
+        public void ProcessList<T>(int mode, List<T> liste, int dataSet)
         {
-            //switch (file)
-            //{
-            //    case 1:
-                    List<Human> employees = _filer.ReadAll<Human>(_path[1]);
-                    return employees;
-                //case 2:
-                //    List<Vehicle> vehicles = _filer.ReadAll<Vehicle>(_path[2]);
-                //   // return vehicles;
-                //case 3:
-                //    List<Resources> resources = _filer.ReadAll<Resources>(_path[3]);
-                //  //  return resources;
-            //}
-          //  return new List<object>();
+            int c = 1;
+            switch (mode)
+            {
+                case 1:
+                    c = 1;
+                    foreach (var ele in liste)
+                    {
+                        _t.Display("(" + c + ") " + ele.ToString() + "\n");
+                        c++;
+                    }
+                    break;
+                case 2:
+                    _t.Display("Generate new." + "\n");
+
+                    switch (dataSet)
+                    {
+                        case 1:
+                            User usr = GenerateHuman();
+                            _filer.WriteObject(usr, _path[dataSet]);
+                            break;
+                        case 2:
+                            Vehicle veh = new Vehicle("hi",1,2);
+                            _filer.WriteObject(veh, _path[dataSet]);
+                            break;
+                        case 3:
+                            Resources res = new Resources("hi", 1);
+                            _filer.WriteObject(res, _path[dataSet]);
+                            break;
+                    }
+                    break;
+                case 3:
+                    _t.Display("Edit." + "\n");
+                    c = 1;
+                    foreach (var ele in liste)
+                    {
+                        _t.Display("(" + c + ") " + ele.ToString() + "\n");
+                        c++;
+                    }
+
+                    switch (dataSet)
+                    {
+                        case 1:
+                            User usr = GenerateHuman();
+                            _filer.WriteObject(usr, _path[dataSet]);
+                            break;
+                        case 2:
+                            Vehicle veh = new Vehicle("hi", 1, 2);
+                            _filer.WriteObject(veh, _path[dataSet]);
+                            break;
+                        case 3:
+                            Resources res = new Resources("hi", 1);
+                            _filer.WriteObject(res, _path[dataSet]);
+                            break;
+                    }
+                    break;
+                    //User tmp = (User)_filer.ReadObject<User>(_path[dataSet], Valid(_t.GetInt(), 1, c - 1));
+
+
+                case 4:
+                    _t.Display("Delete." + "\n");
+                    c = 1;
+                    foreach (var ele in liste)
+                    {
+                        _t.Display("(" + c + ") " + ele.ToString() + "\n");
+                        c++;
+                    }
+                    _filer.DeleteObject(_path[dataSet], Valid(_t.GetInt(), 1, c - 1));
+                    break;
+            }
+        }
+        public User GenerateHuman()
+        {
+            return new User("yeah", "boiiii", 2, "USER", "15947562");
+        }
+
+
+
+        public List<T> GetList<T>(int dataSet)
+        {
+            List<T> employees = _filer.ReadAll<T>(_path[dataSet]);
+            return employees;
         }
         public void ShowAdminOptions()
         {

@@ -94,9 +94,11 @@ namespace FireWorks
                     //string json = File.ReadLines(path).Skip(line - 1).Take(1).First();
                     //object o = JSONConverter.JSONToGeneric<T>(json);
                 }
-                NeedOutput("cannot read line \"0\" or negative." + "\n");
+                else
+                    NeedOutput("cannot read line \"0\" or negative." + "\n");
             }
-            NeedOutput("cannot read file: " + path + "\n");
+            else
+                NeedOutput("cannot read file: " + path + "\n");
         }
         public string ReadLine(string path, int line)
         {

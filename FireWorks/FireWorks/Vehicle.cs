@@ -17,6 +17,10 @@ namespace FireWorks
             EnginePower = ep;
             Seats = s;
         }
+        public override string ToString()
+        {
+            return Type + " " + EnginePower + " " + Seats;
+        }
     }
     public class ToolCarrier : Vehicle
     {

@@ -17,6 +17,10 @@ namespace FireWorks
             Description = d;
             InventoryNumber = inn;
         }
+        public override string ToString()
+        {
+            return Description + " " + InventoryNumber;
+        }
     }
     public class Hose : Resources
     {

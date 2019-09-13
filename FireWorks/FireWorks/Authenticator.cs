@@ -15,8 +15,8 @@ namespace FireWorks
     /// </summary>
     class Authenticator
     {
-        FileIO filer;
-        string _path;
+        private FileIO filer;
+        private string _path;
         public Authenticator(FileIO fil,string path) { filer = fil; _path = path; }
         private const int _pinLength = 4;
 
