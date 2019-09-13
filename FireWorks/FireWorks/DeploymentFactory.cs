@@ -12,7 +12,6 @@ namespace FireWorks
     /// </summary>
     class DeploymentFactory
     {
-        private const string _Path = @"C:\FireWorks\Deployments.txt";
         /// <summary>
         /// Calls the Constructor of Deployment objects with needed params.
         /// </summary>
@@ -88,7 +87,7 @@ namespace FireWorks
             string com = Console.ReadLine();
 
             
-            int num = filer.GetLastDeploymentNumber(_Path) + 1;
+            int num = filer.GetLastDeploymentNumber(path) + 1;
 
             return new Deployment(loc, veh, res, Ff, com, num);
         }
