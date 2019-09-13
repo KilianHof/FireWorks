@@ -15,7 +15,8 @@ namespace FireWorks
     /// </summary>
     class Authenticator
     {
-        public Authenticator() { }
+        FileIO filer;
+        public Authenticator(FileIO fil) { filer = fil; }
         private const int _pinLength = 4;
         private const string _path = @"C:\FireWorks\Employee.txt";
 
@@ -56,7 +57,7 @@ namespace FireWorks
             string Input = NeedStringInput();
             if (ValidateInput(Input))
             {
-                FileIO filer = new FileIO();
+                
 
                 int lineCount = File.ReadLines(_path).Count();
                 for (int i = 1; i <= lineCount; i++)

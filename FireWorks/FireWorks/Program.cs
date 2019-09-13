@@ -15,25 +15,27 @@ namespace FireWorks
         const string _pathVehicle = @"C:\FireWorks\Vehicles.txt";
         const string _pathResource = @"C:\FireWorks\Resources.txt";
         private static TUI _t = new TUI();
+        private static FileIO _filer = new FileIO();
         static void Main(string[] args)
         {
+            _filer.NeedOutput += OutputEvent;
             //Console.WriteLine("0000".GetHashCode());
             //Console.WriteLine("Hello and welcome to FireWorks! \n Please Enter a four digit PIN to continue.");
 
 
-            Authenticator auth = new Authenticator();
+            Authenticator auth = new Authenticator(_filer);
             auth.NeedOutput += OutputEvent;
             auth.NeedBoolInput += BoolInputEvent;
             auth.NeedStringInput += StringInputEvent;
             string mode = auth.LogIn();
-            FileIO filer = new FileIO();
-            filer.NeedOutput += OutputEvent;
-            Deployment test = DeploymentFactory.PromptDeployment(_pathDeployment,filer);
 
-            //filer.WriteObject(test, _path);
+
+            Deployment test = DeploymentFactory.PromptDeployment(_pathDeployment,_filer);
+
+            //_filer.WriteObject(test, _path);
 
             //User user = new User("m", "p", 2, "USER", "15947562");
-            //filer.WriteObject(user, _pathEmployee);
+            //_filer.WriteObject(user, _pathEmployee);
 
 
             string selection;
@@ -90,12 +92,10 @@ namespace FireWorks
         }
         public static void Editing(int file, int mode)
         {
-            FileIO filer = new FileIO();
-            filer.NeedOutput += OutputEvent;
             switch (file)
             {
                 case 1:
-                    List<Human> employees = filer.ReadAll<Human>(_pathEmployee);
+                    List<Human> employees = _filer.ReadAll<Human>(_pathEmployee);
                     foreach (var emp in employees)
                     {
                         _t.Display(emp.ToString()+"\n");
