@@ -16,9 +16,9 @@ namespace FireWorks
         {
 
 
-            
 
-            Human CurrentUser = new Human();
+
+            Human CurrentUser;
             var SCurrentUser = Authenticator.LogIn();
 
             CurrentUser = JsonConvert.DeserializeObject<Human>(SCurrentUser);
@@ -27,7 +27,7 @@ namespace FireWorks
             Console.Clear();
             String Answer;
             
-                Console.WriteLine("(e)insatzliste / Einsatz(s)uche / (d)etailierte Anzeige");
+                Console.WriteLine("(d)etailed Report / deploym(e)nts / (s)earch deployments");
                 Answer = Console.ReadLine();
 
                 if (Answer == "e")

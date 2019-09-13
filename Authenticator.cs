@@ -13,34 +13,35 @@ namespace FireWorks
         public static object StatusCheck(Human CurrentUser)
         {
 
-
-            Console.WriteLine(CurrentUser.Status);
+            
 
 
             if (CurrentUser.Status == 0)
             {
-                Console.WriteLine("Nutzerkonto gesperrt.");
+                Console.WriteLine("This account is locked.");
                 Console.ReadLine();
                 System.Environment.Exit(1);
             }
 
             if (CurrentUser.Status == 1)
             {
-                Console.WriteLine("Nutzer mit ID " + CurrentUser.ID + " erfolgreich eingeloggt.");
+                Console.WriteLine("User with ID " + CurrentUser.ID + " has logged in.");
+                Console.WriteLine("Greetings, "+CurrentUser.FName+" "+CurrentUser.LName+".");
                 Console.ReadLine();
                 return CurrentUser;
             }
 
             if (CurrentUser.Status == 2)
             {
-                Console.WriteLine("Admin mit ID " + CurrentUser.ID + " erfolgreich eingeloggt.");
+                Console.WriteLine("Admin with ID " + CurrentUser.ID + " has logged in.");
+                Console.WriteLine("Greeting, " + CurrentUser.FName + " " + CurrentUser.LName + ".");
                 Console.ReadLine();
                 return CurrentUser;
             }
 
             else
             {
-                Console.WriteLine("Nutzerstatus Invalid.");
+                Console.WriteLine("UserStatus Invalid.");
                 Console.ReadLine();
                 System.Environment.Exit(1);
                 return CurrentUser;
@@ -52,8 +53,7 @@ namespace FireWorks
             public static String LogIn()
         {
             String SCurrentUser = "";
-            Human CurrentUser = new Human();
-            Console.Write("Please enter PIN:");
+            Console.Write("PIN:");
             String PINenter = Console.ReadLine();
             PINenter = "\"PIN\":\"" + PINenter + "\",\""; //Absicherung
             using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Users.txt"))
@@ -65,16 +65,12 @@ namespace FireWorks
 
                     if (SCurrentUser == null)
                     {
-                        Console.WriteLine("Falscher PIN.");
+                        Console.WriteLine("Invalid PIN.");
                         Console.ReadLine();
                         System.Environment.Exit(1);
                     }
                 }
 
-            Console.WriteLine(CurrentUser.Status);
-
-
-            Console.WriteLine(CurrentUser.Status);
 
             return SCurrentUser;
         }

@@ -12,23 +12,37 @@ namespace FireWorks
 
     public class Deployment
     {
-        public string Date { get; set; } // Einsatzdatum
-        public string Location { get; set; } // Einsatzort
-        public object Vehicles { get; set; } // Einsatzfahrzeuge
-        public object Resources { get; set; } // Einsatzmittel
-        public object Human { get; set; } // Einsatz-Anwesende
+        public string Date { get; set; } // Deploymentdatum
+        public string Location { get; set; } // DeploymentLocation
+        public Vehicles[] Vehicles { get; set; }
+        public int VehiclesNumber { get; set; }
+        public LFZ[] LFZ { get; set; }
+        public int LFZNumber { get; set; }
+        public TurntableLadder[] TurntableLadder { get; set; } // Deploymentfahrzeuge
+        public int TurntableLadderNumber { get; set; } // Deploymentfahrzeuge
+        public Ambulance[] Ambulance { get; set; } // Deploymentfahrzeuge
+        public int AmbulanceNumber { get; set; } // Deploymentfahrzeuge
+        public Resources[] Resources { get; set; }
+        public int ResourcesNumber { get; set; } // Deploymentmittel
+        public Human[] Human { get; set; }
+        public int HumanNumber { get; set; } // Deployment-Anwesende
         public string Comment { get; set; } // Kommentar
-        public int Number { get; set; } // Einsatz-ID
+        public int Number { get; set; } // Deployment-ID
     }
 
     public class DeploymentListing
     {
 
+
+
         public static void DeploymentDetail()
         {
+
+
+
             String Deploytext = "";
-            Deployment DetailDeployment = new Deployment();
-            Console.Write("Einsatz ID:");
+            Deployment DetailDeployment;
+            Console.Write("Deployment ID:");
             String IDenter = Console.ReadLine();
             IDenter = "\"Number\":" + IDenter + "}"; //Absicherung
             using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Deployments.txt"))
@@ -37,36 +51,72 @@ namespace FireWorks
 
 
                     Deploytext = UserText.ReadLine();
-                    
+
                     if (Deploytext == null)
                     {
-                        Console.WriteLine("Ungültige ID");
+                        Console.WriteLine("Invalid ID");
                         Console.ReadLine();
                         return;
                     }
 
 
-                    
+
 
                 }
-                    DetailDeployment = JsonConvert.DeserializeObject<Deployment>(Deploytext);
-                    Console.Clear();
-                    Console.WriteLine("Einsatz-ID:      " + DetailDeployment.Number);
-                    Console.WriteLine("Einsatz-Ort:     " + DetailDeployment.Location);
-                    Console.WriteLine("Fahrzeuge:       " + DetailDeployment.Vehicles);
-                    // Extrawerte für Fahrzeuge hier
-                    Console.WriteLine("Einsatzmittel:   " + DetailDeployment.Resources);
-                    Console.WriteLine("Einsatzkräfte:   " + DetailDeployment.Human);
-                    // Hier "Schlauchlängen"
-                    Console.WriteLine("Kommentar:       " + DetailDeployment.Comment);
+            DetailDeployment = JsonConvert.DeserializeObject<Deployment>(Deploytext);
+            Console.Clear();
+            Console.WriteLine("Deployment-ID:      " + DetailDeployment.Number);
+            Console.WriteLine("Deployment-Location:" + DetailDeployment.Location);
+                Console.Write("Vehicles:           ");
+
+            while (DetailDeployment.TurntableLadderNumber > 0)
+            {
+                DetailDeployment.TurntableLadderNumber -= 1;
+                if (DetailDeployment.TurntableLadder[DetailDeployment.TurntableLadderNumber].Saw) Console.Write("Chainsaw-carrying, ");
+                Console.Write(DetailDeployment.TurntableLadder[DetailDeployment.TurntableLadderNumber].Height + "m tall, ");
+                Console.Write(DetailDeployment.TurntableLadder[DetailDeployment.TurntableLadderNumber].Seats + " seater ");
+                Console.Write(DetailDeployment.TurntableLadder[DetailDeployment.TurntableLadderNumber].Type + " (" + DetailDeployment.TurntableLadder[DetailDeployment.TurntableLadderNumber].HP + "hp), ");
+            }
+
+            Console.WriteLine();
+            while (DetailDeployment.LFZNumber > 0)
+            {
+                DetailDeployment.LFZNumber -= 1;
+                if (DetailDeployment.LFZ[DetailDeployment.LFZNumber].Saw) Console.Write("Chainsaw-carrying, ");
+                Console.Write(DetailDeployment.LFZ[DetailDeployment.LFZNumber].FillQuantity + "l water containing ");
+                Console.Write(DetailDeployment.LFZ[DetailDeployment.LFZNumber].Seats + " seater ");
+                Console.Write(DetailDeployment.LFZ[DetailDeployment.LFZNumber].Type + " (" + DetailDeployment.LFZ[DetailDeployment.LFZNumber].HP + "hp), ");
+            }
+
+
+
+
+
+            Console.WriteLine();
+            while (DetailDeployment.VehiclesNumber > 0)
+            {
+                DetailDeployment.VehiclesNumber -= 1;
+                Console.Write(DetailDeployment.Vehicles[DetailDeployment.VehiclesNumber].Seats + " seater ");
+                Console.Write(DetailDeployment.Vehicles[DetailDeployment.VehiclesNumber].Type + " (" + DetailDeployment.Vehicles[DetailDeployment.VehiclesNumber].HP + "hp), ");
+            }
+
+            Console.WriteLine();
+
+            // Extrawerte für Fahrzeuge hier
+            Console.WriteLine("Resources:          " + DetailDeployment.Resources);
+            Console.WriteLine("Deployed units:     " + DetailDeployment.Human);
+            // Hier "Schlauchlängen"
+            Console.WriteLine("Comment:            " + DetailDeployment.Comment);
             return;
         }
 
         public static void DeploymentList()
         {
 
+
+
             int i = 0;
-            Console.WriteLine("Wie viele Einsätze sollen maximal gezeigt werden?");
+            Console.WriteLine("How many deployments are to be shown?");
             int.TryParse(Console.ReadLine(), out int number);
             number += 1;
             String SDeployments = "";
@@ -107,16 +157,16 @@ namespace FireWorks
             {
                 if (number > iMax)
                 {
-                    Console.WriteLine("Es sind nur " + iMax + " Einträge vorhanden.");
+                    Console.WriteLine("Only " + iMax + " entries exist.");
                     DeploymentList();
                     break;
                 }
-                Console.WriteLine("Datum: " + Deployments[number].Date + "    Ort: " + Deployments[number].Location + "    ID:" + Deployments[number].Number);
+                Console.WriteLine("Date: " + Deployments[number].Date + "    Location: " + Deployments[number].Location + "    ID:" + Deployments[number].Number);
                 number -= 1;
             }
 
 
-            Console.Write("In die Detailansicht übergehen?");
+            Console.Write("Go into details for a deployment?");
             if (GetYesNo())
             {
                 DeploymentDetail();
@@ -145,7 +195,7 @@ namespace FireWorks
             {
                 return false;
             }
-            Console.WriteLine("Bitte geben sie y oder n ein");
+            Console.WriteLine("Please enter y or n");
             return GetYesNo();
 
         }
