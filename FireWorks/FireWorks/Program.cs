@@ -34,7 +34,40 @@ namespace FireWorks
             //User user = new User("m","p",2,"USER", "15947562");
             //filer.WriteObject(user, _pathEmployee);
 
+
+            string selection;
+            switch (mode)
+            {
+                case "ADMIN":
+                    ShowAdminOptions();
+                    selection = _t.GetString();
+                    break;
+                case "USER":
+                    ShowUserOptions();
+                    selection = _t.GetString();
+                    break;
+            }
+
+
+
+
+
+
             Console.ReadLine();
+        }
+        public static void ShowAdminOptions()
+        {
+            _t.Display("Options:\n" +
+                       "-e\tEdit base data.\n" +
+                       "-u\tManage Users\n"
+                       );
+        }
+        public static void ShowUserOptions()
+        {
+            _t.Display("Options:\n" +
+                       "-e\tEdit base data.\n" +
+                       "-u\tManage Users\n"
+                       );
         }
         static void OutputEvent(string str)
         {

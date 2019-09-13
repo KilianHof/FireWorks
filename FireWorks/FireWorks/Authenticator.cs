@@ -32,11 +32,12 @@ namespace FireWorks
             string result = CheckPIN();
             if (!(result == "No matching PIN found") && !(result == "Invalid Input"))
             {
+                NeedOutput("Login attempt successful! Logged in as: " + result + "\n");
                 return result;
             }
             else
             {
-                NeedOutput("Log in attempt failed: " + result + ". Try again?");
+                NeedOutput("Login attempt failed: " + result + ". Try again?"+"\n");
                 if (NeedBoolInput())
                     return LogIn();
                 else
