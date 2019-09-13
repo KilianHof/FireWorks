@@ -55,7 +55,7 @@ namespace FireWorks
             if (!(line == 0))
             {
                 string json = File.ReadLines(path).Skip(line - 1).Take(1).First();
-                Deployment o = (Deployment)JSONConverter.JSONToObject(json);
+                Deployment o = (Deployment)JSONConverter.JSONToDeployment(json);
                 return o;
             }
             return new Deployment();

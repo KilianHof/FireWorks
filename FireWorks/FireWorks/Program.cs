@@ -10,15 +10,13 @@ namespace FireWorks
 {
     class Program
     {
-        private const string _path = @"C:\FireWorks\Deployments.txt";
+        private const string _pathDeployment = @"C:\FireWorks\Deployments.txt";
         private static TUI _t = new TUI();
         static void Main(string[] args)
         {
-            //@"C:\FireWorks\Deployments.txt"
             //Console.WriteLine("1234".GetHashCode());
             //Console.WriteLine("Hello and welcome to FireWorks! \n Please Enter a four digit PIN to continue.");
-            //Authenticator.LogIn();
-            
+
 
             Authenticator auth = new Authenticator();
             auth.NeedOutput += OutputEvent;
@@ -29,9 +27,12 @@ namespace FireWorks
 
             //Deployment test = DeploymentFactory.PromptDeployment();
             FileIO filer = new FileIO();
-            filer.NeedOutput += OutputEvent;
+            //filer.NeedOutput += OutputEvent;
             //filer.WriteObject(test, _path);
             //Console.ReadLine();
+
+            User user = new User("mo","pa",1,"ADMIN", "-1152142086");
+            filer.WriteObject(user);
 
         }
         static void OutputEvent(string str)
