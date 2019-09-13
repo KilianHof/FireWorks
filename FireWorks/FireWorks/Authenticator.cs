@@ -37,7 +37,7 @@ namespace FireWorks
             }
             else
             {
-                NeedOutput("Login attempt failed: " + result + ". Try again?"+"\n");
+                NeedOutput("Login attempt failed: " + result + ". Try again?" + "\n");
                 if (NeedBoolInput())
                     return LogIn();
                 else
@@ -62,9 +62,12 @@ namespace FireWorks
                 for (int i = 1; i <= lineCount; i++)
                 {
                     User tmp = JSONConverter.JSONToUser(filer.ReadLine(_path, i));
-                    if (Input.GetHashCode().ToString() == tmp.PIN)
+                    if (tmp.GetType().ToString() == "FireWorks.User")
                     {
-                        return tmp.Status;
+                        if (Input.GetHashCode().ToString() == tmp.PIN)
+                        {
+                            return tmp.Status;
+                        }
                     }
                 }
                 return "No matching PIN found";

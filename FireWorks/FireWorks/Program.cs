@@ -24,14 +24,13 @@ namespace FireWorks
             auth.NeedBoolInput += BoolInputEvent;
             auth.NeedStringInput += StringInputEvent;
             string mode = auth.LogIn();
-            _t.Display(mode + "\n");
 
             //Deployment test = DeploymentFactory.PromptDeployment();
             //FileIO filer = new FileIO();
             //filer.NeedOutput += OutputEvent;
             //filer.WriteObject(test, _path);
 
-            //User user = new User("m","p",2,"USER", "15947562");
+            User user = new User("m","p",2,"USER", "15947562");
             //filer.WriteObject(user, _pathEmployee);
 
 
@@ -65,7 +64,7 @@ namespace FireWorks
         public static void ShowUserOptions()
         {
             _t.Display("Options:\n" +
-                       "-e\tEdit base data.\n" +
+                       "-v\tView Deployments.\n" +
                        "-u\tManage Users\n"
                        );
         }
