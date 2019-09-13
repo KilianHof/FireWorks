@@ -27,12 +27,12 @@ namespace FireWorks
         /// </summary>
         /// <returns>True for a successful login attempt.</returns>
 
-        public bool LogIn()
+        public string LogIn()
         {
-            bool IsValidSuccess = CheckPIN();
-            if (IsValidSuccess)
+            string result = CheckPIN();
+            if (!(result == "No matching PIN found") && !(result == "Invalid Input"))
             {
-                return true;
+                return result;
             }
             else
             {
@@ -41,7 +41,7 @@ namespace FireWorks
                     return LogIn();
                 else
                     System.Environment.Exit(1);
-                return false;
+                return "LOCKED";
             }
         }
         /// <summary>
@@ -50,9 +50,8 @@ namespace FireWorks
         /// Then looks up Entries in PINS.txt
         /// </summary>
         /// <returns>Returns True for a Valid PIN that is found in PINS.txt</returns>
-        public bool CheckPIN()
+        public string CheckPIN()
         {
-            bool IsSuccess = false;
             string Input = NeedStringInput();
             if (ValidateInput(Input))
             {
@@ -61,14 +60,17 @@ namespace FireWorks
                 int lineCount = File.ReadLines(_path).Count();
                 for (int i = 1; i <= lineCount; i++)
                 {
-                    if (Input.GetHashCode().ToString() == JSONConverter.JSONToUser(filer.ReadLine(_path, i)).PIN)
-                        IsSuccess = true;
+                    User tmp = JSONConverter.JSONToUser(filer.ReadLine(_path, i));
+                    if (Input.GetHashCode().ToString() == tmp.PIN)
+                    {
+                        return tmp.Status;
+                    }
                 }
-                return IsSuccess;
+                return "No matching PIN found";
             }
             else
             {
-                return IsSuccess;
+                return "Invalid Input";
             }
         }
         /// <summary>
