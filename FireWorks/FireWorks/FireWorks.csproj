@@ -46,9 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Ambulance.cs" />
-    <Compile Include="FireFighter.cs" />
-    <Compile Include="FireTruck.cs" />
     <Compile Include="Human.cs" />
     <Compile Include="FileIO.cs" />
     <Compile Include="IDataLayer.cs" />
@@ -57,16 +54,11 @@
     <Compile Include="DeploymentFactory.cs" />
     <Compile Include="Deployment.cs" />
     <Compile Include="Authenticator.cs" />
-    <Compile Include="Pkw.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.cs" />
-    <Compile Include="ToolCarrier.cs" />
-    <Compile Include="Hose.cs" />
     <Compile Include="TUI.cs" />
-    <Compile Include="TurntableLadder.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="Vehicles.cs" />
+    <Compile Include="Vehicle.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

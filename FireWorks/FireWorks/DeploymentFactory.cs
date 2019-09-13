@@ -23,7 +23,7 @@ namespace FireWorks
         /// <param name="com">Comment</param>
         /// <param name="num">Number</param>
         /// <returns></returns>
-        public static Deployment NewDeployment(string loc, Vehicles[] veh, object[] res, FireFighter[] Ff, string com, int num)
+        public static Deployment NewDeployment(string loc, Vehicle[] veh, object[] res, FireFighter[] Ff, string com, int num)
         {
             return new Deployment(loc, veh, res, Ff, com, num);
         }
@@ -40,7 +40,7 @@ namespace FireWorks
 
             int amount = int.Parse(Console.ReadLine());
                        
-            Vehicles[] veh = new Vehicles[amount];
+            Vehicle[] veh = new Vehicle[amount];
 
             for (int i = 0; i < amount; i++)
             {
