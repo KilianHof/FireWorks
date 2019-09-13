@@ -15,6 +15,10 @@ namespace FireWorks
         public Human()
         {
         }
+        public override string ToString()
+        {
+            return FirstName + " " + LastName + " " + Id;
+        }
     }
     class FireFighter : Human
     {
@@ -24,10 +28,7 @@ namespace FireWorks
             FirstName = fname;
             Id = id;
         }
-        public override string ToString()
-        {
-            return FirstName + " " + LastName + " " + Id;
-        }
+
     }
     class User : Human
     {
