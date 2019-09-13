@@ -7,17 +7,23 @@ using System.Threading.Tasks;
 
 namespace FireWorks
 {
+    public delegate void OutputEvent(string str);
+    public delegate bool BoolInputEvent();
     /// <summary>
     /// Authenticator is being used to verify and Login users.
     /// </summary>
     class Authenticator
     {
+        public Authenticator() { }
+
+        public event OutputEvent NeedOutput;
+        public event BoolInputEvent NeedBoolInput;
         /// <summary>
         /// Calls helper functions to ask for a PIN
         /// </summary>
         /// <returns>True for a successful login attempt.</returns>
 
-        public static bool LogIn()
+        public bool LogIn()
         {
             bool IsValidSuccess = CheckPIN();
             if (IsValidSuccess)
@@ -26,8 +32,8 @@ namespace FireWorks
             }
             else
             {
-                Console.WriteLine("Log in attempt failed. Try again? (y/n)");
-                if (GetYesNo())
+                NeedOutput("Log in attempt failed. Try again? (y/n)");
+                if (NeedBoolInput())
                     return LogIn();
                 else
                     System.Environment.Exit(1);
@@ -40,7 +46,7 @@ namespace FireWorks
         /// Then looks up Entries in PINS.txt
         /// </summary>
         /// <returns>Returns True for a Valid PIN that is found in PINS.txt</returns>
-        public static bool CheckPIN()
+        public bool CheckPIN()
         {
             bool IsSuccess = false;
             string Input = Console.ReadLine();
@@ -60,8 +66,8 @@ namespace FireWorks
                 }
                 catch (IOException e)
                 {
-                    Console.WriteLine("Couldnt read: PIN data file.");
-                    Console.WriteLine(e.Message);
+                    NeedOutput("Couldnt read: PIN data file.");
+                    NeedOutput(e.Message);
                 }
                 return IsSuccess;
             }
@@ -76,7 +82,7 @@ namespace FireWorks
         /// </summary>
         /// <param name="Input"></param>
         /// <returns>Returns true for a Valid format.</returns>
-        public static bool ValidateInput(string Input)
+        public bool ValidateInput(string Input)
         {
             if (!(Input.Length == 4))
                 return false;
@@ -86,18 +92,6 @@ namespace FireWorks
                     return false;
             }
             return true;
-        }
-        /// <summary>
-        /// Helper function to promt the user for yes or no
-        /// </summary>
-        /// <returns>True for yes.</returns>
-        public static bool GetYesNo()
-        {
-            String str = Console.ReadLine();
-            if ((str == "y") || (str == "Y") || (str == "Yes") || (str == "yes"))
-                return true;
-            else
-                return false;
         }
     }
 }
