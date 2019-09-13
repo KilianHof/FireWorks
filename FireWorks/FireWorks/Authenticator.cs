@@ -15,6 +15,7 @@ namespace FireWorks
     class Authenticator
     {
         public Authenticator() { }
+        private int _pinLength = 4;
 
         public event OutputEvent NeedOutput;
         public event BoolInputEvent NeedBoolInput;
@@ -84,7 +85,7 @@ namespace FireWorks
         /// <returns>Returns true for a Valid format.</returns>
         public bool ValidateInput(string Input)
         {
-            if (!(Input.Length == 4))
+            if (!(Input.Length == _pinLength))
                 return false;
             for (int i = 0; i < Input.Length; i++)
             {

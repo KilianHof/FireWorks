@@ -10,11 +10,7 @@ namespace FireWorks
     {
         void Display(string str);
         int GetInt();
-
         string GetString();
         bool GetBool();
-
-
-
     }
 }

@@ -17,10 +17,7 @@ namespace FireWorks
         /// </summary>
         /// <param name="o"> The object you want to write into a file.</param>
         /// <param name="path">The file that is being written to.</param>
-        public FileIO()
-        {
-
-        }
+        public FileIO() { }
         public event OutputEvent NeedOutput;
 
         public void WriteObject(object o, string path)

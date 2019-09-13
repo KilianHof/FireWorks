@@ -19,7 +19,7 @@ namespace FireWorks
         public string Comment { get; set; }
         public int Number { get; set; }
 
-        public Deployment() //null
+        public Deployment() //nullconstructor only to be used if there is no entry yet.
         {
             Number = 0;
         }
