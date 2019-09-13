@@ -10,7 +10,7 @@ namespace FireWorks
 {
     class Program
     {
-        private const string _Path = @"C:\FireWorks\Deployments.txt";
+        private const string _path = @"C:\FireWorks\Deployments.txt";
         private static TUI _t = new TUI();
         static void Main(string[] args)
         {
@@ -27,8 +27,9 @@ namespace FireWorks
 
 
             //Deployment test = DeploymentFactory.PromptDeployment();
-            //FileIO filer = new FileIO();
-            //filer.WriteObject(test, _Path);
+            FileIO filer = new FileIO();
+            filer.NeedOutput += OutputEvent;
+            //filer.WriteObject(test, _path);
             //Console.ReadLine();
 
         }

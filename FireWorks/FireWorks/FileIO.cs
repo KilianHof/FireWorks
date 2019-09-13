@@ -21,7 +21,7 @@ namespace FireWorks
         {
 
         }
-
+        public event OutputEvent NeedOutput;
 
         public void WriteObject(object o, string path)
         {
@@ -43,8 +43,8 @@ namespace FireWorks
             }
             catch (IOException e)
             {
-                Console.WriteLine("Couldnt read and/or create the File.(" + path + ")");
-                Console.WriteLine(e.Message);
+                NeedOutput("Couldnt read and/or create the File.(" + path + ")");
+                NeedOutput(e.Message);
             }
         }
         /// <summary>
