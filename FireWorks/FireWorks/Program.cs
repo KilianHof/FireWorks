@@ -30,7 +30,7 @@ namespace FireWorks
             string mode = auth.LogIn();
 
 
-            Deployment test = DeploymentFactory.PromptDeployment(_pathDeployment,_filer);
+            //Deployment test = DeploymentFactory.PromptDeployment(_pathDeployment,_filer);
 
             //_filer.WriteObject(test, _path);
 
