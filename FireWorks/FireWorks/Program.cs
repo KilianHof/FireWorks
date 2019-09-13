@@ -11,6 +11,7 @@ namespace FireWorks
     class Program
     {
         private const string _pathDeployment = @"C:\FireWorks\Deployments.txt";
+        private const string _pathEmployee = @"C:\FireWorks\Employee.txt";
         private static TUI _t = new TUI();
         static void Main(string[] args)
         {
@@ -26,14 +27,14 @@ namespace FireWorks
 
 
             //Deployment test = DeploymentFactory.PromptDeployment();
-            FileIO filer = new FileIO();
+            //FileIO filer = new FileIO();
             //filer.NeedOutput += OutputEvent;
             //filer.WriteObject(test, _path);
-            //Console.ReadLine();
 
-            User user = new User("mo","pa",1,"ADMIN", "-1152142086");
-            filer.WriteObject(user);
+            //User user = new User("mo","pa",1,"ADMIN", "-1152142086");
+            //filer.WriteObject(user, _pathEmployee);
 
+            Console.ReadLine();
         }
         static void OutputEvent(string str)
         {

@@ -8,7 +8,7 @@ namespace FireWorks
 {
     interface IDataLayer
     {
-        Deployment ReadObject(string path, int line);
+        string ReadLine(string path, int line);
         void WriteObject(object o, string path);
     }
 }

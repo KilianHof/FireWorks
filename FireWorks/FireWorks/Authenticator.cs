@@ -17,7 +17,7 @@ namespace FireWorks
     {
         public Authenticator() { }
         private const int _pinLength = 4;
-        private const string _path = @"C:\FireWorks\PINS.txt";
+        private const string _path = @"C:\FireWorks\Employee.txt";
 
         public event OutputEvent NeedOutput;
         public event BoolInputEvent NeedBoolInput;
@@ -56,22 +56,13 @@ namespace FireWorks
             string Input = NeedStringInput();
             if (ValidateInput(Input))
             {
-                try
+                FileIO filer = new FileIO();
+
+                int lineCount = File.ReadLines(_path).Count();
+                for (int i = 1; i <= lineCount; i++)
                 {
-                    using (StreamReader Sr = new StreamReader(_path))
-                    {
-                        while (!Sr.EndOfStream)
-                        {
-                            string Line = Sr.ReadLine();
-                            if (Input.GetHashCode().ToString() == Line)
-                                IsSuccess = true;
-                        }
-                    }
-                }
-                catch (IOException e)
-                {
-                    NeedOutput("Couldnt read: PIN data file.");
-                    NeedOutput(e.Message);
+                    if (Input.GetHashCode().ToString() == JSONConverter.JSONToUser(filer.ReadLine(_path, 1)).PIN)
+                        IsSuccess = true;
                 }
                 return IsSuccess;
             }

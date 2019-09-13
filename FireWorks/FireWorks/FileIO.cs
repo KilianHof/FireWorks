@@ -50,7 +50,7 @@ namespace FireWorks
         /// <param name="path">Where the file is located.</param>
         /// <param name="line">The line to be read.</param>
         /// <returns>Deployment object from specified line.</returns>
-        public Deployment ReadObject(string path,int line)
+        public Deployment ReadObject(string path, int line)
         {
             if (!(line == 0))
             {
@@ -59,6 +59,15 @@ namespace FireWorks
                 return o;
             }
             return new Deployment();
+        }
+        public string ReadLine(string path, int line)
+        {
+            if (line > 0)
+            {
+                return File.ReadLines(path).Skip(line - 1).Take(1).First();
+            }
+            NeedOutput("cannot read line \"0\" or negative");
+            return "";
         }
     }
 }

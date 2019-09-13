@@ -25,9 +25,13 @@ namespace FireWorks
         /// </summary>
         /// <param name="str">String thats being converted.</param>
         /// <returns>A Deployment object.</returns>
-        public static object JSONToDeployment(string str)
+        public static Deployment JSONToDeployment(string str)
         {
             return JsonConvert.DeserializeObject<Deployment>(str);
+        }
+        public static User JSONToUser(string str)
+        {
+            return JsonConvert.DeserializeObject<User>(str);
         }
     }
 }
