@@ -23,7 +23,7 @@ namespace FireWorks
             //Console.WriteLine("Hello and welcome to FireWorks! \n Please Enter a four digit PIN to continue.");
 
 
-            Authenticator auth = new Authenticator(_filer);
+            Authenticator auth = new Authenticator(_filer, _pathEmployee);
             auth.NeedOutput += OutputEvent;
             auth.NeedBoolInput += BoolInputEvent;
             auth.NeedStringInput += StringInputEvent;
