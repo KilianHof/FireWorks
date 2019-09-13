@@ -33,5 +33,9 @@ namespace FireWorks
         {
             return JsonConvert.DeserializeObject<User>(str);
         }
+        public static T JSONToGeneric<T>(string str)
+        {
+            return JsonConvert.DeserializeObject<T>(str);
+        }
     }
 }
