@@ -10,8 +10,8 @@ namespace FireWorks
 {
     class Program
     {
-        const string _pathDeployment = @"C:\FireWorks\Deployments.txt";
         const string _pathEmployee = @"C:\FireWorks\Employee.txt";
+        const string _pathDeployment = @"C:\FireWorks\Deployments.txt";
         const string _pathVehicle = @"C:\FireWorks\Vehicles.txt";
         const string _pathResource = @"C:\FireWorks\Resources.txt";
         private static TUI _t = new TUI();
@@ -24,7 +24,8 @@ namespace FireWorks
 
 
             Authenticator auth = new Authenticator(_filer, _pathEmployee);
-            UserFunctions uf = new UserFunctions(_t, _filer, _pathEmployee);
+            string[] paths = new string[] {_pathDeployment, _pathEmployee,  _pathVehicle, _pathResource };
+            UserFunctions uf = new UserFunctions(_t, _filer, paths);
             auth.NeedOutput += OutputEvent;
             auth.NeedBoolInput += BoolInputEvent;
             auth.NeedStringInput += StringInputEvent;

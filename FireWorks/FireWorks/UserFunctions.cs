@@ -13,8 +13,8 @@ namespace FireWorks
 
         private static FileIO _filer;
 
-        private static string _path;
-        public UserFunctions(TUI t,FileIO filer, string path) { _t = t; _filer = filer; _path = path; }
+        private static string[] _path;  // Deploy Employ Vehicles Res
+        public UserFunctions(TUI t,FileIO filer, string[] path) { _t = t; _filer = filer; _path = path; }
         public void Foo(string mode)
         {
             string selection;
@@ -51,36 +51,62 @@ namespace FireWorks
                                "(1)Employees\n" +
                                "(2)Vehicles\n" +
                                "(3)Resources\n");
-                    int data = Valid(_t.GetInt(), 1, 3);
-                    _t.Display("(1)New\n" +
-                               "(2)Edit\n" +
-                               "(3)Delete\n");
-                    int mode = Valid(_t.GetInt(), 1, 3);
-                    Editing(1, 1);
+                    int dataSet = Valid(_t.GetInt(), 1, 3);
+                    _t.Display("(1)View\n" +
+                               "(2)New\n" +
+                               "(3)Edit\n" +
+                               "(4)Delete\n");
+                    int mode = Valid(_t.GetInt(), 1, 4);
+                    
+                    ProcessList(mode,GetList(dataSet));
                     break;
                 case "-q":
                     System.Environment.Exit(1);
                     break;
             }
-
-
         }
-        public void Editing(int file, int mode)
+        public void ProcessList(int mode,List<Human> employees)
         {
-            switch (file)
+            switch (mode)
             {
                 case 1:
-                    List<Human> employees = _filer.ReadAll<Human>(_path);
-                    foreach (var emp in employees)
+                    int c = 1;
+                    foreach (var ele in employees)
                     {
-                        _t.Display(emp.ToString() + "\n");
+                        _t.Display("("+c+") "+ele.ToString() + "\n");
+                            c++;
                     }
                     break;
                 case 2:
+                    _t.Display("Generate new Employee." + "\n");
+
+                    User user = new User("yeah", "boiiii", 2, "USER", "15947562");
+                    _filer.WriteObject(user, _path[1]);
                     break;
                 case 3:
+                    _t.Display("Edit Employee." + "\n");
+                    break;
+                case 4:
+                    _t.Display("Delete Employee." + "\n");
+
                     break;
             }
+        }
+        public List<Human> GetList(int file)
+        {
+            //switch (file)
+            //{
+            //    case 1:
+                    List<Human> employees = _filer.ReadAll<Human>(_path[1]);
+                    return employees;
+                //case 2:
+                //    List<Vehicle> vehicles = _filer.ReadAll<Vehicle>(_path[2]);
+                //   // return vehicles;
+                //case 3:
+                //    List<Resources> resources = _filer.ReadAll<Resources>(_path[3]);
+                //  //  return resources;
+            //}
+          //  return new List<object>();
         }
         public void ShowAdminOptions()
         {
@@ -92,7 +118,7 @@ namespace FireWorks
         {
             _t.Display("Options:\n" +
                        "-v\tView Deployments.\n" +
-                       "-u\tManage Users\n"
+                       "-q\tQuits\n"
                        );
         }
     }

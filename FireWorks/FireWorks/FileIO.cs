@@ -82,6 +82,22 @@ namespace FireWorks
             NeedOutput("cannot read file: " + path + "\n");
             return new object();
         }
+        public void DeleteObject(string path, int line)
+        {
+            if (File.Exists(path))
+            {
+                if ((line > 0))
+                {
+                    List<string> quotelist = File.ReadAllLines(path).ToList();
+                    quotelist.RemoveAt(line-1);
+                    File.WriteAllLines(path, quotelist.ToArray());
+                    //string json = File.ReadLines(path).Skip(line - 1).Take(1).First();
+                    //object o = JSONConverter.JSONToGeneric<T>(json);
+                }
+                NeedOutput("cannot read line \"0\" or negative." + "\n");
+            }
+            NeedOutput("cannot read file: " + path + "\n");
+        }
         public string ReadLine(string path, int line)
         {
             if (File.Exists(path))
