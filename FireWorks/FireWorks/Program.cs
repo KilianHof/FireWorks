@@ -15,7 +15,7 @@ namespace FireWorks
         private static TUI _t = new TUI();
         static void Main(string[] args)
         {
-            //Console.WriteLine("1234".GetHashCode());
+            //Console.WriteLine("0000".GetHashCode());
             //Console.WriteLine("Hello and welcome to FireWorks! \n Please Enter a four digit PIN to continue.");
 
 
@@ -31,7 +31,7 @@ namespace FireWorks
             //filer.NeedOutput += OutputEvent;
             //filer.WriteObject(test, _path);
 
-            //User user = new User("mo","pa",1,"ADMIN", "-1152142086");
+            //User user = new User("m","p",2,"USER", "15947562");
             //filer.WriteObject(user, _pathEmployee);
 
             Console.ReadLine();

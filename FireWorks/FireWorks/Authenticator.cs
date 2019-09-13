@@ -61,7 +61,7 @@ namespace FireWorks
                 int lineCount = File.ReadLines(_path).Count();
                 for (int i = 1; i <= lineCount; i++)
                 {
-                    if (Input.GetHashCode().ToString() == JSONConverter.JSONToUser(filer.ReadLine(_path, 1)).PIN)
+                    if (Input.GetHashCode().ToString() == JSONConverter.JSONToUser(filer.ReadLine(_path, i)).PIN)
                         IsSuccess = true;
                 }
                 return IsSuccess;
