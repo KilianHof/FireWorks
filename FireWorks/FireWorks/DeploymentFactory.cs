@@ -99,7 +99,7 @@ namespace FireWorks
         {
             FileIO filer = new FileIO();
             int lineCount = File.ReadLines(_Path).Count();
-            Deployment last = filer.ReadObject(_Path, lineCount);
+            Deployment last = (Deployment) filer.ReadObject<Deployment>(_Path, lineCount);
             return last.Number;
         }
     }

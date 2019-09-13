@@ -9,7 +9,8 @@ namespace FireWorks
     interface IDataLayer
     {
         string ReadLine(string path, int line);
-        string ReadAll(string path);
+        List<T> ReadAll<T>(string path);
         void WriteObject(object o, string path);
+        object ReadObject<T>(string path,int line);
     }
 }

@@ -10,10 +10,10 @@ namespace FireWorks
 {
     class Program
     {
-        private const string _pathDeployment = @"C:\FireWorks\Deployments.txt";
-        private const string _pathEmployee = @"C:\FireWorks\Employee.txt";
-        private const string _pathVehicle = @"C:\FireWorks\Vehicles.txt";
-        private const string _pathResource = @"C:\FireWorks\Resources.txt";
+        const string _pathDeployment = @"C:\FireWorks\Deployments.txt";
+        const string _pathEmployee = @"C:\FireWorks\Employee.txt";
+        const string _pathVehicle = @"C:\FireWorks\Vehicles.txt";
+        const string _pathResource = @"C:\FireWorks\Resources.txt";
         private static TUI _t = new TUI();
         static void Main(string[] args)
         {
@@ -27,7 +27,7 @@ namespace FireWorks
             auth.NeedStringInput += StringInputEvent;
             string mode = auth.LogIn();
 
-            //Deployment test = DeploymentFactory.PromptDeployment();
+            Deployment test = DeploymentFactory.PromptDeployment();
             //FileIO filer = new FileIO();
             //filer.NeedOutput += OutputEvent;
             //filer.WriteObject(test, _path);
@@ -79,7 +79,7 @@ namespace FireWorks
                                "(2)Edit\n" +
                                "(3)Delete\n");
                     int mode = Valid(_t.GetInt(), 1, 3);
-
+                    Editing(1, 1);
                     break;
                 case "-q":
                     System.Environment.Exit(1);
@@ -90,11 +90,16 @@ namespace FireWorks
         }
         public static void Editing(int file, int mode)
         {
+            FileIO filer = new FileIO();
+            filer.NeedOutput += OutputEvent;
             switch (file)
             {
                 case 1:
-                    List<object> employees = new List<object>();
-
+                    List<Human> employees = filer.ReadAll<Human>(_pathEmployee);
+                    foreach (var emp in employees)
+                    {
+                        _t.Display(emp.ToString()+"\n");
+                    }
                     break;
                 case 2:
                     break;

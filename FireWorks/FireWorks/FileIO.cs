@@ -50,21 +50,37 @@ namespace FireWorks
         /// <param name="path">Where the file is located.</param>
         /// <param name="line">The line to be read.</param>
         /// <returns>Deployment object from specified line.</returns>
-        public Deployment ReadObject(string path, int line)
+        //public Deployment ReadObject(string path, int line)
+        //{
+        //    if (File.Exists(path))
+        //    {
+        //        if ((line > 0))
+        //        {
+        //            string json = File.ReadLines(path).Skip(line - 1).Take(1).First();
+        //            Deployment o = (Deployment)JSONConverter.JSONToDeployment(json);
+        //            return o;
+        //        }
+        //        NeedOutput("cannot read line \"0\" or negative.");
+        //        return new Deployment();
+        //    }
+        //    NeedOutput("cannot read file: " + path);
+        //    return new Deployment();
+        //}
+        public object ReadObject<T>(string path, int line)
         {
             if (File.Exists(path))
             {
                 if ((line > 0))
                 {
                     string json = File.ReadLines(path).Skip(line - 1).Take(1).First();
-                    Deployment o = (Deployment)JSONConverter.JSONToDeployment(json);
+                    object o = JSONConverter.JSONToGeneric<T>(json);
                     return o;
                 }
                 NeedOutput("cannot read line \"0\" or negative.");
-                return new Deployment();
+                return new object();
             }
             NeedOutput("cannot read file: " + path);
-            return new Deployment();
+            return new object();
         }
         public string ReadLine(string path, int line)
         {
@@ -82,16 +98,16 @@ namespace FireWorks
             NeedOutput("cannot read file: " + path);
             return "";
         }
-        public List<object> ReadAll(string path)
+        public List<T> ReadAll<T>(string path)
         {
-            List<object> tmp = new List<object>();
+            List<T> tmp = new List<T>();
             if (File.Exists(path))
             {
                 foreach (string line in File.ReadLines(path))
                 {
-                    tmp.Add(line);
+                    tmp.Add(JSONConverter.JSONToGeneric<T>(line));
                 }
-                File.ReadLines(path);
+                return tmp;
             }
             NeedOutput("cannot read file: " + path);
             return tmp;

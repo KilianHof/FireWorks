@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FireWorks
 {
-    abstract class Human
+    class Human
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -15,7 +15,7 @@ namespace FireWorks
         public Human()
         {
         }
-        public abstract override string ToString();
+        //public abstract override string ToString();
     }
     class FireFighter : Human
     {
