@@ -62,7 +62,7 @@ namespace FireWorks
                 for (int i = 1; i <= lineCount; i++)
                 {
                     User tmp = JSONConverter.JSONToUser(filer.ReadLine(_path, i));
-                    if (tmp.GetType().ToString() == "FireWorks.User")
+                    if (tmp.GetType() == typeof(User))
                     {
                         if (Input.GetHashCode().ToString() == tmp.PIN)
                         {

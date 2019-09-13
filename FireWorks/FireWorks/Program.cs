@@ -12,6 +12,8 @@ namespace FireWorks
     {
         private const string _pathDeployment = @"C:\FireWorks\Deployments.txt";
         private const string _pathEmployee = @"C:\FireWorks\Employee.txt";
+        private const string _pathVehicle = @"C:\FireWorks\Vehicles.txt";
+        private const string _pathResource = @"C:\FireWorks\Resources.txt";
         private static TUI _t = new TUI();
         static void Main(string[] args)
         {
@@ -30,7 +32,7 @@ namespace FireWorks
             //filer.NeedOutput += OutputEvent;
             //filer.WriteObject(test, _path);
 
-            User user = new User("m","p",2,"USER", "15947562");
+            //User user = new User("m", "p", 2, "USER", "15947562");
             //filer.WriteObject(user, _pathEmployee);
 
 
@@ -39,7 +41,7 @@ namespace FireWorks
             {
                 case "ADMIN":
                     ShowAdminOptions();
-                    selection = _t.GetString();
+                    AdminMode(_t.GetString());
                     break;
                 case "USER":
                     ShowUserOptions();
@@ -54,12 +56,57 @@ namespace FireWorks
 
             Console.ReadLine();
         }
+        public static int Valid(int num, int from, int to)
+        {
+            while (num < from || num > to)
+            {
+                _t.Display("Invalid Input. Try again.\n");
+                num = _t.GetInt();
+            }
+            return num;
+        }
+        public static void AdminMode(string sel)
+        {
+            switch (sel)
+            {
+                case "-e":
+                    _t.Display("Choose Base data to work with:\n" +
+                               "(1)Employees\n" +
+                               "(2)Vehicles\n" +
+                               "(3)Resources\n");
+                    int data = Valid(_t.GetInt(), 1, 3);
+                    _t.Display("(1)New\n" +
+                               "(2)Edit\n" +
+                               "(3)Delete\n");
+                    int mode = Valid(_t.GetInt(), 1, 3);
+
+                    break;
+                case "-q":
+                    System.Environment.Exit(1);
+                    break;
+            }
+
+
+        }
+        public static void Editing(int file, int mode)
+        {
+            switch (file)
+            {
+                case 1:
+                    List<object> employees = new List<object>();
+
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+            }
+        }
         public static void ShowAdminOptions()
         {
             _t.Display("Options:\n" +
                        "-e\tEdit base data.\n" +
-                       "-u\tManage Users\n"
-                       );
+                       "-q\tQuit.\n");
         }
         public static void ShowUserOptions()
         {

@@ -52,22 +52,51 @@ namespace FireWorks
         /// <returns>Deployment object from specified line.</returns>
         public Deployment ReadObject(string path, int line)
         {
-            if (!(line == 0))
+            if (File.Exists(path))
             {
-                string json = File.ReadLines(path).Skip(line - 1).Take(1).First();
-                Deployment o = (Deployment)JSONConverter.JSONToDeployment(json);
-                return o;
+                if ((line > 0))
+                {
+                    string json = File.ReadLines(path).Skip(line - 1).Take(1).First();
+                    Deployment o = (Deployment)JSONConverter.JSONToDeployment(json);
+                    return o;
+                }
+                NeedOutput("cannot read line \"0\" or negative.");
+                return new Deployment();
             }
+            NeedOutput("cannot read file: " + path);
             return new Deployment();
         }
         public string ReadLine(string path, int line)
         {
-            if (line > 0)
+            if (File.Exists(path))
             {
-                return File.ReadLines(path).Skip(line - 1).Take(1).First();
+
+                if (line > 0)
+                {
+                    return File.ReadLines(path).Skip(line - 1).Take(1).First();
+                }
+
+                NeedOutput("cannot read line \"0\" or negative.");
+                return "";
             }
-            NeedOutput("cannot read line \"0\" or negative");
+            NeedOutput("cannot read file: " + path);
             return "";
+        }
+        public List<object> ReadAll(string path)
+        {
+            List<object> tmp = new List<object>();
+            if (File.Exists(path))
+            {
+                foreach (string line in File.ReadLines(path))
+                {
+                    tmp.Add(line);
+                }
+                File.ReadLines(path);
+            }
+            NeedOutput("cannot read file: " + path);
+            return tmp;
+            // NeedOutput("cannot read line \"0\" or negative");
+            // return "";
         }
     }
 }
