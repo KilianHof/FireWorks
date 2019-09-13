@@ -9,16 +9,19 @@ namespace FireWorks
 {
     public delegate void OutputEvent(string str);
     public delegate bool BoolInputEvent();
+    public delegate string StringInputEvent();
     /// <summary>
     /// Authenticator is being used to verify and Login users.
     /// </summary>
     class Authenticator
     {
         public Authenticator() { }
-        private int _pinLength = 4;
+        private const int _pinLength = 4;
+        private const string _path = @"C:\FireWorks\PINS.txt";
 
         public event OutputEvent NeedOutput;
         public event BoolInputEvent NeedBoolInput;
+        public event StringInputEvent NeedStringInput;
         /// <summary>
         /// Calls helper functions to ask for a PIN
         /// </summary>
@@ -33,7 +36,7 @@ namespace FireWorks
             }
             else
             {
-                NeedOutput("Log in attempt failed. Try again? (y/n)");
+                NeedOutput("Log in attempt failed. Try again?");
                 if (NeedBoolInput())
                     return LogIn();
                 else
@@ -50,12 +53,12 @@ namespace FireWorks
         public bool CheckPIN()
         {
             bool IsSuccess = false;
-            string Input = Console.ReadLine();
+            string Input = NeedStringInput();
             if (ValidateInput(Input))
             {
                 try
                 {
-                    using (StreamReader Sr = new StreamReader(@"C:\FireWorks\PINS.txt"))
+                    using (StreamReader Sr = new StreamReader(_path))
                     {
                         while (!Sr.EndOfStream)
                         {

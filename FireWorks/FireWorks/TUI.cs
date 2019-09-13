@@ -35,7 +35,7 @@ namespace FireWorks
         }
         public bool GetBool()
         {
-            //Console.WriteLine("(y/n)?");
+            Console.Write(" (y/n)?\n");
             string str = Console.ReadLine();
             if ((str == "y") || (str == "Y") || (str == "Yes") || (str == "yes"))
                 return true;

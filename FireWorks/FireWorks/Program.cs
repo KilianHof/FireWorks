@@ -23,6 +23,7 @@ namespace FireWorks
             Authenticator auth = new Authenticator();
             auth.NeedOutput += OutputEvent;
             auth.NeedBoolInput += BoolInputEvent;
+            auth.NeedStringInput += StringInputEvent;
             auth.LogIn();
 
 
@@ -40,6 +41,10 @@ namespace FireWorks
         static bool BoolInputEvent()
         {
             return _t.GetBool();
+        }
+        static string StringInputEvent()
+        {
+            return _t.GetString();
         }
     }
 }
