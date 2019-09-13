@@ -24,7 +24,7 @@ namespace FireWorks
             auth.NeedBoolInput += BoolInputEvent;
             auth.NeedStringInput += StringInputEvent;
             string mode = auth.LogIn();
-            _t.Display(mode);
+            _t.Display(mode + "\n");
 
             //Deployment test = DeploymentFactory.PromptDeployment();
             //FileIO filer = new FileIO();

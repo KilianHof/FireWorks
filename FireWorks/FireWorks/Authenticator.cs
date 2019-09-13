@@ -36,7 +36,7 @@ namespace FireWorks
             }
             else
             {
-                NeedOutput("Log in attempt failed. Try again?");
+                NeedOutput("Log in attempt failed: " + result + ". Try again?");
                 if (NeedBoolInput())
                     return LogIn();
                 else

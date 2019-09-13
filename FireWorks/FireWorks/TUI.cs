@@ -14,7 +14,7 @@ namespace FireWorks
         }
         public void Display(string str)
         {
-            Console.WriteLine(str);
+            Console.Write(str);
         }
         public int GetInt()
         {
