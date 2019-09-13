@@ -76,10 +76,10 @@ namespace FireWorks
                     object o = JSONConverter.JSONToGeneric<T>(json);
                     return o;
                 }
-                NeedOutput("cannot read line \"0\" or negative.");
+                NeedOutput("cannot read line \"0\" or negative." + "\n");
                 return new object();
             }
-            NeedOutput("cannot read file: " + path);
+            NeedOutput("cannot read file: " + path + "\n");
             return new object();
         }
         public string ReadLine(string path, int line)
@@ -92,10 +92,10 @@ namespace FireWorks
                     return File.ReadLines(path).Skip(line - 1).Take(1).First();
                 }
 
-                NeedOutput("cannot read line \"0\" or negative.");
+                NeedOutput("cannot read line \"0\" or negative." + "\n");
                 return "";
             }
-            NeedOutput("cannot read file: " + path);
+            NeedOutput("cannot read file: " + path + "\n");
             return "";
         }
         public List<T> ReadAll<T>(string path)
@@ -109,7 +109,7 @@ namespace FireWorks
                 }
                 return tmp;
             }
-            NeedOutput("cannot read file: " + path);
+            NeedOutput("cannot read file: " + path + "\n");
             return tmp;
             // NeedOutput("cannot read line \"0\" or negative");
             // return "";
