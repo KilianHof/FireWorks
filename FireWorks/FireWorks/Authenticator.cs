@@ -62,7 +62,8 @@ namespace FireWorks
                 int lineCount = File.ReadLines(_path).Count();
                 for (int i = 1; i <= lineCount; i++)
                 {
-                    User tmp = JSONConverter.JSONToUser(filer.ReadLine(_path, i));
+                    User tmp = JSONConverter.JSONToGeneric<User>(filer.ReadLine(_path, i));
+                    //tmp = JSONConverter.JSONToUser(filer.ReadLine(_path, i));
                     if (tmp.GetType() == typeof(User))
                     {
                         if (Input.GetHashCode().ToString() == tmp.PIN)

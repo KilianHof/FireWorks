@@ -15,7 +15,6 @@ namespace FireWorks
         public Human()
         {
         }
-        //public abstract override string ToString();
     }
     class FireFighter : Human
     {
