@@ -18,4 +18,13 @@ namespace FireWorks
             InventoryNumber = inn;
         }
     }
+    public class Hose : Resources
+    {
+        public char Letter { get; set; }
+        public Hose(string d, int inn, char l) :
+            base(d, inn)
+        {
+            Letter = l;
+        }
+    }
 }
