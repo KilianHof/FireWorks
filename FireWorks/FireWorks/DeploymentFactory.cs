@@ -23,7 +23,7 @@ namespace FireWorks
         /// <param name="com">Comment</param>
         /// <param name="num">Number</param>
         /// <returns></returns>
-        public static Deployment NewDeployment(string loc, Vehicle[] veh, object[] res, FireFighter[] Ff, string com, int num)
+        public static Deployment NewDeployment( string loc, Vehicle[] veh, object[] res, FireFighter[] Ff, string com, int num)
         {
             return new Deployment(loc, veh, res, Ff, com, num);
         }
@@ -31,7 +31,7 @@ namespace FireWorks
         /// Prompts the user to enter a new Deployment object.
         /// </summary>
         /// <returns>The generated Deployment object.</returns>
-        public static Deployment PromptDeployment()
+        public static Deployment PromptDeployment(string path,FileIO filer)
         {
             Console.WriteLine("Where?");
             string loc = Console.ReadLine();
@@ -87,20 +87,10 @@ namespace FireWorks
             Console.WriteLine("Comments?");
             string com = Console.ReadLine();
 
-            int num = GetLastDeploymentNumber() + 1;
+            
+            int num = filer.GetLastDeploymentNumber(_Path) + 1;
 
             return new Deployment(loc, veh, res, Ff, com, num);
-        }
-        /// <summary>
-        /// Used to retrieve the last saved Deployment number to generate the next one.
-        /// </summary>
-        /// <returns>Number of last saved Deployment.</returns>
-        public static int GetLastDeploymentNumber()
-        {
-            FileIO filer = new FileIO();
-            int lineCount = File.ReadLines(_Path).Count();
-            Deployment last = (Deployment) filer.ReadObject<Deployment>(_Path, lineCount);
-            return last.Number;
         }
     }
 }

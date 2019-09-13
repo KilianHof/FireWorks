@@ -114,5 +114,16 @@ namespace FireWorks
             // NeedOutput("cannot read line \"0\" or negative");
             // return "";
         }
+        public int GetLastDeploymentNumber(string path)
+        {
+            if (File.Exists(path))
+            {
+                int lineCount = File.ReadLines(path).Count();
+                Deployment last = (Deployment)ReadObject<Deployment>(path, lineCount);
+                return last.Number;
+            }
+            NeedOutput("cannot read file: " + path +"\n");
+            return 0;
+        }
     }
 }
