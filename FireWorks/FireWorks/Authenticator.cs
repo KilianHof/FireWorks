@@ -72,7 +72,7 @@ namespace FireWorks
             }
         }
         /// <summary>
-        /// Checks for Length =4.
+        /// Checks for Length = _pinLength.
         /// And if the string only contains digits.
         /// </summary>
         /// <param name="Input"></param>
