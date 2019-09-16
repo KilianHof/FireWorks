@@ -17,8 +17,8 @@ namespace FireWorks
         /// </summary>
         /// <param name="o"> The object you want to write into a file.</param>
         /// <param name="path">The file that is being written to.</param>
-        public FileIO() { }
-        public event OutputEvent NeedOutput;
+        private TUI _t;
+        public FileIO(TUI tui) { _t = tui; }
 
         public void WriteObject(object o, string path)
         {
@@ -40,8 +40,8 @@ namespace FireWorks
             }
             catch (IOException e)
             {
-                NeedOutput("Couldnt read and/or create the File.(" + path + ")");
-                NeedOutput(e.Message);
+                _t.Display("Couldnt read and/or create the File.(" + path + ")");
+                _t.Display(e.Message);
             }
         }
         /// <summary>
@@ -76,10 +76,10 @@ namespace FireWorks
                     object o = JSONConverter.JSONToGeneric<T>(json);
                     return o;
                 }
-                NeedOutput("cannot read line \"0\" or negative." + "\n");
+                _t.Display("cannot read line \"0\" or negative." + "\n");
                 return new object();
             }
-            NeedOutput("cannot read file: " + path + "\n");
+            _t.Display("cannot read file: " + path + "\n");
             return new object();
         }
         public void DeleteObject(string path, int line)
@@ -95,10 +95,10 @@ namespace FireWorks
                     //object o = JSONConverter.JSONToGeneric<T>(json);
                 }
                 else
-                    NeedOutput("cannot read line \"0\" or negative." + "\n");
+                    _t.Display("cannot read line \"0\" or negative." + "\n");
             }
             else
-                NeedOutput("cannot read file: " + path + "\n");
+                _t.Display("cannot read file: " + path + "\n");
         }
         public string ReadLine(string path, int line)
         {
@@ -110,10 +110,10 @@ namespace FireWorks
                     return File.ReadLines(path).Skip(line - 1).Take(1).First();
                 }
 
-                NeedOutput("cannot read line \"0\" or negative." + "\n");
+                _t.Display("cannot read line \"0\" or negative." + "\n");
                 return "";
             }
-            NeedOutput("cannot read file: " + path + "\n");
+            _t.Display("cannot read file: " + path + "\n");
             return "";
         }
         public List<T> ReadAll<T>(string path)
@@ -127,7 +127,7 @@ namespace FireWorks
                 }
                 return tmp;
             }
-            NeedOutput("cannot read file: " + path + "\n");
+            _t.Display("cannot read file: " + path + "\n");
             return tmp;
             // NeedOutput("cannot read line \"0\" or negative");
             // return "";
@@ -140,7 +140,7 @@ namespace FireWorks
                 Deployment last = (Deployment)ReadObject<Deployment>(path, lineCount);
                 return last.Number;
             }
-            NeedOutput("cannot read file: " + path +"\n");
+            _t.Display("cannot read file: " + path +"\n");
             return 0;
         }
     }

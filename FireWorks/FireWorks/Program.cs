@@ -15,20 +15,17 @@ namespace FireWorks
         const string _pathVehicle = @"C:\FireWorks\Vehicles.txt";
         const string _pathResource = @"C:\FireWorks\Resources.txt";
         private static TUI _t = new TUI();
-        private static FileIO _filer = new FileIO();
+        private static FileIO _filer = new FileIO(_t);
         static void Main(string[] args)
         {
-            _filer.NeedOutput += OutputEvent;
             //Console.WriteLine("0000".GetHashCode());
             //Console.WriteLine("Hello and welcome to FireWorks! \n Please Enter a four digit PIN to continue.");
 
 
-            Authenticator auth = new Authenticator(_filer, _pathEmployee);
+            Authenticator auth = new Authenticator(_t, _filer, _pathEmployee);
             string[] paths = new string[] {_pathDeployment, _pathEmployee,  _pathVehicle, _pathResource };
             UserFunctions uf = new UserFunctions(_t, _filer, paths);
-            auth.NeedOutput += OutputEvent;
-            auth.NeedBoolInput += BoolInputEvent;
-            auth.NeedStringInput += StringInputEvent;
+
             
             uf.Foo(auth.LogIn());
 
@@ -49,19 +46,6 @@ namespace FireWorks
 
 
             Console.ReadLine();
-        }
-        
-        static void OutputEvent(string str)
-        {
-            _t.Display(str);
-        }
-        static bool BoolInputEvent()
-        {
-            return _t.GetBool();
-        }
-        static string StringInputEvent()
-        {
-            return _t.GetString();
         }
     }
 }

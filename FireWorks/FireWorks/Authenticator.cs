@@ -7,22 +7,17 @@ using System.Threading.Tasks;
 
 namespace FireWorks
 {
-    public delegate void OutputEvent(string str);
-    public delegate bool BoolInputEvent();
-    public delegate string StringInputEvent();
     /// <summary>
     /// Authenticator is being used to verify and Login users.
     /// </summary>
     class Authenticator
     {
+        private TUI _t;
         private FileIO filer;
         private string _path;
-        public Authenticator(FileIO fil,string path) { filer = fil; _path = path; }
+        public Authenticator( TUI tui,FileIO fil,string path) { _t = tui; filer = fil; _path = path; }
         private const int _pinLength = 4;
 
-        public event OutputEvent NeedOutput;
-        public event BoolInputEvent NeedBoolInput;
-        public event StringInputEvent NeedStringInput;
         /// <summary>
         /// Calls helper functions to ask for a PIN
         /// </summary>
@@ -33,13 +28,13 @@ namespace FireWorks
             string result = CheckPIN();
             if (!(result == "No matching PIN found") && !(result == "Invalid Input"))
             {
-                NeedOutput("Login attempt successful! Logged in as: " + result + "\n");
+                _t.Display("Login attempt successful! Logged in as: " + result + "\n");
                 return result;
             }
             else
             {
-                NeedOutput("Login attempt failed: " + result + ". Try again?" + "\n");
-                if (NeedBoolInput())
+                _t.Display("Login attempt failed: " + result + ". Try again?" + "\n");
+                if (_t.GetBool())
                     return LogIn();
                 else
                     System.Environment.Exit(1);
@@ -54,7 +49,7 @@ namespace FireWorks
         /// <returns>Returns True for a Valid PIN that is found in PINS.txt</returns>
         public string CheckPIN()
         {
-            string Input = NeedStringInput();
+            string Input = _t.GetString();
             if (ValidateInput(Input))
             {
                 int lineCount = File.ReadLines(_path).Count();
