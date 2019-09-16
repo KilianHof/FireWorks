@@ -6,16 +6,10 @@ ToDo:
 
 Login-Interface // Abgeschlossen
 
-Einsatzliste // Weitesgehend fertig
+Einsatzliste // Fertig
 
-Fahrzeugliste
+Adminfunktionen // Begonnen
 
-E.Mittelliste
+Einsatzgeneration // Vervollständigt
 
-Einheitenliste
-
-Adminfunktionen
-
-Einsatzgeneration
-
-ToDo-Liste fertigstellen // Weitesgehend fertig
+ToDo-Liste fertigstellen // Größtenteils beendet
