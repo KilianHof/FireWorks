@@ -30,7 +30,7 @@ namespace FireWorks
         /// Prompts the user to enter a new Deployment object.
         /// </summary>
         /// <returns>The generated Deployment object.</returns>
-        public static Deployment PromptDeployment(string path,FileIO filer)
+        public static Deployment PromptDeployment(List<Deployment> deploy,FileIO filer)
         {
             Console.WriteLine("Where?");
             string loc = Console.ReadLine();
@@ -87,7 +87,7 @@ namespace FireWorks
             string com = Console.ReadLine();
 
             
-            int num = filer.GetLastDeploymentNumber(path) + 1;
+            int num = filer.GetLastDeploymentNumber(deploy) + 1;
 
             return new Deployment(loc, veh, res, Ff, com, num);
         }

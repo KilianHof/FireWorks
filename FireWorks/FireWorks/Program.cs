@@ -14,23 +14,25 @@ namespace FireWorks
         const string _pathDeployment = @"C:\FireWorks\Deployments.txt";
         const string _pathVehicle = @"C:\FireWorks\Vehicles.txt";
         const string _pathResource = @"C:\FireWorks\Resources.txt";
+        const string _pathFireFighter = @"C:\FireWorks\FireFighter.txt";
+        public static string[] _paths = new string[] { _pathDeployment, _pathEmployee, _pathVehicle, _pathResource, _pathFireFighter };
+
+        //public static List<Deployment> AllDeployments;
+
         private static TUI _t = new TUI();
         private static FileIO _filer = new FileIO(_t);
         static void Main(string[] args)
         {
             //Console.WriteLine("0000".GetHashCode());
-            //Console.WriteLine("Hello and welcome to FireWorks! \n Please Enter a four digit PIN to continue.");
 
-
-            Authenticator auth = new Authenticator(_t, _filer, _pathEmployee);
-            string[] paths = new string[] {_pathDeployment, _pathEmployee,  _pathVehicle, _pathResource };
-            UserFunctions uf = new UserFunctions(_t, _filer, paths);
+            Authenticator auth = new Authenticator(_t, _filer, _paths[1]);
+            UserFunctions uf = new UserFunctions(_t, _filer, _paths);
 
             
-            uf.Foo(auth.LogIn());
+            uf.Routine(auth.LogIn());
+            uf.SaveAll();
 
-
-            //Deployment test = DeploymentFactory.PromptDeployment(_pathDeployment,_filer);
+            //Deployment test = DeploymentFactory.PromptDeployment(AllDeployments,_filer);
 
             //_filer.WriteObject(test, _path);
 

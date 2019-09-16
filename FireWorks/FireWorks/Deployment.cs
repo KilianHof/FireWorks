@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace FireWorks
 {
@@ -42,7 +43,10 @@ namespace FireWorks
             Comment = Com;
             Number = Num;
         }
-
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
+        }
         public int CompareTo(object obj)
         {
             if (!(obj is Deployment)) throw new FormatException("Only compare Deployment to another Deployment");

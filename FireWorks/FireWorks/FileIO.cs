@@ -89,7 +89,7 @@ namespace FireWorks
                 if ((line > 0))
                 {
                     List<string> quotelist = File.ReadAllLines(path).ToList();
-                    quotelist.RemoveAt(line-1);
+                    quotelist.RemoveAt(line - 1);
                     File.WriteAllLines(path, quotelist.ToArray());
                     //string json = File.ReadLines(path).Skip(line - 1).Take(1).First();
                     //object o = JSONConverter.JSONToGeneric<T>(json);
@@ -132,7 +132,19 @@ namespace FireWorks
             // NeedOutput("cannot read line \"0\" or negative");
             // return "";
         }
-        public int GetLastDeploymentNumber(string path)
+        public void SaveListToFile<T>(List<T> liste,string path)
+        {
+            if (!File.Exists(path)) { _t.Display("cannot read file: " + path + "\n"); return; }
+            string[] str = new string[liste.Count];
+            int i = 0;
+            foreach (var item in liste)
+            {
+                str[i] += JSONConverter.ObjectToJSON(item);
+                i++;
+            }
+            File.WriteAllLines(path, str);
+        }
+        public int GetLastDeploymentNumberX(string path)         //rewrite to read from object-list and not from file
         {
             if (File.Exists(path))
             {
@@ -140,8 +152,13 @@ namespace FireWorks
                 Deployment last = (Deployment)ReadObject<Deployment>(path, lineCount);
                 return last.Number;
             }
-            _t.Display("cannot read file: " + path +"\n");
+            _t.Display("cannot read file: " + path + "\n");
             return 0;
+        }
+        public int GetLastDeploymentNumber(List<Deployment> liste)         // new version need test
+        {
+            if (liste is null) return 0;
+            return liste.Count();
         }
     }
 }
