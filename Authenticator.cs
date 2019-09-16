@@ -13,7 +13,7 @@ namespace FireWorks
         public static object StatusCheck(Human CurrentUser)
         {
 
-            
+
 
 
             if (CurrentUser.Status == 0)
@@ -26,7 +26,7 @@ namespace FireWorks
             if (CurrentUser.Status == 1)
             {
                 Console.WriteLine("User with ID " + CurrentUser.ID + " has logged in.");
-                Console.WriteLine("Greetings, "+CurrentUser.FName+" "+CurrentUser.LName+".");
+                Console.WriteLine("Greetings, " + CurrentUser.FName + " " + CurrentUser.LName + ".");
                 Console.ReadLine();
                 return CurrentUser;
             }
@@ -34,7 +34,7 @@ namespace FireWorks
             if (CurrentUser.Status == 2)
             {
                 Console.WriteLine("Admin with ID " + CurrentUser.ID + " has logged in.");
-                Console.WriteLine("Greeting, " + CurrentUser.FName + " " + CurrentUser.LName + ".");
+                Console.WriteLine("Greetings, " + CurrentUser.FName + " " + CurrentUser.LName + ".");
                 Console.ReadLine();
                 return CurrentUser;
             }
@@ -50,7 +50,7 @@ namespace FireWorks
         }
 
 
-            public static String LogIn()
+        public static String LogIn()
         {
             String SCurrentUser = "";
             Console.Write("PIN:");

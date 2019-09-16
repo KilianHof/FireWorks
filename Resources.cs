@@ -20,7 +20,7 @@ namespace FireWorks
     public class Resources
     {
 
-        public String ID { get; set; } // Inventarnummer
+        public int Amount { get; set; } // Menge
         public String Name { get; set; } // Objektname
 
     }
@@ -29,7 +29,6 @@ namespace FireWorks
     {
 
         public Boolean Saw { get; set; } // Kettensäge y/n
-
         public int Height { get; set; } // Höhe in M
 
     }
@@ -38,7 +37,6 @@ namespace FireWorks
     {
 
         public Boolean Saw { get; set; } // Kettensäge y/n
-
         public int FillQuantity { get; set; } // Wasser in L
 
     }

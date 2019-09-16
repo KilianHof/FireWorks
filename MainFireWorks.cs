@@ -24,28 +24,54 @@ namespace FireWorks
             CurrentUser = JsonConvert.DeserializeObject<Human>(SCurrentUser);
 
             Authenticator.StatusCheck(CurrentUser);
-            Console.Clear();
-            String Answer;
-            
-                Console.WriteLine("(d)etailed Report / deploym(e)nts / (s)earch deployments");
+            if (CurrentUser.Status == 1)
+            {
+                Console.Clear();
+                String Answer;
+
+                Console.WriteLine("(d)etailed Report / show deploym(e)nts / (s)earch deployments");
                 Answer = Console.ReadLine();
 
                 if (Answer == "e")
                 {
                     DeploymentListing.DeploymentList();
                 }
-                //if (Answer == "s")
-                //{
-                //    DeploymentListing.DeploymentSearch();
-                //}
+                if (Answer == "s")
+                {
+                    DeploymentListing.DeploymentSearch();
+                }
                 if (Answer == "d")
                 {
-                Console.Clear();
-                DeploymentListing.DeploymentDetail();
+                    Console.Clear();
+                    DeploymentListing.DeploymentDetail();
                 }
+            }
+            if (CurrentUser.Status == 2)
+            {
+                Console.Clear();
+                String Answer;
 
+                Console.WriteLine("(d)etailed Report / show deploym(e)nts / (s)earch deployments");
+                Answer = Console.ReadLine();
 
-            Console.ReadLine();
+                if (Answer == "e")
+                {
+                    DeploymentListing.DeploymentList();
+                }
+                if (Answer == "s")
+                {
+                    DeploymentListing.DeploymentSearch();
+                }
+                if (Answer == "d")
+                {
+                    Console.Clear();
+                    DeploymentListing.DeploymentDetail();
+                }
+                if (Answer == "c")
+                {
+                    DeploymentListing.CreateDeployment();
+                }
+            }
 
         }
     }
