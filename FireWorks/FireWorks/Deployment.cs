@@ -9,7 +9,7 @@ namespace FireWorks
     /// <summary>
     /// Deployment onbject contains all the information of a given Deployment
     /// </summary>
-    class Deployment
+    class Deployment : IComparable      
     {
         public string DateAndTime { get; set; }
         public string Location { get; set; }
@@ -41,6 +41,19 @@ namespace FireWorks
             FireFighters = Ff;
             Comment = Com;
             Number = Num;
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (!(obj is Deployment)) throw new FormatException("Only compare Deployment to another Deployment");
+               
+            Deployment dep = (Deployment)obj;
+
+            if (Number < dep.Number) return 1;
+            if (Number > dep.Number) return -1;
+            //if both "if's" arent true objects must be equal.
+            return 0;
+
         }
     }
 }
