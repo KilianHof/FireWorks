@@ -19,11 +19,6 @@ namespace FireWorks
         {
             return FirstName + " " + LastName + " " + Id;
         }
-        public void Edit()
-        {
-
-
-        }
     }
     class FireFighter : Human
     {
