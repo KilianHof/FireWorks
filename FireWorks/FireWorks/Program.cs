@@ -36,15 +36,6 @@ namespace FireWorks
 
             //User user = new User("m", "p", 2, "USER", "15947562");
             //_filer.WriteObject(user, _pathEmployee);
-
-
-
-
-
-
-
-
-
             Console.ReadLine();
         }
     }

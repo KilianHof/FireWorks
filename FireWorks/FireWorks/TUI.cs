@@ -19,7 +19,7 @@ namespace FireWorks
         public int GetInt()
         {
             Console.WriteLine("Type a number");
-            string Input = Console.ReadLine();
+            string Input = GetString();
             for (int i = 0; i < Input.Length; i++)
             {
                 if (!char.IsDigit(Input[i]))
@@ -36,7 +36,7 @@ namespace FireWorks
         public bool GetBool()
         {
             Console.Write(" (y/n)?\n");
-            string str = Console.ReadLine();
+            string str = GetString();
             if ((str == "y") || (str == "Y") || (str == "Yes") || (str == "yes"))
                 return true;
             else
