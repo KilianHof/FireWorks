@@ -69,7 +69,7 @@ namespace FireWorks
                         DeploymentListing.CreateDeployment();
                         break;
                     case "l":
-                        Authenticator.UserLock();
+                        Authenticator.UserLock(); // kann auch admin machen
                         break;
                 }
 
