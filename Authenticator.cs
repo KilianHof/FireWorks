@@ -74,5 +74,39 @@ namespace FireWorks
 
             return SCurrentUser;
         }
+
+        public static void UserLock()
+        {
+            String SLCurrentUser = "";
+            Console.Write("User-ID:");
+            String IDenter = Console.ReadLine();
+            IDenter = "\"ID\":" + IDenter; //Absicherung
+            using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Users.txt"))
+                while (SLCurrentUser.IndexOf(IDenter) == -1)
+                {
+
+
+                    SLCurrentUser = UserText.ReadLine();
+
+                    if (SLCurrentUser == null)
+                    {
+                        Console.WriteLine("Invalid ID.");
+                        Console.ReadLine();
+                        System.Environment.Exit(1);
+                    }
+                }
+            
+            Human User = new Human();
+            User = JsonConvert.DeserializeObject<Human>(SLCurrentUser);
+            Console.WriteLine("Enter new Status: 0 (locked) , 1 (User) , 2 (Admin).");
+            string answer = Console.ReadLine();
+            int.TryParse(answer, out int answerint);
+            if (answerint == 0) User.Status = 0;
+            if (answerint == 1) User.Status = 1;
+            if (answerint == 2) User.Status = 2;
+            answer = JsonConvert.SerializeObject(User);
+            ObjectWriter.LineChanger(answer, "C:/Users/khof/Desktop/Users.txt", User.ID);
+        }
+
     }
 }
