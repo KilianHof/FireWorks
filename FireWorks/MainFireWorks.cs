@@ -54,28 +54,24 @@ namespace FireWorks
                 Console.WriteLine("(d)etailed Report / show deploym(e)nts / (s)earch deployments");
                 Answer = Console.ReadLine();
 
-                if (Answer == "e")
+                switch (Answer)
                 {
-                    DeploymentListing.DeploymentList();
+                    case "e":
+                        DeploymentListing.DeploymentList();
+                        break;
+                    case "s":
+                        DeploymentListing.DeploymentSearch();
+                        break;
+                    case "d":
+                        DeploymentListing.DeploymentDetail();
+                        break;
+                    case "c":
+                        DeploymentListing.CreateDeployment();
+                        break;
+                    case "l":
+                        Authenticator.UserLock();
+                        break;
                 }
-                if (Answer == "s")
-                {
-                    DeploymentListing.DeploymentSearch();
-                }
-                if (Answer == "d")
-                {
-                    Console.Clear();
-                    DeploymentListing.DeploymentDetail();
-                }
-                if (Answer == "c")
-                {
-                    DeploymentListing.CreateDeployment();
-                }
-                if (Answer == "l")
-                {
-                    Authenticator.UserLock();
-                }
-            }
 
         }
     }
