@@ -46,9 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Authenticator.cs" />
+    <Compile Include="ObjectWriter.cs" />
+    <Compile Include="Deployment.cs" />
     <Compile Include="Human.cs" />
-    <Compile Include="Vehicles.cs" />
+    <Compile Include="Resources.cs" />
     <Compile Include="MainFireWorks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

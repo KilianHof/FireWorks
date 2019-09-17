@@ -95,8 +95,8 @@ namespace FireWorks
                         System.Environment.Exit(1);
                     }
                 }
-            
-            Human User = new Human();
+
+            Human User;
             User = JsonConvert.DeserializeObject<Human>(SLCurrentUser);
             Console.WriteLine("Enter new Status: 0 (locked) , 1 (User) , 2 (Admin).");
             string answer = Console.ReadLine();
@@ -107,6 +107,5 @@ namespace FireWorks
             answer = JsonConvert.SerializeObject(User);
             ObjectWriter.LineChanger(answer, "C:/Users/khof/Desktop/Users.txt", User.ID);
         }
-
     }
 }

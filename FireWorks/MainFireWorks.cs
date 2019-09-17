@@ -10,42 +10,73 @@ namespace FireWorks
 {
     class MainFireWorks
     {
-        static void Main(string[] args)
+#pragma warning disable IDE0060 // Nicht verwendete Parameter entfernen
+        public static void Main(string[] args)
+#pragma warning restore IDE0060 // Nicht verwendete Parameter entfernen
         {
 
 
-            Human Master = new Human();
-            Master.PIN = "2019";
-            Master.ID = 1;
-            Master.Status = 1;
-
-            string Master1 = JsonConvert.SerializeObject(Master);
-            Console.WriteLine(Master1);
-
-            Human Master2 = JsonConvert.DeserializeObject<Human>(Master1);
-            Console.WriteLine(Master2.PIN);
 
 
-            using (StreamWriter writer = new StreamWriter(@"C:/Users/khof/Desktop/Users.txt"))
+            Human CurrentUser;
+            var SCurrentUser = Authenticator.LogIn();
+
+            CurrentUser = JsonConvert.DeserializeObject<Human>(SCurrentUser);
+
+            Authenticator.StatusCheck(CurrentUser);
+            if (CurrentUser.Status == 1)
             {
-                
-                    writer.WriteLine(Master1);
+                Console.Clear();
+                String Answer;
 
+                Console.WriteLine("(d)etailed Report / show deploym(e)nts / (s)earch deployments");
+                Answer = Console.ReadLine();
+
+                if (Answer == "e")
+                {
+                    DeploymentListing.DeploymentList();
+                }
+                if (Answer == "s")
+                {
+                    DeploymentListing.DeploymentSearch();
+                }
+                if (Answer == "d")
+                {
+                    Console.Clear();
+                    DeploymentListing.DeploymentDetail();
+                }
+            }
+            if (CurrentUser.Status == 2)
+            {
+                Console.Clear();
+                String Answer;
+
+                Console.WriteLine("(d)etailed Report / show deploym(e)nts / (s)earch deployments");
+                Answer = Console.ReadLine();
+
+                if (Answer == "e")
+                {
+                    DeploymentListing.DeploymentList();
+                }
+                if (Answer == "s")
+                {
+                    DeploymentListing.DeploymentSearch();
+                }
+                if (Answer == "d")
+                {
+                    Console.Clear();
+                    DeploymentListing.DeploymentDetail();
+                }
+                if (Answer == "c")
+                {
+                    DeploymentListing.CreateDeployment();
+                }
+                if (Answer == "l")
+                {
+                    Authenticator.UserLock();
+                }
             }
 
-            
-            using (StreamReader reader = new StreamReader(@"C:/Users/khof/Desktop/Users.txt"))
-            {
-
-                string read;
-                    read = reader.ReadLine();
-
-                Console.WriteLine(read);
-
-
-            }
-            Console.ReadLine();
-            
         }
     }
 }
