@@ -75,10 +75,6 @@ namespace FireWorks
                 {
                     Authenticator.UserLock();
                 }
-                if (Answer == "2l")
-                {
-                    Authenticator.UserLock();
-                }
             }
 
         }
