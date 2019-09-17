@@ -12,39 +12,39 @@ namespace FireWorks
     public class Vehicles
     {
 
-        public string Type { get; set; } // Fahrzeuginfo
-        public int HP { get; set; } // Motorleistung
-        public int Seats { get; set; } // Sitzplätze
+        public string Type { get; set; }
+        public int HP { get; set; }
+        public int Seats { get; set; }
 
     }
     public class Resources
     {
 
-        public int Amount { get; set; } // Menge
-        public String Name { get; set; } // Objektname
+        public int Amount { get; set; }
+        public String Name { get; set; }
 
     }
 
     public class TurntableLadder : Vehicles
     {
 
-        public Boolean Saw { get; set; } // Kettensäge y/n
-        public int Height { get; set; } // Höhe in M
+        public Boolean Saw { get; set; }
+        public int Height { get; set; }
 
     }
 
     public class LFZ : Vehicles
     {
 
-        public Boolean Saw { get; set; } // Kettensäge y/n
-        public int FillQuantity { get; set; } // Wasser in L
+        public Boolean Saw { get; set; }
+        public int FillQuantity { get; set; }
 
     }
 
     public class Ambulance : Vehicles
     {
 
-        public int MaxWeight { get; set; } // Patientengewicht
+        public int MaxWeight { get; set; }
 
     }
 
