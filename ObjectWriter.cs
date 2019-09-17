@@ -16,7 +16,7 @@ namespace FireWorks
             string Json = JsonConvert.SerializeObject(Text) + Environment.NewLine;
             try
             {
-                    File.AppendAllText(FilePath, Json);
+                File.AppendAllText(FilePath, Json);
             }
             catch (IOException e)
             {
@@ -24,6 +24,13 @@ namespace FireWorks
                 Console.WriteLine(e.Message);
             }
         }
+        public static void LineChanger(string newText, string fileName, int line_to_edit)
+        {
+            string[] arrLine = File.ReadAllLines(fileName);
+            arrLine[line_to_edit - 1] = newText;
+            File.WriteAllLines(fileName, arrLine);
+        }
 
     }
+
 }
