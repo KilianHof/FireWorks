@@ -51,28 +51,32 @@ namespace FireWorks
                 Console.Clear();
                 String Answer;
 
-                Console.WriteLine("(d)etailed Report / show deploym(e)nts / (s)earch deployments");
+                Console.WriteLine("(detail)ed Report / (show) deployments / (search) deployments");
+                Console.WriteLine("(create) deployment / (lock) or unlock user / (edit) data");
                 Answer = Console.ReadLine();
 
                 switch (Answer)
                 {
-                    case "e":
+                    case "show":
                         DeploymentListing.DeploymentList();
                         break;
-                    case "s":
+                    case "search":
                         DeploymentListing.DeploymentSearch();
                         break;
-                    case "d":
+                    case "detail":
                         DeploymentListing.DeploymentDetail();
                         break;
-                    case "c":
+                    case "create":
                         DeploymentListing.CreateDeployment();
                         break;
-                    case "l":
+                    case "lock":
                         Authenticator.UserLock(); // kann auch admin machen
                         break;
+                    case "edit":
+                        Resource.Editor();
+                        break;
                 }
-
+            }
         }
     }
 }

@@ -48,4 +48,25 @@ namespace FireWorks
 
     }
 
+    public class Resource
+    {
+        public static void Editor()
+        {
+
+            Console.WriteLine("Edit what?");
+            Console.WriteLine("(r)esources / (v)ehicles / (u)sers");
+            string answer = Console.ReadLine();
+            switch (answer)
+            {
+                case "r":
+                    break;
+                case "v":
+                    break;
+                case "u":
+                    break;
+            }
+            return;
+        }
+    }
+
 }
