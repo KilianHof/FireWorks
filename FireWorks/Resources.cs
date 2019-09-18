@@ -20,7 +20,7 @@ namespace FireWorks
     public class Resources
     {
 
-        public int Amount { get; set; }
+        public int ID { get; set; }
         public String Name { get; set; }
 
     }
@@ -52,21 +52,107 @@ namespace FireWorks
     {
         public static void Editor()
         {
-
-            Console.WriteLine("Edit what?");
+            Console.Clear();
+            Console.WriteLine("Edit what type of object?");
             Console.WriteLine("(r)esources / (v)ehicles / (u)sers");
-            string answer = Console.ReadLine();
-            switch (answer)
+            switch (Console.ReadLine())
             {
                 case "r":
+                    EResources();
                     break;
                 case "v":
+                    EVehicles();
                     break;
                 case "u":
+                    EUsers();
+                    break;
+                default:
+                    Console.WriteLine("Invalid answer");
+                    Console.ReadLine();
+                    Editor();
                     break;
             }
             return;
         }
+
+        public static void EResources()
+        {
+            Console.Clear();
+            Console.WriteLine("Edit what value?");
+            Console.WriteLine("(n)ame / (c)reate new resource");
+            switch (Console.ReadLine())
+            {
+                case "n":
+                    break;
+                case "c":
+                    break;
+                default:
+                    Console.WriteLine("Invalid answer");
+                    Console.ReadLine();
+                    EResources();
+                    break;
+            }
+            return;
+        }
+        public static void EVehicles()
+        {
+            Console.Clear();
+            string VehicleType;
+            Console.WriteLine("Edit what vehicle type?");
+            Console.WriteLine("(g)eneric / (l)FZ / (t)urntableladder / (a)ambulace");
+            VehicleType = Console.ReadLine();
+            if (VehicleType != "g") if (VehicleType != "l") if (VehicleType != "t") if (VehicleType != "a")
+                        {
+                            Console.WriteLine("Invalid answer");
+                            Console.ReadLine();
+                            EVehicles();
+                            return;
+                        }
+            Console.WriteLine("Edit what value?");
+            Console.WriteLine("(t)ype / (s)eats / (h)orsepower / (c)reate new resource");
+            switch (Console.ReadLine())
+            {
+                case "t":
+                    break;
+                case "s":
+                    break;
+                case "h":
+                    break;
+                case "c":
+                    break;
+                default:
+                    Console.WriteLine("Invalid answer");
+                    Console.ReadLine();
+                    EVehicles();
+                    break;
+            }
+            return;
+        }
+        public static void EUsers()
+        {
+            Console.Clear();
+            Console.WriteLine("Edit what value?");
+            Console.WriteLine("(n)ame / (p)IN / (d)isable user / (c)reate user");
+            switch (Console.ReadLine())
+            {
+                case "n":
+                    break;
+                case "p":
+                    break;
+                case "d":
+                    break;
+                case "c":
+                    break;
+                default:
+                    Console.WriteLine("Invalid answer");
+                    Console.ReadLine();
+                    EUsers();
+                    break;
+            }
+            return;
+        }
+
+
     }
 
 }

@@ -109,7 +109,6 @@ namespace FireWorks
             while (DetailDeployment.ResourcesNumber > 0)
             {
                 DetailDeployment.ResourcesNumber -= 1;
-                Console.Write(DetailDeployment.Resources[DetailDeployment.ResourcesNumber].Amount + "x ");
                 Console.Write(DetailDeployment.Resources[DetailDeployment.ResourcesNumber].Name + ", ");
             }
             Console.WriteLine();
@@ -527,9 +526,6 @@ namespace FireWorks
                 Console.WriteLine(Number + " resources left.");
                 Console.WriteLine("Enter the name of the resource:");
                 resources[Number - 1].Name = Console.ReadLine();
-                Console.WriteLine("Enter the amount of the used resource:");
-                int.TryParse(Console.ReadLine(), out IntNumber);
-                resources[Number - 1].Amount = IntNumber;
                 Number -= 1;
             }
             NewDeployment.Resources = resources;

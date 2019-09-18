@@ -49,13 +49,11 @@ namespace FireWorks
             if (CurrentUser.Status == 2)
             {
                 Console.Clear();
-                String Answer;
 
                 Console.WriteLine("(detail)ed Report / (show) deployments / (search) deployments");
                 Console.WriteLine("(create) deployment / (lock) or unlock user / (edit) data");
-                Answer = Console.ReadLine();
 
-                switch (Answer)
+                switch (Console.ReadLine())
                 {
                     case "show":
                         DeploymentListing.DeploymentList();
