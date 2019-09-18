@@ -15,7 +15,10 @@ namespace FireWorks
 #pragma warning restore IDE0060 // Nicht verwendete Parameter entfernen
         {
 
+            //Datum
 
+            //DateTime date = DateTime.Now;
+            //string datestring = date.ToString("dd");
 
 
             Human CurrentUser;

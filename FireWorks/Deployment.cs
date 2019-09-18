@@ -105,7 +105,7 @@ namespace FireWorks
             Console.WriteLine();
 
             // Extrawerte für Fahrzeuge hier
-            Console.WriteLine("Resources:          A-Pipelength: " + DetailDeployment.ALength + ", B-Pipelength: " + DetailDeployment.BLength + ", C-Pipelength: " + DetailDeployment.CLength + ", D-Pipelength: " + DetailDeployment.DLength);
+            Console.WriteLine("Resources:          A-Hoselength: " + DetailDeployment.ALength + ", B-Hoselength: " + DetailDeployment.BLength + ", C-Hoselength: " + DetailDeployment.CLength + ", D-Hoselength: " + DetailDeployment.DLength);
             while (DetailDeployment.ResourcesNumber > 0)
             {
                 DetailDeployment.ResourcesNumber -= 1;
@@ -128,7 +128,52 @@ namespace FireWorks
         public static void DeploymentList()
         {
 
+            //Gasmeter
+            String Gasmeters = "";
             int i = 0;
+            using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Gasmeters.txt"))
+                
+                while (Gasmeters != null)
+                {
+
+
+                    Gasmeters = UserText.ReadLine();
+
+                    i += 1;
+                    
+                }
+            int iMax = i-1;
+            i -= 1;
+            Gasmeter[] Gasmeterlist = new Gasmeter[i];
+            using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Gasmeters.txt"))
+                while (i > 0)
+                {
+
+
+                    Gasmeterlist[i-1] = JsonConvert.DeserializeObject<Gasmeter>(UserText.ReadLine());
+
+                    i -= 1;
+
+                }
+
+            DateTime date = DateTime.Now;
+            string datestring = date.ToString("dd");
+            while(i != iMax)
+            {
+                if (Gasmeterlist[i].Date == datestring)Console.WriteLine("Gasmeter with ID " + Gasmeterlist[i].ID + " has to be checked today.");
+
+                i += 1;
+            }
+
+
+
+
+
+
+
+            //Gasmeter
+
+            
             Console.WriteLine("How many deployments are to be shown?");
             int.TryParse(Console.ReadLine(), out int number);
             number += 1;
@@ -163,7 +208,7 @@ namespace FireWorks
                 }
 
             i -= 1;
-            int iMax = i;
+            iMax = i;
             number -= 2;
             while (number > -1)
             {
@@ -551,16 +596,16 @@ namespace FireWorks
             NewDeployment.Human = humans;
 
             Console.Clear();
-            Console.WriteLine("How many meters of A-pipes were used?");
+            Console.WriteLine("How many meters of A-Hoses were used?");
             int.TryParse(Console.ReadLine(), out Number);
             NewDeployment.ALength = Number;
-            Console.WriteLine("How many meters of B-pipes were used?");
+            Console.WriteLine("How many meters of B-Hoses were used?");
             int.TryParse(Console.ReadLine(), out Number);
             NewDeployment.BLength = Number;
-            Console.WriteLine("How many meters of C-pipes were used?");
+            Console.WriteLine("How many meters of C-Hoses were used?");
             int.TryParse(Console.ReadLine(), out Number);
             NewDeployment.CLength = Number;
-            Console.WriteLine("How many meters of D-pipes were used?");
+            Console.WriteLine("How many meters of D-Hoses were used?");
             int.TryParse(Console.ReadLine(), out Number);
             NewDeployment.DLength = Number;
 
