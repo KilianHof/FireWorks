@@ -139,10 +139,16 @@ namespace FireWorks
         public static void EUsers()
         {
 
-            Console.WriteLine("Enter User-ID.");
+            Console.WriteLine("Enter a user-ID. Enter \"0\" to create a new user.");
             string ID = Console.ReadLine();
             string EUser = "";
+            if (ID == "0")
+            {
+                EUsersCreate();
+                return;
+            }
             ID = "\"ID\":" + ID; //Absicherung
+            
             using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Users.txt"))
                 while (EUser.IndexOf(ID) == -1)
                 {
@@ -165,7 +171,7 @@ namespace FireWorks
 
             Console.Clear();
             Console.WriteLine("Edit what value?");
-            Console.WriteLine("(n)ame / (p)IN / (d)isable user / (c)reate user");
+            Console.WriteLine("(n)ame / (p)IN / (d)isable user");
             switch (Console.ReadLine())
             {
                 case "n":
@@ -176,8 +182,6 @@ namespace FireWorks
                     break;
                 case "d":
                     EUsersDisable(User);
-                    break;
-                case "c":
                     break;
                 default:
                     Console.WriteLine("Invalid answer");
@@ -196,6 +200,7 @@ namespace FireWorks
             User.LName = Console.ReadLine();
             string Usertext = JsonConvert.SerializeObject(User);
             ObjectWriter.LineChanger(Usertext, "C:/Users/khof/Desktop/Users.txt", User.ID);
+            return;
         }
         public static void EUsersPin(Human User)
         {
@@ -203,13 +208,41 @@ namespace FireWorks
             User.PIN = Console.ReadLine();
             string Usertext = JsonConvert.SerializeObject(User);
             ObjectWriter.LineChanger(Usertext, "C:/Users/khof/Desktop/Users.txt", User.ID);
+            return;
         }
         public static void EUsersDisable(Human User)
         {
             User.Status = 0;
             string Usertext = JsonConvert.SerializeObject(User);
             ObjectWriter.LineChanger(Usertext, "C:/Users/khof/Desktop/Users.txt", User.ID);
+            return;
+        }
+        public static void EUsersCreate()
+        {
+            Human User = new Human();
+            int i = 0;
+            string Text = "y e e t";
+            using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Users.txt"))
+                while (Text != null)
+                {
+                    Text = UserText.ReadLine();
+
+                    i += 1;
+                }
+            User.ID = i;
+            Console.WriteLine("Assigned user-ID " + i + ".");
+            Console.WriteLine("Please enter a first name.");
+            User.FName = Console.ReadLine();
+            Console.WriteLine("Please enter a last name.");
+            User.LName = Console.ReadLine();
+            Console.WriteLine("Please enter a PIN.");
+            User.PIN = Console.ReadLine();
+            Console.WriteLine("Please enter status number. (0 locked / 1 user / 2 admin)");
+            string answer = Console.ReadLine();
+            int.TryParse(answer, out int status);
+            User.Status = status;
+            ObjectWriter.WriteObject(User, "C:/Users/khof/Desktop/Users.txt");
+            return;
         }
     }
-
 }
