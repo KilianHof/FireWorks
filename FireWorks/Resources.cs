@@ -177,24 +177,227 @@ namespace FireWorks
                             EVehicles();
                             return;
                         }
-            Console.WriteLine("Edit what value?");
-            Console.WriteLine("(t)ype / (s)eats / (h)orsepower / (c)reate new resource");
-            switch (Console.ReadLine())
+
+
+        }
+
+        public static void EVehiclesG()
+        {
+            Console.WriteLine("Enter the vehicle-ID");
+            string ID = Console.ReadLine();
+            string EVehicle = "";
+            ID = "\"ID\":" + ID; //Absicherung
+            using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Users.txt"))
+                while (EVehicle.IndexOf(ID) == -1)
+                {
+
+
+                    EVehicle = UserText.ReadLine();
+
+                    if (EVehicle == null)
+                    {
+                        Console.WriteLine("Invalid ID.");
+                        Console.ReadLine();
+                        EUsers();
+                        return;
+                    }
+
+                }
+            string answer;
+            int number;
+            Vehicles EVehicles = new Vehicles();
+            Console.WriteLine("Enter the new values, leave the field empty to keep the current value.");
+            Console.WriteLine("Type:");
+            answer = Console.ReadLine();
+            if (answer != "") EVehicles.Type = answer;
+            Console.WriteLine("Seats:");
+            answer = Console.ReadLine();
+            if (answer != "")
             {
-                case "t":
-                    break;
-                case "s":
-                    break;
-                case "h":
-                    break;
-                case "c":
-                    break;
-                default:
-                    Console.WriteLine("Invalid answer");
-                    Console.ReadLine();
-                    EVehicles();
-                    break;
+                int.TryParse(answer, out number);
+                EVehicles.Seats = number;
             }
+            Console.WriteLine("Horsepower:");
+            answer = Console.ReadLine();
+            if (answer != "")
+            {
+                int.TryParse(answer, out number);
+                EVehicles.HP = number;
+            }
+
+            return;
+        }
+        public static void EVehiclesTTL()
+        {
+            Console.WriteLine("Enter the vehicle-ID");
+            string ID = Console.ReadLine();
+            string EVehicle = "";
+            ID = "\"ID\":" + ID; //Absicherung
+            using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Users.txt"))
+                while (EVehicle.IndexOf(ID) == -1)
+                {
+
+
+                    EVehicle = UserText.ReadLine();
+
+                    if (EVehicle == null)
+                    {
+                        Console.WriteLine("Invalid ID.");
+                        Console.ReadLine();
+                        EUsers();
+                        return;
+                    }
+
+                }
+            string answer;
+            int number;
+            TurntableLadder EVehicles = new TurntableLadder();
+            Console.WriteLine("Enter the new values, leave the field empty to keep the current value.");
+            Console.WriteLine("Type:");
+            answer = Console.ReadLine();
+            if (answer != "") EVehicles.Type = answer;
+            Console.WriteLine("Seats:");
+            answer = Console.ReadLine();
+            if (answer != "")
+            {
+                int.TryParse(answer, out number);
+                EVehicles.Seats = number;
+            }
+            Console.WriteLine("Horsepower:");
+            answer = Console.ReadLine();
+            if (answer != "")
+            {
+                int.TryParse(answer, out number);
+                EVehicles.HP = number;
+            }
+            Console.WriteLine("Height in m:");
+            answer = Console.ReadLine();
+            if (answer != "")
+            {
+                int.TryParse(answer, out number);
+                EVehicles.Height = number;
+            }
+            Console.WriteLine("Does the vehicle contain a chainsaw? (y/n)");
+            answer = Console.ReadLine();
+            if (answer != "")
+            {
+                if (answer == "n") EVehicles.Saw = false;
+                if (answer == "y") EVehicles.Saw = true;
+            }
+
+            return;
+        }
+        public static void EVehiclesLFZ()
+        {
+            Console.WriteLine("Enter the vehicle-ID");
+            string ID = Console.ReadLine();
+            string EVehicle = "";
+            ID = "\"ID\":" + ID; //Absicherung
+            using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Users.txt"))
+                while (EVehicle.IndexOf(ID) == -1)
+                {
+
+
+                    EVehicle = UserText.ReadLine();
+
+                    if (EVehicle == null)
+                    {
+                        Console.WriteLine("Invalid ID.");
+                        Console.ReadLine();
+                        EUsers();
+                        return;
+                    }
+
+                }
+            string answer;
+            int number;
+            LFZ EVehicles = new LFZ();
+            Console.WriteLine("Enter the new values, leave the field empty to keep the current value.");
+            Console.WriteLine("Type:");
+            answer = Console.ReadLine();
+            if (answer != "") EVehicles.Type = answer;
+            Console.WriteLine("Seats:");
+            answer = Console.ReadLine();
+            if (answer != "")
+            {
+                int.TryParse(answer, out number);
+                EVehicles.Seats = number;
+            }
+            Console.WriteLine("Horsepower:");
+            answer = Console.ReadLine();
+            if (answer != "")
+            {
+                int.TryParse(answer, out number);
+                EVehicles.HP = number;
+            }
+            Console.WriteLine("Fillquantity in L:");
+            answer = Console.ReadLine();
+            if (answer != "")
+            {
+                int.TryParse(answer, out number);
+                EVehicles.FillQuantity = number;
+            }
+            Console.WriteLine("Does the vehicle contain a chainsaw? (y/n)");
+            answer = Console.ReadLine();
+            if (answer != "")
+            {
+                if (answer == "n")EVehicles.Saw = false;
+                if (answer == "y")EVehicles.Saw = true;
+            }
+
+            return;
+        }
+        public static void EVehiclesA()
+        {
+            Console.WriteLine("Enter the vehicle-ID");
+            string ID = Console.ReadLine();
+            string EVehicle = "";
+            ID = "\"ID\":" + ID; //Absicherung
+            using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Users.txt"))
+                while (EVehicle.IndexOf(ID) == -1)
+                {
+
+
+                    EVehicle = UserText.ReadLine();
+
+                    if (EVehicle == null)
+                    {
+                        Console.WriteLine("Invalid ID.");
+                        Console.ReadLine();
+                        EUsers();
+                        return;
+                    }
+
+                }
+            string answer;
+            int number;
+            Ambulance EVehicles = new Ambulance();
+            Console.WriteLine("Enter the new values, leave the field empty to keep the current value.");
+            Console.WriteLine("Type:");
+            answer = Console.ReadLine();
+            if (answer != "") EVehicles.Type = answer;
+            Console.WriteLine("Seats:");
+            answer = Console.ReadLine();
+            if (answer != "")
+            {
+                int.TryParse(answer, out number);
+                EVehicles.Seats = number;
+            }
+            Console.WriteLine("Horsepower:");
+            answer = Console.ReadLine();
+            if (answer != "")
+            {
+                int.TryParse(answer, out number);
+                EVehicles.HP = number;
+            }
+            Console.WriteLine("Maximum patient weight:");
+            answer = Console.ReadLine();
+            if (answer != "")
+            {
+                int.TryParse(answer, out number);
+                EVehicles.MaxWeight = number;
+            }
+
             return;
         }
         public static void EUsers()
