@@ -138,16 +138,44 @@ namespace FireWorks
         }
         public static void EUsers()
         {
+
+            Console.WriteLine("Enter User-ID.");
+            string ID = Console.ReadLine();
+            string EUser = "";
+            ID = "\"ID\":" + ID; //Absicherung
+            using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Users.txt"))
+                while (EUser.IndexOf(ID) == -1)
+                {
+
+
+                    EUser = UserText.ReadLine();
+
+                    if (EUser == null)
+                    {
+                        Console.WriteLine("Invalid ID.");
+                        Console.ReadLine();
+                        EUsers();
+                        return;
+                    }
+                }
+
+            Human User;
+            User = JsonConvert.DeserializeObject<Human>(EUser);
+
+
             Console.Clear();
             Console.WriteLine("Edit what value?");
             Console.WriteLine("(n)ame / (p)IN / (d)isable user / (c)reate user");
             switch (Console.ReadLine())
             {
                 case "n":
+                    EUsersName(User);
                     break;
                 case "p":
+                    EUsersPin(User);
                     break;
                 case "d":
+                    EUsersDisable(User);
                     break;
                 case "c":
                     break;
@@ -160,7 +188,28 @@ namespace FireWorks
             return;
         }
 
-
+        public static void EUsersName(Human User)
+        {
+            Console.WriteLine("Please enter a new first name.");
+            User.FName = Console.ReadLine();
+            Console.WriteLine("Please enter a new last name.");
+            User.LName = Console.ReadLine();
+            string Usertext = JsonConvert.SerializeObject(User);
+            ObjectWriter.LineChanger(Usertext, "C:/Users/khof/Desktop/Users.txt", User.ID);
+        }
+        public static void EUsersPin(Human User)
+        {
+            Console.WriteLine("Please enter a new PIN.");
+            User.PIN = Console.ReadLine();
+            string Usertext = JsonConvert.SerializeObject(User);
+            ObjectWriter.LineChanger(Usertext, "C:/Users/khof/Desktop/Users.txt", User.ID);
+        }
+        public static void EUsersDisable(Human User)
+        {
+            User.Status = 0;
+            string Usertext = JsonConvert.SerializeObject(User);
+            ObjectWriter.LineChanger(Usertext, "C:/Users/khof/Desktop/Users.txt", User.ID);
+        }
     }
 
 }
