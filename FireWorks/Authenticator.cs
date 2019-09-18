@@ -13,9 +13,6 @@ namespace FireWorks
         public static object StatusCheck(Human CurrentUser)
         {
 
-
-
-
             if (CurrentUser.Status == 0)
             {
                 Console.WriteLine("This account is locked.");
@@ -48,7 +45,6 @@ namespace FireWorks
             }
 
         }
-
 
         public static String LogIn()
         {

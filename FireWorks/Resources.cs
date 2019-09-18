@@ -93,21 +93,82 @@ namespace FireWorks
                 case "n":
                     break;
                 case "c":
-                    break;
+                    EResourcesC();
+                    return;
                 default:
                     Console.WriteLine("Invalid answer");
                     Console.ReadLine();
                     EResources();
                     break;
             }
+
+
+            Console.WriteLine("Enter a user-ID.");
+            string ID = Console.ReadLine();
+            string EResource = "";
+            ID = "\"ID\":" + ID; //Absicherung
+
+            using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Users.txt"))
+                while (EResource.IndexOf(ID) == -1)
+                {
+
+
+                    EResource = UserText.ReadLine();
+
+                    if (EResource == null)
+                    {
+                        Console.WriteLine("Invalid ID.");
+                        Console.ReadLine();
+                        EResources();
+                        return;
+                    }
+                }
+
+            Resources Resource;
+            Resource = JsonConvert.DeserializeObject<Resources>(EResource);
+
+            Console.WriteLine("Enter the new name for " + Resource.Name + ".");
+
+            EResource = JsonConvert.SerializeObject(Resource);
+            ObjectWriter.LineChanger(EResource, "C:/Users/khof/Desktop/Resource.txt", Resource.ID);
+
             return;
         }
+
+        public static void EResourcesC()
+        {
+            int i=0;
+            string Text = "y e e t";
+            using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Resources.txt"))
+                while (Text != null)
+                {
+
+                    Text = UserText.ReadLine();
+
+                    i += 1;
+
+                }
+#pragma warning disable IDE0017 // Initialisierung von Objekten vereinfachen
+            Resources ResourceC = new Resources();
+#pragma warning restore IDE0017 // Initialisierung von Objekten vereinfachen
+            ResourceC.ID = i;
+            Console.WriteLine("Assigned resource-ID " + i + ".");
+
+            Console.WriteLine("Enter the name for the resource.");
+            ResourceC.Name = Console.ReadLine();
+
+            ObjectWriter.WriteObject(ResourceC, "C:/Users/khof/Desktop/Resources.txt");
+
+            return;
+        }
+
+
         public static void EVehicles()
         {
             Console.Clear();
             string VehicleType;
             Console.WriteLine("Edit what vehicle type?");
-            Console.WriteLine("(g)eneric / (l)FZ / (t)urntableladder / (a)ambulace");
+            Console.WriteLine("(g)eneric / (l)FZ / (t)urntableladder / (a)mbulace");
             VehicleType = Console.ReadLine();
             if (VehicleType != "g") if (VehicleType != "l") if (VehicleType != "t") if (VehicleType != "a")
                         {
@@ -148,7 +209,7 @@ namespace FireWorks
                 return;
             }
             ID = "\"ID\":" + ID; //Absicherung
-            
+
             using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Users.txt"))
                 while (EUser.IndexOf(ID) == -1)
                 {

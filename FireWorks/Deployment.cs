@@ -132,17 +132,14 @@ namespace FireWorks
             String Gasmeters = "";
             int i = 0;
             using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Gasmeters.txt"))
-                
+
                 while (Gasmeters != null)
                 {
-
-
                     Gasmeters = UserText.ReadLine();
 
                     i += 1;
-                    
                 }
-            int iMax = i-1;
+            int iMax = i - 1;
             i -= 1;
             Gasmeter[] Gasmeterlist = new Gasmeter[i];
             using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Gasmeters.txt"))
@@ -150,7 +147,7 @@ namespace FireWorks
                 {
 
 
-                    Gasmeterlist[i-1] = JsonConvert.DeserializeObject<Gasmeter>(UserText.ReadLine());
+                    Gasmeterlist[i - 1] = JsonConvert.DeserializeObject<Gasmeter>(UserText.ReadLine());
 
                     i -= 1;
 
@@ -158,22 +155,14 @@ namespace FireWorks
 
             DateTime date = DateTime.Now;
             string datestring = date.ToString("dd");
-            while(i != iMax)
+            while (i != iMax)
             {
-                if (Gasmeterlist[i].Date == datestring)Console.WriteLine("Gasmeter with ID " + Gasmeterlist[i].ID + " has to be checked today.");
+                if (Gasmeterlist[i].Date == datestring) Console.WriteLine("Gasmeter with ID " + Gasmeterlist[i].ID + " has to be checked today.");
 
                 i += 1;
             }
-
-
-
-
-
-
-
             //Gasmeter
 
-            
             Console.WriteLine("How many deployments are to be shown?");
             int.TryParse(Console.ReadLine(), out int number);
             number += 1;
@@ -182,7 +171,6 @@ namespace FireWorks
 
                 while (SDeployments != null)
                 {
-
 
                     SDeployments = UserText.ReadLine();
 
