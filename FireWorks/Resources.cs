@@ -62,7 +62,7 @@ namespace FireWorks
         {
             Console.Clear();
             Console.WriteLine("Edit what type of object?");
-            Console.WriteLine("(r)esources / (v)ehicles / (u)sers");
+            Console.WriteLine("(r)esources / (v)ehicles / (u)sers / (g)asmeters");
             switch (Console.ReadLine())
             {
                 case "r":
@@ -74,6 +74,9 @@ namespace FireWorks
                 case "u":
                     EUsers();
                     break;
+                case "g":
+                    EGasmeters();
+                    break;
                 default:
                     Console.WriteLine("Invalid answer");
                     Console.ReadLine();
@@ -82,7 +85,83 @@ namespace FireWorks
             }
             return;
         }
+        public static void EGasmeters()
+        {
+            Console.Clear();
+            Console.WriteLine("Edit what value?");
+            Console.WriteLine("(d)ay of checkup / (c)reate new gasmeter");
+            switch (Console.ReadLine())
+            {
+                case "d":
+                    break;
+                case "c":
+                    EGasmetersC();
+                    return;
+                default:
+                    Console.WriteLine("Invalid answer");
+                    Console.ReadLine();
+                    EResources();
+                    break;
+            }
 
+
+            Console.WriteLine("Enter a user-ID.");
+            string ID = Console.ReadLine();
+            string EResource = "";
+            ID = "\"ID\":" + ID; //Absicherung
+
+            using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Gasmeters.txt"))
+                while (EResource.IndexOf(ID) == -1)
+                {
+
+
+                    EResource = UserText.ReadLine();
+
+                    if (EResource == null)
+                    {
+                        Console.WriteLine("Invalid ID.");
+                        Console.ReadLine();
+                        EResources();
+                        return;
+                    }
+                }
+
+            Gasmeter Resource;
+            Resource = JsonConvert.DeserializeObject<Gasmeter>(EResource);
+
+            Console.WriteLine("Enter the day for " + Resource.Date + ". (as dd format)");
+
+            EResource = JsonConvert.SerializeObject(Resource);
+            ObjectWriter.LineChanger(EResource, "C:/Users/khof/Desktop/Resource.txt", Resource.ID);
+
+            return;
+        }
+        public static void EGasmetersC()
+        {
+            int i = 0;
+            string Text = "y e e t";
+            using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Resources.txt"))
+                while (Text != null)
+                {
+
+                    Text = UserText.ReadLine();
+
+                    i += 1;
+
+                }
+#pragma warning disable IDE0017 // Initialisierung von Objekten vereinfachen
+            Gasmeter ResourceC = new Gasmeter();
+#pragma warning restore IDE0017 // Initialisierung von Objekten vereinfachen
+            ResourceC.ID = i;
+            Console.WriteLine("Assigned resource-ID " + i + ".");
+
+            Console.WriteLine("Enter the date of checkup for the gasmeter. (dd format)");
+            ResourceC.Date = Console.ReadLine();
+
+            ObjectWriter.WriteObject(ResourceC, "C:/Users/khof/Desktop/Gasmeter.txt");
+
+            return;
+        }
         public static void EResources()
         {
             Console.Clear();
