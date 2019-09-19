@@ -15,11 +15,11 @@ namespace FireWorks
             ADMIN = 2,
             LOCKED = 3
         }
-        private static IUserLayer _t;
+        private IUserLayer _t;
 
-        private static IDataLayer _filer;
+        private IDataLayer _filer;
 
-        private static string[] _path;  // Deploy Employ Vehicles Res FF
+        private string[] _path;  // Deploy Employ Vehicles Res FF
         private List<Deployment> AllDeployments;
         private List<User> AllEmployees;
         private List<Vehicle> AllVehicles;

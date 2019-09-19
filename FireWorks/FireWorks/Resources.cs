@@ -28,10 +28,10 @@ namespace FireWorks
     {
         public char Letter { get; set; }
         public int HoseLength { get; set; }
-        public static new string Name = "Hose";
         public Hose(string d, int inv, char l, int len) :
-            base(d, inv, Name)
+            base(d, inv, "Hose")
         {
+            Name = "Hose";
             Letter = l;
             HoseLength = len;
         }

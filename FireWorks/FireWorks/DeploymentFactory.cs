@@ -22,7 +22,7 @@ namespace FireWorks
         /// <param name="com">Comment</param>
         /// <param name="num">Number</param>
         /// <returns></returns>
-        public static Deployment NewDeployment(string loc, Vehicle[] veh, object[] res, FireFighter[] Ff, string com, int num)
+        public Deployment NewDeployment(string loc, Vehicle[] veh, object[] res, FireFighter[] Ff, string com, int num)
         {
             return new Deployment(loc, veh, res, Ff, com, num);
         }
@@ -30,7 +30,7 @@ namespace FireWorks
         /// Prompts the user to enter a new Deployment object.
         /// </summary>
         /// <returns>The generated Deployment object.</returns>
-        public static Deployment PromptDeployment(List<Deployment> deploy,FileIO filer)
+        public Deployment PromptDeployment(List<Deployment> deploy,FileIO filer)
         {
             Console.WriteLine("Where?");
             string loc = Console.ReadLine();
