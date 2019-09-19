@@ -24,7 +24,7 @@ namespace FireWorks
         /// Takes JSON and turns into a Deployment object.
         /// </summary>
         /// <param name="str">String thats being converted.</param>
-        /// <returns>A Deployment object.</returns>
+        /// <returns>A object.</returns>
 
         public static T JSONToGeneric<T>(string str)
         {

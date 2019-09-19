@@ -418,13 +418,10 @@ namespace FireWorks
                 char letter=' ';
                 if (Answer.Length == 1) letter = Answer.ToCharArray().ElementAt(0);
                 if(letter == 'B' || letter == 'C' || letter == 'D') tmp.Letter =letter;
-                
-
-
             }
-
             return t;
         }
+
         public void ViewList<T>(List<T> liste)
         {
             int c = 1;
