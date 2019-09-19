@@ -7,13 +7,13 @@ using Newtonsoft.Json;
 using System.IO;
 
 namespace FireWorks
-{
-    class MainFireWorks
-    {
-        public static class StoragePathClass
+{public static class StoragePathClass
         {
             public static string StoragePath = "";
         }
+    class MainFireWorks
+    {
+        
 #pragma warning disable IDE0060 // Nicht verwendete Parameter entfernen
             public static void Main(string[] args)
 #pragma warning restore IDE0060 // Nicht verwendete Parameter entfernen

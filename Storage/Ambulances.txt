@@ -1,0 +1,1 @@
+{"MaxWeight":250,"ID":1,"Type":"Rescuemaster 01","HP":100,"Seats":4}

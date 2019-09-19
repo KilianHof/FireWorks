@@ -55,7 +55,7 @@ namespace FireWorks
             Console.Write("PIN:");
             String PINenter = Console.ReadLine();
             PINenter = "\"PIN\":\"" + PINenter + "\",\""; //Absicherung
-            using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Users.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Users.txt"))
                 while (SCurrentUser.IndexOf(PINenter) == -1)
                 {
 
@@ -80,7 +80,7 @@ namespace FireWorks
             Console.Write("User-ID:");
             String IDenter = Console.ReadLine();
             IDenter = "\"ID\":" + IDenter; //Absicherung
-            using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Users.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Users.txt"))
                 while (SLCurrentUser.IndexOf(IDenter) == -1)
                 {
 
@@ -104,7 +104,7 @@ namespace FireWorks
             if (answerint == 1) User.Status = 1;
             if (answerint == 2) User.Status = 2;
             answer = JsonConvert.SerializeObject(User);
-            ObjectWriter.LineChanger(answer, "C:/Users/khof/Desktop/Users.txt", User.ID);
+            ObjectWriter.LineChanger(answer, StoragePathClass.StoragePath+"/FireWorks/Storage/Users.txt", User.ID);
         }
     }
 }
