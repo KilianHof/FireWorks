@@ -27,10 +27,15 @@ namespace FireWorks
 
             Authenticator auth = new Authenticator(_t, _filer, _paths[1]);
             UserFunctions uf = new UserFunctions(_t, _filer, _paths);
-
-            
-            uf.Routine(auth.LogIn());
-            uf.SaveAll();
+            bool loop = true;
+            string str = auth.LogIn();
+            while (loop)
+            {
+                uf.Routine(str);
+                uf.SaveAll();
+                _t.Display("Continue?");
+                loop = _t.GetBool();
+            }
 
             //Deployment test = DeploymentFactory.PromptDeployment(AllDeployments,_filer);
 
@@ -38,7 +43,6 @@ namespace FireWorks
 
             //User user = new User("m", "p", 2, "USER", "15947562");
             //_filer.WriteObject(user, _pathEmployee);
-            Console.ReadLine();
         }
     }
 }

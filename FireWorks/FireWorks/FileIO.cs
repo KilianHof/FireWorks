@@ -17,8 +17,8 @@ namespace FireWorks
         /// </summary>
         /// <param name="o"> The object you want to write into a file.</param>
         /// <param name="path">The file that is being written to.</param>
-        private TUI _t;
-        public FileIO(TUI tui) { _t = tui; }
+        private IUserLayer _t;
+        public FileIO(IUserLayer tui) { _t = tui; }
 
         public void WriteObject(object o, string path)
         {
@@ -50,22 +50,6 @@ namespace FireWorks
         /// <param name="path">Where the file is located.</param>
         /// <param name="line">The line to be read.</param>
         /// <returns>Deployment object from specified line.</returns>
-        //public Deployment ReadObject(string path, int line)
-        //{
-        //    if (File.Exists(path))
-        //    {
-        //        if ((line > 0))
-        //        {
-        //            string json = File.ReadLines(path).Skip(line - 1).Take(1).First();
-        //            Deployment o = (Deployment)JSONConverter.JSONToDeployment(json);
-        //            return o;
-        //        }
-        //        NeedOutput("cannot read line \"0\" or negative.");
-        //        return new Deployment();
-        //    }
-        //    NeedOutput("cannot read file: " + path);
-        //    return new Deployment();
-        //}
         public object ReadObject<T>(string path, int line)
         {
             if (File.Exists(path))
@@ -91,8 +75,6 @@ namespace FireWorks
                     List<string> quotelist = File.ReadAllLines(path).ToList();
                     quotelist.RemoveAt(line - 1);
                     File.WriteAllLines(path, quotelist.ToArray());
-                    //string json = File.ReadLines(path).Skip(line - 1).Take(1).First();
-                    //object o = JSONConverter.JSONToGeneric<T>(json);
                 }
                 else
                     _t.Display("cannot read line \"0\" or negative." + "\n");
@@ -129,8 +111,6 @@ namespace FireWorks
             }
             _t.Display("cannot read file: " + path + "\n");
             return tmp;
-            // NeedOutput("cannot read line \"0\" or negative");
-            // return "";
         }
         public void SaveListToFile<T>(List<T> liste,string path)
         {

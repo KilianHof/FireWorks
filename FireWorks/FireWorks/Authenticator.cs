@@ -12,10 +12,10 @@ namespace FireWorks
     /// </summary>
     class Authenticator
     {
-        private TUI _t;
-        private FileIO filer;
+        private IUserLayer _t;
+        private IDataLayer filer;
         private string _path;
-        public Authenticator( TUI tui,FileIO fil,string path) { _t = tui; filer = fil; _path = path; }
+        public Authenticator( IUserLayer tui,IDataLayer fil,string path) { _t = tui; filer = fil; _path = path; }
         private const int _pinLength = 4;
 
         /// <summary>

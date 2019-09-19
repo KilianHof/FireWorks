@@ -12,5 +12,7 @@ namespace FireWorks
         List<T> ReadAll<T>(string path);
         void WriteObject(object o, string path);
         object ReadObject<T>(string path,int line);
+        void SaveListToFile<T>(List<T> liste, string path);
+
     }
 }

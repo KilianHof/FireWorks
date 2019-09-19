@@ -15,12 +15,11 @@ namespace FireWorks
             ADMIN = 2,
             LOCKED = 3
         }
-        private static TUI _t;
+        private static IUserLayer _t;
 
-        private static FileIO _filer;
+        private static IDataLayer _filer;
 
         private static string[] _path;  // Deploy Employ Vehicles Res FF
-        private List<object>[] _allData;
         private List<Deployment> AllDeployments;
         private List<User> AllEmployees;
         private List<Vehicle> AllVehicles;
@@ -28,9 +27,7 @@ namespace FireWorks
         private List<FireFighter> AllFireFighter;
 
 
-        public UserFunctions(TUI t, FileIO filer, string[] path) { _t = t; _filer = filer; _path = path; Init();
-            //_allData = new List<object>[]{ (object)AllDeployments, AllEmployees, AllVehicles, AllResources, AllFireFighter };
-        }
+        public UserFunctions(IUserLayer t, IDataLayer filer, string[] path) { _t = t; _filer = filer; _path = path; Init(); }
 
         public List<T> ReadAll<T>(int dataSet)
         {
@@ -70,6 +67,7 @@ namespace FireWorks
                 case "ADMIN":
                     ShowAdminOptions();
                     AdminMode(_t.GetString());
+                    //AdminMode(_t.GetString());
                     break;
                 case "USER":
                     ShowUserOptions();
@@ -135,6 +133,7 @@ namespace FireWorks
         public void ProcessList<T>(int mode, List<T> liste, int dataSet)
         {
             T tmp;
+            int index;
             switch (mode)
             {
                 case 1:
@@ -145,24 +144,56 @@ namespace FireWorks
                     switch (dataSet)
                     {
                         case 1:
-                            liste.Add((T)(object)new User("yeah", "boiiii", 2, "USER", "15947562"));
+                            User tmpU = new User("Firstname", "Lastname", 0, "USER", "15947562");
+                            liste.Add((T)(object)Edit(tmpU));
                             break;
                         case 2:
-                            liste.Add((T)(object)new Vehicle("hi", 1, 2));
+                            _t.Display("What kind of Vehicle?" + "\n" +
+                                       "(1) Car" + "\n" +
+                                       "(2) Firetruck " + "\n" +
+                                       "(3) Turntabelladdertruck" + "\n" +
+                                       "(4) Ambulance" + "\n");
+                            switch (Valid(_t.GetInt(), 1, 4))
+                            {
+                                case 1:
+                                    liste.Add((T)(object)Edit(new Pkw("TYPE", 0, 0)));
+                                    break;
+                                case 2:
+                                    liste.Add((T)(object)Edit(new FireTruck("TYPE", 0, 0, false, 0)));
+                                    break;
+                                case 3:
+                                    liste.Add((T)(object)Edit(new TurntableLadder("TYPE", 0, 0, false, 0)));
+                                    break;
+                                case 4:
+                                    liste.Add((T)(object)Edit(new Ambulance("TYPE", 0, 0, 0)));
+                                    break;
+                            }
                             break;
                         case 3:
-                            liste.Add((T)(object)new Resources("hi", 1));
+                            _t.Display("What kind of Resource?" + "\n" +
+                                      "(1) Hose" + "\n" +
+                                      "(2) Other Items" + "\n");
+                            switch (Valid(_t.GetInt(), 1, 2))
+                            {
+
+                                case 1:
+                                    liste.Add((T)(object)Edit(new Hose("Hose", 0, ' ', 5)));
+                                    break;
+                                case 2:
+                                    liste.Add((T)(object)Edit(new Resources("Description", 1, "Name")));
+                                    break;
+                            }
                             break;
                         case 4:
                             liste.Add((T)(object)new FireFighter("hi", "yo", 1));
                             break;
                     }
-                    SaveSingle<T>(liste,dataSet);
+                    SaveSingle<T>(liste, dataSet);
                     break;
                 case 3:
                     _t.Display("Edit." + "\n");
                     ViewList(liste);
-                    int index = Valid(_t.GetInt(), 1, liste.Count());
+                    index = Valid(_t.GetInt(), 1, liste.Count());
                     index--;
                     tmp = liste.ElementAt(index);
                     liste.RemoveAt(index);
@@ -174,65 +205,223 @@ namespace FireWorks
                 case 4:
                     _t.Display("Delete." + "\n");
                     ViewList(liste);
-                    liste.RemoveAt(Valid(_t.GetInt(), 1, liste.Count() - 1));                 //wirklich count-1??        .GetType()
+                    index = Valid(_t.GetInt(), 1, liste.Count());
+                    index--;
+                    liste.RemoveAt(index);             
                     SaveSingle<T>(liste, dataSet);
                     break;
             }
         }
-        public T Edit<T>(T t)                                                       // ja ne is klar nice edit skillz
+        public string EditHelperString(string message)
+        {
+            string str;
+            _t.Display(message);
+            str = _t.GetString();
+            if (str != ".")
+                return str;
+            return "";
+        }
+        public string EditHelperBool(string message)
+        {
+            string str;
+            _t.Display(message);
+            _t.Display("(y/n)?\n");
+            str = _t.GetString();
+            while (!((str == "y") || (str == "Y") || (str == "Yes") || (str == "yes") || (str == "n") || (str == "N") || (str == "no") || (str == "No") || (str == "")))
+            {
+                _t.Display("Only (y/n)?\n");
+            str = _t.GetString();
+            }
+
+            return str;
+        }
+        public int EditHelperInt(string message)
+        {
+            int number;
+            _t.Display(message);
+            number = _t.GetInt();
+            while (number < 0)
+            {
+                _t.Display("Please only enter positive intergers" + "\n");
+                number = _t.GetInt();
+            }
+            return number;
+        }
+        public int EditHelperInt(string message, int min, int max) // range
+        {
+            int number;
+            _t.Display(message);
+            number = _t.GetInt();
+            while (!(number >= min && number <= max))
+            {
+                _t.Display("Please only enter Intergers between " + min + " . " + max + ".");
+                number = _t.GetInt();
+            }
+            return number;
+        }
+        public T Edit<T>(T t)  // to use T or not to use T that is thy question(T to obj oder var)                                                     // ja ne is klar nice edit skillz
         {
             string Answer;
-
+            int Number;
+            if (t as FireTruck != null)
+            Console.WriteLine(t.GetType());
             if (t.GetType() == typeof(FireFighter))
             {
-                _t.Display("Leave empty for no changes" + "\n");
+                _t.Display(" \".\"(dot) for no changes (0 in case of number)" + "\n");
                 FireFighter tmp = (FireFighter)(object)t;
 
-                _t.Display("Lastname: " + tmp.LastName + "\n");
-                Answer = _t.GetString();
+                Answer = EditHelperString("Lastname: " + tmp.LastName + "\n");
                 if (Answer != "") tmp.LastName = Answer;
 
-                _t.Display("Firstname: " + tmp.FirstName + "\n");
-                Answer = _t.GetString();
-                if (Answer != "") tmp.FirstName = Answer;
+                Answer = EditHelperString("Firstname: " + tmp.FirstName + "\n");
+                if (Answer != ".") tmp.FirstName = Answer;
 
-                _t.Display("ID: " + tmp.Id + "\n");
-                if (Answer != "") tmp.Id = _t.GetInt();
+                Number = EditHelperInt("ID(number): " + tmp.Id + "\n");
+                if (Number != 0) tmp.Id = Number;
             }
             if (t.GetType() == typeof(User))
             {
-                _t.Display("Leave empty for no changes" + "\n");
+                _t.Display(" \".\"(dot) for no changes (0 in case of number)" + "\n");
                 User tmp = (User)(object)t;
 
-                _t.Display("Lastname: " + tmp.LastName + "\n");
-                Answer = _t.GetString();
-                if (Answer != "") tmp.LastName = Answer;
+                Answer = EditHelperString("Lastname: " + tmp.LastName + "\n");
+                if (Answer != ".") tmp.LastName = Answer;
 
-                _t.Display("Firstname: " + tmp.FirstName + "\n");
-                Answer = _t.GetString();
-                if (Answer != "") tmp.FirstName = Answer;
+                Answer = EditHelperString("Firstname: " + tmp.FirstName + "\n");
+                if (Answer == " hallo") Answer = ".";
+                    
+                if (Answer != ".") tmp.FirstName = Answer;
 
-                _t.Display("ID: " + tmp.Id + "\n");
-                if (Answer != "") tmp.Id = _t.GetInt();
+                Number = EditHelperInt("ID(number): " + tmp.Id + "\n");
+                if (Number != 0) tmp.Id = Number;
 
-                _t.Display("PIN(Hashed): " + tmp.PIN + "\n");
-                Answer = _t.GetString();
-                if (Answer != "") tmp.PIN = Answer.GetHashCode().ToString();
+                Answer = EditHelperString("PIN(number(Hashed)): " + tmp.PIN + "\n");
+                if (Answer != ".") tmp.PIN = Answer.GetHashCode().ToString();
 
-                _t.Display("Status: " + tmp.Status + "\n");
-                Answer = _t.GetString();
-                if (Answer != "") tmp.Status = Answer;
+                Number = EditHelperInt("Status(1=USER,2=ADMIN,3=LOCKED): " + tmp.Status + "\n", 0, 3);
+                if (Number != 0) tmp.Status = ((UserStates)Number).ToString();
             }
-            if (t.GetType() == typeof(Vehicle))
+            if (t.GetType() == typeof(FireTruck))
             {
-                _t.Display("Leave empty for no changes" + "\n");
-                Vehicle tmp = (Vehicle)(object)t;
+                _t.Display(" \".\"(dot) for no changes (0 in case of number)" + "\n");
+                FireTruck tmp = (FireTruck)(object)t;
+
+                Answer = EditHelperString("Type: " + tmp.Type + "\n");
+                if (Answer != ".") tmp.Type = Answer;
+
+                Number = EditHelperInt("Seats: " + tmp.Seats + "\n");
+                if (Number != 0) tmp.Seats = Number;
+
+                Number = EditHelperInt("Fillquantity: " + tmp.FillQuantity + "\n");
+                if (Number != 0) tmp.FillQuantity = Number;
+
+                Number = EditHelperInt("Enginepower: " + tmp.EnginePower + "\n");
+                if (Number != 0) tmp.EnginePower = Number;
+
+                Answer = EditHelperBool("Chainsaw: " + tmp.Chainsaw + "\n");
+                if (Answer != "")
+                {
+                    if ((Answer == "y") || (Answer == "Y") || (Answer == "Yes") || (Answer == "yes"))
+                        tmp.Chainsaw = true;
+                    else
+                        tmp.Chainsaw = false;
+                }
             }
 
+            if (t.GetType() == typeof(TurntableLadder))
+            {
+                _t.Display(" \".\"(dot) for no changes (0 in case of number)" + "\n");
+                TurntableLadder tmp = (TurntableLadder)(object)t;
+
+                Answer = EditHelperString("Type: " + tmp.Type + "\n");
+                if (Answer != ".") tmp.Type = Answer;
+
+                Number = EditHelperInt("Seats: " + tmp.Seats + "\n");
+                if (Number != 0) tmp.Seats = Number;
+
+                Number = EditHelperInt("Ladderheight: " + tmp.LadderHeight + "\n");
+                if (Number != 0) tmp.LadderHeight = Number;
+
+                Number = EditHelperInt("Enginepower: " + tmp.EnginePower + "\n");
+                if (Number != 0) tmp.EnginePower = Number;
+
+                Answer = EditHelperBool("Chainsaw: " + tmp.Chainsaw + "\n");
+                if (Answer != "")
+                {
+                    if ((Answer == "y") || (Answer == "Y") || (Answer == "Yes") || (Answer == "yes"))
+                        tmp.Chainsaw = true;
+                    else
+                        tmp.Chainsaw = false;
+                }
+            }
+            if (t.GetType() == typeof(Ambulance))
+            {
+                _t.Display(" \".\"(dot) for no changes (0 in case of number)" + "\n");
+                Ambulance tmp = (Ambulance)(object)t;
+
+                Answer = EditHelperString("Type: " + tmp.Type + "\n");
+                if (Answer != ".") tmp.Type = Answer;
+
+                Number = EditHelperInt("Seats: " + tmp.Seats + "\n");
+                if (Number != 0) tmp.Seats = Number;
+
+                Number = EditHelperInt("Max Patientweight: " + tmp.PatientWeight + "\n");
+                if (Number != 0) tmp.PatientWeight = Number;
+
+                Number = EditHelperInt("Enginepower: " + tmp.EnginePower + "\n");
+                if (Number != 0) tmp.EnginePower = Number;
+            }
+
+            if (t.GetType() == typeof(Pkw))
+            {
+                _t.Display(" \".\"(dot) for no changes (0 in case of number)" + "\n");
+                Pkw tmp = (Pkw)(object)t;
+
+                Answer = EditHelperString(" \".\"Type: " + tmp.Type + "\n");
+
+                if (Answer != ".") tmp.Type = Answer;
+
+                Number = EditHelperInt("Seats: " + tmp.Seats + "\n");
+                if (Number != 0) tmp.Seats = Number;
+
+                Number = EditHelperInt("Enginepower: " + tmp.EnginePower + "\n");
+                if (Number != 0) tmp.EnginePower = Number;
+            }
+
+            if (t.GetType() == typeof(Resources))
+            {
+                _t.Display(" \".\"(dot) for no changes (0 in case of number)" + "\n");
+                Resources tmp = (Resources)(object)t;
+
+                Answer = EditHelperString("Description: " + tmp.Description + "\n");
+                if (Answer != ".") tmp.Description = Answer;
+
+                Number = EditHelperInt("Inventory Number: " + tmp.InventoryNumber + "\n");
+                if (Number != 0) tmp.InventoryNumber = Number;
+            }
+            if (t.GetType() == typeof(Hose))
+            {
+                _t.Display(" \".\"(dot) for no changes (0 in case of number)" + "\n");
+                Hose tmp = (Hose)(object)t;
+
+                Answer = EditHelperString("Description: " + tmp.Description + "\n");
+                if (Answer != ".") tmp.Description = Answer;
+
+                Number = EditHelperInt("Inventory Number: " + tmp.InventoryNumber + "\n");
+                if (Number != 0) tmp.InventoryNumber = Number;
+
+                Number = EditHelperInt("Hose length(5, 10, 20, 30): " + tmp.HoseLength + "\n");
+                if ((Number != 0 && Number % 10 == 0 && Number <= 30)||Number==5) tmp.HoseLength = Number;
+                else _t.Display("Valid lenghts are 5, 10, 20, 30. No changes were made" + "\n");
+
+                Answer = EditHelperString("Hose type(B,C,D): " + tmp.Letter + "\n");
+                char letter=' ';
+                if (Answer.Length == 1) letter = Answer.ToCharArray().ElementAt(0);
+                if(letter == 'B' || letter == 'C' || letter == 'D') tmp.Letter =letter;
+                
 
 
-
-            if (t.GetType() == typeof(Resources)) { }
+            }
 
             return t;
         }

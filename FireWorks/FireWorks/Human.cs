@@ -15,6 +15,12 @@ namespace FireWorks
         public Human()
         {
         }
+        public Human(int id, string fname,string lname)
+        {
+            Id = id;
+            FirstName = fname;
+            LastName = lname;
+        }
         public override string ToString()
         {
             return FirstName + " " + LastName + " " + Id;
@@ -32,6 +38,12 @@ namespace FireWorks
     }
     class User : Human
     {
+        public enum UserStates
+        {
+            USER = 1,
+            ADMIN = 2,
+            LOCKED = 3
+        }
         public string PIN { get; set; }
         public string Status { get; set; }
 

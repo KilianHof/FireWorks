@@ -31,7 +31,9 @@ namespace FireWorks
         }
         public string GetString()
         {
-            return Console.ReadLine();
+            string str = Console.ReadLine();
+            while (str == "") { str = Console.ReadLine(); }
+            return str;
         }
         public bool GetBool()
         {
@@ -42,6 +44,7 @@ namespace FireWorks
             else
                 return false;
         }
+
 
     }
 }
