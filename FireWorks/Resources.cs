@@ -11,7 +11,7 @@ namespace FireWorks
 
     public class Vehicles
     {
-
+        public int ID { get; set; }
         public string Type { get; set; }
         public int HP { get; set; }
         public int Seats { get; set; }
@@ -105,7 +105,7 @@ namespace FireWorks
             }
 
 
-            Console.WriteLine("Enter a user-ID.");
+            Console.WriteLine("Enter a Gasmeter-ID.");
             string ID = Console.ReadLine();
             string EResource = "";
             ID = "\"ID\":" + ID; //Absicherung
@@ -129,13 +129,17 @@ namespace FireWorks
             Gasmeter Resource;
             Resource = JsonConvert.DeserializeObject<Gasmeter>(EResource);
 
-            Console.WriteLine("Enter the day for " + Resource.Date + ". (as dd format)");
+            Console.WriteLine("Enter the chuckup-day for Gasmeter " + Resource.ID + ". (as dd format)");
 
             EResource = JsonConvert.SerializeObject(Resource);
             ObjectWriter.LineChanger(EResource, "C:/Users/khof/Desktop/Resource.txt", Resource.ID);
 
             return;
         }
+
+
+        
+
         public static void EGasmetersC()
         {
             int i = 0;
@@ -216,7 +220,7 @@ namespace FireWorks
 
         public static void EResourcesC()
         {
-            int i=0;
+            int i = 0;
             string Text = "y e e t";
             using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Resources.txt"))
                 while (Text != null)
@@ -246,17 +250,43 @@ namespace FireWorks
         {
             Console.Clear();
             string VehicleType;
-            Console.WriteLine("Edit what vehicle type?");
-            Console.WriteLine("(g)eneric / (l)FZ / (t)urntableladder / (a)mbulace");
+            Console.WriteLine("Edit what vehicle type? Edit or Create?");
+            Console.WriteLine("(g)eneric / (l)FZ / (t)urntableladder / (a)mbulace // (e)dit / (c)reate");
             VehicleType = Console.ReadLine();
-            if (VehicleType != "g") if (VehicleType != "l") if (VehicleType != "t") if (VehicleType != "a")
-                        {
+            if (VehicleType != "ge") if (VehicleType != "le") if (VehicleType != "te") if (VehicleType != "ae") if (VehicleType != "gc") if (VehicleType != "lc") if (VehicleType != "tc") if (VehicleType != "ac")
+                                        {
                             Console.WriteLine("Invalid answer");
                             Console.ReadLine();
                             EVehicles();
                             return;
                         }
-
+            switch (VehicleType)
+            {
+                case "ge":
+                    EVehiclesG();
+                    break;
+                case "le":
+                    EVehiclesLFZ();
+                    break;
+                case "te":
+                    EVehiclesTTL();
+                    break;
+                case "ae":
+                    EVehiclesA();
+                    break;
+                case "gc":
+                    EVehiclesGCreate();
+                    break;
+                case "lc":
+                    EVehiclesLFZCreate();
+                    break;
+                case "tc":
+                    EVehiclesTTLCreate();
+                    break;
+                case "ac":
+                    EVehiclesACreate();
+                    break;
+            }
 
         }
 
@@ -266,7 +296,7 @@ namespace FireWorks
             string ID = Console.ReadLine();
             string EVehicle = "";
             ID = "\"ID\":" + ID; //Absicherung
-            using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Users.txt"))
+            using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Vehicles.txt"))
                 while (EVehicle.IndexOf(ID) == -1)
                 {
 
@@ -284,7 +314,7 @@ namespace FireWorks
                 }
             string answer;
             int number;
-            Vehicles EVehicles = new Vehicles();
+            Vehicles EVehicles = JsonConvert.DeserializeObject<Vehicles>(EVehicle);
             Console.WriteLine("Enter the new values, leave the field empty to keep the current value.");
             Console.WriteLine("Type:");
             answer = Console.ReadLine();
@@ -304,6 +334,9 @@ namespace FireWorks
                 EVehicles.HP = number;
             }
 
+            string EVehicleS = JsonConvert.SerializeObject(EVehicles);
+
+            ObjectWriter.LineChanger(EVehicleS, "C:/Users/khof/Desktop/Vehicles.txt", EVehicles.ID);
             return;
         }
         public static void EVehiclesTTL()
@@ -312,7 +345,7 @@ namespace FireWorks
             string ID = Console.ReadLine();
             string EVehicle = "";
             ID = "\"ID\":" + ID; //Absicherung
-            using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Users.txt"))
+            using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/TTLs.txt"))
                 while (EVehicle.IndexOf(ID) == -1)
                 {
 
@@ -330,7 +363,7 @@ namespace FireWorks
                 }
             string answer;
             int number;
-            TurntableLadder EVehicles = new TurntableLadder();
+            TurntableLadder EVehicles = JsonConvert.DeserializeObject<TurntableLadder>(EVehicle);
             Console.WriteLine("Enter the new values, leave the field empty to keep the current value.");
             Console.WriteLine("Type:");
             answer = Console.ReadLine();
@@ -364,8 +397,174 @@ namespace FireWorks
                 if (answer == "y") EVehicles.Saw = true;
             }
 
+            string EVehicleS = JsonConvert.SerializeObject(EVehicles);
+
+            ObjectWriter.LineChanger(EVehicleS, "C:/Users/khof/Desktop/TTLs.txt", EVehicles.ID);
+
             return;
         }
+
+        public static void EVehiclesTTLCreate()
+        {
+            string EVehicle = "";
+            int i = 0;
+            using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/TTLs.txt"))
+                while (EVehicle != null)
+                {
+
+
+                    EVehicle = UserText.ReadLine();
+
+                    i += 1;
+
+                }
+
+            Console.WriteLine("Vehicle-ID: " + i);
+            
+            string answer;
+            TurntableLadder EVehicles = new TurntableLadder();
+            Console.WriteLine("Enter the values.");
+            EVehicles.ID = i;
+            Console.WriteLine("Type:");
+            answer = Console.ReadLine();
+            EVehicles.Type = answer;
+            Console.WriteLine("Seats:");
+            answer = Console.ReadLine();
+
+            int.TryParse(answer, out int number);
+            EVehicles.Seats = number;
+
+            Console.WriteLine("Horsepower:");
+            answer = Console.ReadLine();
+
+            int.TryParse(answer, out number);
+            EVehicles.HP = number;
+
+            Console.WriteLine("Height in m:");
+            answer = Console.ReadLine();
+            if (answer != "")
+            {
+                int.TryParse(answer, out number);
+                EVehicles.Height = number;
+            }
+            Console.WriteLine("Does the vehicle contain a chainsaw? (y/n)");
+            if (DeploymentListing.GetYesNo()) EVehicles.Saw = true;
+            else EVehicles.Saw = false;
+
+
+
+            ObjectWriter.WriteObject(EVehicles, "C:/Users/khof/Desktop/TTLs.txt");
+
+            return;
+        }
+
+        public static void EVehiclesLFZCreate()
+        {
+            string EVehicle = "";
+            int i = 0;
+            using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/LFZs.txt"))
+                while (EVehicle != null)
+                {
+
+
+                    EVehicle = UserText.ReadLine();
+
+                    i += 1;
+
+                }
+
+            Console.WriteLine("Vehicle-ID: " + i);
+
+            string answer;
+            LFZ EVehicles = new LFZ();
+            Console.WriteLine("Enter the values.");
+            EVehicles.ID = i;
+            Console.WriteLine("Type:");
+            answer = Console.ReadLine();
+            EVehicles.Type = answer;
+            Console.WriteLine("Seats:");
+            answer = Console.ReadLine();
+
+            int.TryParse(answer, out int number);
+            EVehicles.Seats = number;
+
+            Console.WriteLine("Horsepower:");
+            answer = Console.ReadLine();
+
+            int.TryParse(answer, out number);
+            EVehicles.HP = number;
+
+            Console.WriteLine("Filquantity in L:");
+            answer = Console.ReadLine();
+            if (answer != "")
+            {
+                int.TryParse(answer, out number);
+                EVehicles.FillQuantity = number;
+            }
+            Console.WriteLine("Does the vehicle contain a chainsaw? (y/n)");
+            if (DeploymentListing.GetYesNo()) EVehicles.Saw = true;
+            else EVehicles.Saw = false;
+
+
+
+            ObjectWriter.WriteObject(EVehicles, "C:/Users/khof/Desktop/LFZs.txt");
+
+            return;
+        }
+
+
+        public static void EVehiclesACreate()
+        {
+            string EVehicle = "";
+            int i = 0;
+            using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Ambulances.txt"))
+                while (EVehicle != null)
+                {
+
+
+                    EVehicle = UserText.ReadLine();
+
+                    i += 1;
+
+                }
+
+            Console.WriteLine("Vehicle-ID: " + i);
+
+            string answer;
+            Ambulance EVehicles = new Ambulance();
+            Console.WriteLine("Enter the values.");
+            EVehicles.ID = i;
+            Console.WriteLine("Type:");
+            answer = Console.ReadLine();
+            EVehicles.Type = answer;
+            Console.WriteLine("Seats:");
+            answer = Console.ReadLine();
+
+            int.TryParse(answer, out int number);
+            EVehicles.Seats = number;
+
+            Console.WriteLine("Horsepower:");
+            answer = Console.ReadLine();
+
+            int.TryParse(answer, out number);
+            EVehicles.HP = number;
+
+            Console.WriteLine("Maximum patientweight in kg:");
+            answer = Console.ReadLine();
+            if (answer != "")
+            {
+                int.TryParse(answer, out number);
+                EVehicles.MaxWeight = number;
+            }
+
+
+
+            ObjectWriter.WriteObject(EVehicles, "C:/Users/khof/Desktop/Ambulances.txt");
+
+            return;
+        }
+
+
         public static void EVehiclesLFZ()
         {
             Console.WriteLine("Enter the vehicle-ID");
@@ -390,7 +589,7 @@ namespace FireWorks
                 }
             string answer;
             int number;
-            LFZ EVehicles = new LFZ();
+            LFZ EVehicles = JsonConvert.DeserializeObject<LFZ>(EVehicle);
             Console.WriteLine("Enter the new values, leave the field empty to keep the current value.");
             Console.WriteLine("Type:");
             answer = Console.ReadLine();
@@ -420,12 +619,59 @@ namespace FireWorks
             answer = Console.ReadLine();
             if (answer != "")
             {
-                if (answer == "n")EVehicles.Saw = false;
-                if (answer == "y")EVehicles.Saw = true;
+                if (answer == "n") EVehicles.Saw = false;
+                if (answer == "y") EVehicles.Saw = true;
             }
+
+            string EVehicleS = JsonConvert.SerializeObject(EVehicles);
+
+            ObjectWriter.LineChanger(EVehicleS, "C:/Users/khof/Desktop/LFZs.txt", EVehicles.ID);
+            return;
+        }
+
+        public static void EVehiclesGCreate()
+        {
+            string EVehicle = "";
+            int i = 0;
+            using (StreamReader UserText = new StreamReader(@"C:/Users/khof/Desktop/Vehicles.txt"))
+                while (EVehicle != null)
+                {
+
+
+                    EVehicle = UserText.ReadLine();
+
+                    i += 1;
+
+                }
+
+            Console.WriteLine("Vehicle-ID: " + i);
+
+            string answer;
+            Vehicles EVehicles = new Vehicles();
+            Console.WriteLine("Enter the values.");
+            EVehicles.ID = i;
+            Console.WriteLine("Type:");
+            answer = Console.ReadLine();
+            EVehicles.Type = answer;
+            Console.WriteLine("Seats:");
+            answer = Console.ReadLine();
+
+            int.TryParse(answer, out int number);
+            EVehicles.Seats = number;
+
+            Console.WriteLine("Horsepower:");
+            answer = Console.ReadLine();
+
+            int.TryParse(answer, out number);
+            EVehicles.HP = number;
+
+
+            ObjectWriter.WriteObject(EVehicles, "C:/Users/khof/Desktop/Vehicles.txt");
 
             return;
         }
+
+
         public static void EVehiclesA()
         {
             Console.WriteLine("Enter the vehicle-ID");
@@ -450,7 +696,7 @@ namespace FireWorks
                 }
             string answer;
             int number;
-            Ambulance EVehicles = new Ambulance();
+            Ambulance EVehicles = JsonConvert.DeserializeObject<Ambulance>(EVehicle);
             Console.WriteLine("Enter the new values, leave the field empty to keep the current value.");
             Console.WriteLine("Type:");
             answer = Console.ReadLine();
@@ -477,6 +723,9 @@ namespace FireWorks
                 EVehicles.MaxWeight = number;
             }
 
+            string EVehicleS = JsonConvert.SerializeObject(EVehicles);
+
+            ObjectWriter.LineChanger(EVehicleS, "C:/Users/khof/Desktop/Ambulances.txt", EVehicles.ID);
             return;
         }
         public static void EUsers()
