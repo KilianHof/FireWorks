@@ -50,7 +50,7 @@ namespace FireWorks
         public string CheckPIN()
         {
             string Input = _t.GetString();
-            if (ValidateInput(Input))
+            if (IsValidInput(Input))
             {
                 int lineCount = File.ReadLines(_path).Count();
                 for (int i = 1; i <= lineCount; i++)
@@ -78,7 +78,7 @@ namespace FireWorks
         /// </summary>
         /// <param name="Input"></param>
         /// <returns>Returns true for a Valid format.</returns>
-        public bool ValidateInput(string Input)
+        public bool IsValidInput(string Input)
         {
             if (!(Input.Length == _pinLength))
                 return false;

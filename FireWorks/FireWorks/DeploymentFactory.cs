@@ -30,66 +30,66 @@ namespace FireWorks
         /// Prompts the user to enter a new Deployment object.
         /// </summary>
         /// <returns>The generated Deployment object.</returns>
-        public Deployment PromptDeployment(List<Deployment> deploy,FileIO filer)
-        {
-            Console.WriteLine("Where?");
-            string loc = Console.ReadLine();
+        //public Deployment PromptDeployment(List<Deployment> deploy, FileIO filer)
+        //{
+        //    Console.WriteLine("Where?");
+        //    string loc = Console.ReadLine();
 
-            Console.WriteLine("How many vehicles were used?");
+        //    Console.WriteLine("How many vehicles were used?");
 
-            int amount = int.Parse(Console.ReadLine());
-                       
-            Vehicle[] veh = new Vehicle[amount];
+        //    int amount = int.Parse(Console.ReadLine());
 
-            for (int i = 0; i < amount; i++)
-            {
-                Console.WriteLine("Type? (0) PKW,(1) Firetruck,(2) Ambulance,(3) Turntableladder");
-                string answer = Console.ReadLine();
+        //    Vehicle[] veh = new Vehicle[amount];
 
-                switch (answer)
-                {
-                    case "0":
-                        veh[i] = new Pkw("hi", 1, 2);
+        //    for (int i = 0; i < amount; i++)
+        //    {
+        //        Console.WriteLine("Type? (0) PKW,(1) Firetruck,(2) Ambulance,(3) Turntableladder");
+        //        string answer = Console.ReadLine();
 
-                        break;
-                    case "1":
-                        veh[i] = new FireTruck("hi", 1, 2, true, 232);
-                        
-                        break;
-                    case "2":
-                        veh[i] = new Ambulance("hi", 1, 2, 232);
-                        break;
-                    case "3":
-                        veh[i] = new TurntableLadder("hi", 1, 2, true,43534);
-                        break;
-                    default:
-                        Console.WriteLine("couldnt read input please try again");
-                        i--;
-                        break;
-                }
-            }
-            Console.WriteLine("What resources were used?");
-            object[] res = new string[] { Console.ReadLine() };
+        //        switch (answer)
+        //        {
+        //            case "0":
+        //                veh[i] = new Pkw("hi", 1, 2);
 
-            Console.WriteLine("How Many personel was send?");
-            amount = int.Parse(Console.ReadLine());
-            FireFighter[] Ff = new FireFighter[amount];
-            Console.WriteLine("Who was send?");                     // read from file?
-            for (int i = 0; i < amount; i++)
-            {
-                Ff[i] = new FireFighter(
-                                        Console.ReadLine(),
-                                        Console.ReadLine(),
-                              int.Parse(Console.ReadLine()));
-            }
+        //                break;
+        //            case "1":
+        //                veh[i] = new FireTruck("hi", 1, 2, true, 232);
 
-            Console.WriteLine("Comments?");
-            string com = Console.ReadLine();
+        //                break;
+        //            case "2":
+        //                veh[i] = new Ambulance("hi", 1, 2, 232);
+        //                break;
+        //            case "3":
+        //                veh[i] = new TurntableLadder("hi", 1, 2, true, 43534);
+        //                break;
+        //            default:
+        //                Console.WriteLine("couldnt read input please try again");
+        //                i--;
+        //                break;
+        //        }
+        //    }
+        //    Console.WriteLine("What resources were used?");
+        //    object[] res = new string[] { Console.ReadLine() };
 
-            
-            int num = filer.GetLastDeploymentNumber(deploy) + 1;
+        //    Console.WriteLine("How Many personel was send?");
+        //    amount = int.Parse(Console.ReadLine());
+        //    FireFighter[] Ff = new FireFighter[amount];
+        //    Console.WriteLine("Who was send?");                     // read from file?
+        //    for (int i = 0; i < amount; i++)
+        //    {
+        //        Ff[i] = new FireFighter(
+        //                                Console.ReadLine(),
+        //                                Console.ReadLine(),
+        //                      int.Parse(Console.ReadLine()));
+        //    }
 
-            return new Deployment(loc, veh, res, Ff, com, num);
-        }
+        //    Console.WriteLine("Comments?");
+        //    string com = Console.ReadLine();
+
+
+        //    int num = filer.GetLastDeploymentNumber(deploy) + 1;
+
+        //    return new Deployment(loc, veh, res, Ff, com, num);
+        //}
     }
 }

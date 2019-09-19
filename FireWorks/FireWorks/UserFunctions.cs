@@ -46,7 +46,7 @@ namespace FireWorks
         public List<Vehicle> GetListVehicles() { return AllVehicles; }
         public List<Resources> GetListResources() { return AllResources; }
         public List<FireFighter> GetListFireFighter() { return AllFireFighter; }
-        public void SaveAll()
+        public void SaveAllListsToFile()
         {
             _filer.SaveListToFile<Deployment>(AllDeployments, _path[0]);
             _filer.SaveListToFile<User>(AllEmployees, _path[1]);
@@ -55,7 +55,7 @@ namespace FireWorks
             _filer.SaveListToFile<FireFighter>(AllFireFighter, _path[4]);
         }
 
-        public void SaveSingle<T>(List<T> liste, int fileIndex)
+        public void SaveSingleListToFile<T>(List<T> liste, int fileIndex)
         {
             _filer.SaveListToFile<T>(liste, _path[fileIndex]);
         }
@@ -78,11 +78,11 @@ namespace FireWorks
                     break;
             }
         }
-        public int Valid(int num, int from, int to)
+        public int ValidInputRange(int num, int from, int to)
         {
             while (num < from || num > to)
             {
-                _t.Display("Invalid Input. Try again.\n");
+                _t.Display("Invalid Input. Out of valid range:from("+from+") to("+to+"). Try again.\n");
                 num = _t.GetInt();
             }
             return num;
@@ -97,14 +97,14 @@ namespace FireWorks
                                "(2)Vehicles\n" +
                                "(3)Resources\n" +
                                "(4)Firefighters\n");
-                    int dataSet = Valid(_t.GetInt(), 1, 4);
+                    int dataSet = ValidInputRange(_t.GetInt(), 1, 4);
                     _t.Display("(1)View\n" +
                                "(2)New\n" +
                                "(3)Edit\n" +
                                "(4)Delete\n");
-                    int mode = Valid(_t.GetInt(), 1, 4);
+                    int userAction = ValidInputRange(_t.GetInt(), 1, 4);
 
-                    Select(dataSet, mode);
+                    Select(dataSet, userAction);
 
                     break;
                 case "-q":
@@ -112,29 +112,29 @@ namespace FireWorks
                     break;
             }
         }
-        public void Select(int dataSet, int mode)
+        public void Select(int dataSet, int userAction)
         {
             switch (dataSet)
             {
                 case 1:
-                    ProcessList(mode, GetListEmployees(), dataSet);
+                    ProcessList(userAction, GetListEmployees(), dataSet);
                     break;
                 case 2:
-                    ProcessList(mode, GetListVehicles(), dataSet);
+                    ProcessList(userAction, GetListVehicles(), dataSet);
                     break;
                 case 3:
-                    ProcessList(mode, GetListResources(), dataSet);
+                    ProcessList(userAction, GetListResources(), dataSet);
                     break;
                 case 4:
-                    ProcessList(mode, GetListFireFighter(), dataSet);
+                    ProcessList(userAction, GetListFireFighter(), dataSet);
                     break;
             }
         }
-        public void ProcessList<T>(int mode, List<T> liste, int dataSet)
+        public void ProcessList<T>(int userAction, List<T> liste, int dataSet)
         {
             T tmp;
             int index;
-            switch (mode)
+            switch (userAction)
             {
                 case 1:
                     ViewList(liste);
@@ -153,7 +153,7 @@ namespace FireWorks
                                        "(2) Firetruck " + "\n" +
                                        "(3) Turntabelladdertruck" + "\n" +
                                        "(4) Ambulance" + "\n");
-                            switch (Valid(_t.GetInt(), 1, 4))
+                            switch (ValidInputRange(_t.GetInt(), 1, 4))
                             {
                                 case 1:
                                     liste.Add((T)(object)Edit(new Pkw("TYPE", 0, 0)));
@@ -173,7 +173,7 @@ namespace FireWorks
                             _t.Display("What kind of Resource?" + "\n" +
                                       "(1) Hose" + "\n" +
                                       "(2) Other Items" + "\n");
-                            switch (Valid(_t.GetInt(), 1, 2))
+                            switch (ValidInputRange(_t.GetInt(), 1, 2))
                             {
 
                                 case 1:
@@ -188,27 +188,27 @@ namespace FireWorks
                             liste.Add((T)(object)new FireFighter("hi", "yo", 1));
                             break;
                     }
-                    SaveSingle<T>(liste, dataSet);
+                    SaveSingleListToFile<T>(liste, dataSet);
                     break;
                 case 3:
                     _t.Display("Edit." + "\n");
                     ViewList(liste);
-                    index = Valid(_t.GetInt(), 1, liste.Count());
+                    index = ValidInputRange(_t.GetInt(), 1, liste.Count());
                     index--;
                     tmp = liste.ElementAt(index);
                     liste.RemoveAt(index);
                     liste.Add(Edit(tmp));
-                    SaveSingle<T>(liste, dataSet);
+                    SaveSingleListToFile<T>(liste, dataSet);
                     break;
                 //User tmp = (User)_filer.ReadObject<User>(_path[dataSet], Valid(_t.GetInt(), 1, c - 1));
 
                 case 4:
                     _t.Display("Delete." + "\n");
                     ViewList(liste);
-                    index = Valid(_t.GetInt(), 1, liste.Count());
+                    index = ValidInputRange(_t.GetInt(), 1, liste.Count());
                     index--;
                     liste.RemoveAt(index);             
-                    SaveSingle<T>(liste, dataSet);
+                    SaveSingleListToFile<T>(liste, dataSet);
                     break;
             }
         }

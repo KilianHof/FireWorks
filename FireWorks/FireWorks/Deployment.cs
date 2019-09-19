@@ -55,7 +55,7 @@ namespace FireWorks
 
             if (Number < dep.Number) return 1;
             if (Number > dep.Number) return -1;
-            //if both "if's" arent true objects must be equal.
+            //if both "if's" arent true objects must be equal. No number is given twice.
             return 0;
 
         }

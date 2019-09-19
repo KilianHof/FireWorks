@@ -32,7 +32,7 @@ namespace FireWorks
             while (loop)
             {
                 uf.Routine(str);
-                uf.SaveAll();
+                uf.SaveAllListsToFile();
                 _t.Display("Continue?");
                 loop = _t.GetBool();
             }
