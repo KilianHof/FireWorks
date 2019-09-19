@@ -6,15 +6,19 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
 
-namespace FireWorks
+namespace FireWorks.Ressources
 {
     public class Resources
     {
 
         public int ID { get; set; }
-        public String Name { get; set; }
+        public string Name { get; set; }
 
     }
+}
+
+namespace FireWorks.Ressources
+{
 
     public class Resource
     {
@@ -60,72 +64,72 @@ namespace FireWorks
                 case "b5":
                     line = 1;
                     Console.WriteLine("Please enter the new amount.");
-                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath+"/FireWorks/Storage/Amounts.txt", line);
+                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath + "/FireWorks/Storage/Amounts.txt", line);
                     break;
                 case "b10":
                     line = 2;
                     Console.WriteLine("Please enter the new amount.");
-                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath+"/FireWorks/Storage/Amounts.txt", line);
+                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath + "/FireWorks/Storage/Amounts.txt", line);
                     break;
                 case "b20":
                     line = 3;
                     Console.WriteLine("Please enter the new amount.");
-                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath+"/FireWorks/Storage/Amounts.txt", line);
+                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath + "/FireWorks/Storage/Amounts.txt", line);
                     break;
                 case "b30":
                     line = 4;
                     Console.WriteLine("Please enter the new amount.");
-                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath+"/FireWorks/Storage/Amounts.txt", line);
+                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath + "/FireWorks/Storage/Amounts.txt", line);
                     break;
                 case "c5":
                     line = 5;
                     Console.WriteLine("Please enter the new amount.");
-                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath+"/FireWorks/Storage/Amounts.txt", line);
+                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath + "/FireWorks/Storage/Amounts.txt", line);
                     break;
                 case "c10":
                     line = 6;
                     Console.WriteLine("Please enter the new amount.");
-                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath+"/FireWorks/Storage/Amounts.txt", line);
+                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath + "/FireWorks/Storage/Amounts.txt", line);
                     break;
                 case "c20":
                     line = 7;
                     Console.WriteLine("Please enter the new amount.");
-                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath+"/FireWorks/Storage/Amounts.txt", line);
+                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath + "/FireWorks/Storage/Amounts.txt", line);
                     break;
                 case "c30":
                     line = 8;
                     Console.WriteLine("Please enter the new amount.");
-                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath+"/FireWorks/Storage/Amounts.txt", line);
+                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath + "/FireWorks/Storage/Amounts.txt", line);
                     break;
                 case "d5":
                     line = 9;
                     Console.WriteLine("Please enter the new amount.");
-                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath+"/FireWorks/Storage/Amounts.txt", line);
+                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath + "/FireWorks/Storage/Amounts.txt", line);
                     break;
                 case "d10":
                     line = 10;
                     Console.WriteLine("Please enter the new amount.");
-                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath+"/FireWorks/Storage/Amounts.txt", line);
+                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath + "/FireWorks/Storage/Amounts.txt", line);
                     break;
                 case "d20":
                     line = 11;
                     Console.WriteLine("Please enter the new amount.");
-                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath+"/FireWorks/Storage/Amounts.txt", line);
+                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath + "/FireWorks/Storage/Amounts.txt", line);
                     break;
                 case "d30":
                     line = 12;
                     Console.WriteLine("Please enter the new amount.");
-                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath+"/FireWorks/Storage/Amounts.txt", line);
+                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath + "/FireWorks/Storage/Amounts.txt", line);
                     break;
                 case "d":
                     line = 13;
                     Console.WriteLine("Please enter the new amount.");
-                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath+"/FireWorks/Storage/Amounts.txt", line);
+                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath + "/FireWorks/Storage/Amounts.txt", line);
                     break;
                 case "j":
                     line = 14;
                     Console.WriteLine("Please enter the new amount.");
-                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath+"/FireWorks/Storage/Amounts.txt", line);
+                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath + "/FireWorks/Storage/Amounts.txt", line);
                     break;
                 default:
                     Console.WriteLine("Invalid answer");
@@ -162,7 +166,7 @@ namespace FireWorks
             string EResource = "";
             ID = "\"ID\":" + ID; //Absicherung
 
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Gasmeters.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/FireWorks/Storage/Gasmeters.txt"))
                 while (EResource.IndexOf(ID) == -1)
                 {
 
@@ -184,19 +188,19 @@ namespace FireWorks
             Console.WriteLine("Enter the chuckup-day for Gasmeter " + Resource.ID + ". (as dd format)");
 
             EResource = JsonConvert.SerializeObject(Resource);
-            ObjectWriter.LineChanger(EResource, StoragePathClass.StoragePath+"/FireWorks/Storage/Resource.txt", Resource.ID);
+            ObjectWriter.LineChanger(EResource, StoragePathClass.StoragePath + "/FireWorks/Storage/Resources.txt", Resource.ID);
 
             return;
         }
 
 
-        
+
 
         public static void EGasmetersC()
         {
             int i = 0;
             string Text = "y e e t";
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Resources.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/FireWorks/Storage/Resources.txt"))
                 while (Text != null)
                 {
 
@@ -214,7 +218,7 @@ namespace FireWorks
             Console.WriteLine("Enter the date of checkup for the gasmeter. (dd format)");
             ResourceC.Date = Console.ReadLine();
 
-            ObjectWriter.WriteObject(ResourceC, StoragePathClass.StoragePath+"/FireWorks/Storage/Gasmeter.txt");
+            ObjectWriter.WriteObject(ResourceC, StoragePathClass.StoragePath + "/FireWorks/Storage/Gasmeter.txt");
 
             return;
         }
@@ -243,7 +247,7 @@ namespace FireWorks
             string EResource = "";
             ID = "\"ID\":" + ID; //Absicherung
 
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Users.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/FireWorks/Storage/Users.txt"))
                 while (EResource.IndexOf(ID) == -1)
                 {
 
@@ -265,7 +269,7 @@ namespace FireWorks
             Console.WriteLine("Enter the new name for " + Resource.Name + ".");
 
             EResource = JsonConvert.SerializeObject(Resource);
-            ObjectWriter.LineChanger(EResource, StoragePathClass.StoragePath+"/FireWorks/Storage/Resource.txt", Resource.ID);
+            ObjectWriter.LineChanger(EResource, StoragePathClass.StoragePath + "/FireWorks/Storage/Resource.txt", Resource.ID);
 
             return;
         }
@@ -274,7 +278,7 @@ namespace FireWorks
         {
             int i = 0;
             string Text = "y e e t";
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Resources.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/FireWorks/Storage/Resources.txt"))
                 while (Text != null)
                 {
 
@@ -292,7 +296,7 @@ namespace FireWorks
             Console.WriteLine("Enter the name for the resource.");
             ResourceC.Name = Console.ReadLine();
 
-            ObjectWriter.WriteObject(ResourceC, StoragePathClass.StoragePath+"/FireWorks/Storage/Resources.txt");
+            ObjectWriter.WriteObject(ResourceC, StoragePathClass.StoragePath + "/FireWorks/Storage/Resources.txt");
 
             return;
         }
@@ -307,11 +311,11 @@ namespace FireWorks
             VehicleType = Console.ReadLine();
             if (VehicleType != "ge") if (VehicleType != "le") if (VehicleType != "te") if (VehicleType != "ae") if (VehicleType != "gc") if (VehicleType != "lc") if (VehicleType != "tc") if (VehicleType != "ac")
                                         {
-                            Console.WriteLine("Invalid answer");
-                            Console.ReadLine();
-                            EVehicles();
-                            return;
-                        }
+                                            Console.WriteLine("Invalid answer");
+                                            Console.ReadLine();
+                                            EVehicles();
+                                            return;
+                                        }
             switch (VehicleType)
             {
                 case "ge":
@@ -348,7 +352,7 @@ namespace FireWorks
             string ID = Console.ReadLine();
             string EVehicle = "";
             ID = "\"ID\":" + ID; //Absicherung
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Vehicles.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/FireWorks/Storage/Vehicles.txt"))
                 while (EVehicle.IndexOf(ID) == -1)
                 {
 
@@ -388,7 +392,7 @@ namespace FireWorks
 
             string EVehicleS = JsonConvert.SerializeObject(EVehicles);
 
-            ObjectWriter.LineChanger(EVehicleS, StoragePathClass.StoragePath+"/FireWorks/Storage/Vehicles.txt", EVehicles.ID);
+            ObjectWriter.LineChanger(EVehicleS, StoragePathClass.StoragePath + "/FireWorks/Storage/Vehicles.txt", EVehicles.ID);
             return;
         }
         public static void EVehiclesTTL()
@@ -397,7 +401,7 @@ namespace FireWorks
             string ID = Console.ReadLine();
             string EVehicle = "";
             ID = "\"ID\":" + ID; //Absicherung
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/TTLs.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/FireWorks/Storage/TTLs.txt"))
                 while (EVehicle.IndexOf(ID) == -1)
                 {
 
@@ -451,7 +455,7 @@ namespace FireWorks
 
             string EVehicleS = JsonConvert.SerializeObject(EVehicles);
 
-            ObjectWriter.LineChanger(EVehicleS, StoragePathClass.StoragePath+"/FireWorks/Storage/TTLs.txt", EVehicles.ID);
+            ObjectWriter.LineChanger(EVehicleS, StoragePathClass.StoragePath + "/FireWorks/Storage/TTLs.txt", EVehicles.ID);
 
             return;
         }
@@ -460,7 +464,7 @@ namespace FireWorks
         {
             string EVehicle = "";
             int i = 0;
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/TTLs.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/FireWorks/Storage/TTLs.txt"))
                 while (EVehicle != null)
                 {
 
@@ -472,7 +476,7 @@ namespace FireWorks
                 }
 
             Console.WriteLine("Vehicle-ID: " + i);
-            
+
             string answer;
             TurntableLadder EVehicles = new TurntableLadder();
             Console.WriteLine("Enter the values.");
@@ -505,7 +509,7 @@ namespace FireWorks
 
 
 
-            ObjectWriter.WriteObject(EVehicles, StoragePathClass.StoragePath+"/FireWorks/Storage/TTLs.txt");
+            ObjectWriter.WriteObject(EVehicles, StoragePathClass.StoragePath + "/FireWorks/Storage/TTLs.txt");
 
             return;
         }
@@ -514,7 +518,7 @@ namespace FireWorks
         {
             string EVehicle = "";
             int i = 0;
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/LFZs.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/FireWorks/Storage/LFZs.txt"))
                 while (EVehicle != null)
                 {
 
@@ -559,7 +563,7 @@ namespace FireWorks
 
 
 
-            ObjectWriter.WriteObject(EVehicles, StoragePathClass.StoragePath+"/FireWorks/Storage/LFZs.txt");
+            ObjectWriter.WriteObject(EVehicles, StoragePathClass.StoragePath + "/FireWorks/Storage/LFZs.txt");
 
             return;
         }
@@ -569,7 +573,7 @@ namespace FireWorks
         {
             string EVehicle = "";
             int i = 0;
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Ambulances.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/FireWorks/Storage/Ambulances.txt"))
                 while (EVehicle != null)
                 {
 
@@ -611,7 +615,7 @@ namespace FireWorks
 
 
 
-            ObjectWriter.WriteObject(EVehicles, StoragePathClass.StoragePath+"/FireWorks/Storage/Ambulances.txt");
+            ObjectWriter.WriteObject(EVehicles, StoragePathClass.StoragePath + "/FireWorks/Storage/Ambulances.txt");
 
             return;
         }
@@ -623,7 +627,7 @@ namespace FireWorks
             string ID = Console.ReadLine();
             string EVehicle = "";
             ID = "\"ID\":" + ID; //Absicherung
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Users.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/FireWorks/Storage/Users.txt"))
                 while (EVehicle.IndexOf(ID) == -1)
                 {
 
@@ -677,7 +681,7 @@ namespace FireWorks
 
             string EVehicleS = JsonConvert.SerializeObject(EVehicles);
 
-            ObjectWriter.LineChanger(EVehicleS, StoragePathClass.StoragePath+"/FireWorks/Storage/LFZs.txt", EVehicles.ID);
+            ObjectWriter.LineChanger(EVehicleS, StoragePathClass.StoragePath + "/FireWorks/Storage/LFZs.txt", EVehicles.ID);
             return;
         }
 
@@ -685,7 +689,7 @@ namespace FireWorks
         {
             string EVehicle = "";
             int i = 0;
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Vehicles.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/FireWorks/Storage/Vehicles.txt"))
                 while (EVehicle != null)
                 {
 
@@ -718,7 +722,7 @@ namespace FireWorks
             EVehicles.HP = number;
 
 
-            ObjectWriter.WriteObject(EVehicles, StoragePathClass.StoragePath+"/FireWorks/Storage/Vehicles.txt");
+            ObjectWriter.WriteObject(EVehicles, StoragePathClass.StoragePath + "/FireWorks/Storage/Vehicles.txt");
 
             return;
         }
@@ -730,7 +734,7 @@ namespace FireWorks
             string ID = Console.ReadLine();
             string EVehicle = "";
             ID = "\"ID\":" + ID; //Absicherung
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Users.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/FireWorks/Storage/Users.txt"))
                 while (EVehicle.IndexOf(ID) == -1)
                 {
 
@@ -777,7 +781,7 @@ namespace FireWorks
 
             string EVehicleS = JsonConvert.SerializeObject(EVehicles);
 
-            ObjectWriter.LineChanger(EVehicleS, StoragePathClass.StoragePath+"/FireWorks/Storage/Ambulances.txt", EVehicles.ID);
+            ObjectWriter.LineChanger(EVehicleS, StoragePathClass.StoragePath + "/FireWorks/Storage/Ambulances.txt", EVehicles.ID);
             return;
         }
         public static void EUsers()
@@ -793,7 +797,7 @@ namespace FireWorks
             }
             ID = "\"ID\":" + ID; //Absicherung
 
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Users.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/FireWorks/Storage/Users.txt"))
                 while (EUser.IndexOf(ID) == -1)
                 {
 
@@ -843,7 +847,7 @@ namespace FireWorks
             Console.WriteLine("Please enter a new last name.");
             User.LName = Console.ReadLine();
             string Usertext = JsonConvert.SerializeObject(User);
-            ObjectWriter.LineChanger(Usertext, StoragePathClass.StoragePath+"/FireWorks/Storage/Users.txt", User.ID);
+            ObjectWriter.LineChanger(Usertext, StoragePathClass.StoragePath + "/FireWorks/Storage/Users.txt", User.ID);
             return;
         }
         public static void EUsersPin(Human User)
@@ -851,14 +855,14 @@ namespace FireWorks
             Console.WriteLine("Please enter a new PIN.");
             User.PIN = Console.ReadLine();
             string Usertext = JsonConvert.SerializeObject(User);
-            ObjectWriter.LineChanger(Usertext, StoragePathClass.StoragePath+"/FireWorks/Storage/Users.txt", User.ID);
+            ObjectWriter.LineChanger(Usertext, StoragePathClass.StoragePath + "/FireWorks/Storage/Users.txt", User.ID);
             return;
         }
         public static void EUsersDisable(Human User)
         {
             User.Status = 0;
             string Usertext = JsonConvert.SerializeObject(User);
-            ObjectWriter.LineChanger(Usertext, StoragePathClass.StoragePath+"/FireWorks/Storage/Users.txt", User.ID);
+            ObjectWriter.LineChanger(Usertext, StoragePathClass.StoragePath + "/FireWorks/Storage/Users.txt", User.ID);
             return;
         }
         public static void EUsersCreate()
@@ -866,7 +870,7 @@ namespace FireWorks
             Human User = new Human();
             int i = 0;
             string Text = "y e e t";
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Users.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/FireWorks/Storage/Users.txt"))
                 while (Text != null)
                 {
                     Text = UserText.ReadLine();
@@ -885,7 +889,7 @@ namespace FireWorks
             string answer = Console.ReadLine();
             int.TryParse(answer, out int status);
             User.Status = status;
-            ObjectWriter.WriteObject(User, StoragePathClass.StoragePath+"/FireWorks/Storage/Users.txt");
+            ObjectWriter.WriteObject(User, StoragePathClass.StoragePath + "/FireWorks/Storage/Users.txt");
             return;
         }
     }
