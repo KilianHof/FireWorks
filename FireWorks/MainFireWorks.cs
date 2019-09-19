@@ -10,16 +10,19 @@ namespace FireWorks
 {
     class MainFireWorks
     {
+        public static class StoragePathClass
+        {
+            public static string StoragePath = "";
+        }
 #pragma warning disable IDE0060 // Nicht verwendete Parameter entfernen
-        public static void Main(string[] args)
+            public static void Main(string[] args)
 #pragma warning restore IDE0060 // Nicht verwendete Parameter entfernen
         {
 
-            //Datum
+            //   C:\Users\khof\Documents
 
-            //DateTime date = DateTime.Now;
-            //string datestring = date.ToString("dd");
-
+            Console.WriteLine("Enter the path to your /FireWorks/Storage directory");
+            StoragePathClass.StoragePath = Console.ReadLine();
 
             Human CurrentUser;
             var SCurrentUser = Authenticator.LogIn();

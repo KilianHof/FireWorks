@@ -62,7 +62,7 @@ namespace FireWorks
         {
             Console.Clear();
             Console.WriteLine("Edit what type of object?");
-            Console.WriteLine("(r)esources / (v)ehicles / (u)sers / (g)asmeters");
+            Console.WriteLine("(r)esources / (v)ehicles / (u)sers / (g)asmeters / (h)oses, distributors and jethoses");
             switch (Console.ReadLine())
             {
                 case "r":
@@ -77,6 +77,9 @@ namespace FireWorks
                 case "g":
                     EGasmeters();
                     break;
+                case "h":
+                    EAmounts();
+                    break;
                 default:
                     Console.WriteLine("Invalid answer");
                     Console.ReadLine();
@@ -85,6 +88,95 @@ namespace FireWorks
             }
             return;
         }
+
+        public static void EAmounts()
+        {
+            Console.Clear();
+            int line;
+            Console.WriteLine("Edit which objects amount?");
+            Console.WriteLine("(b5)/(b10)/(b20)/(b30)/(c5)/(c10)/(c20)/(c30)/(d5)/(d10)/(d20)/(d30)/(d)istributers/(j)ethoses");
+            switch (Console.ReadLine())
+            {
+                case "b5":
+                    line = 1;
+                    Console.WriteLine("Please enter the new amount.");
+                    ObjectWriter.LineChanger(Console.ReadLine(), "C:/Users/khof/Desktop/Amounts.txt", line);
+                    break;
+                case "b10":
+                    line = 2;
+                    Console.WriteLine("Please enter the new amount.");
+                    ObjectWriter.LineChanger(Console.ReadLine(), "C:/Users/khof/Desktop/Amounts.txt", line);
+                    break;
+                case "b20":
+                    line = 3;
+                    Console.WriteLine("Please enter the new amount.");
+                    ObjectWriter.LineChanger(Console.ReadLine(), "C:/Users/khof/Desktop/Amounts.txt", line);
+                    break;
+                case "b30":
+                    line = 4;
+                    Console.WriteLine("Please enter the new amount.");
+                    ObjectWriter.LineChanger(Console.ReadLine(), "C:/Users/khof/Desktop/Amounts.txt", line);
+                    break;
+                case "c5":
+                    line = 5;
+                    Console.WriteLine("Please enter the new amount.");
+                    ObjectWriter.LineChanger(Console.ReadLine(), "C:/Users/khof/Desktop/Amounts.txt", line);
+                    break;
+                case "c10":
+                    line = 6;
+                    Console.WriteLine("Please enter the new amount.");
+                    ObjectWriter.LineChanger(Console.ReadLine(), "C:/Users/khof/Desktop/Amounts.txt", line);
+                    break;
+                case "c20":
+                    line = 7;
+                    Console.WriteLine("Please enter the new amount.");
+                    ObjectWriter.LineChanger(Console.ReadLine(), "C:/Users/khof/Desktop/Amounts.txt", line);
+                    break;
+                case "c30":
+                    line = 8;
+                    Console.WriteLine("Please enter the new amount.");
+                    ObjectWriter.LineChanger(Console.ReadLine(), "C:/Users/khof/Desktop/Amounts.txt", line);
+                    break;
+                case "d5":
+                    line = 9;
+                    Console.WriteLine("Please enter the new amount.");
+                    ObjectWriter.LineChanger(Console.ReadLine(), "C:/Users/khof/Desktop/Amounts.txt", line);
+                    break;
+                case "d10":
+                    line = 10;
+                    Console.WriteLine("Please enter the new amount.");
+                    ObjectWriter.LineChanger(Console.ReadLine(), "C:/Users/khof/Desktop/Amounts.txt", line);
+                    break;
+                case "d20":
+                    line = 11;
+                    Console.WriteLine("Please enter the new amount.");
+                    ObjectWriter.LineChanger(Console.ReadLine(), "C:/Users/khof/Desktop/Amounts.txt", line);
+                    break;
+                case "d30":
+                    line = 12;
+                    Console.WriteLine("Please enter the new amount.");
+                    ObjectWriter.LineChanger(Console.ReadLine(), "C:/Users/khof/Desktop/Amounts.txt", line);
+                    break;
+                case "d":
+                    line = 13;
+                    Console.WriteLine("Please enter the new amount.");
+                    ObjectWriter.LineChanger(Console.ReadLine(), "C:/Users/khof/Desktop/Amounts.txt", line);
+                    break;
+                case "j":
+                    line = 14;
+                    Console.WriteLine("Please enter the new amount.");
+                    ObjectWriter.LineChanger(Console.ReadLine(), "C:/Users/khof/Desktop/Amounts.txt", line);
+                    break;
+                default:
+                    Console.WriteLine("Invalid answer");
+                    Console.ReadLine();
+                    EAmounts();
+                    break;
+            }
+            return;
+        }
+
+
         public static void EGasmeters()
         {
             Console.Clear();
