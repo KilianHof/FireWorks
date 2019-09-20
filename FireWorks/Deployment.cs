@@ -283,7 +283,6 @@ namespace FireWorks
                 runs += 1;
             }
 
-
             Console.Write("Go into details for a deployment?");
             if (GetYesNo())
             {
@@ -310,7 +309,6 @@ namespace FireWorks
             }
             Console.WriteLine("Please enter y or n");
             return GetYesNo();
-
         }
         public static void DeploymentSearchN()
         {

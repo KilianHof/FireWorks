@@ -4,12 +4,18 @@ Circlon Testproject
 
 ToDo:
 
-Login-Interface // Abgeschlossen
+Login-Interface ✓
 
-Einsatzliste // Fertig
+Einsatzliste ✓
 
-Adminfunktionen // Begonnen
+Adminfunktionen ✓
 
-Einsatzgeneration // Vervollständigt
+Einsatzgeneration ✓
 
-ToDo-Liste fertigstellen // Größtenteils beendet
+ToDo-Liste fertigstellen ✓
+
+Code aktualisieren
+
+Web-app erstellen
+
+.dll erstellen
