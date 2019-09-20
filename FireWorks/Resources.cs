@@ -173,7 +173,7 @@ namespace FireWorks
                     {
                         Console.WriteLine("Invalid ID.");
                         Console.ReadLine();
-                        EResources();
+                        EGasmeters();
                         return;
                     }
                 }
@@ -182,9 +182,10 @@ namespace FireWorks
             Resource = JsonConvert.DeserializeObject<Gasmeter>(EResource);
 
             Console.WriteLine("Enter the chuckup-day for Gasmeter " + Resource.ID + ". (as dd format)");
+            Resource.Date = Console.ReadLine();
 
             EResource = JsonConvert.SerializeObject(Resource);
-            ObjectWriter.LineChanger(EResource, StoragePathClass.StoragePath+"/FireWorks/Storage/Resource.txt", Resource.ID);
+            ObjectWriter.LineChanger(EResource, StoragePathClass.StoragePath+"/FireWorks/Storage/Gasmeters.txt", Resource.ID);
 
             return;
         }
@@ -243,7 +244,7 @@ namespace FireWorks
             string EResource = "";
             ID = "\"ID\":" + ID; //Absicherung
 
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Users.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Resources.txt"))
                 while (EResource.IndexOf(ID) == -1)
                 {
 
@@ -265,7 +266,7 @@ namespace FireWorks
             Console.WriteLine("Enter the new name for " + Resource.Name + ".");
 
             EResource = JsonConvert.SerializeObject(Resource);
-            ObjectWriter.LineChanger(EResource, StoragePathClass.StoragePath+"/FireWorks/Storage/Resource.txt", Resource.ID);
+            ObjectWriter.LineChanger(EResource, StoragePathClass.StoragePath+"/FireWorks/Storage/Resources.txt", Resource.ID);
 
             return;
         }
@@ -623,7 +624,7 @@ namespace FireWorks
             string ID = Console.ReadLine();
             string EVehicle = "";
             ID = "\"ID\":" + ID; //Absicherung
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Users.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/LFZs.txt"))
                 while (EVehicle.IndexOf(ID) == -1)
                 {
 
@@ -730,7 +731,7 @@ namespace FireWorks
             string ID = Console.ReadLine();
             string EVehicle = "";
             ID = "\"ID\":" + ID; //Absicherung
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Users.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Ambulances.txt"))
                 while (EVehicle.IndexOf(ID) == -1)
                 {
 

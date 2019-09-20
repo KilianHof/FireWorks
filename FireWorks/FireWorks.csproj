@@ -49,7 +49,12 @@
     <Compile Include="Authenticator.cs" />
     <Compile Include="ObjectWriter.cs" />
     <Compile Include="Deployment.cs" />
-    <Compile Include="Human.cs" />
+    <Compile Include="ResourceClasses\Ambulance.cs" />
+    <Compile Include="ResourceClasses\Gasmeter.cs" />
+    <Compile Include="ResourceClasses\Human.cs" />
+    <Compile Include="ResourceClasses\LFZ.cs" />
+    <Compile Include="ResourceClasses\TurntableLadder.cs" />
+    <Compile Include="ResourceClasses\Vehicles.cs" />
     <Compile Include="Resources.cs" />
     <Compile Include="MainFireWorks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -57,6 +62,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

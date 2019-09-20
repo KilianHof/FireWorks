@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using System.IO;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace FireWorks
-{public static class StoragePathClass
-        {
-            public static string StoragePath = "";
-        }
+{
+    public static class StoragePathClass
+    {
+        public static string StoragePath = "";
+    }
     class MainFireWorks
     {
-        
+
 #pragma warning disable IDE0060 // Nicht verwendete Parameter entfernen
-            public static void Main(string[] args)
+        public static void Main(string[] args)
 #pragma warning restore IDE0060 // Nicht verwendete Parameter entfernen
         {
 
