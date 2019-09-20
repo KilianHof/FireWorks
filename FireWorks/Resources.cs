@@ -165,8 +165,6 @@ namespace FireWorks
             using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Gasmeters.txt"))
                 while (EResource.IndexOf(ID) == -1)
                 {
-
-
                     EResource = UserText.ReadLine();
 
                     if (EResource == null)
@@ -200,11 +198,8 @@ namespace FireWorks
             using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Resources.txt"))
                 while (Text != null)
                 {
-
                     Text = UserText.ReadLine();
-
                     i += 1;
-
                 }
 #pragma warning disable IDE0017 // Initialisierung von Objekten vereinfachen
             Gasmeter ResourceC = new Gasmeter();
@@ -247,10 +242,7 @@ namespace FireWorks
             using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Resources.txt"))
                 while (EResource.IndexOf(ID) == -1)
                 {
-
-
                     EResource = UserText.ReadLine();
-
                     if (EResource == null)
                     {
                         Console.WriteLine("Invalid ID.");
@@ -278,11 +270,8 @@ namespace FireWorks
             using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Resources.txt"))
                 while (Text != null)
                 {
-
                     Text = UserText.ReadLine();
-
                     i += 1;
-
                 }
 #pragma warning disable IDE0017 // Initialisierung von Objekten vereinfachen
             Resources ResourceC = new Resources();
@@ -340,7 +329,6 @@ namespace FireWorks
                     EVehiclesACreate();
                     break;
             }
-
         }
 
         public static void EVehiclesG()
@@ -352,10 +340,7 @@ namespace FireWorks
             using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Vehicles.txt"))
                 while (EVehicle.IndexOf(ID) == -1)
                 {
-
-
                     EVehicle = UserText.ReadLine();
-
                     if (EVehicle == null)
                     {
                         Console.WriteLine("Invalid ID.");
@@ -363,7 +348,6 @@ namespace FireWorks
                         EUsers();
                         return;
                     }
-
                 }
             string answer;
             int number;
@@ -386,9 +370,7 @@ namespace FireWorks
                 int.TryParse(answer, out number);
                 EVehicles.HP = number;
             }
-
             string EVehicleS = JsonConvert.SerializeObject(EVehicles);
-
             ObjectWriter.LineChanger(EVehicleS, StoragePathClass.StoragePath+"/FireWorks/Storage/Vehicles.txt", EVehicles.ID);
             return;
         }
@@ -401,8 +383,6 @@ namespace FireWorks
             using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/TTLs.txt"))
                 while (EVehicle.IndexOf(ID) == -1)
                 {
-
-
                     EVehicle = UserText.ReadLine();
 
                     if (EVehicle == null)
@@ -412,7 +392,6 @@ namespace FireWorks
                         EUsers();
                         return;
                     }
-
                 }
             string answer;
             int number;
@@ -451,7 +430,6 @@ namespace FireWorks
             }
 
             string EVehicleS = JsonConvert.SerializeObject(EVehicles);
-
             ObjectWriter.LineChanger(EVehicleS, StoragePathClass.StoragePath+"/FireWorks/Storage/TTLs.txt", EVehicles.ID);
 
             return;
@@ -464,12 +442,8 @@ namespace FireWorks
             using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/TTLs.txt"))
                 while (EVehicle != null)
                 {
-
-
                     EVehicle = UserText.ReadLine();
-
                     i += 1;
-
                 }
 
             Console.WriteLine("Vehicle-ID: " + i);
@@ -504,8 +478,6 @@ namespace FireWorks
             if (DeploymentListing.GetYesNo()) EVehicles.Saw = true;
             else EVehicles.Saw = false;
 
-
-
             ObjectWriter.WriteObject(EVehicles, StoragePathClass.StoragePath+"/FireWorks/Storage/TTLs.txt");
 
             return;
@@ -518,12 +490,8 @@ namespace FireWorks
             using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/LFZs.txt"))
                 while (EVehicle != null)
                 {
-
-
                     EVehicle = UserText.ReadLine();
-
                     i += 1;
-
                 }
 
             Console.WriteLine("Vehicle-ID: " + i);
@@ -558,8 +526,6 @@ namespace FireWorks
             if (DeploymentListing.GetYesNo()) EVehicles.Saw = true;
             else EVehicles.Saw = false;
 
-
-
             ObjectWriter.WriteObject(EVehicles, StoragePathClass.StoragePath+"/FireWorks/Storage/LFZs.txt");
 
             return;
@@ -573,12 +539,8 @@ namespace FireWorks
             using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Ambulances.txt"))
                 while (EVehicle != null)
                 {
-
-
                     EVehicle = UserText.ReadLine();
-
                     i += 1;
-
                 }
 
             Console.WriteLine("Vehicle-ID: " + i);
@@ -610,8 +572,6 @@ namespace FireWorks
                 EVehicles.MaxWeight = number;
             }
 
-
-
             ObjectWriter.WriteObject(EVehicles, StoragePathClass.StoragePath+"/FireWorks/Storage/Ambulances.txt");
 
             return;
@@ -627,8 +587,6 @@ namespace FireWorks
             using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/LFZs.txt"))
                 while (EVehicle.IndexOf(ID) == -1)
                 {
-
-
                     EVehicle = UserText.ReadLine();
 
                     if (EVehicle == null)
@@ -638,7 +596,6 @@ namespace FireWorks
                         EUsers();
                         return;
                     }
-
                 }
             string answer;
             int number;
@@ -689,12 +646,9 @@ namespace FireWorks
             using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Vehicles.txt"))
                 while (EVehicle != null)
                 {
-
-
                     EVehicle = UserText.ReadLine();
 
                     i += 1;
-
                 }
 
             Console.WriteLine("Vehicle-ID: " + i);
@@ -724,7 +678,6 @@ namespace FireWorks
             return;
         }
 
-
         public static void EVehiclesA()
         {
             Console.WriteLine("Enter the vehicle-ID");
@@ -734,10 +687,7 @@ namespace FireWorks
             using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Ambulances.txt"))
                 while (EVehicle.IndexOf(ID) == -1)
                 {
-
-
                     EVehicle = UserText.ReadLine();
-
                     if (EVehicle == null)
                     {
                         Console.WriteLine("Invalid ID.");
@@ -745,7 +695,6 @@ namespace FireWorks
                         EUsers();
                         return;
                     }
-
                 }
             string answer;
             int number;
@@ -783,7 +732,6 @@ namespace FireWorks
         }
         public static void EUsers()
         {
-
             Console.WriteLine("Enter a user-ID. Enter \"0\" to create a new user.");
             string ID = Console.ReadLine();
             string EUser = "";
@@ -797,8 +745,6 @@ namespace FireWorks
             using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Users.txt"))
                 while (EUser.IndexOf(ID) == -1)
                 {
-
-
                     EUser = UserText.ReadLine();
 
                     if (EUser == null)
@@ -812,7 +758,6 @@ namespace FireWorks
 
             Human User;
             User = JsonConvert.DeserializeObject<Human>(EUser);
-
 
             Console.Clear();
             Console.WriteLine("Edit what value?");

@@ -15,17 +15,16 @@ namespace FireWorks
 #pragma warning restore IDE0060 // Nicht verwendete Parameter entfernen
         {
 
-            //   C:\Users\khof\Documents
 
             Console.WriteLine("Enter the path to your /FireWorks/Storage directory");
             StoragePathClass.StoragePath = Console.ReadLine();
 
             Human CurrentUser;
-            var SCurrentUser = Authenticator.LogIn();
+            var SCurrentUser = Authenticator.LogIn();   //checkt den PIN
 
             CurrentUser = JsonConvert.DeserializeObject<Human>(SCurrentUser);
 
-            Authenticator.StatusCheck(CurrentUser);
+            Authenticator.StatusCheck(CurrentUser); //ordnet Nutzer nach Status ein
             if (CurrentUser.Status == 1)
             {
                 Console.Clear();
@@ -66,7 +65,7 @@ namespace FireWorks
                         DeploymentListing.CreateDeployment();
                         break;
                     case "lock":
-                        Authenticator.UserLock(); // kann auch admin machen
+                        Authenticator.UserLock();
                         break;
                     case "edit":
                         Resource.Editor();

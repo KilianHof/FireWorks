@@ -58,8 +58,6 @@ namespace FireWorks
             using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Users.txt"))
                 while (SCurrentUser.IndexOf(PINenter) == -1)
                 {
-
-
                     SCurrentUser = UserText.ReadLine();
 
                     if (SCurrentUser == null)
@@ -83,8 +81,6 @@ namespace FireWorks
             using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Users.txt"))
                 while (SLCurrentUser.IndexOf(IDenter) == -1)
                 {
-
-
                     SLCurrentUser = UserText.ReadLine();
 
                     if (SLCurrentUser == null)

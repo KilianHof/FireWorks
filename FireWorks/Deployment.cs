@@ -50,13 +50,13 @@ namespace FireWorks
             String IDenter = Console.ReadLine();
             IDenter = "\"Number\":" + IDenter + "}"; //Absicherung
             using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Deployments.txt"))
-                while (Deploytext.IndexOf(IDenter) == -1)
+                while (Deploytext.IndexOf(IDenter) == -1)   //zählt sucht nach dem ersten Einsatz mit der ID
                 {
 
 
                     Deploytext = UserText.ReadLine();
 
-                    if (Deploytext == null)
+                    if (Deploytext == null) //wenn keine vorhanden sind
                     {
                         Console.WriteLine("Invalid ID");
                         Console.ReadLine();
@@ -67,7 +67,7 @@ namespace FireWorks
 
 
                 }
-            DetailDeployment = JsonConvert.DeserializeObject<Deployment>(Deploytext);
+            DetailDeployment = JsonConvert.DeserializeObject<Deployment>(Deploytext);   //Macht den Einsatz zum Objekt / Im folgenden wird er angezeigt
             Console.Clear();
             Console.WriteLine("Deployment-ID:      " + DetailDeployment.Number);
             Console.WriteLine("Deployment-Location:" + DetailDeployment.Location);
@@ -104,7 +104,6 @@ namespace FireWorks
 
             Console.WriteLine();
 
-            // Extrawerte für Fahrzeuge hier
             Console.WriteLine("Resources:          A-Hoselength: " + DetailDeployment.ALength + ", B-Hoselength: " + DetailDeployment.BLength + ", C-Hoselength: " + DetailDeployment.CLength + ", D-Hoselength: " + DetailDeployment.DLength);
             while (DetailDeployment.ResourcesNumber > 0)
             {
@@ -127,8 +126,6 @@ namespace FireWorks
 
         public static void DeploymentList()
         {
-
-            //Gasmeter
             String Gasmeters = "";
             int i = 0;
             using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Gasmeters.txt"))
@@ -152,7 +149,6 @@ namespace FireWorks
                     i -= 1;
 
                 }
-
             DateTime date = DateTime.Now;
             string datestring = date.ToString("dd");
             while (i != iMax)
@@ -161,8 +157,6 @@ namespace FireWorks
 
                 i += 1;
             }
-            //Gasmeter
-
             Console.WriteLine("How many deployments are to be shown?");
             int.TryParse(Console.ReadLine(), out int number);
             number += 1;
@@ -234,7 +228,6 @@ namespace FireWorks
         public static void DeploymentSearchV()
         {
 
-
             Console.Write("Vehicle name:");
             String IDenter = Console.ReadLine();
             int i = 0;
@@ -259,7 +252,6 @@ namespace FireWorks
                 while (SDeployments != null)
                 {
 
-
                     SDeployments = UserText.ReadLine();
                     if (SDeployments != null)
                     {
@@ -269,7 +261,6 @@ namespace FireWorks
                             i += 1;
                         }
                     }
-
 
                 }
 
@@ -299,7 +290,6 @@ namespace FireWorks
                 DeploymentDetail();
                 return;
             }
-
 
             return;
 
@@ -325,7 +315,6 @@ namespace FireWorks
         public static void DeploymentSearchN()
         {
 
-
             Console.Write("First name:");
             String IDenterF = Console.ReadLine();
             Console.Write("Last name:");
@@ -334,7 +323,6 @@ namespace FireWorks
 
             String SDeployments = "";
             using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Deployments.txt"))
-
 
                 while (SDeployments != null)
                 {
@@ -350,11 +338,8 @@ namespace FireWorks
             SDeployments = "";
             i = 0;
             using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Deployments.txt"))
-
                 while (SDeployments != null)
                 {
-
-
                     SDeployments = UserText.ReadLine();
                     if (SDeployments != null)
                     {
@@ -367,8 +352,6 @@ namespace FireWorks
                             }
                         }
                     }
-
-
                 }
 
             i -= 1;
@@ -390,14 +373,12 @@ namespace FireWorks
                 runs += 1;
             }
 
-
             Console.Write("Go into details for a deployment?");
             if (GetYesNo())
             {
                 DeploymentDetail();
                 return;
             }
-
 
             return;
 
@@ -471,9 +452,9 @@ namespace FireWorks
             TurntableLadder[] turntableLadders = new TurntableLadder[Number];
             while (Number > 0)
             {
+                Console.Clear();
                 TurntableLadder tmp = new TurntableLadder();
                 turntableLadders[Number - 1] = tmp;
-                Console.Clear();
                 Console.WriteLine(Number + " turntableladders left.");
                 Console.WriteLine("Enter the type of turntableladder:");
                 turntableLadders[Number - 1].Type = Console.ReadLine();
@@ -563,7 +544,6 @@ namespace FireWorks
             }
             NewDeployment.Resources = resources;
 
-
             Console.Clear();
             Console.WriteLine("Please enter the number of units deployed:");
             int.TryParse(Console.ReadLine(), out Number);
@@ -601,10 +581,7 @@ namespace FireWorks
             NewDeployment.Comment = Console.ReadLine();
 
             ObjectWriter.WriteObject(NewDeployment, StoragePathClass.StoragePath+"/FireWorks/Storage/Deployments.txt");
-
         }
-
     }
-
 }
 
