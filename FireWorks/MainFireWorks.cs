@@ -5,7 +5,7 @@ namespace FireWorks
 {
     public static class StoragePathClass
     {
-        public static string StoragePath = "";
+        public static string StoragePath = "C:/Users/khof/source/repos";
     }
     class MainFireWorks
     {
@@ -29,23 +29,19 @@ namespace FireWorks
             if (CurrentUser.Status == 1)
             {
                 Console.Clear();
-                String Answer;
-
                 Console.WriteLine("(d)etailed Report / show deploym(e)nts / (s)earch deployments");
-                Answer = Console.ReadLine();
-
-                if (Answer == "e")
+                switch (Console.ReadLine())
                 {
+                case "e":
                     DeploymentListing.DeploymentList();
-                }
-                if (Answer == "s")
-                {
+                    break;
+                case "s":
                     DeploymentListing.DeploymentSearch();
-                }
-                if (Answer == "d")
-                {
+                    break;
+                case "d":
                     Console.Clear();
                     DeploymentListing.DeploymentDetail();
+                    break;
                 }
             }
             if (CurrentUser.Status == 2)
