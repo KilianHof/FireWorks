@@ -264,7 +264,6 @@ namespace FireWorks
             string Answer;
             int Number;
             if (t as FireTruck != null)
-            Console.WriteLine(t.GetType());
             if (t.GetType() == typeof(FireFighter))
             {
                 _t.Display(" \".\"(dot) for no changes (0 in case of number)" + "\n");

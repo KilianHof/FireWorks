@@ -16,7 +16,7 @@ namespace FireWorks
         {
             Console.Write(str);
         }
-        public int GetInt()
+        public int GetInt()                                             //negative??
         {
             Console.WriteLine("Type a number");
             string Input = GetString();

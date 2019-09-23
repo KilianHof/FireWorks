@@ -36,9 +36,10 @@ namespace FireWorks
                 _t.Display("Continue?");
                 loop = _t.GetBool();
             }
-
+            //test
             //Deployment test = DeploymentFactory.PromptDeployment(AllDeployments,_filer);
-
+            //aawdawdawdawd
+            //asdasd
             //_filer.WriteObject(test, _path);
 
             //User user = new User("m", "p", 2, "USER", "15947562");
