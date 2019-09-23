@@ -27,19 +27,28 @@ namespace FireWorks
         private List<FireFighter> AllFireFighter;
 
 
-        public UserFunctions(IUserLayer t, IDataLayer filer, string[] path) { _t = t; _filer = filer; _path = path; Init(); }
+        public UserFunctions(IUserLayer t, IDataLayer filer, string[] path) { _t = t; _filer = filer; _path = path; Initx(); }
+        public UserFunctions(IUserLayer t, IDataLayer filer, object[] lists) { _t = t; _filer = filer; Init(lists); }
 
         public List<T> ReadAll<T>(int dataSet)
         {
             return _filer.ReadAll<T>(_path[dataSet]);
         }
-        public void Init()
+        public void Initx()
         {
             AllDeployments = ReadAll<Deployment>(0);
             AllEmployees = ReadAll<User>(1);
             AllVehicles = ReadAll<Vehicle>(2);
             AllResources = ReadAll<Resources>(3);
             AllFireFighter = ReadAll<FireFighter>(4);
+        }
+        public void Init(object[] lists)
+        {
+            AllDeployments =  (List<Deployment>)lists[0];
+            AllEmployees = (List<User>)lists[1];
+            AllVehicles = (List<Vehicle>)lists[2];
+            AllResources = (List<Resources>)lists[3];
+            AllFireFighter = (List<FireFighter>)lists[4];
         }
         public List<Deployment> GetListDeployments() { return AllDeployments; }
         public List<User> GetListEmployees() { return AllEmployees; }
