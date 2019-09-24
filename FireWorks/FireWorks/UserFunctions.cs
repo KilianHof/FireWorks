@@ -52,10 +52,6 @@ namespace FireWorks
             _filer.SaveListToFile<Resources>(AllResources, _path[3]);
             _filer.SaveListToFile<FireFighter>(AllFireFighter, _path[4]);
         }
-        //public void SaveSingleListToFile<T>(List<T> liste, int fileIndex)
-        //{
-        //    _filer.SaveListToFile<T>(liste, _path[fileIndex]);
-        //}
         public void Routine(string mode)
         {
             switch (mode)
@@ -595,15 +591,15 @@ namespace FireWorks
         public void ShowAdminOptions()
         {
             _t.Display("Options:\n" +
-                       "-e\tEdit base data.\n" +
-                       "-q\tQuit.\n");
+                       "-e    Edit base data.\n" +
+                       "-q    Quit.\n");
         }
         public void ShowUserOptions()
         {
             _t.Display("Options:\n" +
-                       "-v\tView Deployments.\n" +
-                       "-g\tGenerate Deployment.\n" +
-                       "-q\tQuits\n"
+                       "-v    View Deployments.\n" +
+                       "-g    Generate Deployment.\n" +
+                       "-q    Quits\n"
                        );
         }
     }
