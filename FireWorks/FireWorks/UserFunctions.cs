@@ -16,7 +16,6 @@ namespace FireWorks
             LOCKED = 3
         }
         private IUserLayer _t;
-
         private IDataLayer _filer;
 
         private string[] _path;  // Deploy Employ Vehicles Res FF
@@ -25,7 +24,6 @@ namespace FireWorks
         private List<Vehicle> AllVehicles;
         private List<Resources> AllResources;
         private List<FireFighter> AllFireFighter;
-
 
         public UserFunctions(IUserLayer t, IDataLayer filer, object[] lists, string[] paths) { _t = t; _filer = filer; _path = paths; Init(lists); }
 
@@ -54,11 +52,10 @@ namespace FireWorks
             _filer.SaveListToFile<Resources>(AllResources, _path[3]);
             _filer.SaveListToFile<FireFighter>(AllFireFighter, _path[4]);
         }
-
-        public void SaveSingleListToFile<T>(List<T> liste, int fileIndex)
-        {
-            _filer.SaveListToFile<T>(liste, _path[fileIndex]);
-        }
+        //public void SaveSingleListToFile<T>(List<T> liste, int fileIndex)
+        //{
+        //    _filer.SaveListToFile<T>(liste, _path[fileIndex]);
+        //}
         public void Routine(string mode)
         {
             switch (mode)
