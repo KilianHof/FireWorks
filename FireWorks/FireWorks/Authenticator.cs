@@ -8,9 +8,8 @@ namespace FireWorks
     {
         private IUserLayer _t;
         private IDataLayer filer;
-        public Authenticator( IUserLayer tui,IDataLayer fil,string path) { _t = tui; filer = fil; }
+        public Authenticator(IUserLayer tui, IDataLayer fil, string path) { _t = tui; filer = fil; }
         private const int _pinLength = 4;
-
         /// <summary>
         /// Calls helper functions to ask for a PIN
         /// </summary>
@@ -21,8 +20,8 @@ namespace FireWorks
             string[] result = CheckPIN();
             if (!(result[0] == "error") && !(result[1] == "error"))
             {
-                _t.Display("Login attempt successful! Logged in as: " + result[0]+" : "+ result[1] + "\n");
-                
+                _t.Display("Login attempt successful! Logged in as: " + result[0] + " : " + result[1] + "\n");
+
             }
             else
             {
@@ -61,10 +60,9 @@ namespace FireWorks
             }
             else
             {
-               _t.Display("Invalid Input\n");
+                _t.Display("Invalid Input\n");
             }
             return new string[2] { "error", "error" };
-
         }
         /// <summary>
         /// Checks for Length = _pinLength.
