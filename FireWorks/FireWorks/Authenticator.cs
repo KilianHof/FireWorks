@@ -21,7 +21,7 @@ namespace FireWorks
             string[] result = CheckPIN();
             if (!(result[0] == "error") && !(result[1] == "error"))
             {
-                _t.Display("Login attempt successful! Logged in as: " + result[0]+":"+ result[1] + "\n");
+                _t.Display("Login attempt successful! Logged in as: " + result[0]+" : "+ result[1] + "\n");
                 
             }
             else
