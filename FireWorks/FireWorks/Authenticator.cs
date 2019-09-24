@@ -16,23 +16,21 @@ namespace FireWorks
         /// </summary>
         /// <returns>True for a successful login attempt.</returns>
 
-        public string LogIn()
+        public string[] LogIn()
         {
-            string result = CheckPIN();
-            if (!(result == "No matching PIN found") && !(result == "Invalid Input"))
+            string[] result = CheckPIN();
+            if (!(result[0] == "error") && !(result[1] == "error"))
             {
-                _t.Display("Login attempt successful! Logged in as: " + result + "\n");
-                return result;
+                _t.Display("Login attempt successful! Logged in as: " + result[0]+":"+ result[1] + "\n");
+                
             }
             else
             {
-                _t.Display("Login attempt failed: " + result + ". Try again?" + "\n");
+                _t.Display("Login attempt failed. Try again?" + "\n");
                 if (_t.GetBool())
                     return LogIn();
-                else
-                    System.Environment.Exit(1);
-                return "LOCKED";
             }
+            return result;
         }
         /// <summary>
         /// Prompts the user for input.
@@ -40,13 +38,13 @@ namespace FireWorks
         /// Then looks up Entries in PINS.txt
         /// </summary>
         /// <returns>Returns True for a Valid PIN that is found in PINS.txt</returns>
-        public string CheckPIN()
+        public string[] CheckPIN()
         {
             string Input = _t.GetString();
             if (IsValidInput(Input))
             {
                 {
-                    string[] users = filer.CheckUserStatus();
+                    string[] users = filer.GetListOfUsers();
                     foreach (var item in users)
                     {
                         User tmp = JSONConverter.JSONToGeneric<User>(item);
@@ -54,17 +52,19 @@ namespace FireWorks
                         {
                             if (Input.GetHashCode().ToString() == tmp.PIN)
                             {
-                                return tmp.Status;
+                                return new string[2] { tmp.Status, tmp.FirstName };
                             }
                         }
                     }
                 }
-                return "No matching PIN found";
+                _t.Display("No matching PIN found\n");
             }
             else
             {
-                return "Invalid Input";
+               _t.Display("Invalid Input\n");
             }
+            return new string[2] { "error", "error" };
+
         }
         /// <summary>
         /// Checks for Length = _pinLength.

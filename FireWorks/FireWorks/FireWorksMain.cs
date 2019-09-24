@@ -34,10 +34,10 @@ namespace FireWorks
 
 
             bool loop = true;
-            string str = auth.LogIn();// add User?
+            string[] str = auth.LogIn();
             while (loop)
             {
-                _uf.Routine(str);
+                _uf.Routine(str[0]);
                 _filer.SaveAllLists(lists);
                 _t.Display("Continue?");
                 loop = _t.GetBool();

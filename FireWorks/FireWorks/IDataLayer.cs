@@ -4,7 +4,7 @@ namespace FireWorks
 {
     interface IDataLayer
     {
-        string[] CheckUserStatus();
+        string[] GetListOfUsers();
         List<T> ReadAll<T>(string path);
         void SaveListToFile<T>(List<T> liste, string path);
         void SaveAllLists(object[] lists);

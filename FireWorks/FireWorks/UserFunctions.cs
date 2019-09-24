@@ -40,14 +40,6 @@ namespace FireWorks
         public List<Vehicle> GetListVehicles() { return AllVehicles; }
         public List<Resources> GetListResources() { return AllResources; }
         public List<FireFighter> GetListFireFighter() { return AllFireFighter; }
-        //public void SaveAllListsToFile()
-        //{
-        //    _filer.SaveListToFile<Deployment>(AllDeployments, _path[0]);
-        //    _filer.SaveListToFile<User>(AllEmployees, _path[1]);
-        //    _filer.SaveListToFile<Vehicle>(AllVehicles, _path[2]);
-        //    _filer.SaveListToFile<Resources>(AllResources, _path[3]);
-        //    _filer.SaveListToFile<FireFighter>(AllFireFighter, _path[4]);
-        //}
         public void Routine(string mode)
         {
             switch (mode)

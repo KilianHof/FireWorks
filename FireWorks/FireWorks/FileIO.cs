@@ -21,7 +21,7 @@ namespace FireWorks
         private string[] _paths;
         public FileIO(IUserLayer tui,string[] paths) { _t = tui; _paths = paths; }
 
-        public string[] CheckUserStatus()
+        public string[] GetListOfUsers()
         {
             List<string> results = new List<string>();
             string Path = _paths[1];
