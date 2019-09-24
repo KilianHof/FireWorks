@@ -29,7 +29,7 @@ namespace FireWorks
             object[] lists = { Deploys, Employs, Vehicles, Resources, FireFighters };
 
 
-            UserFunctions uf = new UserFunctions(_t, _filer, lists, _paths);
+            UserFunctions _uf = new UserFunctions(_t, _filer, lists, _paths);
 
 
 
@@ -37,8 +37,8 @@ namespace FireWorks
             string str = auth.LogIn();// add User?
             while (loop)
             {
-                uf.Routine(str);
-                uf.SaveAllListsToFile();
+                _uf.Routine(str);
+                _filer.SaveAllLists(lists);
                 _t.Display("Continue?");
                 loop = _t.GetBool();
             }
