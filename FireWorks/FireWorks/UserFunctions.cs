@@ -27,10 +27,6 @@ namespace FireWorks
 
         public UserFunctions(IUserLayer t, IDataLayer filer, object[] lists, string[] paths) { _t = t; _filer = filer; _path = paths; Init(lists); }
 
-        public List<T> ReadAll<T>(int dataSet)
-        {
-            return _filer.ReadAll<T>(_path[dataSet]);
-        }
         public void Init(object[] lists)
         {
             AllDeployments = (List<Deployment>)lists[0];

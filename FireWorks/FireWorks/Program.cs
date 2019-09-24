@@ -25,6 +25,8 @@ namespace FireWorks
         {
             //Console.WriteLine("0000".GetHashCode());
 
+
+
             Authenticator auth = new Authenticator(_t, _filer, _paths[1]);
 
 
