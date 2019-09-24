@@ -20,68 +20,6 @@ namespace FireWorks
         private IUserLayer _t;
         public FileIO(IUserLayer tui) { _t = tui; }
 
-        //public void WriteObject(object o, string path)
-        //{
-        //    string Json = JSONConverter.ObjectToJSON(o) + Environment.NewLine;
-        //    try
-        //    {
-        //        if (File.Exists(path))
-        //        {
-        //            File.AppendAllText(path, Json);
-        //        }
-        //        else
-        //        {
-        //            using (FileStream Fs = File.Create(path))
-        //            {
-        //                Byte[] info = new UTF8Encoding(true).GetBytes(Json);
-        //                Fs.Write(info, 0, info.Length);
-        //            }
-        //        }
-        //    }
-        //    catch (IOException e)
-        //    {
-        //        _t.Display("Couldnt read and/or create the File.(" + path + ")");
-        //        _t.Display(e.Message);
-        //    }
-        //}
-        /// <summary>
-        /// Reads a specific line and turns it into Deployment object 
-        /// </summary>
-        /// <param name="path">Where the file is located.</param>
-        /// <param name="line">The line to be read.</param>
-        /// <returns>Deployment object from specified line.</returns>
-        //public object ReadObject<T>(string path, int line)
-        //{
-        //    if (File.Exists(path))
-        //    {
-        //        if ((line > 0))
-        //        {
-        //            string json = File.ReadLines(path).Skip(line - 1).Take(1).First();
-        //            object o = JSONConverter.JSONToGeneric<T>(json);
-        //            return o;
-        //        }
-        //        _t.Display("cannot read line \"0\" or negative." + "\n");
-        //        return new object();
-        //    }
-        //    _t.Display("cannot read file: " + path + "\n");
-        //    return new object();
-        //}
-        //public void DeleteObject(string path, int line)
-        //{
-        //    if (File.Exists(path))
-        //    {
-        //        if ((line > 0))
-        //        {
-        //            List<string> quotelist = File.ReadAllLines(path).ToList();
-        //            quotelist.RemoveAt(line - 1);
-        //            File.WriteAllLines(path, quotelist.ToArray());
-        //        }
-        //        else
-        //            _t.Display("cannot read line \"0\" or negative." + "\n");
-        //    }
-        //    else
-        //        _t.Display("cannot read file: " + path + "\n");
-        //}
         public string ReadLine(string path, int line)
         {
             if (File.Exists(path))
@@ -124,17 +62,6 @@ namespace FireWorks
             }
             File.WriteAllLines(path, str);
         }
-        //public int GetLastDeploymentNumberX(string path)         //rewrite to read from object-list and not from file
-        //{
-        //    if (File.Exists(path))
-        //    {
-        //        int lineCount = File.ReadLines(path).Count();
-        //        Deployment last = (Deployment)ReadObject<Deployment>(path, lineCount);
-        //        return last.Number;
-        //    }
-        //    _t.Display("cannot read file: " + path + "\n");
-        //    return 0;
-        //}
         public int GetLastDeploymentNumber(List<Deployment> liste)         // new version need test
         {
             if (liste is null) return 0;
