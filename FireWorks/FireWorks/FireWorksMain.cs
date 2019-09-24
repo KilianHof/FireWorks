@@ -34,6 +34,7 @@ namespace FireWorks
 
 
             bool loop = true;
+            _t.Display("type your PIN\n");
             string[] str = auth.LogIn();
             while (loop)
             {

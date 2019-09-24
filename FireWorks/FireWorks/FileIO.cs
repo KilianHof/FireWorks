@@ -36,6 +36,7 @@ namespace FireWorks
                 else
                 {
                     _t.Display("cannot read line \"0\" or negative.(file empty?)" + "\n");
+                    _t.Display("No lines indicates no stored users." + "\n");
                 }
                 return results.ToArray();
             }

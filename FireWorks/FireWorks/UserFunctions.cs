@@ -330,7 +330,9 @@ namespace FireWorks
                             }
                             break;
                         case 4:
-                            liste.Add((T)(object)new FireFighter("hi", "yo", 1));
+                            //liste.Add((T)(object)new FireFighter("hi", "yo", 1));
+                            FireFighter tmpF = new FireFighter("Firstname", "Lastname", 0);
+                            liste.Add((T)(object)Edit(tmpF));
                             break;
                     }
                     //SaveSingleListToFile<T>(liste, dataSet);
@@ -419,21 +421,20 @@ namespace FireWorks
         {
             string Answer;
             int Number;
-            if (t as FireTruck != null)
-                if (t.GetType() == typeof(FireFighter))
-                {
-                    _t.Display(" \".\"(dot) for no changes (0 in case of number)" + "\n");
-                    FireFighter tmp = (FireFighter)(object)t;
+            if (t.GetType() == typeof(FireFighter))
+            {
+                _t.Display(" \".\"(dot) for no changes (0 in case of number)" + "\n");
+                FireFighter tmp = (FireFighter)(object)t;
 
-                    Answer = EditHelperString("Lastname: " + tmp.LastName + "\n");
-                    if (Answer != "") tmp.LastName = Answer;
+                Answer = EditHelperString("Lastname: " + tmp.LastName + "\n");
+                if (Answer != "") tmp.LastName = Answer;
 
-                    Answer = EditHelperString("Firstname: " + tmp.FirstName + "\n");
-                    if (Answer != ".") tmp.FirstName = Answer;
+                Answer = EditHelperString("Firstname: " + tmp.FirstName + "\n");
+                if (Answer != ".") tmp.FirstName = Answer;
 
-                    Number = EditHelperInt("ID(number): " + tmp.Id + "\n");
-                    if (Number != 0) tmp.Id = Number;
-                }
+                Number = EditHelperInt("ID(number): " + tmp.Id + "\n");
+                if (Number != 0) tmp.Id = Number;
+            }
             if (t.GetType() == typeof(User))
             {
                 _t.Display(" \".\"(dot) for no changes (0 in case of number)" + "\n");
