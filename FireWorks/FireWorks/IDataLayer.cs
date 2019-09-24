@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace FireWorks
 {
@@ -13,6 +9,5 @@ namespace FireWorks
         void SaveListToFile<T>(List<T> liste, string path);
         void SaveAllLists(object[] lists);
         int GetLastDeploymentNumber(List<Deployment> liste);
-
     }
 }

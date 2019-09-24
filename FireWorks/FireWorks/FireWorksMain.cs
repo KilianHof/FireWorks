@@ -33,8 +33,6 @@ namespace FireWorks
 
 
 
-
-
             bool loop = true;
             string str = auth.LogIn();// add User?
             while (loop)
