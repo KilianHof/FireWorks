@@ -14,8 +14,7 @@ namespace FireWorks
     {
         private IUserLayer _t;
         private IDataLayer filer;
-        private string _path;
-        public Authenticator( IUserLayer tui,IDataLayer fil,string path) { _t = tui; filer = fil; _path = path; }
+        public Authenticator( IUserLayer tui,IDataLayer fil,string path) { _t = tui; filer = fil; }
         private const int _pinLength = 4;
 
         /// <summary>
@@ -52,16 +51,17 @@ namespace FireWorks
             string Input = _t.GetString();
             if (IsValidInput(Input))
             {
-                int lineCount = File.ReadLines(_path).Count();
-                for (int i = 1; i <= lineCount; i++)
                 {
-                    User tmp = JSONConverter.JSONToGeneric<User>(filer.ReadLine(_path, i));
-                    //tmp = JSONConverter.JSONToUser(filer.ReadLine(_path, i));
-                    if (tmp.GetType() == typeof(User))
+                    string[] users = filer.CheckUserStatus();
+                    foreach (var item in users)
                     {
-                        if (Input.GetHashCode().ToString() == tmp.PIN)
+                        User tmp = JSONConverter.JSONToGeneric<User>(item);
+                        if (tmp.GetType() == typeof(User))
                         {
-                            return tmp.Status;
+                            if (Input.GetHashCode().ToString() == tmp.PIN)
+                            {
+                                return tmp.Status;
+                            }
                         }
                     }
                 }

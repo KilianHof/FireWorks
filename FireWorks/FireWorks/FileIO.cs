@@ -18,23 +18,29 @@ namespace FireWorks
         /// <param name="o"> The object you want to write into a file.</param>
         /// <param name="path">The file that is being written to.</param>
         private IUserLayer _t;
-        public FileIO(IUserLayer tui) { _t = tui; }
+        private string[] _paths;
+        public FileIO(IUserLayer tui,string[] paths) { _t = tui; _paths = paths; }
 
-        public string ReadLine(string path, int line)
+        public string[] CheckUserStatus()
         {
-            if (File.Exists(path))
+            List<string> results = new List<string>();
+            string Path = _paths[1];
+            if (File.Exists(Path))
             {
-
-                if (line > 0)
+                int lineCount = File.ReadLines(Path).Count();
+                if (!(lineCount == 0))
+                    for (int i = 1; i <= lineCount; i++)
+                    {
+                       results.Add(File.ReadLines(Path).Skip(i - 1).Take(1).First());
+                    }
+                else
                 {
-                    return File.ReadLines(path).Skip(line - 1).Take(1).First();
+                    _t.Display("cannot read line \"0\" or negative.(file empty?)" + "\n");
                 }
-
-                _t.Display("cannot read line \"0\" or negative." + "\n");
-                return "";
+                return results.ToArray();
             }
-            _t.Display("cannot read file: " + path + "\n");
-            return "";
+            _t.Display("cannot read file: " + Path + "\n");
+            return results.ToArray();
         }
         public List<T> ReadAll<T>(string path)
         {
@@ -66,6 +72,14 @@ namespace FireWorks
         {
             if (liste is null) return 0;
             return liste.Count();
+        }
+        public void SaveAllLists(object[] lists)
+        {
+            SaveListToFile<Deployment>((List<Deployment>)lists[0], _paths[0]);
+            SaveListToFile<User>((List<User>)lists[1], _paths[1]);
+            SaveListToFile<Vehicle>((List<Vehicle>)lists[2], _paths[2]);
+            SaveListToFile<Resources>((List<Resources>)lists[3], _paths[3]);
+            SaveListToFile<FireFighter>((List<FireFighter>)lists[4], _paths[4]);
         }
     }
 }

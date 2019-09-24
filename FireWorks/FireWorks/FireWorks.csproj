@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FireWorksMain.cs" />
     <Compile Include="Human.cs" />
     <Compile Include="FileIO.cs" />
     <Compile Include="IDataLayer.cs" />
