@@ -289,8 +289,7 @@ namespace FireWorks
                     switch (dataSet)
                     {
                         case 1:
-                            User tmpU = new User("Firstname", "Lastname", 0, "USER", "15947562");
-                            liste.Add((T)(object)Edit(tmpU));
+                            liste.Add((T)(object)Edit(new User("Firstname", "Lastname", 0, "USER", "15947562")));
                             break;
                         case 2:
                             _t.Display("What kind of Vehicle?" + "\n" +
@@ -330,9 +329,7 @@ namespace FireWorks
                             }
                             break;
                         case 4:
-                            //liste.Add((T)(object)new FireFighter("hi", "yo", 1));
-                            FireFighter tmpF = new FireFighter("Firstname", "Lastname", 0);
-                            liste.Add((T)(object)Edit(tmpF));
+                            liste.Add((T)(object)Edit(new FireFighter("Firstname", "Lastname", 0)));
                             break;
                     }
                     //SaveSingleListToFile<T>(liste, dataSet);
