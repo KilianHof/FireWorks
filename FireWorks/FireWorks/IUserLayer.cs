@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FireWorks
 {
-    interface IUserLayer
+    public interface IUserLayer
     {
         void Display(string str);
         string GetString();

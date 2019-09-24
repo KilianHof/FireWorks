@@ -14,5 +14,7 @@ namespace FireWorks
         //object ReadObject<T>(string path,int line);
         void SaveListToFile<T>(List<T> liste, string path);
 
+        int GetLastDeploymentNumber(List<Deployment> liste);
+
     }
 }

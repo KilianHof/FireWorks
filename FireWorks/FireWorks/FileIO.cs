@@ -10,7 +10,7 @@ namespace FireWorks
     /// <summary>
     /// Wrapper for writing to a file.
     /// </summary>
-    class FileIO : IDataLayer
+    public class FileIO : IDataLayer
     {
         /// <summary>
         /// Writing an object as JSON to a file. If it doesnt exist its being created and then written to.

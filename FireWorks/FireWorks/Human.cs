@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FireWorks
 {
-    class Human
+    public class Human
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -26,7 +26,7 @@ namespace FireWorks
             return FirstName + " " + LastName + " " + Id;
         }
     }
-    class FireFighter : Human
+    public class FireFighter : Human
     {
         public FireFighter(string fname, string lname, int id)
         {
@@ -36,7 +36,7 @@ namespace FireWorks
         }
 
     }
-    class User : Human
+    public class User : Human
     {
         public enum UserStates
         {

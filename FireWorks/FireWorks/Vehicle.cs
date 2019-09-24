@@ -21,6 +21,28 @@ namespace FireWorks
         {
             return Type + " " + EnginePower + " " + Seats;
         }
+        public override bool Equals(Object obj)
+        {
+            //Check for null and compare run-time types.
+            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+                Vehicle p = (Vehicle)obj;
+                return (Type == p.Type) && (EnginePower == p.EnginePower) && (Seats == p.Seats);
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 877455370;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Type);
+            hashCode = hashCode * -1521134295 + EnginePower.GetHashCode();
+            hashCode = hashCode * -1521134295 + Seats.GetHashCode();
+            return hashCode;
+        }
     }
     public class ToolCarrier : Vehicle
     {

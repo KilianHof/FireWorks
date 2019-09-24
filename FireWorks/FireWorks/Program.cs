@@ -26,16 +26,20 @@ namespace FireWorks
             //Console.WriteLine("0000".GetHashCode());
 
 
-            
 
             Authenticator auth = new Authenticator(_t, _filer, _paths[1]);
+
+
             List<Deployment> Deploys = _filer.ReadAll<Deployment>(_paths[0]);
             List<User> Employs = _filer.ReadAll<User>(_paths[1]);
             List<Vehicle> Vehicles = _filer.ReadAll<Vehicle>(_paths[2]);
+           // Vehicles.Add(new Pkw("TYPE", 0, 0));
             List<Resources> Resources = _filer.ReadAll<Resources>(_paths[3]);
             List<FireFighter> FireFighters = _filer.ReadAll<FireFighter>(_paths[4]);
             object[] lists = { Deploys, Employs, Vehicles, Resources, FireFighters };
-            UserFunctions uf = new UserFunctions(_t, _filer, lists);
+
+
+            UserFunctions uf = new UserFunctions(_t, _filer, lists, _paths);
             //UserFunctions uf = new UserFunctions(_t, _filer, _paths);
             bool loop = true;
             string str = auth.LogIn();
