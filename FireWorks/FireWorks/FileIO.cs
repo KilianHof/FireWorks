@@ -11,7 +11,8 @@ namespace FireWorks
     /// Wrapper for writing to a file.
     /// </summary>
     public class FileIO : IDataLayer
-    {public enum DataSets
+    {
+        public enum DataSets
         {
             Deployments = 0,
             Employees = 1,
@@ -33,10 +34,7 @@ namespace FireWorks
             bool[] pathsExist = new bool[] { true, true, true, true, true };
             for (int i = 0; i < _paths.Length; i++)
             {
-                if (!(File.Exists(_paths[i])))
-                {
-                    pathsExist[i] = false;
-                }
+                if (!(File.Exists(_paths[i]))) { pathsExist[i] = false; }
             }
             return pathsExist;
         }
@@ -102,42 +100,25 @@ namespace FireWorks
         public void SaveListToFile<T>(List<T> liste)
         {
             if (liste.Count == 0) { return; }
+
+            int path = -1;
+            if (IsSubclassOfRawGeneric(typeof(T), typeof(Vehicle))) { path = 0; }
+            if (IsSubclassOfRawGeneric(typeof(T), typeof(Vehicle))) { path = 1; }
+            if (IsSubclassOfRawGeneric(typeof(T), typeof(Vehicle))) { path = 2; }
+            if (IsSubclassOfRawGeneric(typeof(T), typeof(Vehicle))) { path = 3; }
+            if (IsSubclassOfRawGeneric(typeof(T), typeof(Vehicle))) { path = 4; }
+            if (path == -1) { return; }
+            if (!File.Exists(_paths[path])) { _t.Display("cannot read file: " + _paths[path] + "\n"); return; }
+
+            string[] str = new string[liste.Count];
+            int i = 0;
+            foreach (var item in liste)
             {
-                int path = 1;
-                _t.Display(IsSubclassOfRawGeneric(typeof(T), typeof(Vehicle)).ToString());
-                switch (liste.ElementAt(0).GetType().ToString())
-                {
-                    case "FireWorks.Deployment":
-                        _t.Display("d");
-                        path = 0;
-                        break;
-                    case "FireWorks.User":
-                        _t.Display("u");
-                        path = 1;
-                        break;
-                    case "FireWorks.Vehicle":
-                        _t.Display("v");
-                        path = 2;
-                        break;
-                    case "FireWorks.Resources":
-                        _t.Display("r");
-                        path = 3;
-                        break;
-                    case "FireWorks.FireFighter":
-                        _t.Display("f");
-                        path = 4;
-                        break;
-                }
-                if (!File.Exists(_paths[path])) { _t.Display("cannot read file: " + _paths[path] + "\n"); return; }
-                string[] str = new string[liste.Count];
-                int i = 0;
-                foreach (var item in liste)
-                {
-                    str[i] += JSONConverter.ObjectToJSON(item);
-                    i++;
-                }
-                File.WriteAllLines(_paths[path], str);
+                str[i] += JSONConverter.ObjectToJSON(item);
+                i++;
             }
+            File.WriteAllLines(_paths[path], str);
+
         }
         public int GetLastDeploymentNumber(List<Deployment> liste)         // new version need test
         {
@@ -157,10 +138,7 @@ namespace FireWorks
             while (toCheck != null && toCheck != typeof(object))
             {
                 var cur = toCheck.IsGenericType ? toCheck.GetGenericTypeDefinition() : toCheck;
-                if (generic == cur)
-                {
-                    return true;
-                }
+                if (generic == cur) { return true; }
                 toCheck = toCheck.BaseType;
             }
             return false;
