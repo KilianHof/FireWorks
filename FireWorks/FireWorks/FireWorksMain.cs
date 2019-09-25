@@ -19,7 +19,7 @@ namespace FireWorks
         {
 
             TUI _t = new TUI();
-            FileIO _filer = new FileIO(_t);
+            FileIO _filer = new FileIO(_t,_paths);
             bool[] PathsExist = _filer.CheckForFiles();
             bool isFine = true;
             foreach (var item in PathsExist)

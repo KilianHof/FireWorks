@@ -12,12 +12,7 @@ namespace FireWorks
     /// </summary>
     public class FileIO : IDataLayer
     {
-        const string _pathEmployee = @"C:\FireWorks\Employee.txt";
-        const string _pathDeployment = @"C:\FireWorks\Deployments.txt";
-        const string _pathVehicle = @"C:\FireWorks\Vehicles.txt";
-        const string _pathResource = @"C:\FireWorks\Resources.txt";
-        const string _pathFireFighter = @"C:\FireWorks\FireFighter.txt";
-        public static string[] _paths = new string[] { _pathDeployment, _pathEmployee, _pathVehicle, _pathResource, _pathFireFighter };
+        public static string[] _paths;
 
         private const int Deployments = 0;
         private const int Employees = 1;
@@ -30,7 +25,7 @@ namespace FireWorks
         /// <param name="o"> The object you want to write into a file.</param>
         /// <param name="path">The file that is being written to.</param>
         private readonly IUserLayer _t;
-        public FileIO(IUserLayer tui) { _t = tui; }
+        public FileIO(IUserLayer tui, string[] paths) { _t = tui;_paths = paths; }
 
         public bool[] CheckForFiles()
         {
