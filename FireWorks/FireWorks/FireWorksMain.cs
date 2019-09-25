@@ -45,7 +45,6 @@ namespace FireWorks
             //_uf.AdminMode("-e");
 
             bool loop = true;
-            _t.Display("type your PIN\n");
             string[] user = auth.LogIn();
             while (loop)
             {

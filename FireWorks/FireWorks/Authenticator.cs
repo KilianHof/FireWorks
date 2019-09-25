@@ -17,6 +17,7 @@ namespace FireWorks
 
         public string[] LogIn()
         {
+            _t.Display("Type your PIN:\n");
             string[] result = CheckPIN();
             if (!(result[0] == "error") && !(result[1] == "error"))
             {
