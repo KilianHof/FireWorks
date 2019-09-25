@@ -126,11 +126,9 @@ namespace FireWorks
                         _t.Display("How many deployments do you wish to view?(" + GetListDeployments().Count() + ") \n");
                         howMany = ValidInputRange(_t.GetInt(), 1, GetListDeployments().Count());
 
-
-
-                            List<Deployment> deploys = GetListDeployments();
-                            if (UserChoice == 1)
-                            {
+                        List<Deployment> deploys = GetListDeployments();
+                        if (UserChoice == 1)
+                        {
                             List<FireFighter> firefighters = GetListFireFighter();
                             FireFighter tmp;
                             _t.Display("Select for which Firefighter you wish to search:\n");
@@ -156,15 +154,15 @@ namespace FireWorks
                             if (!(counter == 0))
                             {
                                 _t.Display("To go into detail type corresponding number.\n");
-                            UserChoice = ValidInputRange(_t.GetInt(), 1, counter);
-                            _t.Display(GetListDeployments().ElementAt(UserChoice - 1).ToString() + "\n");
+                                UserChoice = ValidInputRange(_t.GetInt(), 1, counter);
+                                _t.Display(GetListDeployments().ElementAt(UserChoice - 1).ToString() + "\n");
                             }
                             else
                             {
                                 _t.Display("Couldnt find any Deployments with your selection.\n");
                             }
                         }
-                        if(UserChoice == 2)
+                        if (UserChoice == 2)
                         {
                             List<Vehicle> vehicles = GetListVehicles();
                             Vehicle tmp;
@@ -205,7 +203,6 @@ namespace FireWorks
                 case "-g":
 
                     List<Deployment> liste = GetListDeployments();
-
 
                     _t.Display("Where was the Deployment?\n");
                     string loc = _t.GetString();
@@ -252,7 +249,7 @@ namespace FireWorks
             int count = list.Count();
             for (int i = 0; i < count; i++)
             {
-                _t.Display("(" + (i + 1) + ")"+ list.ElementAt(i)+"\n");
+                _t.Display("(" + (i + 1) + ")" + list.ElementAt(i) + "\n");
             }
             _t.Display("To select type corresponding number." + "\n");
             return ValidInputRange(_t.GetInt(), 1, count);
@@ -332,7 +329,6 @@ namespace FireWorks
                             liste.Add((T)(object)Edit(new FireFighter("Firstname", "Lastname", 0)));
                             break;
                     }
-                    //SaveSingleListToFile<T>(liste, dataSet);
                     break;
                 case 3:
                     _t.Display("Edit." + "\n");
@@ -342,9 +338,7 @@ namespace FireWorks
                     tmp = liste.ElementAt(index);
                     liste.RemoveAt(index);
                     liste.Add(Edit(tmp));
-                    //SaveSingleListToFile<T>(liste, dataSet);
                     break;
-                //User tmp = (User)_filer.ReadObject<User>(_path[dataSet], Valid(_t.GetInt(), 1, c - 1));
 
                 case 4:
                     _t.Display("Delete." + "\n");
@@ -352,7 +346,6 @@ namespace FireWorks
                     index = ValidInputRange(_t.GetInt(), 1, liste.Count());
                     index--;
                     liste.RemoveAt(index);
-                    //SaveSingleListToFile<T>(liste, dataSet);
                     break;
             }
         }

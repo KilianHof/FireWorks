@@ -14,12 +14,28 @@ namespace FireWorks
     class FireWorksMain
     {
         private string[] _paths;
-        public FireWorksMain(string[] paths) {_paths = paths; }
-        public void Run() 
+        public FireWorksMain(string[] paths) { _paths = paths; }
+        public void Run()
         {
 
             TUI _t = new TUI();
             FileIO _filer = new FileIO(_t, _paths);
+            bool[] PathsExist = _filer.CheckForFiles();
+            bool isFine = true;
+            foreach (var item in PathsExist)
+            {
+                if (!item)
+                    isFine = false;
+            }
+            if (!isFine)
+            {
+                _t.Display("Seems like some files dont exist. Do you wish to initialize missing files?(Admin PIN=0000)");
+                if (_t.GetBool())
+                {
+                    _filer.Init(PathsExist);
+                }
+            }
+
             Authenticator auth = new Authenticator(_t, _filer, _paths[1]);
             List<Deployment> Deploys = _filer.ReadAll<Deployment>(_paths[0]);
             List<User> Employs = _filer.ReadAll<User>(_paths[1]);

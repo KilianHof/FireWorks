@@ -28,7 +28,15 @@ namespace FireWorks
 
         public static T JSONToGeneric<T>(string str)
         {
-            return JsonConvert.DeserializeObject<T>(str);
+            try
+            {
+                return JsonConvert.DeserializeObject<T>(str);
+            }
+            catch (JsonReaderException e)
+            {
+                Console.WriteLine($"The file containing users seems to be corrupted:\n '{e}'");
+            }
+            return (T)(object) null;
         }
     }
 }

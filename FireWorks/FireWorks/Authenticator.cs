@@ -49,7 +49,7 @@ namespace FireWorks
                         User tmp = JSONConverter.JSONToGeneric<User>(item);
                         if (tmp.GetType() == typeof(User))
                         {
-                            if (Input.GetHashCode().ToString() == tmp.PIN)
+                            if (Input.GetHashCode().ToString().Equals(tmp.PIN))
                             {
                                 return new string[2] { tmp.Status, tmp.FirstName };
                             }

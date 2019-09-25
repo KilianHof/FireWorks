@@ -19,7 +19,42 @@ namespace FireWorks
         /// <param name="path">The file that is being written to.</param>
         private IUserLayer _t;
         private string[] _paths;
-        public FileIO(IUserLayer tui,string[] paths) { _t = tui; _paths = paths; }
+        public FileIO(IUserLayer tui, string[] paths) { _t = tui; _paths = paths; }
+
+        public bool[] CheckForFiles()
+        {
+            bool[] pathsExist = new bool[] { true, true, true, true, true };
+            for (int i = 0; i < _paths.Length; i++)
+            {
+                if (!(File.Exists(_paths[i])))
+                {
+                    pathsExist[i] = false;
+                }
+            }
+            return pathsExist;
+        }
+        public void Init(bool[] existing)
+        {
+            for (int i = 0; i < _paths.Length; i++)
+            {
+                if (!existing[i])
+                {
+                    Byte[] info;
+                    using (FileStream fs = File.Create(_paths[i]))
+                    {
+                        if (i == 1)
+                        {
+                            string PIN = "0000";
+                            info = new UTF8Encoding(true).GetBytes(@"{""PIN"":""" + PIN.GetHashCode().ToString() + @""",""Status"":""ADMIN"",""Id"":1,""FirstName"":""FirstName"",""LastName"":""LastName""}");
+                        }
+                        else
+                            info = new UTF8Encoding(true).GetBytes("");
+                        fs.Write(info, 0, info.Length);
+                    }
+                }
+            }
+        }
+
 
         public string[] GetListOfUsers()
         {
@@ -31,7 +66,7 @@ namespace FireWorks
                 if (!(lineCount == 0))
                     for (int i = 1; i <= lineCount; i++)
                     {
-                       results.Add(File.ReadLines(Path).Skip(i - 1).Take(1).First());
+                        results.Add(File.ReadLines(Path).Skip(i - 1).Take(1).First());
                     }
                 else
                 {
@@ -57,7 +92,7 @@ namespace FireWorks
             _t.Display("cannot read file: " + path + "\n");
             return tmp;
         }
-        public void SaveListToFile<T>(List<T> liste,string path)
+        public void SaveListToFile<T>(List<T> liste, string path)
         {
             if (!File.Exists(path)) { _t.Display("cannot read file: " + path + "\n"); return; }
             string[] str = new string[liste.Count];
