@@ -2,12 +2,12 @@
 
 namespace FireWorks
 {
-    interface IDataLayer
+    public interface IDataLayer
     {
         string[] GetListOfUsers();
-        List<T> ReadAll<T>(string path);
+        List<T> ReadFile<T>();
         void SaveListToFile<T>(List<T> liste);
         void SaveAllLists(object[] lists);
-        int GetLastDeploymentNumber(List<Deployment> liste);
+        int GetLastDeploymentNumber();
     }
 }

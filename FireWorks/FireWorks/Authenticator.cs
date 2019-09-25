@@ -68,15 +68,15 @@ namespace FireWorks
         /// Checks for Length = _pinLength.
         /// And if the string only contains digits.
         /// </summary>
-        /// <param name="Input"></param>
+        /// <param name="toCheck"></param>
         /// <returns>Returns true for a Valid format.</returns>
-        public bool IsValidInput(string Input)
+        public bool IsValidInput(string toCheck)
         {
-            if (!(Input.Length == _pinLength))
+            if (!(toCheck.Length == _pinLength))
                 return false;
-            for (int i = 0; i < Input.Length; i++)
+            for (int i = 0; i < toCheck.Length; i++)
             {
-                if (!char.IsDigit(Input[i]))
+                if (!char.IsDigit(toCheck[i]))
                     return false;
             }
             return true;

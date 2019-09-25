@@ -19,7 +19,7 @@ namespace FireWorks
         {
 
             TUI _t = new TUI();
-            FileIO _filer = new FileIO(_t, _paths);
+            FileIO _filer = new FileIO(_t);
             bool[] PathsExist = _filer.CheckForFiles();
             bool isFine = true;
             foreach (var item in PathsExist)
@@ -37,15 +37,10 @@ namespace FireWorks
             }
 
             Authenticator auth = new Authenticator(_t, _filer);
-            List<Deployment> Deploys = _filer.ReadAll<Deployment>(_paths[0]);
-            List<User> Employs = _filer.ReadAll<User>(_paths[1]);
-            List<Vehicle> Vehicles = _filer.ReadAll<Vehicle>(_paths[2]);
-            List<Resources> Resources = _filer.ReadAll<Resources>(_paths[3]);
-            List<FireFighter> FireFighters = _filer.ReadAll<FireFighter>(_paths[4]);
-            object[] lists = { Deploys, Employs, Vehicles, Resources, FireFighters };
+            object[] lists = _filer.ReadAllFiles();
 
 
-            UserFunctions _uf = new UserFunctions(_t, _filer, lists, _paths);
+            UserFunctions _uf = new UserFunctions(_t, _filer, lists);
 
             //_uf.AdminMode("-e");
 

@@ -23,14 +23,13 @@ namespace FireWorks
         private readonly IUserLayer _t;
         private readonly IDataLayer _filer;
 
-        private readonly string[] _path;  // Deploy Employ Vehicles Res FF
         private List<Deployment> AllDeployments;
         private List<User> AllEmployees;
         private List<Vehicle> AllVehicles;
         private List<Resources> AllResources;
         private List<FireFighter> AllFireFighter;
 
-        public UserFunctions(IUserLayer t, IDataLayer filer, object[] lists, string[] paths) { _t = t; _filer = filer; _path = paths; Init(lists); }
+        public UserFunctions(IUserLayer t, IDataLayer filer, object[] lists) { _t = t; _filer = filer;  Init(lists); }
 
         public void Init(object[] lists)
         {
@@ -230,9 +229,7 @@ namespace FireWorks
                     FireFighter[] p = new FireFighter[number];
                     Resources[] r = new Resources[number];
 
-
                     List<Deployment> liste = GetListDeployments();
-
 
                     _t.Display("Where was the Deployment?\n");
                     string loc = _t.GetString();
@@ -288,7 +285,7 @@ namespace FireWorks
                     string com = _t.GetString();
 
                     DeploymentFactory DF = new DeploymentFactory();
-                    Deployment test = DF.NewDeployment(loc, v, r, p, com, _filer.GetLastDeploymentNumber(liste));
+                    Deployment test = DF.NewDeployment(loc, v, r, p, com, _filer.GetLastDeploymentNumber());
                     liste.Add(test);
                     _filer.SaveListToFile<Deployment>(AllDeployments);
                     break;

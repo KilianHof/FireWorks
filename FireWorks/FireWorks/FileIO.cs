@@ -12,22 +12,25 @@ namespace FireWorks
     /// </summary>
     public class FileIO : IDataLayer
     {
-        public enum DataSets
-        {
-            Deployments = 0,
-            Employees = 1,
-            Vehicles = 2,
-            Resources = 3,
-            Firefighters = 4,
-        }
+        const string _pathEmployee = @"C:\FireWorks\Employee.txt";
+        const string _pathDeployment = @"C:\FireWorks\Deployments.txt";
+        const string _pathVehicle = @"C:\FireWorks\Vehicles.txt";
+        const string _pathResource = @"C:\FireWorks\Resources.txt";
+        const string _pathFireFighter = @"C:\FireWorks\FireFighter.txt";
+        public static string[] _paths = new string[] { _pathDeployment, _pathEmployee, _pathVehicle, _pathResource, _pathFireFighter };
+
+        private const int Deployments = 0;
+        private const int Employees = 1;
+        private const int Vehicles = 2;
+        private const int Resources = 3;
+        private const int Firefighters = 4;
         /// <summary>
         /// Writing an object as JSON to a file. If it doesnt exist its being created and then written to.
         /// </summary>
         /// <param name="o"> The object you want to write into a file.</param>
         /// <param name="path">The file that is being written to.</param>
         private readonly IUserLayer _t;
-        private readonly string[] _paths;
-        public FileIO(IUserLayer tui, string[] paths) { _t = tui; _paths = paths; }
+        public FileIO(IUserLayer tui) { _t = tui; }
 
         public bool[] CheckForFiles()
         {
@@ -59,12 +62,10 @@ namespace FireWorks
                 }
             }
         }
-
-
         public string[] GetListOfUsers()
         {
             List<string> results = new List<string>();
-            string Path = _paths[1];
+            string Path = _paths[Employees];
             if (File.Exists(Path))
             {
                 int lineCount = File.ReadLines(Path).Count();
@@ -83,30 +84,37 @@ namespace FireWorks
             _t.Display("cannot read file: " + Path + "\n");
             return results.ToArray();
         }
-        public List<T> ReadAll<T>(string path)
+        public List<T> ReadFile<T>()
         {
+            int path = Pathfinder<T>();
             List<T> tmp = new List<T>();
-            if (File.Exists(path))
+            if (File.Exists(_paths[path]))
             {
-                foreach (string line in File.ReadLines(path))
+                foreach (string line in File.ReadLines(_paths[path]))
                 {
                     tmp.Add(JSONConverter.JSONToGeneric<T>(line));
                 }
                 return tmp;
             }
-            _t.Display("cannot read file: " + path + "\n");
+            _t.Display("cannot read file: " + _paths[path] + "\n");
             return tmp;
+        }
+
+        public object[] ReadAllFiles()
+        {
+            List<Deployment> Deploys = ReadFile<Deployment>();
+            List<User> Employs = ReadFile<User>();
+            List<Vehicle> Vehicles = ReadFile<Vehicle>();
+            List<Resources> Resources = ReadFile<Resources>();
+            List<FireFighter> FireFighters = ReadFile<FireFighter>();
+            return new object[] { Deploys, Employs, Vehicles, Resources, FireFighters };
+
         }
         public void SaveListToFile<T>(List<T> liste)
         {
             if (liste.Count == 0) { return; }
 
-            int path = -1;
-            if (IsSubclassOfRawGeneric(typeof(T), typeof(Vehicle))) { path = 0; }
-            if (IsSubclassOfRawGeneric(typeof(T), typeof(Vehicle))) { path = 1; }
-            if (IsSubclassOfRawGeneric(typeof(T), typeof(Vehicle))) { path = 2; }
-            if (IsSubclassOfRawGeneric(typeof(T), typeof(Vehicle))) { path = 3; }
-            if (IsSubclassOfRawGeneric(typeof(T), typeof(Vehicle))) { path = 4; }
+            int path = Pathfinder<T>();
             if (path == -1) { return; }
             if (!File.Exists(_paths[path])) { _t.Display("cannot read file: " + _paths[path] + "\n"); return; }
 
@@ -120,18 +128,19 @@ namespace FireWorks
             File.WriteAllLines(_paths[path], str);
 
         }
-        public int GetLastDeploymentNumber(List<Deployment> liste)         // new version need test
+        public int GetLastDeploymentNumber()         // new version need test
         {
+            List<Deployment> liste = ReadFile<Deployment>();
             if (liste is null) return 0;
             return liste.Count();
         }
         public void SaveAllLists(object[] lists)
         {
-            SaveListToFile<Deployment>((List<Deployment>)lists[0]); //warum kann ich das vereinfachen?
-            SaveListToFile<User>((List<User>)lists[1]);
-            SaveListToFile<Vehicle>((List<Vehicle>)lists[2]);
-            SaveListToFile<Resources>((List<Resources>)lists[3]);
-            SaveListToFile<FireFighter>((List<FireFighter>)lists[4]);
+            SaveListToFile<Deployment>((List<Deployment>)lists[Deployments]); //warum kann ich das vereinfachen?
+            SaveListToFile<User>((List<User>)lists[Employees]);
+            SaveListToFile<Vehicle>((List<Vehicle>)lists[Vehicles]);
+            SaveListToFile<Resources>((List<Resources>)lists[Resources]);
+            SaveListToFile<FireFighter>((List<FireFighter>)lists[Firefighters]);
         }
         static bool IsSubclassOfRawGeneric(Type generic, Type toCheck)
         {
@@ -142,6 +151,16 @@ namespace FireWorks
                 toCheck = toCheck.BaseType;
             }
             return false;
+        }
+        public int Pathfinder<T>()
+        {
+            int path = -1;
+            if (IsSubclassOfRawGeneric(typeof(T), typeof(Deployment))) { path = Deployments; }
+            if (IsSubclassOfRawGeneric(typeof(T), typeof(User))) { path = Employees; }
+            if (IsSubclassOfRawGeneric(typeof(T), typeof(Vehicle))) { path = Vehicles; }
+            if (IsSubclassOfRawGeneric(typeof(T), typeof(Resources))) { path = Resources; }
+            if (IsSubclassOfRawGeneric(typeof(T), typeof(FireFighter))) { path = Firefighters; }
+            return path;
         }
     }
 }
