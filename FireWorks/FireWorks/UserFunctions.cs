@@ -53,6 +53,7 @@ namespace FireWorks
                     UserMode(_t.GetString());
                     break;
                 case "LOCKED":
+                    _t.Display("Your user is locked contact your local admin");
                     System.Environment.Exit(1);
                     break;
             }
@@ -96,26 +97,32 @@ namespace FireWorks
             switch (sel)
             {
                 case "-v":
-                    _t.Display("Viewing Deployments:\n" +
+                    int DeployCount = GetListDeployments().Count();
+                    _t.Display("Viewing Deployments(" + DeployCount + "):\n" +
                                "(1)List last X Deployments.\n" +
                                "(2)List by X.\n");
+                    if (DeployCount == 0)
+                    {
+                        _t.Display("The deployment file seems to be empty.\nBefore you view deployments you should create one!\n");
+                        return;
+                    }
                     int UserChoice = ValidInputRange(_t.GetInt(), 1, 2);
                     int howMany;
                     if (UserChoice == 1)
                     {
-                        _t.Display("How many deployments do you wish to view?(" + GetListDeployments().Count() + ") \n");
-                        howMany = ValidInputRange(_t.GetInt(), 1, GetListDeployments().Count());
+                        _t.Display("How many deployments do you wish to view?(" + DeployCount + ") \n");
+                        howMany = ValidInputRange(_t.GetInt(), 1, DeployCount);
                         _t.Display("Last " + howMany + " Deployments: \n");
                         string toDisplay = "";
 
                         for (int i = 0; i < howMany; i++)
                         {
-                            toDisplay += "(" + (i + 1) + ") At: " + GetListDeployments().ElementAt(i).Location + " Time: " + GetListDeployments().ElementAt(i).DateAndTime + "\n";
+                            toDisplay += "(" + (i + 1) + ") At: " + GetListDeployments().ElementAt((DeployCount-1)-i).Location + " Time: " + GetListDeployments().ElementAt((DeployCount - 1) - i).DateAndTime + "\n";
                         }
                         _t.Display(toDisplay);
                         _t.Display("To go into detail type corresponding number.\n");
-                        howMany = ValidInputRange(_t.GetInt(), 1, GetListDeployments().Count());
-                        _t.Display(GetListDeployments().ElementAt(howMany - 1).ToString() + "\n");
+                        howMany = ValidInputRange(_t.GetInt(), 1, DeployCount);
+                        _t.Display(GetListDeployments().ElementAt((DeployCount-1)-(howMany - 1)).ToString() + "\n");
                     }
                     else
                     {
@@ -123,10 +130,16 @@ namespace FireWorks
                         "(1)List by Firefighter.\n" +
                         "(2)List by Vehicle.\n");
                         UserChoice = ValidInputRange(_t.GetInt(), 1, 2);
-                        _t.Display("How many deployments do you wish to view?(" + GetListDeployments().Count() + ") \n");
-                        howMany = ValidInputRange(_t.GetInt(), 1, GetListDeployments().Count());
+                        _t.Display("How many deployments do you wish to view?(" + DeployCount + ") \n");
+                        howMany = ValidInputRange(_t.GetInt(), 1, DeployCount);
 
                         List<Deployment> deploys = GetListDeployments();
+                        if (UserChoice == 1 && GetListFireFighter().Count == 0)
+                        {
+                            _t.Display("Seems like you dont have any Firefighters in your basedata!\n");
+                            return;
+                        }
+
                         if (UserChoice == 1)
                         {
                             List<FireFighter> firefighters = GetListFireFighter();
@@ -161,6 +174,11 @@ namespace FireWorks
                             {
                                 _t.Display("Couldnt find any Deployments with your selection.\n");
                             }
+                        }
+                        if (UserChoice == 2 && GetListVehicles().Count == 0)
+                        {
+                            _t.Display("Seems like you dont have any Vehicles in your basedata!\n");
+                            return;
                         }
                         if (UserChoice == 2)
                         {
@@ -201,36 +219,66 @@ namespace FireWorks
 
                     break;
                 case "-g":
+                    int number = 0;
+
+                    Vehicle[] v = new Vehicle[number];
+                    FireFighter[] p = new FireFighter[number];
+                    Resources[] r = new Resources[number];
+
 
                     List<Deployment> liste = GetListDeployments();
+
 
                     _t.Display("Where was the Deployment?\n");
                     string loc = _t.GetString();
                     _t.Display("How many Vehicles participated in the Deployment?\n");
                     List<Vehicle> cars = GetListVehicles();
-                    int number = ValidInputRange(_t.GetInt(), 0, 999);
-                    Vehicle[] v = new Vehicle[number];
-                    for (int i = 0; i < number; i++)
+                    if (cars.Count == 0)
                     {
-                        v[i] = cars.ElementAt(ObjectSelection(cars) - 1);
+                        _t.Display("It appears as if you have no vehicles in your basedata\n" +
+                            "You might wish to ask your local admin to create some for you.\n");
+                    }
+                    else
+                    {
+                        number = ValidInputRange(_t.GetInt(), 0, GetListVehicles().Count);
+                        v = new Vehicle[number];
+                        for (int i = 0; i < number; i++)
+                        {
+                            v[i] = cars.ElementAt(ObjectSelection(cars) - 1);
+                        }
                     }
                     _t.Display("How much staff participated in the Deployment?\n");
                     List<FireFighter> staff = GetListFireFighter();
-                    number = ValidInputRange(_t.GetInt(), 0, 999);
-                    FireFighter[] p = new FireFighter[number];
-                    for (int i = 0; i < number; i++)
+                    if (staff.Count == 0)
                     {
-                        p[i] = staff.ElementAt(ObjectSelection(staff) - 1);
+                        _t.Display("It appears as if you have no staff in your basedata\n" +
+                            "You might wish to ask your local admin to create some for you.\n\n");
+                    }
+                    else
+                    {
+                        number = ValidInputRange(_t.GetInt(), 0, GetListFireFighter().Count);
+                        p = new FireFighter[number];
+                        for (int i = 0; i < number; i++)
+                        {
+                            p[i] = staff.ElementAt(ObjectSelection(staff) - 1);
+                        }
                     }
                     _t.Display("How many resources were used in the Deployment?\n");
                     List<Resources> res = GetListResources();
-                    number = ValidInputRange(_t.GetInt(), 0, 999);
-                    Resources[] r = new Resources[number];
-                    for (int i = 0; i < number; i++)
+                    if (res.Count == 0)
                     {
-                        r[i] = res.ElementAt(ObjectSelection(res) - 1);
+                        _t.Display("It appears as if you have no resources in your basedata\n" +
+                            "You might wish to ask your local admin to create some for you.\n\n");
                     }
-
+                    else
+                    {
+                        number = ValidInputRange(_t.GetInt(), 0, GetListResources().Count);
+                        r = new Resources[number];
+                        for (int i = 0; i < number; i++)
+                        {
+                            r[i] = res.ElementAt(ObjectSelection(res) - 1);
+                        }
+                    }
                     _t.Display("Any comments?\n");
                     string com = _t.GetString();
 
@@ -247,6 +295,10 @@ namespace FireWorks
         public int ObjectSelection<T>(List<T> list) // warum brauche ich <T> nicht im funktions aufruf?
         {
             int count = list.Count();
+            if (count == 0)
+            {
+                return 0;
+            }
             for (int i = 0; i < count; i++)
             {
                 _t.Display("(" + (i + 1) + ")" + list.ElementAt(i) + "\n");
