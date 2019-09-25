@@ -13,7 +13,7 @@ namespace FireWorks
 {
     class FireWorksMain
     {
-        private string[] _paths;
+        private readonly string[] _paths;
         public FireWorksMain(string[] paths) { _paths = paths; }
         public void Run()
         {
@@ -36,7 +36,7 @@ namespace FireWorks
                 }
             }
 
-            Authenticator auth = new Authenticator(_t, _filer, _paths[1]);
+            Authenticator auth = new Authenticator(_t, _filer);
             List<Deployment> Deploys = _filer.ReadAll<Deployment>(_paths[0]);
             List<User> Employs = _filer.ReadAll<User>(_paths[1]);
             List<Vehicle> Vehicles = _filer.ReadAll<Vehicle>(_paths[2]);
@@ -47,7 +47,7 @@ namespace FireWorks
 
             UserFunctions _uf = new UserFunctions(_t, _filer, lists, _paths);
 
-
+            //_uf.AdminMode("-e");
 
             bool loop = true;
             _t.Display("type your PIN\n");

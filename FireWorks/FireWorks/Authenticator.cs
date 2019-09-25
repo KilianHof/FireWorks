@@ -6,9 +6,9 @@ namespace FireWorks
     /// </summary>
     class Authenticator
     {
-        private IUserLayer _t;
-        private IDataLayer filer;
-        public Authenticator(IUserLayer tui, IDataLayer fil, string path) { _t = tui; filer = fil; }
+        private readonly IUserLayer _t;
+        private readonly IDataLayer filer;
+        public Authenticator(IUserLayer tui, IDataLayer fil) { _t = tui; filer = fil; }
         private const int _pinLength = 4;
         /// <summary>
         /// Calls helper functions to ask for a PIN

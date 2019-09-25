@@ -11,14 +11,21 @@ namespace FireWorks
     /// Wrapper for writing to a file.
     /// </summary>
     public class FileIO : IDataLayer
-    {
+    {public enum DataSets
+        {
+            Deployments = 0,
+            Employees = 1,
+            Vehicles = 2,
+            Resources = 3,
+            Firefighters = 4,
+        }
         /// <summary>
         /// Writing an object as JSON to a file. If it doesnt exist its being created and then written to.
         /// </summary>
         /// <param name="o"> The object you want to write into a file.</param>
         /// <param name="path">The file that is being written to.</param>
-        private IUserLayer _t;
-        private string[] _paths;
+        private readonly IUserLayer _t;
+        private readonly string[] _paths;
         public FileIO(IUserLayer tui, string[] paths) { _t = tui; _paths = paths; }
 
         public bool[] CheckForFiles()
@@ -92,9 +99,9 @@ namespace FireWorks
             _t.Display("cannot read file: " + path + "\n");
             return tmp;
         }
-        public void SaveListToFile<T>(List<T> liste, string path)
+        public void SaveListToFile<T>(List<T> liste, int path)
         {
-            if (!File.Exists(path)) { _t.Display("cannot read file: " + path + "\n"); return; }
+            if (!File.Exists(_paths[path])) { _t.Display("cannot read file: " + _paths[path] + "\n"); return; }
             string[] str = new string[liste.Count];
             int i = 0;
             foreach (var item in liste)
@@ -102,7 +109,7 @@ namespace FireWorks
                 str[i] += JSONConverter.ObjectToJSON(item);
                 i++;
             }
-            File.WriteAllLines(path, str);
+            File.WriteAllLines(_paths[path], str);
         }
         public int GetLastDeploymentNumber(List<Deployment> liste)         // new version need test
         {
@@ -111,11 +118,11 @@ namespace FireWorks
         }
         public void SaveAllLists(object[] lists)
         {
-            SaveListToFile<Deployment>((List<Deployment>)lists[0], _paths[0]);
-            SaveListToFile<User>((List<User>)lists[1], _paths[1]);
-            SaveListToFile<Vehicle>((List<Vehicle>)lists[2], _paths[2]);
-            SaveListToFile<Resources>((List<Resources>)lists[3], _paths[3]);
-            SaveListToFile<FireFighter>((List<FireFighter>)lists[4], _paths[4]);
+            SaveListToFile<Deployment>((List<Deployment>)lists[0], 0); //warum kann ich das vereinfachen?
+            SaveListToFile<User>((List<User>)lists[1], 1);
+            SaveListToFile<Vehicle>((List<Vehicle>)lists[2], 2);
+            SaveListToFile<Resources>((List<Resources>)lists[3], 3);
+            SaveListToFile<FireFighter>((List<FireFighter>)lists[4], 4);
         }
     }
 }

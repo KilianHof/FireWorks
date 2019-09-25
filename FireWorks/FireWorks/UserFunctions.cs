@@ -9,16 +9,24 @@ namespace FireWorks
     class UserFunctions
 
     {
-        public enum UserStates
+        private enum UserStates
         {
             USER = 1,
             ADMIN = 2,
             LOCKED = 3
         }
-        private IUserLayer _t;
-        private IDataLayer _filer;
+        private enum DataSets
+        {
+            DEPLOYMENTS = 0,
+            Employees = 1,
+            Vehicles = 2,
+            Resources = 3,
+            Firefighters = 4,
+        }
+        private readonly IUserLayer _t;
+        private readonly IDataLayer _filer;
 
-        private string[] _path;  // Deploy Employ Vehicles Res FF
+        private readonly string[] _path;  // Deploy Employ Vehicles Res FF
         private List<Deployment> AllDeployments;
         private List<User> AllEmployees;
         private List<Vehicle> AllVehicles;
@@ -240,7 +248,7 @@ namespace FireWorks
                     }
                     else
                     {
-                        number = ValidInputRange(_t.GetInt(), 0, GetListVehicles().Count);
+                        number = ValidInputRange(_t.GetInt(), 0, cars.Count);
                         v = new Vehicle[number];
                         for (int i = 0; i < number; i++)
                         {
@@ -256,7 +264,7 @@ namespace FireWorks
                     }
                     else
                     {
-                        number = ValidInputRange(_t.GetInt(), 0, GetListFireFighter().Count);
+                        number = ValidInputRange(_t.GetInt(), 0, staff.Count);
                         p = new FireFighter[number];
                         for (int i = 0; i < number; i++)
                         {
@@ -272,7 +280,7 @@ namespace FireWorks
                     }
                     else
                     {
-                        number = ValidInputRange(_t.GetInt(), 0, GetListResources().Count);
+                        number = ValidInputRange(_t.GetInt(), 0, res.Count);
                         r = new Resources[number];
                         for (int i = 0; i < number; i++)
                         {
@@ -285,7 +293,7 @@ namespace FireWorks
                     DeploymentFactory DF = new DeploymentFactory();
                     Deployment test = DF.NewDeployment(loc, v, r, p, com, _filer.GetLastDeploymentNumber(liste));
                     liste.Add(test);
-                    _filer.SaveListToFile<Deployment>(AllDeployments, _path[0]);
+                    _filer.SaveListToFile<Deployment>(AllDeployments, ((UserStates)0));
                     break;
                 case "-q":
                     System.Environment.Exit(1);
