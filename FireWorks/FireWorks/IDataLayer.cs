@@ -6,7 +6,7 @@ namespace FireWorks
     {
         string[] GetListOfUsers();
         List<T> ReadAll<T>(string path);
-        void SaveListToFile<T>(List<T> liste, int path);
+        void SaveListToFile<T>(List<T> liste);
         void SaveAllLists(object[] lists);
         int GetLastDeploymentNumber(List<Deployment> liste);
     }

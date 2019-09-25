@@ -99,17 +99,45 @@ namespace FireWorks
             _t.Display("cannot read file: " + path + "\n");
             return tmp;
         }
-        public void SaveListToFile<T>(List<T> liste, int path)
+        public void SaveListToFile<T>(List<T> liste)
         {
-            if (!File.Exists(_paths[path])) { _t.Display("cannot read file: " + _paths[path] + "\n"); return; }
-            string[] str = new string[liste.Count];
-            int i = 0;
-            foreach (var item in liste)
+            if (liste.Count == 0) { return; }
             {
-                str[i] += JSONConverter.ObjectToJSON(item);
-                i++;
+                int path = 1;
+                _t.Display(IsSubclassOfRawGeneric(typeof(T), typeof(Vehicle)).ToString());
+                switch (liste.ElementAt(0).GetType().ToString())
+                {
+                    case "FireWorks.Deployment":
+                        _t.Display("d");
+                        path = 0;
+                        break;
+                    case "FireWorks.User":
+                        _t.Display("u");
+                        path = 1;
+                        break;
+                    case "FireWorks.Vehicle":
+                        _t.Display("v");
+                        path = 2;
+                        break;
+                    case "FireWorks.Resources":
+                        _t.Display("r");
+                        path = 3;
+                        break;
+                    case "FireWorks.FireFighter":
+                        _t.Display("f");
+                        path = 4;
+                        break;
+                }
+                if (!File.Exists(_paths[path])) { _t.Display("cannot read file: " + _paths[path] + "\n"); return; }
+                string[] str = new string[liste.Count];
+                int i = 0;
+                foreach (var item in liste)
+                {
+                    str[i] += JSONConverter.ObjectToJSON(item);
+                    i++;
+                }
+                File.WriteAllLines(_paths[path], str);
             }
-            File.WriteAllLines(_paths[path], str);
         }
         public int GetLastDeploymentNumber(List<Deployment> liste)         // new version need test
         {
@@ -118,11 +146,24 @@ namespace FireWorks
         }
         public void SaveAllLists(object[] lists)
         {
-            SaveListToFile<Deployment>((List<Deployment>)lists[0], 0); //warum kann ich das vereinfachen?
-            SaveListToFile<User>((List<User>)lists[1], 1);
-            SaveListToFile<Vehicle>((List<Vehicle>)lists[2], 2);
-            SaveListToFile<Resources>((List<Resources>)lists[3], 3);
-            SaveListToFile<FireFighter>((List<FireFighter>)lists[4], 4);
+            SaveListToFile<Deployment>((List<Deployment>)lists[0]); //warum kann ich das vereinfachen?
+            SaveListToFile<User>((List<User>)lists[1]);
+            SaveListToFile<Vehicle>((List<Vehicle>)lists[2]);
+            SaveListToFile<Resources>((List<Resources>)lists[3]);
+            SaveListToFile<FireFighter>((List<FireFighter>)lists[4]);
+        }
+        static bool IsSubclassOfRawGeneric(Type generic, Type toCheck)
+        {
+            while (toCheck != null && toCheck != typeof(object))
+            {
+                var cur = toCheck.IsGenericType ? toCheck.GetGenericTypeDefinition() : toCheck;
+                if (generic == cur)
+                {
+                    return true;
+                }
+                toCheck = toCheck.BaseType;
+            }
+            return false;
         }
     }
 }

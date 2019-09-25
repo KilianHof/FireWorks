@@ -290,7 +290,7 @@ namespace FireWorks
                     DeploymentFactory DF = new DeploymentFactory();
                     Deployment test = DF.NewDeployment(loc, v, r, p, com, _filer.GetLastDeploymentNumber(liste));
                     liste.Add(test);
-                    _filer.SaveListToFile<Deployment>(AllDeployments,DEPLOYMENTS);
+                    _filer.SaveListToFile<Deployment>(AllDeployments);
                     break;
                 case "-q":
                     System.Environment.Exit(1);

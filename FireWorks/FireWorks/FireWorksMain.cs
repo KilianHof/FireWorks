@@ -51,10 +51,10 @@ namespace FireWorks
 
             bool loop = true;
             _t.Display("type your PIN\n");
-            string[] str = auth.LogIn();
+            string[] user = auth.LogIn();
             while (loop)
             {
-                _uf.Routine(str[0]);
+                _uf.Routine(user[0]);
                 _filer.SaveAllLists(lists);
                 _t.Display("Continue?");
                 loop = _t.GetBool();
