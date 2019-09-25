@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,10 +14,26 @@ namespace FireWorks
 {
     class FireWorksMain
     {
-        private readonly string[] _paths;
-        public FireWorksMain(string[] paths) { _paths = paths; }
+        
+        public FireWorksMain() { }
         public void Run()
         {
+            string f = Directory.GetCurrentDirectory();
+            f += @"\Files";
+            if (!Directory.Exists(f))
+            {
+                Directory.CreateDirectory(f);
+            }
+
+
+            string[] _paths = new string[] {
+                f +@"\Deployments.txt",
+                f +@"\Employee.txt",
+                f +@"\Vehicles.txt",
+                f +@"\Resources.txt",
+                f +@"\FireFighters.txt",
+            };
+
 
             TUI _t = new TUI();
             FileIO _filer = new FileIO(_t,_paths);
