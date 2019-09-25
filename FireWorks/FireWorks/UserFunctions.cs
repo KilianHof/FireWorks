@@ -15,14 +15,11 @@ namespace FireWorks
             ADMIN = 2,
             LOCKED = 3
         }
-        private enum DataSets
-        {
-            DEPLOYMENTS = 0,
-            Employees = 1,
-            Vehicles = 2,
-            Resources = 3,
-            Firefighters = 4,
-        }
+        private const int DEPLOYMENTS = 0;
+        private const int EMPLOYEES = 1;
+        private const int VEHICLES = 2;
+        private const int RESOURCES = 3;
+        private const int FIREFIGHTERS = 4;
         private readonly IUserLayer _t;
         private readonly IDataLayer _filer;
 
@@ -37,11 +34,11 @@ namespace FireWorks
 
         public void Init(object[] lists)
         {
-            AllDeployments = (List<Deployment>)lists[0];
-            AllEmployees = (List<User>)lists[1];
-            AllVehicles = (List<Vehicle>)lists[2];
-            AllResources = (List<Resources>)lists[3];
-            AllFireFighter = (List<FireFighter>)lists[4];
+            AllDeployments = (List<Deployment>)lists[DEPLOYMENTS];
+            AllEmployees = (List<User>)lists[EMPLOYEES];
+            AllVehicles = (List<Vehicle>)lists[VEHICLES];
+            AllResources = (List<Resources>)lists[RESOURCES];
+            AllFireFighter = (List<FireFighter>)lists[FIREFIGHTERS];
         }
         public List<Deployment> GetListDeployments() { return AllDeployments; }
         public List<User> GetListEmployees() { return AllEmployees; }
@@ -293,7 +290,7 @@ namespace FireWorks
                     DeploymentFactory DF = new DeploymentFactory();
                     Deployment test = DF.NewDeployment(loc, v, r, p, com, _filer.GetLastDeploymentNumber(liste));
                     liste.Add(test);
-                    _filer.SaveListToFile<Deployment>(AllDeployments, ((UserStates)0));
+                    _filer.SaveListToFile<Deployment>(AllDeployments,DEPLOYMENTS);
                     break;
                 case "-q":
                     System.Environment.Exit(1);
@@ -638,8 +635,7 @@ namespace FireWorks
             _t.Display("Options:\n" +
                        "-v    View Deployments.\n" +
                        "-g    Generate Deployment.\n" +
-                       "-q    Quits\n"
-                       );
+                       "-q    Quits\n");
         }
     }
 }
