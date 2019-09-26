@@ -27,7 +27,7 @@ namespace FireWorks
         private readonly IUserLayer _t;
         public FileIO(IUserLayer tui) { _t = tui; }
 
-        public bool[] CheckForFiles()
+        public void CheckForFiles()
         {
             string f = Directory.GetCurrentDirectory();
             f += @"\Files";
@@ -48,25 +48,38 @@ namespace FireWorks
             {
                 if (!(File.Exists(_paths[i]))) { pathsExist[i] = false; }
             }
-            return pathsExist;
+            Init(pathsExist);
         }
         public void Init(bool[] existing)
         {
-            for (int i = 0; i < _paths.Length; i++)
+            bool isFine = true;
+            foreach (var item in existing)
             {
-                if (!existing[i])
+                if (!item)
+                    isFine = false;
+            }
+            if (!isFine)
+            {
+                _t.Display("Seems like some files dont exist. Do you wish to initialize missing files?(Admin PIN=0000)");
+                if (_t.GetBool())
                 {
-                    Byte[] info;
-                    using (FileStream fs = File.Create(_paths[i]))
+                    for (int i = 0; i < _paths.Length; i++)
                     {
-                        if (i == 1)
+                        if (!existing[i])
                         {
-                            string PIN = "0000";
-                            info = new UTF8Encoding(true).GetBytes(@"{""PIN"":""" + PIN.GetHashCode().ToString() + @""",""Status"":""ADMIN"",""Id"":1,""FirstName"":""FirstName"",""LastName"":""LastName""}");
+                            Byte[] info;
+                            using (FileStream fs = File.Create(_paths[i]))
+                            {
+                                if (i == 1)
+                                {
+                                    string PIN = "0000";
+                                    info = new UTF8Encoding(true).GetBytes(@"{""PIN"":""" + PIN.GetHashCode().ToString() + @""",""Status"":""ADMIN"",""Id"":1,""FirstName"":""FirstName"",""LastName"":""LastName""}");
+                                }
+                                else
+                                    info = new UTF8Encoding(true).GetBytes("");
+                                fs.Write(info, 0, info.Length);
+                            }
                         }
-                        else
-                            info = new UTF8Encoding(true).GetBytes("");
-                        fs.Write(info, 0, info.Length);
                     }
                 }
             }

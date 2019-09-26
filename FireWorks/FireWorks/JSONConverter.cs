@@ -34,7 +34,7 @@ namespace FireWorks
             }
             catch (JsonReaderException e)
             {
-                Console.WriteLine($"The file containing users seems to be corrupted:\n '{e}'");
+                Console.WriteLine($"The file you tried to read from seems to be corrupted:\n '{e}'");
             }
             return (T)(object) null;
         }

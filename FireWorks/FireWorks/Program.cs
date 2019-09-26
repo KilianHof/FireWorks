@@ -19,12 +19,6 @@ namespace FireWorks
 
         static void Main(string[] args)
         {
-            string f = Directory.GetCurrentDirectory();
-            f += @"\Files";
-            if (!Directory.Exists(f))
-            {
-                Directory.CreateDirectory(f);
-            }
             FireWorksMain program = new FireWorksMain();
             program.Run();
         }
