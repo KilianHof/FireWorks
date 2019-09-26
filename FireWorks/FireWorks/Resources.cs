@@ -58,4 +58,25 @@ namespace FireWorks
             HoseLength = len;
         }
     }
+    public class Gasanalyzer : Resources
+    {
+        public Gasanalyzer(string d, int inv) :
+               base(d, inv, "Gasanalyzer")
+        {
+        }
+    }
+    public class Distributer : Resources
+    {
+        public Distributer(string d, int inv) :
+               base(d, inv, "Distributer")
+        {
+        }
+    }
+    public class Jetnozzle : Resources
+    {
+        public Jetnozzle(string d, int inv) :
+               base(d, inv, "Jetnozzle")
+        {
+        }
+    }
 }
