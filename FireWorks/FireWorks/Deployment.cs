@@ -58,5 +58,29 @@ namespace FireWorks
             //if both "if's" arent true objects must be equal. No number is given twice.
             return 0;
         }
+        public string SumUpHoses()
+        {
+            int B = 0, C = 0, D = 0;
+            for (int i = 0; i < Resources.Length; i++)
+            {
+                if( this.Resources[i].GetType() == typeof(Hose))
+                {
+                    Hose tmp = (Hose)this.Resources[i];
+                    switch (tmp.Letter)
+                    {
+                        case 'B':
+                            B += tmp.HoseLength;
+                            break;
+                        case 'C':
+                            C += tmp.HoseLength;
+                            break;
+                        case 'D':
+                            D += tmp.HoseLength;
+                            break;
+                    }
+                }
+            }
+            return "B: "+B+" C: "+C+ " D: "+D;
+        }
     }
 }
