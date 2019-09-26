@@ -25,10 +25,24 @@ namespace FireWorks
         /// <param name="o"> The object you want to write into a file.</param>
         /// <param name="path">The file that is being written to.</param>
         private readonly IUserLayer _t;
-        public FileIO(IUserLayer tui, string[] paths) { _t = tui;_paths = paths; }
+        public FileIO(IUserLayer tui) { _t = tui; }
 
         public bool[] CheckForFiles()
         {
+            string f = Directory.GetCurrentDirectory();
+            f += @"\Files";
+            if (!Directory.Exists(f))
+            {
+                Directory.CreateDirectory(f);
+            }
+            string[] _path = new string[] {
+                f +@"\Deployments.txt",
+                f +@"\Employee.txt",
+                f +@"\Vehicles.txt",
+                f +@"\Resources.txt",
+                f +@"\FireFighters.txt",
+            };
+            _paths = _path;
             bool[] pathsExist = new bool[] { true, true, true, true, true };
             for (int i = 0; i < _paths.Length; i++)
             {

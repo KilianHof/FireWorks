@@ -18,40 +18,10 @@ namespace FireWorks
         public FireWorksMain() { }
         public void Run()
         {
-            string f = Directory.GetCurrentDirectory();
-            f += @"\Files";
-            if (!Directory.Exists(f))
-            {
-                Directory.CreateDirectory(f);
-            }
-
-
-            string[] _paths = new string[] {
-                f +@"\Deployments.txt",
-                f +@"\Employee.txt",
-                f +@"\Vehicles.txt",
-                f +@"\Resources.txt",
-                f +@"\FireFighters.txt",
-            };
-
-
             TUI _t = new TUI();
-            FileIO _filer = new FileIO(_t,_paths);
-            bool[] PathsExist = _filer.CheckForFiles();
-            bool isFine = true;
-            foreach (var item in PathsExist)
-            {
-                if (!item)
-                    isFine = false;
-            }
-            if (!isFine)
-            {
-                _t.Display("Seems like some files dont exist. Do you wish to initialize missing files?(Admin PIN=0000)");
-                if (_t.GetBool())
-                {
-                    _filer.Init(PathsExist);
-                }
-            }
+            FileIO _filer = new FileIO(_t);
+            _filer.CheckForFiles();
+            
 
             Authenticator auth = new Authenticator(_t, _filer);
             object[] lists = _filer.ReadAllFiles();
