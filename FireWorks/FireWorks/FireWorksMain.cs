@@ -84,7 +84,15 @@ namespace FireWorks
 
 
 
+            Hose hose1 = new Hose("Hose", 1, 'B', 10);
+            Hose hose2 = new Hose("Hose", 1, 'B', 5);
+            Hose hose3 = new Hose("Hose", 1, 'D', 10);
+            Hose hose4 = new Hose("Hose", 1, 'D', 20);
+            Hose hose5 = new Hose("Hose", 1, 'D', 5);
+            Hose hose6 = new Hose("Hose", 1, 'B', 10);
 
+            Deployment aaaaa = new Deployment("here", new Vehicle[0], new Resources[] {hose1,hose2, hose3, hose4, hose5, hose6 }, new FireFighter[0], "hi", _filer.GetLastDeploymentNumber());
+            Console.WriteLine(aaaaa.SumUpHoses());
 
 
 

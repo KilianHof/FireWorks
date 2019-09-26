@@ -15,7 +15,7 @@ namespace FireWorks
         public Human()
         {
         }
-        public Human(int id, string fname,string lname)
+        public Human(int id, string fname, string lname)
         {
             Id = id;
             FirstName = fname;
@@ -44,21 +44,28 @@ namespace FireWorks
             ADMIN = 2,
             LOCKED = 3
         }
-        public string PIN
+        public string PIN;
+
+        public string GetPIN()
         {
-            get { return PIN; }
-            set
+            return PIN;
+        }
+
+        public void SetPIN(string value)
+        {
+            if (!value.ToString().Equals("null"))
             {
                 if (value.Length == 4)
                     for (int i = 0; i < value.Length; i++)
                     {
                         if (!char.IsDigit(value[i]))
                             return;
-                            //throw excep?
+                        //throw excep?
                     }
-                PIN = value;
+                this.PIN = value;
             }
         }
+
         public string Status { get; set; }
 
         public User(string fname, string lname, int id, string status, string pin)
