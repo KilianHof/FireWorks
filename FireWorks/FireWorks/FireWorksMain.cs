@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using RBTREE;
 
 
 
@@ -17,7 +17,7 @@ namespace FireWorks
     {
         
         public FireWorksMain() { }
-        public const bool debug = false;
+        public const bool debug = true;
         public void Run()
         {
             TUI _t = new TUI();
@@ -27,34 +27,70 @@ namespace FireWorks
             object[] lists = _filer.ReadAllFiles();
             UserFunctions _uf = new UserFunctions(_t, _filer, lists);
 
-
-            if (debug)
+            int testsize = 10000000;
+            if (false)
             {
                 Stopwatch stopWatch = new Stopwatch();
                 stopWatch.Start();
                 Deployment test;
-                for (int i = 1; i < 1001; i++)
+                test = new Deployment("here", new Vehicle[0], new Resources[0], new FireFighter[0], "hi", _filer.GetLastDeploymentNumber());
+                List<Deployment> list = (List<Deployment>)lists[0];
+                for (int i = 1; i < testsize+1; i++)
                 {
-                    test = new Deployment("here", new Vehicle[0], new Resources[0], new FireFighter[0], "hi", _filer.GetLastDeploymentNumber());
-                    List<Deployment> testing = (List<Deployment>)lists[0];
-                    testing.Add(test);
-                    _filer.SaveListToFile(testing);
-                    if (i % 100 == 0)
-                        _t.Display((i / 10).ToString() + "%\n");
+                    list.Add(test);
+                    if (i % (testsize/10) == 0)
+                        _t.Display((i / (testsize/100)).ToString() + "%\n");
                 }
-                for (int i = 1; i < 1001; i++)
+                for (int i = 1; i < testsize+1; i++)
                 {
-                    List<Deployment> testing = (List<Deployment>)lists[0];
-                    testing.RemoveAt(_filer.GetLastDeploymentNumber() - 1);
-                    _filer.SaveListToFile(testing);
-                    if (i % 100 == 0)
-                        _t.Display((i / 10).ToString() + "%\n");
+                    list.Remove(test);
+                    if (i % (testsize/10) == 0)
+                        _t.Display((i / (testsize / 100)).ToString() + "%\n");
                 }
                 stopWatch.Stop();
                 // Get the elapsed time as a TimeSpan value.
                 TimeSpan ts = stopWatch.Elapsed;
                 _t.Display(ts.ToString() + "\n");
             }
+
+
+            if (debug)
+            {
+                LLRBTree<int, Deployment> tree = new LLRBTree<int, Deployment>();
+                Stopwatch stopWatch = new Stopwatch();
+                stopWatch.Start();
+                    Deployment test;
+                    test = new Deployment("here", new Vehicle[0], new Resources[0], new FireFighter[0], "hi", _filer.GetLastDeploymentNumber());
+                for (int i = 1; i < testsize+1; i++)
+                {
+                    tree.Insert(i, test);
+
+                    if (i % (testsize/10) == 0)
+                        _t.Display((i / (testsize/100)).ToString() + "%\n");
+                }
+    
+                for (int i = 1; i < testsize + 1; i++)
+                {
+                    tree.Delete(i);
+                    if (i % (testsize / 10) == 0)
+                        _t.Display((i / (testsize / 100)).ToString() + "%\n");
+                }
+                stopWatch.Stop();
+                // Get the elapsed time as a TimeSpan value.
+                TimeSpan ts = stopWatch.Elapsed;
+                _t.Display(ts.ToString() + "\n");
+            }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
