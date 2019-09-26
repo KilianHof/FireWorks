@@ -17,7 +17,7 @@ namespace FireWorks
     {
         
         public FireWorksMain() { }
-        public const bool debug = true;
+        public const bool debug = false;
         public void Run()
         {
             TUI _t = new TUI();
@@ -27,9 +27,9 @@ namespace FireWorks
             object[] lists = _filer.ReadAllFiles();
             UserFunctions _uf = new UserFunctions(_t, _filer, lists);
 
-            int testsize = 10000000;
-            if (false)
+            if (debug)
             {
+                int testsize = 10000000;
                 Stopwatch stopWatch = new Stopwatch();
                 stopWatch.Start();
                 Deployment test;
@@ -56,6 +56,7 @@ namespace FireWorks
 
             if (debug)
             {
+                int testsize = 10000000;
                 LLRBTree<int, Deployment> tree = new LLRBTree<int, Deployment>();
                 Stopwatch stopWatch = new Stopwatch();
                 stopWatch.Start();
@@ -80,12 +81,6 @@ namespace FireWorks
                 TimeSpan ts = stopWatch.Elapsed;
                 _t.Display(ts.ToString() + "\n");
             }
-
-
-
-
-
-
 
 
 

@@ -44,7 +44,21 @@ namespace FireWorks
             ADMIN = 2,
             LOCKED = 3
         }
-        public string PIN { get; set; }
+        public string PIN
+        {
+            get { return PIN; }
+            set
+            {
+                if (value.Length == 4)
+                    for (int i = 0; i < value.Length; i++)
+                    {
+                        if (!char.IsDigit(value[i]))
+                            return;
+                            //throw excep?
+                    }
+                PIN = value;
+            }
+        }
         public string Status { get; set; }
 
         public User(string fname, string lname, int id, string status, string pin)
