@@ -222,7 +222,7 @@ namespace FireWorks
                     }
 
                     break;
-                case "-g":
+                case "-d":
                     int number = 0;
 
                     Vehicle[] v = new Vehicle[number];
@@ -288,6 +288,11 @@ namespace FireWorks
                     Deployment test = DF.NewDeployment(loc, v, r, p, com, _filer.GetLastDeploymentNumber());
                     liste.Add(test);
                     _filer.SaveListToFile<Deployment>(AllDeployments);
+                    break;
+                case "-g":
+
+                    //to be implemented
+                    System.Environment.Exit(1);
                     break;
                 case "-q":
                     System.Environment.Exit(1);
@@ -367,14 +372,26 @@ namespace FireWorks
                         case 3:
                             _t.Display("What kind of Resource?" + "\n" +
                                       "(1) Hose" + "\n" +
-                                      "(2) Other Items" + "\n");
-                            switch (ValidInputRange(_t.GetInt(), 1, 2))
+                                      "(2) Gasanalyzer" + "\n" +
+                                      "(3) Jetnozzle" + "\n" +
+                                      "(4) Distributer" + "\n" +
+                                      "(5) Other Items" + "\n");
+                            switch (ValidInputRange(_t.GetInt(), 1, 5))
                             {
 
                                 case 1:
                                     liste.Add((T)(object)Edit(new Hose("Hose", 0, ' ', 5)));
                                     break;
                                 case 2:
+                                    liste.Add((T)(object)Edit(new Gasanalyzer("Gasanalyzer", 0)));
+                                    break;
+                                case 3:
+                                    liste.Add((T)(object)Edit(new Jetnozzle("Jetnozzle", 0)));
+                                    break;
+                                case 4:
+                                    liste.Add((T)(object)Edit(new Distributer("Hose", 0)));
+                                    break;
+                                case 5:
                                     liste.Add((T)(object)Edit(new Resources("Description", 1, "Name")));
                                     break;
                             }
@@ -619,6 +636,39 @@ namespace FireWorks
                 if (Answer.Length == 1) letter = Answer.ToCharArray().ElementAt(0);
                 if (letter == 'B' || letter == 'C' || letter == 'D') tmp.Letter = letter;
             }
+            if (t.GetType() == typeof(Gasanalyzer))
+            {
+                _t.Display(" \".\"(dot) for no changes (0 in case of number)" + "\n");
+                Gasanalyzer tmp = (Gasanalyzer)(object)t;
+
+                Answer = EditHelperString("Description: " + tmp.Description + "\n");
+                if (Answer != ".") tmp.Description = Answer;
+
+                Number = EditHelperInt("Inventory Number: " + tmp.InventoryNumber + "\n");
+                if (Number != 0) tmp.InventoryNumber = Number;
+            }
+            if (t.GetType() == typeof(Jetnozzle))
+            {
+                _t.Display(" \".\"(dot) for no changes (0 in case of number)" + "\n");
+                Jetnozzle tmp = (Jetnozzle)(object)t;
+
+                Answer = EditHelperString("Description: " + tmp.Description + "\n");
+                if (Answer != ".") tmp.Description = Answer;
+
+                Number = EditHelperInt("Inventory Number: " + tmp.InventoryNumber + "\n");
+                if (Number != 0) tmp.InventoryNumber = Number;
+            }
+            if (t.GetType() == typeof(Distributer))
+            {
+                _t.Display(" \".\"(dot) for no changes (0 in case of number)" + "\n");
+                Distributer tmp = (Distributer)(object)t;
+
+                Answer = EditHelperString("Description: " + tmp.Description + "\n");
+                if (Answer != ".") tmp.Description = Answer;
+
+                Number = EditHelperInt("Inventory Number: " + tmp.InventoryNumber + "\n");
+                if (Number != 0) tmp.InventoryNumber = Number;
+            }
             return t;
         }
         public void ShowAdminOptions()
@@ -631,7 +681,8 @@ namespace FireWorks
         {
             _t.Display("Options:\n" +
                        "-v    View Deployments.\n" +
-                       "-g    Generate Deployment.\n" +
+                       "-d    Generate Deployment.\n" +
+                       "-g    Set Gasanalyzer examination.\n" +
                        "-q    Quits\n");
         }
     }

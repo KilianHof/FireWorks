@@ -60,6 +60,7 @@ namespace FireWorks
     }
     public class Gasanalyzer : Resources
     {
+        public string ExaminationDate;
         public Gasanalyzer(string d, int inv) :
                base(d, inv, "Gasanalyzer")
         {
