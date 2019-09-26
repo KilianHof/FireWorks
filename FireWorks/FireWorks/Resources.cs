@@ -26,8 +26,24 @@ namespace FireWorks
     }
     public class Hose : Resources
     {
-        public char Letter { get; set; }
-        public int HoseLength { get; set; }
+        public char Letter {
+            get {return Letter; }
+            set
+            {
+                if (value == 'B' || value == 'C' || value == 'D')
+                    Letter = value;
+                //else throw excep?
+            }
+        }
+        public int HoseLength {
+            get { return HoseLength; }
+            set
+            {
+                if (value == 5 || value == 10 || value == 20 || value == 30)
+                    HoseLength = value;
+                //else throw excep?
+            }
+        }
         public Hose(string d, int inv, char l, int len) :
             base(d, inv, "Hose")
         {
