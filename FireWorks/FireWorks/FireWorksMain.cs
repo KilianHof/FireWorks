@@ -17,7 +17,6 @@ namespace FireWorks
     {
         
         public FireWorksMain() { }
-        public const bool debug = false;
         public void Run()
         {
             TUI _t = new TUI();
@@ -27,7 +26,7 @@ namespace FireWorks
             object[] lists = _filer.ReadAllFiles();
             UserFunctions _uf = new UserFunctions(_t, _filer, lists);
 
-            if (debug)
+            if (Globals.debug)
             {
                 int testsize = 10000000;
                 Stopwatch stopWatch = new Stopwatch();
@@ -54,7 +53,7 @@ namespace FireWorks
             }
 
 
-            if (debug)
+            if (Globals.debug)
             {
                 int testsize = 10000000;
                 LLRBTree<int, Deployment> tree = new LLRBTree<int, Deployment>();
@@ -107,5 +106,9 @@ namespace FireWorks
                 loop = _t.GetBool();
             }
         }
+    }
+    public static class Globals
+    {
+        public const bool debug = false;
     }
 }
