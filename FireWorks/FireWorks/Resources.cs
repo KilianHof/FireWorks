@@ -60,10 +60,24 @@ namespace FireWorks
     }
     public class Gasanalyzer : Resources
     {
-        public string ExaminationDate;
+        public DateTime LastExaminationDate;
         public Gasanalyzer(string d, int inv) :
                base(d, inv, "Gasanalyzer")
         {
+            LastExaminationDate = DateTime.Now;
+        }
+        public bool GasTimerCheck()
+        {
+            DateTime CurrentDate = DateTime.Now;
+            TimeSpan diff = CurrentDate.Subtract(LastExaminationDate);
+            diff = diff.Duration();
+            double days = diff.TotalDays;
+            if (days > 30)
+            {
+                LastExaminationDate = CurrentDate;
+                return true;
+            }
+            return false;
         }
     }
     public class Distributer : Resources

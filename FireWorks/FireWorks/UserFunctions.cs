@@ -290,11 +290,10 @@ namespace FireWorks
                     Deployment test = DF.NewDeployment(loc, v, r, p, com, _filer.GetLastDeploymentNumber());
                     liste.Add(test);
                     _filer.SaveListToFile<Deployment>(AllDeployments);
+                    GasExaminationCheck();
                     break;
                 case "-g":
-
-                    //to be implemented
-                    System.Environment.Exit(1);
+                    GasExaminationCheck();
                     break;
                 case "-w":
 
@@ -320,6 +319,28 @@ namespace FireWorks
                 case "-q":
                     System.Environment.Exit(1);
                     break;
+            }
+        }
+        public void GasExaminationCheck()
+        {
+            bool clear = true;
+            List<Resources> list = GetListResources();
+            foreach (var item in list)
+            {
+                if (item.GetType() == typeof(Gasanalyzer))
+                {
+                    Gasanalyzer tmp = (Gasanalyzer)item;
+                    if (tmp.GasTimerCheck())
+                    {
+                        clear = false;
+                        _t.Display("A gasanalyzer needs to be examined!\n" +
+                            "Inventorynumber= " + tmp.InventoryNumber + "\n");
+                    }
+                }
+            }
+            if (clear)
+            {
+                _t.Display("All good, all examinations up to date.\n");
             }
         }
         public int ObjectSelection<T>(List<T> list) // warum brauche ich <T> nicht im funktions aufruf?

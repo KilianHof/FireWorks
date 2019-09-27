@@ -108,17 +108,43 @@ namespace FireWorks
         }
         public List<T> ReadFile<T>()
         {
+
             int path = Pathfinder<T>();
-            List<T> tmp = new List<T>();
+
+            List<object> tmp = new List<object>();
+            List<T> test = new List<T>();
+            object trial;
             if (File.Exists(_paths[path]))
             {
+                bool needCast = false;
                 foreach (string line in File.ReadLines(_paths[path]))
                 {
-                    tmp.Add(JSONConverter.JSONToGeneric<T>(line));
+                    trial = JSONConverter.JSONToGeneric<T>(line);
+                    if (trial.GetType() == typeof(Resources))
+                    {
+                        Resources toTest = (Resources)trial;
+                        if (toTest.Name == "Gasanalyzer")
+                        {
+                            tmp.Add(JSONConverter.JSONToGeneric<Gasanalyzer>(line));
+                        }
+                        needCast = true;
+                    }
+                    test.Add(JSONConverter.JSONToGeneric<T>(line));
+
                 }
-                return tmp;
+                if (needCast) { return ConvertList<T>(tmp); }
+                else { return test; }
             }
             _t.Display("cannot read file: " + _paths[path] + "\n");
+            return test;
+        }
+        public List<T> ConvertList<T>(List<object> value)
+        {
+            List<T> tmp = new List<T>();
+            for (int i = 0; i < value.Count(); i++)
+            {
+                tmp.Add((T)value.ElementAt(i));
+            }
             return tmp;
         }
 
