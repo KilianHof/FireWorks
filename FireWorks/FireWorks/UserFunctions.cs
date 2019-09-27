@@ -98,10 +98,12 @@ namespace FireWorks
         }
         public void UserMode(string sel)
         {
+            string toDisplay = "";
+            int DeployCount;
             switch (sel)
             {
                 case "-v":
-                    int DeployCount = GetListDeployments().Count();
+                    DeployCount = GetListDeployments().Count();
                     _t.Display("Viewing Deployments(" + DeployCount + "):\n" +
                                "(1)List last X Deployments.\n" +
                                "(2)List by X.\n");
@@ -117,7 +119,7 @@ namespace FireWorks
                         _t.Display("How many deployments do you wish to view?(" + DeployCount + ") \n");
                         howMany = ValidInputRange(_t.GetInt(), 1, DeployCount);
                         _t.Display("Last " + howMany + " Deployments: \n");
-                        string toDisplay = "";
+                        toDisplay = "";
 
                         for (int i = 0; i < howMany; i++)
                         {
@@ -238,7 +240,7 @@ namespace FireWorks
                     if (cars.Count == 0)
                     {
                         _t.Display("It appears as if you have no vehicles in your basedata\n" +
-                            "You might wish to ask your local admin to create some for you.\n");
+                            "You might wish to ask your local admin to create some for you.\n\n");
                     }
                     else
                     {
@@ -293,6 +295,27 @@ namespace FireWorks
 
                     //to be implemented
                     System.Environment.Exit(1);
+                    break;
+                case "-w":
+
+                    DeployCount = GetListDeployments().Count();
+                    if (DeployCount == 0)
+                    {
+                        _t.Display("The deployment file seems to be empty.\nBefore you view deployments you should create one!\n");
+                        return;
+                    }
+                    _t.Display("How many deployments do you wish to view?(" + DeployCount + ") \n");
+                    howMany = ValidInputRange(_t.GetInt(), 1, DeployCount);
+                    _t.Display("Last " + howMany + " Deployments: \n");
+                    toDisplay = "";
+
+                    for (int i = 0; i < howMany; i++)
+                    {
+                        toDisplay += "(" + (i + 1) + ") At: " + GetListDeployments().ElementAt((DeployCount - 1) - i).Location + " Time: " + GetListDeployments().ElementAt((DeployCount - 1) - i).DateAndTime + "\n";
+                    }
+                    _t.Display(toDisplay);
+                    howMany = ValidInputRange(_t.GetInt(), 1, DeployCount);
+                    _t.Display(GetListDeployments().ElementAt((DeployCount - 1) - (howMany - 1)).GenerateWebReport() + "\n");
                     break;
                 case "-q":
                     System.Environment.Exit(1);
@@ -683,6 +706,7 @@ namespace FireWorks
                        "-v    View Deployments.\n" +
                        "-d    Generate Deployment.\n" +
                        "-g    Set Gasanalyzer examination.\n" +
+                       "-w    Generate Deploymentreport .\n" +
                        "-q    Quits\n");
         }
     }

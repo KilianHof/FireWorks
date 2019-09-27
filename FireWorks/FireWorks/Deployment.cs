@@ -63,7 +63,7 @@ namespace FireWorks
             int B = 0, C = 0, D = 0;
             for (int i = 0; i < Resources.Length; i++)
             {
-                if( this.Resources[i].GetType() == typeof(Hose))
+                if (this.Resources[i].GetType() == typeof(Hose))
                 {
                     Hose tmp = (Hose)this.Resources[i];
                     switch (tmp.Letter)
@@ -80,7 +80,46 @@ namespace FireWorks
                     }
                 }
             }
-            return "B: "+B+" C: "+C+ " D: "+D;
+            return "B: " + B + " C: " + C + " D: " + D;
+        }
+        public string GenerateWebReport()
+        {
+            string report = "\n\n";
+            report += "Heute am "+DateAndTime+" gab es in "+Location+" einen Einsatz.\n";
+            int numberOfFireFighters = FireFighters.Length;
+            report += "An diesem Einsatz waren " + numberOfFireFighters + " Einsatzkräfte beteiligt.\n";
+            if (numberOfFireFighters != 0)
+            {
+                report += "Folgende Personen haben geholfen:\n";
+                foreach (var item in FireFighters)
+                {
+                    report += "    "+item.FirstName + " " + item.LastName + "\n";
+                }
+            }
+            int numberOfVehicles = Cars.Length;
+            report += "Desweiteren wurden " + numberOfVehicles + " Einsatzfahrzeuge benötigt.\n";
+            if (numberOfVehicles != 0)
+            {
+                report += "Genutzte Fahrzeuge:\n";
+                foreach (var item in Cars)
+                {
+                    report += "    " + item.Type + "\n";
+                }
+            }
+            int numberOfResources = Resources.Length;
+            report += "Desweiteren wurden " + numberOfResources + " Einsatzfahrzeuge benötigt.\n";
+            if (numberOfResources != 0)
+            {
+                report += "Genutzte Ressourcen:\n";
+                foreach (var item in Resources)
+                {
+                    report += "    " + item.Name+" "+ item.Description+ "\n";
+                }
+            }
+            report +="Der Einsatzleiter gab diesen Kommentar zum Einsatz:\n";
+            report += Comment + "\n";
+            report += "Wir danken dem Team der Circlon Werksfeuerwehr für ihre Leistung und den " +Number+ ". Abgeschlossenen Einsatz.\n\n";
+            return report;
         }
     }
 }
