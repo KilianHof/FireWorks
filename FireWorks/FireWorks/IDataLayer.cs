@@ -8,6 +8,5 @@ namespace FireWorks
         List<T> ReadFile<T>();
         void SaveListToFile<T>(List<T> liste);
         void SaveAllLists(object[] lists);
-        int GetLastDeploymentNumber();
     }
 }
