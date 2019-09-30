@@ -98,7 +98,7 @@ namespace FireWorks
         }
         public void UserMode(string sel)
         {
-            string toDisplay = "";
+            string toDisplay;
             int DeployCount;
             switch (sel)
             {

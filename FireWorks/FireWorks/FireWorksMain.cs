@@ -28,7 +28,7 @@ namespace FireWorks
 
             if (Globals.debug)
             {
-                int testsize = 10000000;
+                int testsize = 100000;
                 Stopwatch stopWatch = new Stopwatch();
                 stopWatch.Start();
                 Deployment test;

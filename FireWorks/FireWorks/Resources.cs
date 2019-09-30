@@ -96,7 +96,7 @@ namespace FireWorks
     }
     public class Distributer : Resources
     {
-        public new const string Identifier = "Distributer";
+        public new string Identifier = "Distributer";
         public Distributer(string d, int inv) :
                base(d, inv, "Distributer")
         {
@@ -104,7 +104,7 @@ namespace FireWorks
     }
     public class Jetnozzle : Resources
     {
-        public new const string Identifier = "Jetnozzle";
+        public new string Identifier = "Jetnozzle";
         public Jetnozzle(string d, int inv) :
                base(d, inv, "Jetnozzle")
         {

@@ -197,14 +197,13 @@ namespace FireWorks
                         Resources toTest = (Resources)trial;
                         if (toTest.GetIdentifier() == "Hose")
                         {
-                            tmp.Add(JSONConverter.JSONToGeneric<Gasanalyzer>(line));
+                            tmp.Add(JSONConverter.JSONToGeneric<Hose>(line));
                         }
                         if (toTest.GetIdentifier() == "Jetnozzle")
                         {
                             tmp.Add(JSONConverter.JSONToGeneric<Jetnozzle>(line));
                         }
                         if (toTest.GetIdentifier() == "Distributer")
-
                         {
                             tmp.Add(JSONConverter.JSONToGeneric<Distributer>(line));
                         }
@@ -285,7 +284,7 @@ namespace FireWorks
         public int GetLastDeploymentNumber()         // new version need test
         {
             List<Deployment> liste = ReadFile<Deployment>();
-            if (liste is null) return 0;
+            if (liste is null) return 1;
             return liste.Count();
         }
         public void SaveAllLists(object[] lists)
