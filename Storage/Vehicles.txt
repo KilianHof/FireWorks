@@ -1,1 +1,0 @@
-{"ID":1,"Type":"Tank","HP":340,"Seats":1}

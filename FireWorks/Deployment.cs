@@ -49,7 +49,7 @@ namespace FireWorks
             Console.Write("Deployment ID:");
             String IDenter = Console.ReadLine();
             IDenter = "\"Number\":" + IDenter + "}"; //Absicherung
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Deployments.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/Storage/Deployments.txt"))
                 while (Deploytext.IndexOf(IDenter) == -1)   //zählt sucht nach dem ersten Einsatz mit der ID
                 {
 
@@ -128,7 +128,7 @@ namespace FireWorks
         {
             String Gasmeters = "";
             int i = 0;
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Gasmeters.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/Storage/Gasmeters.txt"))
 
                 while (Gasmeters != null)
                 {
@@ -139,7 +139,7 @@ namespace FireWorks
             int iMax = i - 1;
             i -= 1;
             Gasmeter[] Gasmeterlist = new Gasmeter[i];
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Gasmeters.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/Storage/Gasmeters.txt"))
                 while (i > 0)
                 {
 
@@ -161,7 +161,7 @@ namespace FireWorks
             int.TryParse(Console.ReadLine(), out int number);
             number += 1;
             String SDeployments = "";
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Deployments.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/Storage/Deployments.txt"))
 
                 while (SDeployments != null)
                 {
@@ -175,7 +175,7 @@ namespace FireWorks
             Deployment[] Deployments = new Deployment[i];
             i = 0;
             SDeployments = "";
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Deployments.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/Storage/Deployments.txt"))
 
                 while (SDeployments != null)
                 {
@@ -233,7 +233,7 @@ namespace FireWorks
             int i = 0;
 
             String SDeployments = "";
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Deployments.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/Storage/Deployments.txt"))
 
 
                 while (SDeployments != null)
@@ -247,7 +247,7 @@ namespace FireWorks
             Deployment[] Deployments = new Deployment[i];
             i = 0;
             SDeployments = "";
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Deployments.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/Storage/Deployments.txt"))
 
                 while (SDeployments != null)
                 {
@@ -320,7 +320,7 @@ namespace FireWorks
             int i = 0;
 
             String SDeployments = "";
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Deployments.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/Storage/Deployments.txt"))
 
                 while (SDeployments != null)
                 {
@@ -335,7 +335,7 @@ namespace FireWorks
             Deployment[] Deployments = new Deployment[i];
             SDeployments = "";
             i = 0;
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Deployments.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/Storage/Deployments.txt"))
                 while (SDeployments != null)
                 {
                     SDeployments = UserText.ReadLine();
@@ -391,7 +391,7 @@ namespace FireWorks
             Deployment NewDeployment = new Deployment();
             int i = 0;
             String readtext = "yeet";
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/FireWorks/Storage/Deployments.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/Storage/Deployments.txt"))
 
                 while (readtext != null)
                 {
@@ -578,7 +578,7 @@ namespace FireWorks
             Console.WriteLine("Enter any comments you might have for the deployment:");
             NewDeployment.Comment = Console.ReadLine();
 
-            ObjectWriter.WriteObject(NewDeployment, StoragePathClass.StoragePath+"/FireWorks/Storage/Deployments.txt");
+            ObjectWriter.WriteObject(NewDeployment, StoragePathClass.StoragePath+"/Storage/Deployments.txt");
         }
     }
 }

@@ -1,11 +1,12 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.IO;
 
 namespace FireWorks
 {
     public static class StoragePathClass
     {
-        public static string StoragePath = "C:/Users/khof/source/repos";
+        public static string StoragePath = "";
     }
     class MainFireWorks
     {
@@ -14,10 +15,10 @@ namespace FireWorks
         public static void Main(string[] args)
 #pragma warning restore IDE0060 // Nicht verwendete Parameter entfernen
         {
+            
 
-
-            Console.WriteLine("Enter the path to your /FireWorks/Storage directory");
-            StoragePathClass.StoragePath = Console.ReadLine();
+            Console.WriteLine("Enter the path to your /Storage directory");
+            StoragePathClass.StoragePath = Directory.GetCurrentDirectory();
 
             Human CurrentUser;
             var SCurrentUser = Authenticator.LogIn();   //checkt den PIN
