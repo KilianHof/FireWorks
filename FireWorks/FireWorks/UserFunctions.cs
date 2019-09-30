@@ -21,7 +21,6 @@ namespace FireWorks
         private const int RESOURCES = 3;
         private const int FIREFIGHTERS = 4;
         private readonly IUserLayer _t;
-        private readonly IDataLayer _filer;
 
         private List<Deployment> AllDeployments;
         private List<User> AllEmployees;
@@ -29,7 +28,7 @@ namespace FireWorks
         private List<Resources> AllResources;
         private List<FireFighter> AllFireFighter;
 
-        public UserFunctions(IUserLayer t, IDataLayer filer, object[] lists) { _t = t; _filer = filer;  Init(lists); }
+        public UserFunctions(IUserLayer t, object[] lists) { _t = t; Init(lists); }
 
         public void Init(object[] lists)
         {
@@ -96,7 +95,6 @@ namespace FireWorks
                     UserMode(_t.GetString());
                     break;
                 case "-q":
-                    System.Environment.Exit(1);
                     break;
             }
         }
@@ -293,7 +291,6 @@ namespace FireWorks
                     DeploymentFactory DF = new DeploymentFactory();
                     Deployment test = DF.NewDeployment(loc, v, r, p, com, AllDeployments.Count()+1);
                     liste.Add(test);
-                    _filer.SaveListToFile<Deployment>(AllDeployments);
                     GasExaminationCheck();
                     break;
                 case "-g":

@@ -44,8 +44,6 @@ namespace FireWorks
                 Letter = value;
         }
         public int HoseLength;
-
-
         public int GetHoseLength()
         {
             return HoseLength;

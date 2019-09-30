@@ -24,7 +24,7 @@ namespace FireWorks
             _filer.CheckForFiles();
             Authenticator auth = new Authenticator(_t, _filer);
             object[] lists = _filer.ReadAllFiles();
-            UserFunctions _uf = new UserFunctions(_t, _filer, lists);
+            UserFunctions _uf = new UserFunctions(_t, lists);
 
             if (Globals.debug)
             {
@@ -88,10 +88,10 @@ namespace FireWorks
             while (loop)
             {
                 _uf.Routine(user[0]);
-                _filer.SaveAllLists(lists);
                 _t.Display("Continue?");
                 loop = _t.GetBool();
             }
+            _filer.SaveAllLists(lists);
         }
     }
     public static class Globals
