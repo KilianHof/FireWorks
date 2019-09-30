@@ -26,6 +26,8 @@ namespace FireWorks
             object[] lists = _filer.ReadAllFiles();
             UserFunctions _uf = new UserFunctions(_t, _filer, lists);
 
+                
+            Console.WriteLine(((List<Vehicle>) lists[2]).Count);
             if (Globals.debug)
             {
                 int testsize = 10000000;

@@ -11,7 +11,7 @@ namespace FireWorks
         public string Description { get; set; }
         public int InventoryNumber { get; set; }
         public string Name { get; set; }
-        public const string Identifier = "Resource";
+        public string Identifier = "Resource";
 
 
         public Resources(string d, int inv, string n)
@@ -31,7 +31,7 @@ namespace FireWorks
     }
     public class Hose : Resources
     {
-        public new const string Identifier = "Hose";
+        public new string Identifier = "Hose";
         public char Letter;
         public char GetLetter()
         {
@@ -66,7 +66,7 @@ namespace FireWorks
     }
     public class Gasanalyzer : Resources
     {
-        public new const string Identifier = "Gasanalyzer";
+        public new string Identifier = "Gasanalyzer";
         public DateTime LastExaminationDate;
         public DateTime GetLastExaminationDate()
         {

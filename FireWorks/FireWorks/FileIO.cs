@@ -65,7 +65,7 @@ namespace FireWorks
                 {
 
                     _t.Display("Do you wish to create some default basedata?");
-                    bool CreationMode= _t.GetBool();
+                    bool CreationMode = _t.GetBool();
 
                     for (int i = 0; i < _paths.Length; i++)
                     {
@@ -74,31 +74,81 @@ namespace FireWorks
                             Byte[] info;
                             using (FileStream fs = File.Create(_paths[i]))
                             {
-
+                                StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.Default);
                                 if (i == 1)
                                 {
                                     string PIN = "0000";
                                     info = new UTF8Encoding(true).GetBytes(@"{""PIN"":""" + PIN.GetHashCode().ToString() + @""",""Status"":""ADMIN"",""Id"":1,""FirstName"":""FirstName"",""LastName"":""LastName""}");
+                                    fs.Write(info, 0, info.Length);
+
                                 }
                                 else
                                 {
                                     if (CreationMode)
                                     {
-                                        //switch (i)
-                                        //{
-                                        //    case 2:
-                                        //        Firetruck ft = new Firetruck();
-                                        //        info = new UTF8Encoding(true).GetBytes(@"{""PIN"":""" + PIN.GetHashCode().ToString() + @""",""Status"":""ADMIN"",""Id"":1,""FirstName"":""FirstName"",""LastName"":""LastName""}");
-                                        //        break;
-                                        //}
-                                        info = new UTF8Encoding(true).GetBytes("");
+                                        Byte[] newline = Encoding.ASCII.GetBytes(Environment.NewLine);
+                                        string temp = "";
+                                        switch (i)
+                                        {
+                                            case 2:
+                                                Pkw p = new Pkw("Pkw", 80, 4);
+                                                Firetruck ft = new Firetruck("LFZ", 200, 4, false, 400);
+                                                Ambulance a = new Ambulance("Ambulance", 150, 6, 300);
+                                                Turntableladder tl = new Turntableladder("Turntableladder", 300, 4, true, 20);
+
+                                                temp = JSONConverter.ObjectToJSON(p);
+                                                sw.WriteLine(temp);
+
+                                                temp = JSONConverter.ObjectToJSON(ft);
+                                                sw.WriteLine(temp);
+
+                                                temp = JSONConverter.ObjectToJSON(a);
+                                                sw.WriteLine(temp);
+
+                                                temp = JSONConverter.ObjectToJSON(tl);
+                                                sw.Write(temp);
+                                                break;
+                                            case 3:
+                                                Hose h = new Hose("A regular Hose", 1, 'B', 20);
+                                                Gasanalyzer ga = new Gasanalyzer("A regular gasanalyzer", 2);
+                                                Distributer d = new Distributer("A regular Distributer", 3);
+                                                Jetnozzle jn = new Jetnozzle("A regular Jetnozzle", 4);
+
+                                                temp = JSONConverter.ObjectToJSON(h);
+                                                sw.WriteLine(temp);
+
+                                                temp = JSONConverter.ObjectToJSON(ga);
+                                                sw.WriteLine(temp);
+
+                                                temp = JSONConverter.ObjectToJSON(d);
+                                                sw.WriteLine(temp);
+
+                                                temp = JSONConverter.ObjectToJSON(jn);
+                                                sw.Write(temp);
+                                                break;
+                                            case 4:
+                                                FireFighter ff1 = new FireFighter("Max", "Mustermann", 1);
+                                                FireFighter ff2 = new FireFighter("Marina", "Musterfrau", 2);
+
+                                                temp = JSONConverter.ObjectToJSON(ff1);
+                                                sw.WriteLine(temp);
+
+                                                temp = JSONConverter.ObjectToJSON(ff2);
+                                                sw.Write(temp);
+                                                break;
+                                            default:
+                                                info = new UTF8Encoding(true).GetBytes("");
+                                                fs.Write(info, 0, info.Length);
+                                                break;
+                                        }
                                     }
-                                    else 
+                                    else
                                     {
                                         info = new UTF8Encoding(true).GetBytes("");
+                                        fs.Write(info, 0, info.Length);
                                     }
                                 }
-                                fs.Write(info, 0, info.Length);
+                                sw.Close();
                             }
                         }
                     }
@@ -154,6 +204,7 @@ namespace FireWorks
                             tmp.Add(JSONConverter.JSONToGeneric<Jetnozzle>(line));
                         }
                         if (toTest.GetIdentifier() == "Distributer")
+
                         {
                             tmp.Add(JSONConverter.JSONToGeneric<Distributer>(line));
                         }
@@ -168,19 +219,19 @@ namespace FireWorks
                         Vehicle toTest = (Vehicle)trial;
                         if (toTest.GetIdentifier() == "Pkw")
                         {
-                            tmp.Add(JSONConverter.JSONToGeneric<Firetruck>(line));
+                            tmp.Add(JSONConverter.JSONToGeneric<Pkw>(line));
                         }
-                        if (toTest.GetIdentifier() == "FireTruck")
+                        if (toTest.GetIdentifier() == "Firetruck")
                         {
                             tmp.Add(JSONConverter.JSONToGeneric<Firetruck>(line));
                         }
                         if (toTest.GetIdentifier() == "Ambulance")
                         {
-                            tmp.Add(JSONConverter.JSONToGeneric<Firetruck>(line));
+                            tmp.Add(JSONConverter.JSONToGeneric<Ambulance>(line));
                         }
                         if (toTest.GetIdentifier() == "Turntableladder")
                         {
-                            tmp.Add(JSONConverter.JSONToGeneric<Firetruck>(line));
+                            tmp.Add(JSONConverter.JSONToGeneric<Turntableladder>(line));
                         }
                         needCast = true;
                     }

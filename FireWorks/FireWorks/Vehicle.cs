@@ -8,7 +8,7 @@ namespace FireWorks
 {
     public class Vehicle
     {
-        public const string Identifier = "Vehicle";
+        public string Identifier = "Vehicle";
         public string Type { get; set; }
         public int EnginePower { get; set; }
         public int Seats { get; set; }
@@ -60,7 +60,7 @@ namespace FireWorks
     }
     public class Turntableladder : ToolCarrier
     {
-        public new const string Identifier = "Turntableadder";
+        public new string Identifier = "Turntableladder";
         public int LadderHeight { get; set; }
         public Turntableladder(string type, int engine, int seats, bool cs, int ladder) :
         base(type, engine, seats, cs)
@@ -70,7 +70,7 @@ namespace FireWorks
     }
     public class Firetruck : ToolCarrier
     {
-        public new const string Identifier = "Firetruck";
+        public new string Identifier = "Firetruck";
         public int FillQuantity { get; set; }
         public Firetruck(string type, int engine, int seats, bool cs, int fill) :
         base(type, engine, seats, cs)
@@ -81,7 +81,7 @@ namespace FireWorks
     public class Ambulance : Vehicle
     {
 
-        public new const string Identifier = "Ambulance";
+        public new string Identifier = "Ambulance";
         public int PatientWeight { get; set; }
         public Ambulance(string type, int engine, int seats, int Pweight) :
         base(type, engine, seats)
@@ -92,7 +92,7 @@ namespace FireWorks
     public class Pkw : Vehicle
     {
 
-        public new const string Identifier = "Pkw";
+        public new string Identifier = "Pkw";
         public Pkw(string type, int engine, int seats) :
         base(type, engine, seats)
         {
