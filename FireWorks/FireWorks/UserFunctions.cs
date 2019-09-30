@@ -91,6 +91,10 @@ namespace FireWorks
                     Select(dataSet, userAction);
 
                     break;
+                case "-u":
+                    ShowUserOptions();
+                    UserMode(_t.GetString());
+                    break;
                 case "-q":
                     System.Environment.Exit(1);
                     break;
@@ -719,6 +723,7 @@ namespace FireWorks
         {
             _t.Display("Options:\n" +
                        "-e    Edit base data.\n" +
+                       "-u    Use Userfunctions.\n" +
                        "-q    Quit.\n");
         }
         public void ShowUserOptions()
