@@ -1,0 +1,17 @@
+///
+Glossar:
+ 
+Einsatzfahrzeuge = Vehicles
+PKW = Pkw
+Löschfahrzeug = FireTruck
+Krankenwagen = Ambulance
+Drehleiterwagen = Turntableladder
+ 
+Einsatzmittel = Resources
+Schlauch = Hose
+Verteiler = Distributer
+Spritzdüse = Jetnozzle
+Gasmessgerät = Gasanalyzer
+ 
+Einsatz = Deployment
+Einsatzkraft = FireFighter

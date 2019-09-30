@@ -8,14 +8,19 @@ namespace FireWorks
 {
     public class Vehicle
     {
+        public const string Identifier = "Vehicle";
         public string Type { get; set; }
         public int EnginePower { get; set; }
         public int Seats { get; set; }
-        public Vehicle(string t, int ep, int s)
+        public Vehicle(string type, int engine, int seats)
         {
-            Type = t;
-            EnginePower = ep;
-            Seats = s;
+            Type = type;
+            EnginePower = engine;
+            Seats = seats;
+        }
+        public string GetIdentifier()
+        {
+            return Identifier;
         }
         public override string ToString()
         {
@@ -47,45 +52,49 @@ namespace FireWorks
     public class ToolCarrier : Vehicle
     {
         public bool Chainsaw { get; set; }
-        public ToolCarrier(string t, int ep, int s, bool cs) :
-        base(t, ep, s)
+        public ToolCarrier(string type, int engine, int seats, bool cs) :
+        base(type, engine, seats)
         {
             Chainsaw = cs;
         }
     }
-    class TurntableLadder : ToolCarrier
+    public class Turntableladder : ToolCarrier
     {
+        public new const string Identifier = "Turntableadder";
         public int LadderHeight { get; set; }
-        public TurntableLadder(string t, int ep, int s, bool cs, int lh) :
-        base(t, ep, s, cs)
+        public Turntableladder(string type, int engine, int seats, bool cs, int ladder) :
+        base(type, engine, seats, cs)
         {
-            LadderHeight = lh;
+            LadderHeight = ladder;
         }
     }
-    class FireTruck : ToolCarrier
+    public class Firetruck : ToolCarrier
     {
+        public new const string Identifier = "Firetruck";
         public int FillQuantity { get; set; }
-        public FireTruck(string t, int ep, int s, bool cs, int fq) :
-        base(t, ep, s, cs)
+        public Firetruck(string type, int engine, int seats, bool cs, int fill) :
+        base(type, engine, seats, cs)
         {
-            FillQuantity = fq;
+            FillQuantity = fill;
         }
     }
-    class Ambulance : Vehicle
+    public class Ambulance : Vehicle
     {
 
+        public new const string Identifier = "Ambulance";
         public int PatientWeight { get; set; }
-        public Ambulance(string t, int ep, int s, int pw) :
-        base(t, ep, s)
+        public Ambulance(string type, int engine, int seats, int Pweight) :
+        base(type, engine, seats)
         {
-            PatientWeight = pw;
+            PatientWeight = Pweight;
         }
     }
-    class Pkw : Vehicle
+    public class Pkw : Vehicle
     {
 
-        public Pkw(string t, int ep, int s) :
-        base(t, ep, s)
+        public new const string Identifier = "Pkw";
+        public Pkw(string type, int engine, int seats) :
+        base(type, engine, seats)
         {
         }
     }

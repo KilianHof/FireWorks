@@ -403,10 +403,10 @@ namespace FireWorks
                                     liste.Add((T)(object)Edit(new Pkw("TYPE", 0, 0)));
                                     break;
                                 case 2:
-                                    liste.Add((T)(object)Edit(new FireTruck("TYPE", 0, 0, false, 0)));
+                                    liste.Add((T)(object)Edit(new Firetruck("TYPE", 0, 0, false, 0)));
                                     break;
                                 case 3:
-                                    liste.Add((T)(object)Edit(new TurntableLadder("TYPE", 0, 0, false, 0)));
+                                    liste.Add((T)(object)Edit(new Turntableladder("TYPE", 0, 0, false, 0)));
                                     break;
                                 case 4:
                                     liste.Add((T)(object)Edit(new Ambulance("TYPE", 0, 0, 0)));
@@ -562,10 +562,10 @@ namespace FireWorks
                 Number = EditHelperInt("Status(1=USER,2=ADMIN,3=LOCKED): " + tmp.Status + "\n", 0, 3);
                 if (Number != 0) tmp.Status = ((UserStates)Number).ToString();
             }
-            if (t.GetType() == typeof(FireTruck))
+            if (t.GetType() == typeof(Firetruck))
             {
                 _t.Display(" \".\"(dot) for no changes (0 in case of number)" + "\n");
-                FireTruck tmp = (FireTruck)(object)t;
+                Firetruck tmp = (Firetruck)(object)t;
 
                 Answer = EditHelperString("Type: " + tmp.Type + "\n");
                 if (Answer != ".") tmp.Type = Answer;
@@ -589,10 +589,10 @@ namespace FireWorks
                 }
             }
 
-            if (t.GetType() == typeof(TurntableLadder))
+            if (t.GetType() == typeof(Turntableladder))
             {
                 _t.Display(" \".\"(dot) for no changes (0 in case of number)" + "\n");
-                TurntableLadder tmp = (TurntableLadder)(object)t;
+                Turntableladder tmp = (Turntableladder)(object)t;
 
                 Answer = EditHelperString("Type: " + tmp.Type + "\n");
                 if (Answer != ".") tmp.Type = Answer;

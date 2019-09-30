@@ -11,6 +11,7 @@ namespace FireWorks
         public string Description { get; set; }
         public int InventoryNumber { get; set; }
         public string Name { get; set; }
+        public const string Identifier = "Resource";
 
 
         public Resources(string d, int inv, string n)
@@ -19,6 +20,10 @@ namespace FireWorks
             InventoryNumber = inv;
             Name = n;
         }
+        public string GetIdentifier()
+        {
+            return Identifier;
+        }
         public override string ToString()
         {
             return Description + " " + InventoryNumber;
@@ -26,6 +31,7 @@ namespace FireWorks
     }
     public class Hose : Resources
     {
+        public new const string Identifier = "Hose";
         public char Letter;
         public char GetLetter()
         {
@@ -60,7 +66,16 @@ namespace FireWorks
     }
     public class Gasanalyzer : Resources
     {
+        public new const string Identifier = "Gasanalyzer";
         public DateTime LastExaminationDate;
+        public DateTime GetLastExaminationDate()
+        {
+            return LastExaminationDate;
+        }
+        public void SetLastExaminationDate()
+        {
+            LastExaminationDate = DateTime.Now;
+        }
         public Gasanalyzer(string d, int inv) :
                base(d, inv, "Gasanalyzer")
         {
@@ -71,8 +86,7 @@ namespace FireWorks
             DateTime CurrentDate = DateTime.Now;
             TimeSpan diff = CurrentDate.Subtract(LastExaminationDate);
             diff = diff.Duration();
-            double days = diff.TotalDays;
-            if (days > 30)
+            if (diff.TotalDays > 30)
             {
                 LastExaminationDate = CurrentDate;
                 return true;
@@ -82,6 +96,7 @@ namespace FireWorks
     }
     public class Distributer : Resources
     {
+        public new const string Identifier = "Distributer";
         public Distributer(string d, int inv) :
                base(d, inv, "Distributer")
         {
@@ -89,6 +104,7 @@ namespace FireWorks
     }
     public class Jetnozzle : Resources
     {
+        public new const string Identifier = "Jetnozzle";
         public Jetnozzle(string d, int inv) :
                base(d, inv, "Jetnozzle")
         {

@@ -63,6 +63,10 @@ namespace FireWorks
                 _t.Display("Seems like some files dont exist. Do you wish to initialize missing files?(Admin PIN=0000)");
                 if (_t.GetBool())
                 {
+
+                    _t.Display("Do you wish to create some default basedata?");
+                    bool CreationMode= _t.GetBool();
+
                     for (int i = 0; i < _paths.Length; i++)
                     {
                         if (!existing[i])
@@ -70,13 +74,30 @@ namespace FireWorks
                             Byte[] info;
                             using (FileStream fs = File.Create(_paths[i]))
                             {
+
                                 if (i == 1)
                                 {
                                     string PIN = "0000";
                                     info = new UTF8Encoding(true).GetBytes(@"{""PIN"":""" + PIN.GetHashCode().ToString() + @""",""Status"":""ADMIN"",""Id"":1,""FirstName"":""FirstName"",""LastName"":""LastName""}");
                                 }
                                 else
-                                    info = new UTF8Encoding(true).GetBytes("");
+                                {
+                                    if (CreationMode)
+                                    {
+                                        //switch (i)
+                                        //{
+                                        //    case 2:
+                                        //        Firetruck ft = new Firetruck();
+                                        //        info = new UTF8Encoding(true).GetBytes(@"{""PIN"":""" + PIN.GetHashCode().ToString() + @""",""Status"":""ADMIN"",""Id"":1,""FirstName"":""FirstName"",""LastName"":""LastName""}");
+                                        //        break;
+                                        //}
+                                        info = new UTF8Encoding(true).GetBytes("");
+                                    }
+                                    else 
+                                    {
+                                        info = new UTF8Encoding(true).GetBytes("");
+                                    }
+                                }
                                 fs.Write(info, 0, info.Length);
                             }
                         }
@@ -120,12 +141,46 @@ namespace FireWorks
                 foreach (string line in File.ReadLines(_paths[path]))
                 {
                     trial = JSONConverter.JSONToGeneric<T>(line);
+
                     if (trial.GetType() == typeof(Resources))
                     {
                         Resources toTest = (Resources)trial;
-                        if (toTest.Name == "Gasanalyzer")
+                        if (toTest.GetIdentifier() == "Hose")
                         {
                             tmp.Add(JSONConverter.JSONToGeneric<Gasanalyzer>(line));
+                        }
+                        if (toTest.GetIdentifier() == "Jetnozzle")
+                        {
+                            tmp.Add(JSONConverter.JSONToGeneric<Jetnozzle>(line));
+                        }
+                        if (toTest.GetIdentifier() == "Distributer")
+                        {
+                            tmp.Add(JSONConverter.JSONToGeneric<Distributer>(line));
+                        }
+                        if (toTest.GetIdentifier() == "Gasanalyzer")
+                        {
+                            tmp.Add(JSONConverter.JSONToGeneric<Gasanalyzer>(line));
+                        }
+                        needCast = true;
+                    }
+                    if (trial.GetType() == typeof(Vehicle))
+                    {
+                        Vehicle toTest = (Vehicle)trial;
+                        if (toTest.GetIdentifier() == "Pkw")
+                        {
+                            tmp.Add(JSONConverter.JSONToGeneric<Firetruck>(line));
+                        }
+                        if (toTest.GetIdentifier() == "FireTruck")
+                        {
+                            tmp.Add(JSONConverter.JSONToGeneric<Firetruck>(line));
+                        }
+                        if (toTest.GetIdentifier() == "Ambulance")
+                        {
+                            tmp.Add(JSONConverter.JSONToGeneric<Firetruck>(line));
+                        }
+                        if (toTest.GetIdentifier() == "Turntableladder")
+                        {
+                            tmp.Add(JSONConverter.JSONToGeneric<Firetruck>(line));
                         }
                         needCast = true;
                     }
