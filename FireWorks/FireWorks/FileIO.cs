@@ -281,12 +281,6 @@ namespace FireWorks
             File.WriteAllLines(_paths[path], str);
 
         }
-        public int GetLastDeploymentNumber()         // new version need test
-        {
-            List<Deployment> liste = ReadFile<Deployment>();
-            if (liste is null) return 1;
-            return liste.Count()+1;
-        }
         public void SaveAllLists(object[] lists)
         {
             SaveListToFile<Deployment>((List<Deployment>)lists[Deployments]); //warum kann ich das vereinfachen?
