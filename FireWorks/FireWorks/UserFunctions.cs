@@ -291,7 +291,7 @@ namespace FireWorks
                     string com = _t.GetString();
 
                     DeploymentFactory DF = new DeploymentFactory();
-                    Deployment test = DF.NewDeployment(loc, v, r, p, com, _filer.GetLastDeploymentNumber());
+                    Deployment test = DF.NewDeployment(loc, v, r, p, com, AllDeployments.Count()+1);
                     liste.Add(test);
                     _filer.SaveListToFile<Deployment>(AllDeployments);
                     GasExaminationCheck();

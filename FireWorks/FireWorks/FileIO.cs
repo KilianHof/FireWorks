@@ -285,7 +285,7 @@ namespace FireWorks
         {
             List<Deployment> liste = ReadFile<Deployment>();
             if (liste is null) return 1;
-            return liste.Count();
+            return liste.Count()+1;
         }
         public void SaveAllLists(object[] lists)
         {

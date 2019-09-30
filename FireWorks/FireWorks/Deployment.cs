@@ -116,7 +116,9 @@ namespace FireWorks
                     report += "    " + item.Name+" "+ item.Description+ "\n";
                 }
             }
-            report +="Der Einsatzleiter gab diesen Kommentar zum Einsatz:\n";
+            report += "Gesamt genutzte schlauchlänge:\n";
+            report += "    "+SumUpHoses()+"\n";
+            report += "Der Einsatzleiter gab diesen Kommentar zum Einsatz:\n";
             report += Comment + "\n";
             report += "Wir danken dem Team der Circlon Werksfeuerwehr für ihre Leistung und den " +Number+ ". Abgeschlossenen Einsatz.\n\n";
             return report;

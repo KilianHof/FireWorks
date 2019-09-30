@@ -32,7 +32,8 @@ namespace FireWorks
                 Stopwatch stopWatch = new Stopwatch();
                 stopWatch.Start();
                 Deployment test;
-                test = new Deployment("here", new Vehicle[0], new Resources[0], new FireFighter[0], "hi", _filer.GetLastDeploymentNumber());
+                List<Deployment> l = (List<Deployment>)lists[0];
+                test = new Deployment("here", new Vehicle[0], new Resources[0], new FireFighter[0], "hi", (l.Count + 1));
                 List<Deployment> list = (List<Deployment>)lists[0];
                 for (int i = 1; i < testsize+1; i++)
                 {
@@ -60,7 +61,8 @@ namespace FireWorks
                 Stopwatch stopWatch = new Stopwatch();
                 stopWatch.Start();
                     Deployment test;
-                    test = new Deployment("here", new Vehicle[0], new Resources[0], new FireFighter[0], "hi", _filer.GetLastDeploymentNumber());
+                List<Deployment> l = (List<Deployment>)lists[0];
+                    test = new Deployment("here", new Vehicle[0], new Resources[0], new FireFighter[0], "hi", (l.Count+1));
                 for (int i = 1; i < testsize+1; i++)
                 {
                     tree.Insert(i, test);
