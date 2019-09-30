@@ -24,6 +24,8 @@ namespace FireWorks
             _filer.CheckForFiles();
             Authenticator auth = new Authenticator(_t, _filer);
             object[] lists = _filer.ReadAllFiles();
+            _t.Display(_filer.ReadFile<Deployment>().Count().ToString());
+            _t.Display(_filer.ReadFile<Deployment>().ElementAt(0).ToString());
             UserFunctions _uf = new UserFunctions(_t, lists);
 
             if (Globals.debug)

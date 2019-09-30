@@ -43,6 +43,16 @@ namespace FireWorks
             Comment = Com;
             Number = Num;
         }
+        public Deployment(string date,string Loc, Vehicle[] Veh, Resources[] Res, FireFighter[] Ff, string Com, int Num)
+        {
+            DateAndTime = date;
+            Location = Loc;
+            Cars = Veh;
+            Resources = Res;
+            FireFighters = Ff;
+            Comment = Com;
+            Number = Num;
+        }
         public override string ToString()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);

@@ -179,7 +179,7 @@ namespace FireWorks
         }
         public List<T> ReadFile<T>()
         {
-
+            bool needCast = false;
             int path = Pathfinder<T>();
 
             List<object> tmp = new List<object>();
@@ -187,61 +187,160 @@ namespace FireWorks
             object trial;
             if (File.Exists(_paths[path]))
             {
-                bool needCast = false;
                 foreach (string line in File.ReadLines(_paths[path]))
                 {
                     trial = JSONConverter.JSONToGeneric<T>(line);
-
-                    if (trial.GetType() == typeof(Resources))
-                    {
-                        Resources toTest = (Resources)trial;
-                        if (toTest.GetIdentifier() == "Hose")
-                        {
-                            tmp.Add(JSONConverter.JSONToGeneric<Hose>(line));
-                        }
-                        if (toTest.GetIdentifier() == "Jetnozzle")
-                        {
-                            tmp.Add(JSONConverter.JSONToGeneric<Jetnozzle>(line));
-                        }
-                        if (toTest.GetIdentifier() == "Distributer")
-                        {
-                            tmp.Add(JSONConverter.JSONToGeneric<Distributer>(line));
-                        }
-                        if (toTest.GetIdentifier() == "Gasanalyzer")
-                        {
-                            tmp.Add(JSONConverter.JSONToGeneric<Gasanalyzer>(line));
-                        }
-                        needCast = true;
-                    }
                     if (trial.GetType() == typeof(Vehicle))
                     {
-                        Vehicle toTest = (Vehicle)trial;
-                        if (toTest.GetIdentifier() == "Pkw")
+                        tmp.Add(ObjectCast<Vehicle>(line));
+                        needCast = true;
+                    }
+                    if (trial.GetType() == typeof(Resources))
+                    {
+                        tmp.Add(ObjectCast<Resources>(line));
+                        needCast = true;
+                    }
+                    if (trial.GetType() == typeof(Deployment))
+                    {
+                        Deployment prototype = (Deployment)trial;
+
+                        List<Vehicle> v = new List<Vehicle>();
+                        List<Resources> r = new List<Resources>();
+                        List<FireFighter> f = new List<FireFighter>();
+                        string cutting = line;
+                        object testNull;
+
+                        int firstIndex = cutting.IndexOf('[') + 1;          // first occourence marks array
+                        int lastIndex = cutting.IndexOf(']');           // first occourence marks end of array
+
+                        string cutted = cutting.Substring(firstIndex, lastIndex - firstIndex); // extract everything between [ and ]
+                        cutting = cutting.Substring(lastIndex + 1, cutting.Length - lastIndex - 1);    // remove everything from start till end of array"]"
+
+                        testNull = CreateArray(cutted);
+                        string[] VehObjects;
+                        if (!(testNull == null))
                         {
-                            tmp.Add(JSONConverter.JSONToGeneric<Pkw>(line));
+                            VehObjects = (string[])testNull;
+                            foreach (var item in VehObjects)
+                            {
+                                v.Add((Vehicle)ObjectCast<Vehicle>(item));
+                            }
                         }
-                        if (toTest.GetIdentifier() == "Firetruck")
+                        firstIndex = cutting.IndexOf('[') + 1;          // first occourence marks array
+                        lastIndex = cutting.IndexOf(']');           // first occourence marks end of array
+
+                        cutted = cutting.Substring(firstIndex, lastIndex - firstIndex); // extract everything between [ and ]
+                        cutting = cutting.Substring(lastIndex + 1, cutting.Length - lastIndex - 1);    // remove everything from start till end of array"]"
+
+                        testNull = CreateArray(cutted);
+                        string[] ResObjects;
+                        if (!(testNull == null))
                         {
-                            tmp.Add(JSONConverter.JSONToGeneric<Firetruck>(line));
+                            ResObjects = (string[])testNull;
+                            foreach (var item in ResObjects)
+                            {
+                                r.Add((Resources)ObjectCast<Resources>(item));
+                            }
                         }
-                        if (toTest.GetIdentifier() == "Ambulance")
+                        firstIndex = cutting.IndexOf('[') + 1;          // first occourence marks array
+                        lastIndex = cutting.IndexOf(']');           // first occourence marks end of array
+
+                        cutted = cutting.Substring(firstIndex, lastIndex - firstIndex); // extract everything between [ and ]
+                        cutting = cutting.Substring(lastIndex + 1, cutting.Length - lastIndex - 1);    // remove everything from start till end of array"]"
+
+                        testNull = CreateArray(cutted);
+                        string[] FFObjects;
+                        if (!(testNull == null))
                         {
-                            tmp.Add(JSONConverter.JSONToGeneric<Ambulance>(line));
+                            FFObjects = (string[])testNull;
+                            foreach (var item in FFObjects)
+                            {
+                                f.Add(JSONConverter.JSONToGeneric<FireFighter>(item));
+                            }
                         }
-                        if (toTest.GetIdentifier() == "Turntableladder")
-                        {
-                            tmp.Add(JSONConverter.JSONToGeneric<Turntableladder>(line));
-                        }
+                        Deployment fin = new Deployment(prototype.DateAndTime, prototype.Location, v.ToArray(), r.ToArray(), f.ToArray(), prototype.Comment, prototype.Number);
+                        tmp.Add(fin);
                         needCast = true;
                     }
                     test.Add(JSONConverter.JSONToGeneric<T>(line));
 
                 }
-                if (needCast) { return ConvertList<T>(tmp); }
-                else { return test; }
+
+                if (needCast) return ConvertList<T>(tmp);
+                return test;
             }
             _t.Display("cannot read file: " + _paths[path] + "\n");
             return test;
+        }
+        public string[] CreateArray(string value)
+        {
+            if (value == "") return null;
+            List<string> toArray = new List<string>();
+            int lastIndex;
+            string obj;
+            do
+            {
+                lastIndex = value.IndexOf('}') + 1;                            // set last index to end of 
+                obj = value.Substring(0, lastIndex);
+                toArray.Add(obj);
+
+                lastIndex++;
+                value = value.Substring(lastIndex, value.Length - lastIndex);
+
+
+            } while (value[0] == ',');
+            lastIndex = value.IndexOf('}') + 1;                            // set last index to end of 
+            obj = value.Substring(0, lastIndex);
+            toArray.Add(obj);
+
+            return toArray.ToArray();
+
+        }
+        public object ObjectCast<T>(string line)
+        {
+            object trial = JSONConverter.JSONToGeneric<T>(line);
+            if (trial.GetType() == typeof(Resources))
+            {
+                Resources prototype = (Resources)trial;
+                if (prototype.GetIdentifier() == "Hose")
+                {
+                    return (JSONConverter.JSONToGeneric<Hose>(line));
+                }
+                if (prototype.GetIdentifier() == "Jetnozzle")
+                {
+                    return (JSONConverter.JSONToGeneric<Jetnozzle>(line));
+                }
+                if (prototype.GetIdentifier() == "Distributer")
+                {
+                    return (JSONConverter.JSONToGeneric<Distributer>(line));
+                }
+                if (prototype.GetIdentifier() == "Gasanalyzer")
+                {
+                    return (JSONConverter.JSONToGeneric<Gasanalyzer>(line));
+                }
+            }
+            if (trial.GetType() == typeof(Vehicle))
+            {
+                trial = JSONConverter.JSONToGeneric<Vehicle>(line);
+                Vehicle prototype = (Vehicle)trial;
+                if (prototype.GetIdentifier() == "Pkw")
+                {
+                    return (JSONConverter.JSONToGeneric<Pkw>(line));
+                }
+                if (prototype.GetIdentifier() == "Firetruck")
+                {
+                    return (JSONConverter.JSONToGeneric<Firetruck>(line));
+                }
+                if (prototype.GetIdentifier() == "Ambulance")
+                {
+                    return (JSONConverter.JSONToGeneric<Ambulance>(line));
+                }
+                if (prototype.GetIdentifier() == "Turntableladder")
+                {
+                    return (JSONConverter.JSONToGeneric<Turntableladder>(line));
+                }
+            }
+            return null;
         }
         public List<T> ConvertList<T>(List<object> value)
         {
