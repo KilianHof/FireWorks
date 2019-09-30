@@ -17,7 +17,6 @@ namespace FireWorks
         {
             
 
-            Console.WriteLine("Enter the path to your /Storage directory");
             StoragePathClass.StoragePath = Directory.GetCurrentDirectory();
 
             Human CurrentUser;
@@ -50,7 +49,6 @@ namespace FireWorks
                     DeploymentListing.DeploymentSearch();
                     break;
                 case "d":
-                    Console.Clear();
                     DeploymentListing.DeploymentDetail();
                     break;
             }

@@ -44,6 +44,7 @@ namespace FireWorks
 
 
 
+            Console.Clear();
             String Deploytext = "";
             Deployment DetailDeployment;
             Console.Write("Deployment ID:");
