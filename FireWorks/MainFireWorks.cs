@@ -27,10 +27,21 @@ namespace FireWorks
             Authenticator.StatusCheck(CurrentUser); //ordnet Nutzer nach Status ein
             if (CurrentUser.Status == 1)
             {
+                NewMethod();
+            }
+            if (CurrentUser.Status == 2)
+            {
                 Console.Clear();
-                Console.WriteLine("(d)etailed Report / show deploym(e)nts / (s)earch deployments");
-                switch (Console.ReadLine())
-                {
+                AdminMenu();
+            }
+        }
+
+        private static void NewMethod()
+        {
+            Console.Clear();
+            Console.WriteLine("(d)etailed Report / show deploym(e)nts / (s)earch deployments");
+            switch (Console.ReadLine())
+            {
                 case "e":
                     DeploymentListing.DeploymentList();
                     break;
@@ -41,36 +52,34 @@ namespace FireWorks
                     Console.Clear();
                     DeploymentListing.DeploymentDetail();
                     break;
-                }
             }
-            if (CurrentUser.Status == 2)
+        }
+
+        private static void AdminMenu()
+        {
+            Console.WriteLine("(detail)ed Report / (show) deployments / (search) deployments");
+            Console.WriteLine("(create) deployment / (lock) or unlock user / (edit) data");
+
+            switch (Console.ReadLine())
             {
-                Console.Clear();
-
-                Console.WriteLine("(detail)ed Report / (show) deployments / (search) deployments");
-                Console.WriteLine("(create) deployment / (lock) or unlock user / (edit) data");
-
-                switch (Console.ReadLine())
-                {
-                    case "show":
-                        DeploymentListing.DeploymentList();
-                        break;
-                    case "search":
-                        DeploymentListing.DeploymentSearch();
-                        break;
-                    case "detail":
-                        DeploymentListing.DeploymentDetail();
-                        break;
-                    case "create":
-                        DeploymentListing.CreateDeployment();
-                        break;
-                    case "lock":
-                        Authenticator.UserLock();
-                        break;
-                    case "edit":
-                        Resource.Editor();
-                        break;
-                }
+                case "show":
+                    DeploymentListing.DeploymentList();
+                    break;
+                case "search":
+                    DeploymentListing.DeploymentSearch();
+                    break;
+                case "detail":
+                    DeploymentListing.DeploymentDetail();
+                    break;
+                case "create":
+                    DeploymentListing.CreateDeployment();
+                    break;
+                case "lock":
+                    Authenticator.UserLock();
+                    break;
+                case "edit":
+                    Resource.Editor();
+                    break;
             }
         }
     }
