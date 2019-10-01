@@ -27,7 +27,7 @@ namespace FireWorks
             Authenticator.StatusCheck(CurrentUser); //ordnet Nutzer nach Status ein
             if (CurrentUser.Status == 1)
             {
-                NewMethod();
+                UserMenu();
             }
             if (CurrentUser.Status == 2)
             {
@@ -36,49 +36,63 @@ namespace FireWorks
             }
         }
 
-        private static void NewMethod()
+        private static void UserMenu()
         {
-            Console.Clear();
-            Console.WriteLine("(d)etailed Report / show deploym(e)nts / (s)earch deployments");
-            switch (Console.ReadLine())
+            bool exit = false;
+            while (exit == false)
             {
-                case "e":
-                    DeploymentListing.DeploymentList();
-                    break;
-                case "s":
-                    DeploymentListing.DeploymentSearch();
-                    break;
-                case "d":
-                    DeploymentListing.DeploymentDetail();
-                    break;
+                Console.Clear();
+                Console.WriteLine("(d)etailed Report / show deploym(e)nts / (s)earch deployments / (exit)");
+                switch (Console.ReadLine())
+                {
+                    case "e":
+                        DeploymentListing.DeploymentList();
+                        break;
+                    case "s":
+                        DeploymentListing.DeploymentSearch();
+                        break;
+                    case "d":
+                        DeploymentListing.DeploymentDetail();
+                        break;
+                    case "exit":
+                        exit = true;
+                        break;
+                }
             }
         }
 
         private static void AdminMenu()
         {
-            Console.WriteLine("(detail)ed Report / (show) deployments / (search) deployments");
-            Console.WriteLine("(create) deployment / (lock) or unlock user / (edit) data");
-
-            switch (Console.ReadLine())
+            bool exit = false;
+            while (exit == false)
             {
-                case "show":
-                    DeploymentListing.DeploymentList();
-                    break;
-                case "search":
-                    DeploymentListing.DeploymentSearch();
-                    break;
-                case "detail":
-                    DeploymentListing.DeploymentDetail();
-                    break;
-                case "create":
-                    DeploymentListing.CreateDeployment();
-                    break;
-                case "lock":
-                    Authenticator.UserLock();
-                    break;
-                case "edit":
-                    Resource.Editor();
-                    break;
+                Console.WriteLine("(detail)ed Report / (show) deployments / (search) deployments");
+                Console.WriteLine("(create) deployment / (lock) or unlock user / (edit) data / (exit)");
+
+                switch (Console.ReadLine())
+                {
+                    case "show":
+                        DeploymentListing.DeploymentList();
+                        break;
+                    case "search":
+                        DeploymentListing.DeploymentSearch();
+                        break;
+                    case "detail":
+                        DeploymentListing.DeploymentDetail();
+                        break;
+                    case "create":
+                        DeploymentListing.CreateDeployment();
+                        break;
+                    case "lock":
+                        Authenticator.UserLock();
+                        break;
+                    case "edit":
+                        Resource.Editor();
+                        break;
+                    case "exit":
+                        exit = true;
+                        break;
+                }
             }
         }
     }

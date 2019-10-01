@@ -158,6 +158,7 @@ namespace FireWorks
 
                 i += 1;
             }
+            i = 0;
             Console.WriteLine("How many deployments are to be shown?");
             int.TryParse(Console.ReadLine(), out int number);
             number += 1;
@@ -195,7 +196,7 @@ namespace FireWorks
             number -= 2;
             while (number > -1)
             {
-                if (number > iMax)
+                if (number >= iMax)
                 {
                     Console.WriteLine("Only " + iMax + " entries exist.");
                     DeploymentList();
