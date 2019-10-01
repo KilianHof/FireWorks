@@ -12,10 +12,10 @@ namespace FireWorks
     {
 
         public int ID { get; set; }
-        public String PIN { get; set; }
+        public string PIN { get; set; }
         public int Status { get; set; }
-        public String FName { get; set; }
-        public String LName { get; set; }
+        public string FName { get; set; }
+        public string LName { get; set; }
 
     }
 }

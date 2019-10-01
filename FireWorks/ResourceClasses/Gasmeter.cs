@@ -6,7 +6,7 @@ namespace FireWorks
     {
 
         public int ID { get; set; }
-        public String Date { get; set; }
+        public string Date { get; set; }
 
     }
 }

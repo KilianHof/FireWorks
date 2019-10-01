@@ -12,7 +12,7 @@ namespace FireWorks
     {
 
         public int ID { get; set; }
-        public String Name { get; set; }
+        public string Name { get; set; }
 
     }
 
@@ -64,14 +64,18 @@ namespace FireWorks
                 {
                     ObjectWriter.LineChanger(content, StoragePathClass.StoragePath + "/Storage/Amounts.txt", line);
                 }
-                else {Console.WriteLine("Invalid input.");
+                else
+                {
+                    Console.WriteLine("Invalid input.");
+                    Console.ReadLine();
+                    EAmounts();
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid input.");
                 Console.ReadLine();
                 EAmounts();
-            }
-        }
-            else {Console.WriteLine("Invalid input.");
-            Console.ReadLine();
-            EAmounts();
             }
 
             return;
@@ -364,7 +368,7 @@ namespace FireWorks
                 answer = Console.ReadLine();
                 if (answer != "")
                 {
-                    if (int.TryParse(answer, out  check) && check >= 0 && check <= 999999)
+                    if (int.TryParse(answer, out check) && check >= 0 && check <= 999999)
                     {
                         EVehicles.Seats = check;
                     }
@@ -538,7 +542,6 @@ namespace FireWorks
             {
                 EVehicles.HP = check;
             }
-
             Console.WriteLine("Maximum patientweight in kg:");
             answer = Console.ReadLine();
             if (answer != "")
@@ -548,9 +551,7 @@ namespace FireWorks
                     EVehicles.MaxWeight = check;
                 }
             }
-
             ObjectWriter.WriteObject(EVehicles, StoragePathClass.StoragePath + "/Storage/Ambulances.txt");
-
             return;
         }
 
@@ -830,10 +831,10 @@ namespace FireWorks
                 {
                     User.PIN = temp;
                 }
-                else { Console.WriteLine("Invalid input.");EUsersCreate(); }
+                else { Console.WriteLine("Invalid input."); EUsersCreate(); }
             }
-            else {Console.WriteLine("Invalid input."); EUsersCreate(); }
-        Console.WriteLine("Please enter status number. (0 locked / 1 user / 2 admin)");
+            else { Console.WriteLine("Invalid input."); EUsersCreate(); }
+            Console.WriteLine("Please enter status number. (0 locked / 1 user / 2 admin)");
             string answer = Console.ReadLine();
             int.TryParse(answer, out int status);
             User.Status = status;
