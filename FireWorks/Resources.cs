@@ -784,8 +784,12 @@ namespace FireWorks
             Console.WriteLine("Please enter a new PIN.");
             User.PIN = Console.ReadLine(); if (int.TryParse(User.PIN, out int check) && check >= 0 && check <= 9999)
             {
-                string Usertext = JsonConvert.SerializeObject(User);
-                ObjectWriter.LineChanger(Usertext, StoragePathClass.StoragePath + "/Storage/Users.txt", User.ID);
+                if (User.PIN.Length == 4)
+                {
+                    string Usertext = JsonConvert.SerializeObject(User);
+                    ObjectWriter.LineChanger(Usertext, StoragePathClass.StoragePath + "/Storage/Users.txt", User.ID);
+                }
+                else Console.WriteLine("Invalid input.");
             }
             else Console.WriteLine("Invalid input.");
             return;
@@ -819,8 +823,13 @@ namespace FireWorks
             string temp = Console.ReadLine();
             if (int.TryParse(temp, out int check) && check >= 0 && check <= 999999)
             {
-                User.PIN = temp;
+                if (temp.Length == 4)
+                {
+                    User.PIN = temp;
+                }
+                else Console.WriteLine("Invalid input.");
             }
+            else Console.WriteLine("Invalid input.");
                 Console.WriteLine("Please enter status number. (0 locked / 1 user / 2 admin)");
             string answer = Console.ReadLine();
             int.TryParse(answer, out int status);
