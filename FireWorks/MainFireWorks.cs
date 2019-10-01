@@ -15,10 +15,9 @@ namespace FireWorks
         public static void Main(string[] args)
 #pragma warning restore IDE0060 // Nicht verwendete Parameter entfernen
         {
-            
 
             StoragePathClass.StoragePath = Directory.GetCurrentDirectory();
-
+            WindowLine("-");
             Human CurrentUser;
             var SCurrentUser = Authenticator.LogIn();   //checkt den PIN
 
@@ -96,5 +95,22 @@ namespace FireWorks
                 }
             }
         }
+
+        public static string WindowLine(string input)
+        {
+            
+
+            int remaining = Console.WindowWidth;
+
+            while (remaining > 0)
+            {
+                Console.Write(input);
+                remaining -= 1;
+            }
+
+            return input;
+
+        }
+
     }
 }
