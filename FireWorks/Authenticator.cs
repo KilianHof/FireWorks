@@ -54,31 +54,37 @@ namespace FireWorks
             String SCurrentUser = "";
             Console.Write("PIN:");
             String PINenter = Console.ReadLine();
-            PINenter = "\"PIN\":\"" + PINenter + "\",\""; //Absicherung
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/Storage/Users.txt"))
-                while (SCurrentUser.IndexOf(PINenter) == -1)
-                {
-                    SCurrentUser = UserText.ReadLine();
-
-                    if (SCurrentUser == null)
+            if (int.TryParse(PINenter, out int check) && check >= 0 && check <= 9999)
+            {
+                PINenter = "\"PIN\":\"" + PINenter + "\",\""; //Absicherung
+                using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/Storage/Users.txt"))
+                    while (SCurrentUser.IndexOf(PINenter) == -1)
                     {
-                        Console.WriteLine("Invalid PIN.");
-                        Console.ReadLine();
-                        System.Environment.Exit(1);
+                        SCurrentUser = UserText.ReadLine();
+
+                        if (SCurrentUser == null)
+                        {
+                            Console.WriteLine("Invalid PIN.");
+                            Console.ReadLine();
+                            System.Environment.Exit(1);
+                        }
                     }
-                }
+                return SCurrentUser;
+            }
 
-
+            Console.WriteLine("Invalid PIN.");
+            Console.ReadLine();
+            System.Environment.Exit(1);
             return SCurrentUser;
         }
 
         public static void UserLock()
         {
             String SLCurrentUser = "";
-            Console.Write("User-ID:");
+            Console.Write("Target user-ID:");
             String IDenter = Console.ReadLine();
             IDenter = "\"ID\":" + IDenter; //Absicherung
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/Storage/Users.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/Storage/Users.txt"))
                 while (SLCurrentUser.IndexOf(IDenter) == -1)
                 {
                     SLCurrentUser = UserText.ReadLine();
@@ -96,11 +102,17 @@ namespace FireWorks
             Console.WriteLine("Enter new Status: 0 (locked) , 1 (User) , 2 (Admin).");
             string answer = Console.ReadLine();
             int.TryParse(answer, out int answerint);
-            if (answerint == 0) User.Status = 0;
-            if (answerint == 1) User.Status = 1;
-            if (answerint == 2) User.Status = 2;
-            answer = JsonConvert.SerializeObject(User);
-            ObjectWriter.LineChanger(answer, StoragePathClass.StoragePath+"/Storage/Users.txt", User.ID);
+            if (int.TryParse(answer, out int check) && check >= 0 && check <= 2)
+            {
+                if (answerint == 0) User.Status = 0;
+                if (answerint == 1) User.Status = 1;
+                if (answerint == 2) User.Status = 2;
+                answer = JsonConvert.SerializeObject(User);
+                ObjectWriter.LineChanger(answer, StoragePathClass.StoragePath + "/Storage/Users.txt", User.ID);
+                return;
+            }
+            Console.WriteLine("Invalid input.");
+            return;
         }
     }
 }

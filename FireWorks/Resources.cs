@@ -52,87 +52,25 @@ namespace FireWorks
         public static void EAmounts()
         {
             Console.Clear();
-            int line;
             Console.WriteLine("Edit which objects amount?");
-            Console.WriteLine("(b5)/(b10)/(b20)/(b30)/(c5)/(c10)/(c20)/(c30)/(d5)/(d10)/(d20)/(d30)/(d)istributers/(j)ethoses");
-            switch (Console.ReadLine())
+            Console.WriteLine("1(b5)/2(b10)/3(b20)/4(b30)/5(c5)/6(c10)/7(c20)/8(c30)/9(d5)/10(d10)/11(d20)/12(d30)/13(d)istributers/14(j)ethoses");
+            string lineS = Console.ReadLine();
+
+            if (int.TryParse(lineS, out int line) && line >= 0 && line <= 9999)
             {
-                case "b5":
-                    line = 1;
-                    Console.WriteLine("Please enter the new amount.");
-                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath+"/Storage/Amounts.txt", line);
-                    break;
-                case "b10":
-                    line = 2;
-                    Console.WriteLine("Please enter the new amount.");
-                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath+"/Storage/Amounts.txt", line);
-                    break;
-                case "b20":
-                    line = 3;
-                    Console.WriteLine("Please enter the new amount.");
-                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath+"/Storage/Amounts.txt", line);
-                    break;
-                case "b30":
-                    line = 4;
-                    Console.WriteLine("Please enter the new amount.");
-                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath+"/Storage/Amounts.txt", line);
-                    break;
-                case "c5":
-                    line = 5;
-                    Console.WriteLine("Please enter the new amount.");
-                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath+"/Storage/Amounts.txt", line);
-                    break;
-                case "c10":
-                    line = 6;
-                    Console.WriteLine("Please enter the new amount.");
-                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath+"/Storage/Amounts.txt", line);
-                    break;
-                case "c20":
-                    line = 7;
-                    Console.WriteLine("Please enter the new amount.");
-                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath+"/Storage/Amounts.txt", line);
-                    break;
-                case "c30":
-                    line = 8;
-                    Console.WriteLine("Please enter the new amount.");
-                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath+"/Storage/Amounts.txt", line);
-                    break;
-                case "d5":
-                    line = 9;
-                    Console.WriteLine("Please enter the new amount.");
-                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath+"/Storage/Amounts.txt", line);
-                    break;
-                case "d10":
-                    line = 10;
-                    Console.WriteLine("Please enter the new amount.");
-                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath+"/Storage/Amounts.txt", line);
-                    break;
-                case "d20":
-                    line = 11;
-                    Console.WriteLine("Please enter the new amount.");
-                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath+"/Storage/Amounts.txt", line);
-                    break;
-                case "d30":
-                    line = 12;
-                    Console.WriteLine("Please enter the new amount.");
-                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath+"/Storage/Amounts.txt", line);
-                    break;
-                case "d":
-                    line = 13;
-                    Console.WriteLine("Please enter the new amount.");
-                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath+"/Storage/Amounts.txt", line);
-                    break;
-                case "j":
-                    line = 14;
-                    Console.WriteLine("Please enter the new amount.");
-                    ObjectWriter.LineChanger(Console.ReadLine(), StoragePathClass.StoragePath+"/Storage/Amounts.txt", line);
-                    break;
-                default:
-                    Console.WriteLine("Invalid answer");
-                    Console.ReadLine();
-                    EAmounts();
-                    break;
+                Console.WriteLine("Enter the new amount:");
+                var content = Console.ReadLine();
+                if (int.TryParse(content, out int check) && check >= 0 && check <= 9999)
+                {
+                    ObjectWriter.LineChanger(content, StoragePathClass.StoragePath + "/Storage/Amounts.txt", line);
+                }
+                else Console.WriteLine("Invalid input.");
             }
+            else Console.WriteLine("Invalid input.");
+
+            Console.ReadLine();
+            EAmounts();
+
             return;
         }
 
@@ -152,7 +90,7 @@ namespace FireWorks
                 default:
                     Console.WriteLine("Invalid answer");
                     Console.ReadLine();
-                    EResources();
+                    EGasmeters();
                     break;
             }
 
@@ -162,7 +100,7 @@ namespace FireWorks
             string EResource = "";
             ID = "\"ID\":" + ID; //Absicherung
 
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/Storage/Gasmeters.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/Storage/Gasmeters.txt"))
                 while (EResource.IndexOf(ID) == -1)
                 {
                     EResource = UserText.ReadLine();
@@ -183,19 +121,19 @@ namespace FireWorks
             Resource.Date = Console.ReadLine();
 
             EResource = JsonConvert.SerializeObject(Resource);
-            ObjectWriter.LineChanger(EResource, StoragePathClass.StoragePath+"/Storage/Gasmeters.txt", Resource.ID);
+            ObjectWriter.LineChanger(EResource, StoragePathClass.StoragePath + "/Storage/Gasmeters.txt", Resource.ID);
 
             return;
         }
 
 
-        
+
 
         public static void EGasmetersC()
         {
             int i = 0;
-            string Text = "y e e t";
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/Storage/Resources.txt"))
+            string Text = "lorem ipsum";
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/Storage/Resources.txt"))
                 while (Text != null)
                 {
                     Text = UserText.ReadLine();
@@ -210,8 +148,15 @@ namespace FireWorks
             Console.WriteLine("Enter the date of checkup for the gasmeter. (dd format)");
             ResourceC.Date = Console.ReadLine();
 
-            ObjectWriter.WriteObject(ResourceC, StoragePathClass.StoragePath+"/Storage/Gasmeter.txt");
-
+            if (int.TryParse(ResourceC.Date, out int check) && check >= 1 && check <= 31)
+            {
+                ObjectWriter.WriteObject(ResourceC, StoragePathClass.StoragePath + "/Storage/Gasmeter.txt");
+            }
+            else
+            {
+                Console.WriteLine("Invalid input.");
+                EGasmetersC();
+            }
             return;
         }
         public static void EResources()
@@ -236,30 +181,33 @@ namespace FireWorks
 
             Console.WriteLine("Enter a user-ID.");
             string ID = Console.ReadLine();
-            string EResource = "";
-            ID = "\"ID\":" + ID; //Absicherung
+            if (int.TryParse(ID, out int check) && check >= 0 && check <= 999999)
+            {
+                string EResource = "";
+                ID = "\"ID\":" + ID; //Absicherung
 
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/Storage/Resources.txt"))
-                while (EResource.IndexOf(ID) == -1)
-                {
-                    EResource = UserText.ReadLine();
-                    if (EResource == null)
+                using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/Storage/Resources.txt"))
+                    while (EResource.IndexOf(ID) == -1)
                     {
-                        Console.WriteLine("Invalid ID.");
-                        Console.ReadLine();
-                        EResources();
-                        return;
+                        EResource = UserText.ReadLine();
+                        if (EResource == null)
+                        {
+                            Console.WriteLine("Invalid ID.");
+                            Console.ReadLine();
+                            EResources();
+                            return;
+                        }
                     }
-                }
 
-            Resources Resource;
-            Resource = JsonConvert.DeserializeObject<Resources>(EResource);
+                Resources Resource;
+                Resource = JsonConvert.DeserializeObject<Resources>(EResource);
 
-            Console.WriteLine("Enter the new name for " + Resource.Name + ".");
+                Console.WriteLine("Enter the new name for " + Resource.Name + ".");
 
-            EResource = JsonConvert.SerializeObject(Resource);
-            ObjectWriter.LineChanger(EResource, StoragePathClass.StoragePath+"/Storage/Resources.txt", Resource.ID);
-
+                EResource = JsonConvert.SerializeObject(Resource);
+                ObjectWriter.LineChanger(EResource, StoragePathClass.StoragePath + "/Storage/Resources.txt", Resource.ID);
+            }
+            Console.WriteLine("Invalid input.");
             return;
         }
 
@@ -267,7 +215,7 @@ namespace FireWorks
         {
             int i = 0;
             string Text = "y e e t";
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/Storage/Resources.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/Storage/Resources.txt"))
                 while (Text != null)
                 {
                     Text = UserText.ReadLine();
@@ -282,7 +230,7 @@ namespace FireWorks
             Console.WriteLine("Enter the name for the resource.");
             ResourceC.Name = Console.ReadLine();
 
-            ObjectWriter.WriteObject(ResourceC, StoragePathClass.StoragePath+"/Storage/Resources.txt");
+            ObjectWriter.WriteObject(ResourceC, StoragePathClass.StoragePath + "/Storage/Resources.txt");
 
             return;
         }
@@ -297,11 +245,11 @@ namespace FireWorks
             VehicleType = Console.ReadLine();
             if (VehicleType != "ge") if (VehicleType != "le") if (VehicleType != "te") if (VehicleType != "ae") if (VehicleType != "gc") if (VehicleType != "lc") if (VehicleType != "tc") if (VehicleType != "ac")
                                         {
-                            Console.WriteLine("Invalid answer");
-                            Console.ReadLine();
-                            EVehicles();
-                            return;
-                        }
+                                            Console.WriteLine("Invalid answer");
+                                            Console.ReadLine();
+                                            EVehicles();
+                                            return;
+                                        }
             switch (VehicleType)
             {
                 case "ge":
@@ -335,43 +283,50 @@ namespace FireWorks
         {
             Console.WriteLine("Enter the vehicle-ID");
             string ID = Console.ReadLine();
-            string EVehicle = "";
-            ID = "\"ID\":" + ID; //Absicherung
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/Storage/Vehicles.txt"))
-                while (EVehicle.IndexOf(ID) == -1)
-                {
-                    EVehicle = UserText.ReadLine();
-                    if (EVehicle == null)
+            if (int.TryParse(ID, out int check) && check >= 0 && check <= 999999)
+            {
+                string EVehicle = "";
+                ID = "\"ID\":" + ID; //Absicherung
+                using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/Storage/Vehicles.txt"))
+                    while (EVehicle.IndexOf(ID) == -1)
                     {
-                        Console.WriteLine("Invalid ID.");
-                        Console.ReadLine();
-                        EUsers();
-                        return;
+                        EVehicle = UserText.ReadLine();
+                        if (EVehicle == null)
+                        {
+                            Console.WriteLine("Invalid ID.");
+                            Console.ReadLine();
+                            EUsers();
+                            return;
+                        }
+                    }
+                string answer;
+                Vehicles EVehicles = JsonConvert.DeserializeObject<Vehicles>(EVehicle);
+                Console.WriteLine("Enter the new values, leave the field empty to keep the current value.");
+                Console.WriteLine("Type:");
+                answer = Console.ReadLine();
+                if (answer != "") EVehicles.Type = answer;
+                Console.WriteLine("Seats:");
+                answer = Console.ReadLine();
+                if (answer != "")
+                {
+                    int.TryParse(answer, out int number);
+                    EVehicles.Seats = number;
+                }
+                Console.WriteLine("Horsepower:");
+                answer = Console.ReadLine();
+
+
+                if (answer != "")
+                {
+                    if (int.TryParse(answer, out check) && check >= 0 && check <= 999999)
+                    {
+                        EVehicles.HP = check;
                     }
                 }
-            string answer;
-            int number;
-            Vehicles EVehicles = JsonConvert.DeserializeObject<Vehicles>(EVehicle);
-            Console.WriteLine("Enter the new values, leave the field empty to keep the current value.");
-            Console.WriteLine("Type:");
-            answer = Console.ReadLine();
-            if (answer != "") EVehicles.Type = answer;
-            Console.WriteLine("Seats:");
-            answer = Console.ReadLine();
-            if (answer != "")
-            {
-                int.TryParse(answer, out number);
-                EVehicles.Seats = number;
+                string EVehicleS = JsonConvert.SerializeObject(EVehicles);
+                ObjectWriter.LineChanger(EVehicleS, StoragePathClass.StoragePath + "/Storage/Vehicles.txt", EVehicles.ID);
+
             }
-            Console.WriteLine("Horsepower:");
-            answer = Console.ReadLine();
-            if (answer != "")
-            {
-                int.TryParse(answer, out number);
-                EVehicles.HP = number;
-            }
-            string EVehicleS = JsonConvert.SerializeObject(EVehicles);
-            ObjectWriter.LineChanger(EVehicleS, StoragePathClass.StoragePath+"/Storage/Vehicles.txt", EVehicles.ID);
             return;
         }
         public static void EVehiclesTTL()
@@ -379,59 +334,70 @@ namespace FireWorks
             Console.WriteLine("Enter the vehicle-ID");
             string ID = Console.ReadLine();
             string EVehicle = "";
-            ID = "\"ID\":" + ID; //Absicherung
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/Storage/TTLs.txt"))
-                while (EVehicle.IndexOf(ID) == -1)
-                {
-                    EVehicle = UserText.ReadLine();
-
-                    if (EVehicle == null)
+            if (int.TryParse(ID, out int check) && check >= 0 && check <= 9999)
+            {
+                ID = "\"ID\":" + ID; //Absicherung
+                using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/Storage/TTLs.txt"))
+                    while (EVehicle.IndexOf(ID) == -1)
                     {
-                        Console.WriteLine("Invalid ID.");
-                        Console.ReadLine();
-                        EUsers();
-                        return;
+                        EVehicle = UserText.ReadLine();
+
+                        if (EVehicle == null)
+                        {
+                            Console.WriteLine("Invalid ID.");
+                            Console.ReadLine();
+                            EUsers();
+                            return;
+                        }
+                    }
+                string answer;
+                int number;
+                TurntableLadder EVehicles = JsonConvert.DeserializeObject<TurntableLadder>(EVehicle);
+                Console.WriteLine("Enter the new values, leave the field empty to keep the current value.");
+                Console.WriteLine("Type:");
+                answer = Console.ReadLine();
+                if (answer != "") EVehicles.Type = answer;
+                Console.WriteLine("Seats:");
+                answer = Console.ReadLine();
+                if (answer != "")
+                {
+                    if (int.TryParse(answer, out  check) && check >= 0 && check <= 999999)
+                    {
+                        EVehicles.Seats = check;
                     }
                 }
-            string answer;
-            int number;
-            TurntableLadder EVehicles = JsonConvert.DeserializeObject<TurntableLadder>(EVehicle);
-            Console.WriteLine("Enter the new values, leave the field empty to keep the current value.");
-            Console.WriteLine("Type:");
-            answer = Console.ReadLine();
-            if (answer != "") EVehicles.Type = answer;
-            Console.WriteLine("Seats:");
-            answer = Console.ReadLine();
-            if (answer != "")
-            {
-                int.TryParse(answer, out number);
-                EVehicles.Seats = number;
-            }
-            Console.WriteLine("Horsepower:");
-            answer = Console.ReadLine();
-            if (answer != "")
-            {
-                int.TryParse(answer, out number);
-                EVehicles.HP = number;
-            }
-            Console.WriteLine("Height in m:");
-            answer = Console.ReadLine();
-            if (answer != "")
-            {
-                int.TryParse(answer, out number);
-                EVehicles.Height = number;
-            }
-            Console.WriteLine("Does the vehicle contain a chainsaw? (y/n)");
-            answer = Console.ReadLine();
-            if (answer != "")
-            {
-                if (answer == "n") EVehicles.Saw = false;
-                if (answer == "y") EVehicles.Saw = true;
-            }
+                Console.WriteLine("Horsepower:");
+                answer = Console.ReadLine();
+                if (answer != "")
+                {
+                    if (int.TryParse(answer, out check) && check >= 0 && check <= 999999)
+                    {
+                        int.TryParse(answer, out number);
+                        EVehicles.HP = number;
+                    }
+                }
+                Console.WriteLine("Height in m:");
+                answer = Console.ReadLine();
+                if (answer != "")
+                {
+                    if (int.TryParse(answer, out check) && check >= 0 && check <= 999999)
+                    {
+                        int.TryParse(answer, out number);
+                        EVehicles.Height = number;
+                    }
+                }
+                Console.WriteLine("Does the vehicle contain a chainsaw? (y/n)");
+                answer = Console.ReadLine();
+                if (answer != "")
+                {
+                    if (answer == "n") EVehicles.Saw = false;
+                    if (answer == "y") EVehicles.Saw = true;
+                }
 
-            string EVehicleS = JsonConvert.SerializeObject(EVehicles);
-            ObjectWriter.LineChanger(EVehicleS, StoragePathClass.StoragePath+"/Storage/TTLs.txt", EVehicles.ID);
-
+                string EVehicleS = JsonConvert.SerializeObject(EVehicles);
+                ObjectWriter.LineChanger(EVehicleS, StoragePathClass.StoragePath + "/Storage/TTLs.txt", EVehicles.ID);
+            }
+            else Console.WriteLine("Invalid input.");
             return;
         }
 
@@ -439,7 +405,7 @@ namespace FireWorks
         {
             string EVehicle = "";
             int i = 0;
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/Storage/TTLs.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/Storage/TTLs.txt"))
                 while (EVehicle != null)
                 {
                     EVehicle = UserText.ReadLine();
@@ -447,7 +413,7 @@ namespace FireWorks
                 }
 
             Console.WriteLine("Vehicle-ID: " + i);
-            
+
             string answer;
             TurntableLadder EVehicles = new TurntableLadder();
             Console.WriteLine("Enter the values.");
@@ -457,28 +423,30 @@ namespace FireWorks
             EVehicles.Type = answer;
             Console.WriteLine("Seats:");
             answer = Console.ReadLine();
-
-            int.TryParse(answer, out int number);
-            EVehicles.Seats = number;
-
+            if (int.TryParse(answer, out int check) && check >= 0 && check <= 999999)
+            {
+                EVehicles.Seats = check;
+            }
             Console.WriteLine("Horsepower:");
             answer = Console.ReadLine();
-
-            int.TryParse(answer, out number);
-            EVehicles.HP = number;
-
+            if (int.TryParse(answer, out check) && check >= 0 && check <= 999999)
+            {
+                EVehicles.HP = check;
+            }
             Console.WriteLine("Height in m:");
             answer = Console.ReadLine();
             if (answer != "")
             {
-                int.TryParse(answer, out number);
-                EVehicles.Height = number;
+                if (int.TryParse(answer, out check) && check >= 0 && check <= 999999)
+                {
+                    EVehicles.Height = check;
+                }
             }
             Console.WriteLine("Does the vehicle contain a chainsaw? (y/n)");
             if (DeploymentListing.GetYesNo()) EVehicles.Saw = true;
             else EVehicles.Saw = false;
 
-            ObjectWriter.WriteObject(EVehicles, StoragePathClass.StoragePath+"/Storage/TTLs.txt");
+            ObjectWriter.WriteObject(EVehicles, StoragePathClass.StoragePath + "/Storage/TTLs.txt");
 
             return;
         }
@@ -487,7 +455,7 @@ namespace FireWorks
         {
             string EVehicle = "";
             int i = 0;
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/Storage/LFZs.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/Storage/LFZs.txt"))
                 while (EVehicle != null)
                 {
                     EVehicle = UserText.ReadLine();
@@ -505,28 +473,31 @@ namespace FireWorks
             EVehicles.Type = answer;
             Console.WriteLine("Seats:");
             answer = Console.ReadLine();
-
-            int.TryParse(answer, out int number);
-            EVehicles.Seats = number;
+            if (int.TryParse(answer, out int check) && check >= 0 && check <= 999999)
+            {
+                EVehicles.Seats = check;
+            }
 
             Console.WriteLine("Horsepower:");
             answer = Console.ReadLine();
-
-            int.TryParse(answer, out number);
-            EVehicles.HP = number;
-
+            if (int.TryParse(answer, out check) && check >= 0 && check <= 999999)
+            {
+                EVehicles.HP = check;
+            }
             Console.WriteLine("Filquantity in L:");
             answer = Console.ReadLine();
             if (answer != "")
             {
-                int.TryParse(answer, out number);
-                EVehicles.FillQuantity = number;
+                if (int.TryParse(answer, out check) && check >= 0 && check <= 999999)
+                {
+                    EVehicles.FillQuantity = check;
+                }
             }
             Console.WriteLine("Does the vehicle contain a chainsaw? (y/n)");
             if (DeploymentListing.GetYesNo()) EVehicles.Saw = true;
             else EVehicles.Saw = false;
 
-            ObjectWriter.WriteObject(EVehicles, StoragePathClass.StoragePath+"/Storage/LFZs.txt");
+            ObjectWriter.WriteObject(EVehicles, StoragePathClass.StoragePath + "/Storage/LFZs.txt");
 
             return;
         }
@@ -536,7 +507,7 @@ namespace FireWorks
         {
             string EVehicle = "";
             int i = 0;
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/Storage/Ambulances.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/Storage/Ambulances.txt"))
                 while (EVehicle != null)
                 {
                     EVehicle = UserText.ReadLine();
@@ -554,25 +525,28 @@ namespace FireWorks
             EVehicles.Type = answer;
             Console.WriteLine("Seats:");
             answer = Console.ReadLine();
-
-            int.TryParse(answer, out int number);
-            EVehicles.Seats = number;
-
+            if (int.TryParse(answer, out int check) && check >= 0 && check <= 999999)
+            {
+                EVehicles.Seats = check;
+            }
             Console.WriteLine("Horsepower:");
             answer = Console.ReadLine();
-
-            int.TryParse(answer, out number);
-            EVehicles.HP = number;
+            if (int.TryParse(answer, out check) && check >= 0 && check <= 999999)
+            {
+                EVehicles.HP = check;
+            }
 
             Console.WriteLine("Maximum patientweight in kg:");
             answer = Console.ReadLine();
             if (answer != "")
             {
-                int.TryParse(answer, out number);
-                EVehicles.MaxWeight = number;
+                if (int.TryParse(answer, out check) && check >= 0 && check <= 999999)
+                {
+                    EVehicles.MaxWeight = check;
+                }
             }
 
-            ObjectWriter.WriteObject(EVehicles, StoragePathClass.StoragePath+"/Storage/Ambulances.txt");
+            ObjectWriter.WriteObject(EVehicles, StoragePathClass.StoragePath + "/Storage/Ambulances.txt");
 
             return;
         }
@@ -584,7 +558,7 @@ namespace FireWorks
             string ID = Console.ReadLine();
             string EVehicle = "";
             ID = "\"ID\":" + ID; //Absicherung
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/Storage/LFZs.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/Storage/LFZs.txt"))
                 while (EVehicle.IndexOf(ID) == -1)
                 {
                     EVehicle = UserText.ReadLine();
@@ -598,7 +572,6 @@ namespace FireWorks
                     }
                 }
             string answer;
-            int number;
             LFZ EVehicles = JsonConvert.DeserializeObject<LFZ>(EVehicle);
             Console.WriteLine("Enter the new values, leave the field empty to keep the current value.");
             Console.WriteLine("Type:");
@@ -608,22 +581,28 @@ namespace FireWorks
             answer = Console.ReadLine();
             if (answer != "")
             {
-                int.TryParse(answer, out number);
-                EVehicles.Seats = number;
+                if (int.TryParse(answer, out int check) && check >= 0 && check <= 999999)
+                {
+                    EVehicles.Seats = check;
+                }
             }
             Console.WriteLine("Horsepower:");
             answer = Console.ReadLine();
             if (answer != "")
             {
-                int.TryParse(answer, out number);
-                EVehicles.HP = number;
+                if (int.TryParse(answer, out int check) && check >= 0 && check <= 999999)
+                {
+                    EVehicles.HP = check;
+                }
             }
             Console.WriteLine("Fillquantity in L:");
             answer = Console.ReadLine();
             if (answer != "")
             {
-                int.TryParse(answer, out number);
-                EVehicles.FillQuantity = number;
+                if (int.TryParse(answer, out int check) && check >= 0 && check <= 999999)
+                {
+                    EVehicles.FillQuantity = check;
+                }
             }
             Console.WriteLine("Does the vehicle contain a chainsaw? (y/n)");
             answer = Console.ReadLine();
@@ -635,7 +614,7 @@ namespace FireWorks
 
             string EVehicleS = JsonConvert.SerializeObject(EVehicles);
 
-            ObjectWriter.LineChanger(EVehicleS, StoragePathClass.StoragePath+"/Storage/LFZs.txt", EVehicles.ID);
+            ObjectWriter.LineChanger(EVehicleS, StoragePathClass.StoragePath + "/Storage/LFZs.txt", EVehicles.ID);
             return;
         }
 
@@ -643,7 +622,7 @@ namespace FireWorks
         {
             string EVehicle = "";
             int i = 0;
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/Storage/Vehicles.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/Storage/Vehicles.txt"))
                 while (EVehicle != null)
                 {
                     EVehicle = UserText.ReadLine();
@@ -662,18 +641,18 @@ namespace FireWorks
             EVehicles.Type = answer;
             Console.WriteLine("Seats:");
             answer = Console.ReadLine();
-
-            int.TryParse(answer, out int number);
-            EVehicles.Seats = number;
-
+            if (int.TryParse(answer, out int check) && check >= 0 && check <= 999999)
+            {
+                EVehicles.Seats = check;
+            }
             Console.WriteLine("Horsepower:");
             answer = Console.ReadLine();
+            if (int.TryParse(answer, out check) && check >= 0 && check <= 999999)
+            {
+                EVehicles.HP = check;
+            }
 
-            int.TryParse(answer, out number);
-            EVehicles.HP = number;
-
-
-            ObjectWriter.WriteObject(EVehicles, StoragePathClass.StoragePath+"/Storage/Vehicles.txt");
+            ObjectWriter.WriteObject(EVehicles, StoragePathClass.StoragePath + "/Storage/Vehicles.txt");
 
             return;
         }
@@ -684,7 +663,7 @@ namespace FireWorks
             string ID = Console.ReadLine();
             string EVehicle = "";
             ID = "\"ID\":" + ID; //Absicherung
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/Storage/Ambulances.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/Storage/Ambulances.txt"))
                 while (EVehicle.IndexOf(ID) == -1)
                 {
                     EVehicle = UserText.ReadLine();
@@ -697,7 +676,6 @@ namespace FireWorks
                     }
                 }
             string answer;
-            int number;
             Ambulance EVehicles = JsonConvert.DeserializeObject<Ambulance>(EVehicle);
             Console.WriteLine("Enter the new values, leave the field empty to keep the current value.");
             Console.WriteLine("Type:");
@@ -707,78 +685,87 @@ namespace FireWorks
             answer = Console.ReadLine();
             if (answer != "")
             {
-                int.TryParse(answer, out number);
-                EVehicles.Seats = number;
+                if (int.TryParse(answer, out int check) && check >= 0 && check <= 999999)
+                {
+                    EVehicles.Seats = check;
+                }
             }
             Console.WriteLine("Horsepower:");
             answer = Console.ReadLine();
             if (answer != "")
             {
-                int.TryParse(answer, out number);
-                EVehicles.HP = number;
+                if (int.TryParse(answer, out int check) && check >= 0 && check <= 999999)
+                {
+                    EVehicles.HP = check;
+                }
             }
             Console.WriteLine("Maximum patient weight:");
             answer = Console.ReadLine();
             if (answer != "")
             {
-                int.TryParse(answer, out number);
-                EVehicles.MaxWeight = number;
+                if (int.TryParse(answer, out int check) && check >= 0 && check <= 999999)
+                {
+                    EVehicles.MaxWeight = check;
+                }
             }
 
             string EVehicleS = JsonConvert.SerializeObject(EVehicles);
 
-            ObjectWriter.LineChanger(EVehicleS, StoragePathClass.StoragePath+"/Storage/Ambulances.txt", EVehicles.ID);
+            ObjectWriter.LineChanger(EVehicleS, StoragePathClass.StoragePath + "/Storage/Ambulances.txt", EVehicles.ID);
             return;
         }
         public static void EUsers()
         {
             Console.WriteLine("Enter a user-ID. Enter \"0\" to create a new user.");
             string ID = Console.ReadLine();
-            string EUser = "";
-            if (ID == "0")
+            string EUser = ""; if (int.TryParse(ID, out int check) && check >= 0 && check <= 999999)
             {
-                EUsersCreate();
-                return;
-            }
-            ID = "\"ID\":" + ID; //Absicherung
-
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/Storage/Users.txt"))
-                while (EUser.IndexOf(ID) == -1)
+                if (ID == "0")
                 {
-                    EUser = UserText.ReadLine();
+                    EUsersCreate();
+                    return;
+                }
+                ID = "\"ID\":" + ID; //Absicherung
 
-                    if (EUser == null)
+                using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/Storage/Users.txt"))
+                    while (EUser.IndexOf(ID) == -1)
                     {
-                        Console.WriteLine("Invalid ID.");
+                        EUser = UserText.ReadLine();
+
+                        if (EUser == null)
+                        {
+                            Console.WriteLine("Invalid ID.");
+                            Console.ReadLine();
+                            EUsers();
+                            return;
+                        }
+                    }
+
+                Human User;
+                User = JsonConvert.DeserializeObject<Human>(EUser);
+
+                Console.Clear();
+                Console.WriteLine("Edit what value?");
+                Console.WriteLine("(n)ame / (p)IN / (d)isable user");
+                switch (Console.ReadLine())
+                {
+                    case "n":
+                        EUsersName(User);
+                        break;
+                    case "p":
+                        EUsersPin(User);
+                        break;
+                    case "d":
+                        EUsersDisable(User);
+                        break;
+                    default:
+                        Console.WriteLine("Invalid answer");
                         Console.ReadLine();
                         EUsers();
-                        return;
-                    }
+                        break;
                 }
-
-            Human User;
-            User = JsonConvert.DeserializeObject<Human>(EUser);
-
-            Console.Clear();
-            Console.WriteLine("Edit what value?");
-            Console.WriteLine("(n)ame / (p)IN / (d)isable user");
-            switch (Console.ReadLine())
-            {
-                case "n":
-                    EUsersName(User);
-                    break;
-                case "p":
-                    EUsersPin(User);
-                    break;
-                case "d":
-                    EUsersDisable(User);
-                    break;
-                default:
-                    Console.WriteLine("Invalid answer");
-                    Console.ReadLine();
-                    EUsers();
-                    break;
             }
+            else Console.WriteLine("Invalid input.");
             return;
         }
 
@@ -789,22 +776,25 @@ namespace FireWorks
             Console.WriteLine("Please enter a new last name.");
             User.LName = Console.ReadLine();
             string Usertext = JsonConvert.SerializeObject(User);
-            ObjectWriter.LineChanger(Usertext, StoragePathClass.StoragePath+"/Storage/Users.txt", User.ID);
+            ObjectWriter.LineChanger(Usertext, StoragePathClass.StoragePath + "/Storage/Users.txt", User.ID);
             return;
         }
         public static void EUsersPin(Human User)
         {
             Console.WriteLine("Please enter a new PIN.");
-            User.PIN = Console.ReadLine();
-            string Usertext = JsonConvert.SerializeObject(User);
-            ObjectWriter.LineChanger(Usertext, StoragePathClass.StoragePath+"/Storage/Users.txt", User.ID);
+            User.PIN = Console.ReadLine(); if (int.TryParse(User.PIN, out int check) && check >= 0 && check <= 9999)
+            {
+                string Usertext = JsonConvert.SerializeObject(User);
+                ObjectWriter.LineChanger(Usertext, StoragePathClass.StoragePath + "/Storage/Users.txt", User.ID);
+            }
+            else Console.WriteLine("Invalid input.");
             return;
         }
         public static void EUsersDisable(Human User)
         {
             User.Status = 0;
             string Usertext = JsonConvert.SerializeObject(User);
-            ObjectWriter.LineChanger(Usertext, StoragePathClass.StoragePath+"/Storage/Users.txt", User.ID);
+            ObjectWriter.LineChanger(Usertext, StoragePathClass.StoragePath + "/Storage/Users.txt", User.ID);
             return;
         }
         public static void EUsersCreate()
@@ -812,7 +802,7 @@ namespace FireWorks
             Human User = new Human();
             int i = 0;
             string Text = "y e e t";
-            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath+"/Storage/Users.txt"))
+            using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/Storage/Users.txt"))
                 while (Text != null)
                 {
                     Text = UserText.ReadLine();
@@ -826,12 +816,16 @@ namespace FireWorks
             Console.WriteLine("Please enter a last name.");
             User.LName = Console.ReadLine();
             Console.WriteLine("Please enter a PIN.");
-            User.PIN = Console.ReadLine();
-            Console.WriteLine("Please enter status number. (0 locked / 1 user / 2 admin)");
+            string temp = Console.ReadLine();
+            if (int.TryParse(temp, out int check) && check >= 0 && check <= 999999)
+            {
+                User.PIN = temp;
+            }
+                Console.WriteLine("Please enter status number. (0 locked / 1 user / 2 admin)");
             string answer = Console.ReadLine();
             int.TryParse(answer, out int status);
             User.Status = status;
-            ObjectWriter.WriteObject(User, StoragePathClass.StoragePath+"/Storage/Users.txt");
+            ObjectWriter.WriteObject(User, StoragePathClass.StoragePath + "/Storage/Users.txt");
             return;
         }
     }
