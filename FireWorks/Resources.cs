@@ -64,12 +64,15 @@ namespace FireWorks
                 {
                     ObjectWriter.LineChanger(content, StoragePathClass.StoragePath + "/Storage/Amounts.txt", line);
                 }
-                else Console.WriteLine("Invalid input.");
+                else {Console.WriteLine("Invalid input.");
+                Console.ReadLine();
+                EAmounts();
             }
-            else Console.WriteLine("Invalid input.");
-
+        }
+            else {Console.WriteLine("Invalid input.");
             Console.ReadLine();
             EAmounts();
+            }
 
             return;
         }
@@ -214,7 +217,7 @@ namespace FireWorks
         public static void EResourcesC()
         {
             int i = 0;
-            string Text = "y e e t";
+            string Text = "lorem ipsum";
             using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/Storage/Resources.txt"))
                 while (Text != null)
                 {
@@ -805,7 +808,7 @@ namespace FireWorks
         {
             Human User = new Human();
             int i = 0;
-            string Text = "y e e t";
+            string Text = "lorem ipsum";
             using (StreamReader UserText = new StreamReader(@StoragePathClass.StoragePath + "/Storage/Users.txt"))
                 while (Text != null)
                 {
@@ -827,10 +830,10 @@ namespace FireWorks
                 {
                     User.PIN = temp;
                 }
-                else Console.WriteLine("Invalid input.");
+                else { Console.WriteLine("Invalid input.");EUsersCreate(); }
             }
-            else Console.WriteLine("Invalid input.");
-                Console.WriteLine("Please enter status number. (0 locked / 1 user / 2 admin)");
+            else {Console.WriteLine("Invalid input."); EUsersCreate(); }
+        Console.WriteLine("Please enter status number. (0 locked / 1 user / 2 admin)");
             string answer = Console.ReadLine();
             int.TryParse(answer, out int status);
             User.Status = status;

@@ -66,6 +66,7 @@ namespace FireWorks
             bool exit = false;
             while (exit == false)
             {
+                Console.Clear();
                 Console.WriteLine("(detail)ed Report / (show) deployments / (search) deployments");
                 Console.WriteLine("(create) deployment / (lock) or unlock user / (edit) data / (exit)");
 
