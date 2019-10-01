@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace FireWorks
 {
     /// <summary>
-    /// Deployment onbject contains all the information of a given Deployment
+    /// Deployment object contains all the information of a given Deployment
     /// </summary>
     public class Deployment : IComparable      
     {
@@ -25,7 +25,7 @@ namespace FireWorks
             Number = 0;
         }
         /// <summary>
-        /// Constructor for Deployments
+        /// Default constructor for Deployments
         /// </summary>
         /// <param name="Loc">Location</param>
         /// <param name="Veh">Cars</param>
@@ -43,6 +43,16 @@ namespace FireWorks
             Comment = Com;
             Number = Num;
         }
+        /// <summary>
+        /// Copy constructor only to be used when reading from files.
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="Loc"></param>
+        /// <param name="Veh"></param>
+        /// <param name="Res"></param>
+        /// <param name="Ff"></param>
+        /// <param name="Com"></param>
+        /// <param name="Num"></param>
         public Deployment(string date,string Loc, Vehicle[] Veh, Resources[] Res, FireFighter[] Ff, string Com, int Num)
         {
             DateAndTime = date;
@@ -53,10 +63,19 @@ namespace FireWorks
             Comment = Com;
             Number = Num;
         }
+        /// <summary>
+        /// ToString method returns object as formatted JSON.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
+        /// <summary>
+        /// CompareTo implementation to be able to sort deployments
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public int CompareTo(object obj)
         {
             if (!(obj is Deployment)) throw new FormatException("Only compare Deployment to another Deployment");
@@ -68,6 +87,12 @@ namespace FireWorks
             //if both "if's" arent true objects must be equal. No number is given twice.
             return 0;
         }
+        /// <summary>
+        /// Sums up all used Hoses
+        /// </summary>
+        /// <returns>
+        /// returns string containing the summed Hoses
+        /// </returns>
         public string SumUpHoses()
         {
             int B = 0, C = 0, D = 0;
@@ -92,6 +117,12 @@ namespace FireWorks
             }
             return "B: " + B + " C: " + C + " D: " + D;
         }
+        /// <summary>
+        /// Generate a Report in flowng text.
+        /// </summary>
+        /// <returns>
+        /// A string containing the report.
+        /// </returns>
         public string GenerateWebReport()
         {
             string report = "\n\n";

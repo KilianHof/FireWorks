@@ -8,53 +8,115 @@ namespace FireWorks
 {
     class TUI : IUserLayer
     {
-        private readonly int width = 120;
-        private readonly int height = 30;
+        private int width = 120;
+        private int height = 30;
         private readonly int maxLength = 115;
-        private readonly bool isFancy = false;
+        private readonly bool isFancy = Globals.debug;
+        public string message = "";
 
         public TUI()
         {
             Console.SetWindowSize(width, height);
         }
+        public void Update()
+        {
+            if (isFancy || true)
+            {
+                Console.WriteLine(message);
+                message = "";
+            }
+        }
         public void Display(string str)
         {
-            if (isFancy)
-            {
-                for (int i = 0; i < width - 1; i++)         // Top Row
-                {
-                    Console.Write("X");
-                }
+            char leftTop = '╔';
+            char rightTop = '╗';
+            char leftBottom = '╚';
+            char rightBottom = '╝';
 
-                Console.Write("\n");
-                Console.Write("X ");
-                string Timedate = DateTime.Now.ToString("dddd, dd MMMM yyyy HH: mm:ss");
-                Console.Write("Time and Date: " + Timedate);
+            char vertical = '║';
+            char horizontal = '═';
+
+            char vertRight = '╠';
+            char vertLeft = '╣';
+
+
+            if (isFancy || true)
+            {
+                Console.Clear();
+                width = Console.WindowWidth;
+                height = Console.WindowHeight;
+
+                message += leftTop;
+                for (int i = 0; i < width - 3; i++)         // Top Row
+                {
+                    message += horizontal;
+                }
+                message += rightTop;
+
+                message += "\n";
+
+
+
+
+
+
+                message += vertical+" ";
+                string Timedate = DateTime.Now.ToString("dddd, dd MMMM yyyy HH: mm:ss"); // Statusbar
+                message += "Time and Date: " + Timedate;
+
+
+
 
                 for (int i = 0; i < width - (1 + Timedate.Length + 18); i++)         // Statusbar puffer
                 {
-                    Console.Write(" ");
+                    message += " ";
                 }
-                Console.Write("X\n");
-                for (int i = 0; i < width - 1; i++)         // Second Row
+                message += vertical+"\n";
+
+
+
+
+
+                message += vertRight;
+                for (int i = 0; i < width - 3; i++)         // Second Row
                 {
-                    Console.Write("X");
+                    message += horizontal;
                 }
-                Console.Write("\n");
+                message += vertLeft;
+
+
+
                 string[] splitted = str.Split('\n');
                 for (int j = 0; j < splitted.Length; j++)
                 {
-                    Console.Write("X ");
-                    Console.Write(splitted[j]);
+                    message += "\n"+vertical+" ";
+                        message += splitted[j];
                     for (int i = 0; i < width - (1 + splitted[j].Length + 3); i++)         // display puffer
                     {
-                        Console.Write(" ");
+                        message += " ";
                     }
 
-                    Console.Write("X\n");
+                    message += vertical;
                 }
-               
-                Console.Write("X\n");
+
+
+
+
+
+                message += "\n";
+                message += leftBottom;
+
+                for (int i = 0; i < width - 3; i++)         // Bottom Row
+                {
+                    message += horizontal;
+                }
+                message += rightBottom;
+                message += "\n";
+
+
+
+
+
 
             }
             else
@@ -72,7 +134,7 @@ namespace FireWorks
                 {
                     tmp += " ";
                 }
-                tmp += " X\n";    
+                tmp += " X";    
                     
             }
             return tmp;
@@ -122,7 +184,8 @@ namespace FireWorks
         }
         public int GetInt()                                             //negative??
         {
-            Console.WriteLine("Type a number");
+            Update();
+            //Console.WriteLine("Type a number");
             string Input = GetString();
             for (int i = 0; i < Input.Length; i++)
             {
@@ -135,13 +198,15 @@ namespace FireWorks
         }
         public string GetString()
         {
+            Update();
             string str = Console.ReadLine();
             while (str == "") { str = Console.ReadLine(); }
             return str;
         }
         public bool GetBool()
         {
-            Console.Write(" (y/n)?\n");
+            //Console.Write(" (y/n)?\n");
+            Update();
             string str = GetString();
             if ((str == "y") || (str == "Y") || (str == "Yes") || (str == "yes"))
                 return true;

@@ -3,6 +3,9 @@ namespace FireWorks
 {
     /// <summary>
     /// Authenticator is being used to verify and Login users.
+    /// A List of users is read from file.
+    /// The entered PIN gets compared with each pin in the Users file.
+    /// If a match is found the status of the user is returned as well as his name.
     /// </summary>
     class Authenticator
     {
@@ -13,7 +16,10 @@ namespace FireWorks
         /// <summary>
         /// Calls helper functions to ask for a PIN
         /// </summary>
-        /// <returns>True for a successful login attempt.</returns>
+        /// <returns>
+        /// String array[2] containing Status and User name for a successful login attempt.
+        /// returns error in boths slots of the array for invalid inputs or any error while reading file.
+        /// </returns>
 
         public string[] LogIn()
         {
@@ -38,9 +44,10 @@ namespace FireWorks
         /// Then looks up Entries in PINS.txt
         /// </summary>
         /// <returns>Returns True for a Valid PIN that is found in PINS.txt</returns>
-        public string[] CheckPIN()
+        private string[] CheckPIN()
         {
             string Input = _t.GetString();
+
             if (IsValidInput(Input))
             {
                 {
@@ -71,7 +78,7 @@ namespace FireWorks
         /// </summary>
         /// <param name="toCheck"></param>
         /// <returns>Returns true for a Valid format.</returns>
-        public bool IsValidInput(string toCheck)
+        private bool IsValidInput(string toCheck)
         {
             if (!(toCheck.Length == _pinLength))
                 return false;

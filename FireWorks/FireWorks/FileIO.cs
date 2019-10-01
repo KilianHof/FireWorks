@@ -12,21 +12,19 @@ namespace FireWorks
     /// </summary>
     public class FileIO : IDataLayer
     {
-        public static string[] _paths;
+        private static string[] _paths;
 
         private const int Deployments = 0;
         private const int Employees = 1;
         private const int Vehicles = 2;
         private const int Resources = 3;
         private const int Firefighters = 4;
-        /// <summary>
-        /// Writing an object as JSON to a file. If it doesnt exist its being created and then written to.
-        /// </summary>
-        /// <param name="o"> The object you want to write into a file.</param>
-        /// <param name="path">The file that is being written to.</param>
+
         private readonly IUserLayer _t;
         public FileIO(IUserLayer tui) { _t = tui; }
-
+        /// <summary>
+        /// Checks if the needed files exist and calls Init() to create missing files.
+        /// </summary>
         public void CheckForFiles()
         {
             string f = Directory.GetCurrentDirectory();
@@ -50,7 +48,11 @@ namespace FireWorks
             }
             Init(pathsExist);
         }
-        public void Init(bool[] existing)
+        /// <summary>
+        /// Intialization of FileIO missing files are created.
+        /// </summary>
+        /// <param name="existing"></param>
+        private void Init(bool[] existing)
         {
             bool isFine = true;
             foreach (var item in existing)
@@ -155,6 +157,11 @@ namespace FireWorks
                 }
             }
         }
+      
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <returns>returns a string[] containing Users</returns>
         public string[] GetListOfUsers()
         {
             List<string> results = new List<string>();
@@ -177,6 +184,11 @@ namespace FireWorks
             _t.Display("cannot read file: " + Path + "\n");
             return results.ToArray();
         }
+        /// <summary>
+        /// reads files.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns>returns a list of objects of type T</returns>
         public List<T> ReadFile<T>()
         {
             bool needCast = false;
@@ -207,7 +219,7 @@ namespace FireWorks
                         List<Vehicle> v = new List<Vehicle>();
                         List<Resources> r = new List<Resources>();
                         List<FireFighter> f = new List<FireFighter>();
-                        string cutting = line;
+                        string cutting = line;          
                         object testNull;
 
                         int firstIndex = cutting.IndexOf('[') + 1;          // first occourence marks array
@@ -272,7 +284,12 @@ namespace FireWorks
             _t.Display("cannot read file: " + _paths[path] + "\n");
             return test;
         }
-        public string[] CreateArray(string value)
+        /// <summary>
+        /// A helper function used to Disassemble a Json string.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private string[] CreateArray(string value)
         {
             if (value == "") return null;
             List<string> toArray = new List<string>();
@@ -296,7 +313,13 @@ namespace FireWorks
             return toArray.ToArray();
 
         }
-        public object ObjectCast<T>(string line)
+        /// <summary>
+        /// Used to turn Json strings to Objects.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="line"></param>
+        /// <returns> An object of type T</returns>
+        private object ObjectCast<T>(string line)
         {
             object trial = JSONConverter.JSONToGeneric<T>(line);
             if (trial.GetType() == typeof(Resources))
@@ -342,13 +365,21 @@ namespace FireWorks
             }
             return null;
         }
-        public List<T> ConvertList<T>(List<object> value)
+        /// <summary>
+        /// turns List of objects to List of T
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value"></param>
+        /// <returns> a List of type T</returns>
+        private List<T> ConvertList<T>(List<object> value)
         {
             List<T> tmp = new List<T>();
+
             for (int i = 0; i < value.Count(); i++)
             {
                 tmp.Add((T)value.ElementAt(i));
             }
+
             return tmp;
         }
 
@@ -364,19 +395,21 @@ namespace FireWorks
         }
         public void SaveListToFile<T>(List<T> liste)
         {
-            if (liste.Count == 0) { return; }
-
             int path = Pathfinder<T>();
+            string[] str = new string[liste.Count];
+            int i = 0;
+
+            if (liste.Count == 0) { return; }
             if (path == -1) { return; }
             if (!File.Exists(_paths[path])) { _t.Display("cannot read file: " + _paths[path] + "\n"); return; }
 
-            string[] str = new string[liste.Count];
-            int i = 0;
             foreach (var item in liste)
             {
                 str[i] += JSONConverter.ObjectToJSON(item);
                 i++;
             }
+
+
             File.WriteAllLines(_paths[path], str);
 
         }
@@ -388,7 +421,13 @@ namespace FireWorks
             SaveListToFile<Resources>((List<Resources>)lists[Resources]);
             SaveListToFile<FireFighter>((List<FireFighter>)lists[Firefighters]);
         }
-        static bool IsSubclassOfRawGeneric(Type generic, Type toCheck)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="generic"></param>
+        /// <param name="toCheck"></param>
+        /// <returns>true if toCheck is a subclass of generic</returns>
+        private bool IsSubclassOfRawGeneric(Type generic, Type toCheck)
         {
             while (toCheck != null && toCheck != typeof(object))
             {
@@ -396,16 +435,24 @@ namespace FireWorks
                 if (generic == cur) { return true; }
                 toCheck = toCheck.BaseType;
             }
+
             return false;
         }
-        public int Pathfinder<T>()
+        /// <summary>
+        /// Determines wich path an object is saved to.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns>int to reference path array</returns>
+        private int Pathfinder<T>()
         {
             int path = -1;
+
             if (IsSubclassOfRawGeneric(typeof(T), typeof(Deployment))) { path = Deployments; }
             if (IsSubclassOfRawGeneric(typeof(T), typeof(User))) { path = Employees; }
             if (IsSubclassOfRawGeneric(typeof(T), typeof(Vehicle))) { path = Vehicles; }
             if (IsSubclassOfRawGeneric(typeof(T), typeof(Resources))) { path = Resources; }
             if (IsSubclassOfRawGeneric(typeof(T), typeof(FireFighter))) { path = Firefighters; }
+
             return path;
         }
     }
