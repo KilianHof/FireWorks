@@ -94,6 +94,6 @@ namespace FireWorks
     }
     public static class Globals
     {
-        public const bool debug = true;
+        public const bool debug = false;
     }
 }

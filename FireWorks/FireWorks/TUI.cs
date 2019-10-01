@@ -14,6 +14,17 @@ namespace FireWorks
         private readonly bool isFancy = Globals.debug;
         private string message = "";
 
+        const char leftTop = '╔';
+        const char rightTop = '╗';
+        const char leftBottom = '╚';
+        const char rightBottom = '╝';
+        
+        const char vertical = '║';
+        const char horizontal = '═';
+        
+        const char vertRight = '╠';
+        const char vertLeft = '╣';
+
         public TUI()
         {
             Console.SetWindowSize(width, height);
@@ -22,83 +33,80 @@ namespace FireWorks
         {
             if (isFancy)
             {
-                Console.WriteLine(message);
+                Test(message);
                 message = "";
             }
         }
         public void Display(string str)
         {
-            char leftTop = '╔';
-            char rightTop = '╗';
-            char leftBottom = '╚';
-            char rightBottom = '╝';
-
-            char vertical = '║';
-            char horizontal = '═';
-
-            char vertRight = '╠';
-            char vertLeft = '╣';
-
-
+            
             if (isFancy)
             {
-                Console.Clear();
-                width = Console.WindowWidth;
-                height = Console.WindowHeight;
-                maxLength = width - 5;
-
-                message += leftTop;
-                for (int i = 0; i < width - 3; i++)         // Top Row
-                {
-                    message += horizontal;
-                }
-                message += rightTop;
-                message += "\n";
-
-                message += vertical+" ";
-                string Timedate = DateTime.Now.ToString("dddd, dd MMMM yyyy HH: mm:ss"); // Statusbar
-                message += "Time and Date: " + Timedate;
-
-                for (int i = 0; i < width - (1 + Timedate.Length + 18); i++)         // Statusbar puffer
-                {
-                    message += " ";
-                }
-                message += vertical+"\n";
-
-                message += vertRight;
-                for (int i = 0; i < width - 3; i++)         // Second Row
-                {
-                    message += horizontal;
-                }
-                message += vertLeft;
-
-                string[] splitted = str.Split('\n');
-                for (int j = 0; j < splitted.Length; j++)
-                {
-                    message += "\n"+vertical+" ";
-                        message += splitted[j];
-                    for (int i = 0; i < width - (1 + splitted[j].Length + 3); i++)         // display puffer
-                    {
-                        message += " ";
-                    }
-
-                    message += vertical;
-                }
-
-                message += "\n";
-                message += leftBottom;
-
-                for (int i = 0; i < width - 3; i++)         // Bottom Row
-                {
-                    message += horizontal;
-                }
-                message += rightBottom;
-                message += "\n";
+                message += str+"\n";
 
             }
             else
-                Console.Write(str);
+               Console.Write(str);
         }
+
+        private void Test(string str)
+        {
+            string internmessage = "";
+            Console.Clear();
+            width = Console.WindowWidth;
+            height = Console.WindowHeight;
+            maxLength = width - 5;
+
+            internmessage += leftTop;
+            for (int i = 0; i < width - 3; i++)         // Top Row
+            {
+                internmessage += horizontal;
+            }
+            internmessage += rightTop;
+            internmessage += "\n";
+
+            internmessage += vertical + " ";
+            string Timedate = DateTime.Now.ToString("dddd, dd MMMM yyyy HH: mm:ss"); // Statusbar
+            internmessage += "Time and Date: " + Timedate;
+
+            for (int i = 0; i < width - (1 + Timedate.Length + 18); i++)         // Statusbar puffer
+            {
+                internmessage += " ";
+            }
+            internmessage += vertical + "\n";
+
+            internmessage += vertRight;
+            for (int i = 0; i < width - 3; i++)         // Second Row
+            {
+                internmessage += horizontal;
+            }
+            internmessage += vertLeft;
+
+            string[] splitted = str.Split('\n');
+            for (int j = 0; j < splitted.Length; j++)
+            {
+                internmessage += "\n" + vertical + " ";
+                internmessage += splitted[j];
+                for (int i = 0; i < width - (1 + splitted[j].Length + 3); i++)         // display puffer
+                {
+                    internmessage += " ";
+                }
+
+                internmessage += vertical;
+            }
+
+            internmessage += "\n";
+            internmessage += leftBottom;
+
+            for (int i = 0; i < width - 3; i++)         // Bottom Row
+            {
+                internmessage += horizontal;
+            }
+            internmessage += rightBottom;
+            internmessage += "\n";
+            Console.WriteLine(internmessage);
+        }
+
         public string LineConstructor(string str)
         {
             string tmp = "";
@@ -185,7 +193,7 @@ namespace FireWorks
             //Console.Write(" (y/n)?\n");
             Update();
             string str = GetString();
-            if ((str == "y") || (str == "Y") || (str == "Yes") || (str == "yes"))
+            if ((str == "y") || (str == "Y") || (str == "Yes") || (str == "yes") || (str == "YES"))
                 return true;
             else
                 return false;
