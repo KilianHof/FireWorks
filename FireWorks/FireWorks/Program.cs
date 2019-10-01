@@ -10,7 +10,7 @@ namespace FireWorks
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             FireWorksMain program = new FireWorksMain();
             program.Run();

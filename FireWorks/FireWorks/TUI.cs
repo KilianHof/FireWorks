@@ -10,17 +10,17 @@ namespace FireWorks
     {
         private int width = 120;
         private int height = 30;
-        private readonly int maxLength = 115;
+        private int maxLength = 115;
         private readonly bool isFancy = Globals.debug;
-        public string message = "";
+        private string message = "";
 
         public TUI()
         {
             Console.SetWindowSize(width, height);
         }
-        public void Update()
+        private void Update()
         {
-            if (isFancy || true)
+            if (isFancy)
             {
                 Console.WriteLine(message);
                 message = "";
@@ -40,11 +40,12 @@ namespace FireWorks
             char vertLeft = '╣';
 
 
-            if (isFancy || true)
+            if (isFancy)
             {
                 Console.Clear();
                 width = Console.WindowWidth;
                 height = Console.WindowHeight;
+                maxLength = width - 5;
 
                 message += leftTop;
                 for (int i = 0; i < width - 3; i++)         // Top Row
@@ -52,20 +53,11 @@ namespace FireWorks
                     message += horizontal;
                 }
                 message += rightTop;
-
                 message += "\n";
-
-
-
-
-
 
                 message += vertical+" ";
                 string Timedate = DateTime.Now.ToString("dddd, dd MMMM yyyy HH: mm:ss"); // Statusbar
                 message += "Time and Date: " + Timedate;
-
-
-
 
                 for (int i = 0; i < width - (1 + Timedate.Length + 18); i++)         // Statusbar puffer
                 {
@@ -73,18 +65,12 @@ namespace FireWorks
                 }
                 message += vertical+"\n";
 
-
-
-
-
                 message += vertRight;
                 for (int i = 0; i < width - 3; i++)         // Second Row
                 {
                     message += horizontal;
                 }
                 message += vertLeft;
-
-
 
                 string[] splitted = str.Split('\n');
                 for (int j = 0; j < splitted.Length; j++)
@@ -99,10 +85,6 @@ namespace FireWorks
                     message += vertical;
                 }
 
-
-
-
-
                 message += "\n";
                 message += leftBottom;
 
@@ -112,11 +94,6 @@ namespace FireWorks
                 }
                 message += rightBottom;
                 message += "\n";
-
-
-
-
-
 
             }
             else
@@ -139,7 +116,7 @@ namespace FireWorks
             }
             return tmp;
         }
-        public string[] SplitStrings(string str)
+        private string[] SplitStrings(string str)
         {
             List<string> tmp = new List<string>();
             string[] splits = str.Split('\n');
@@ -156,7 +133,7 @@ namespace FireWorks
             }
             return tmp.ToArray();
         }
-        public string[] Chunk(string str)
+        private string[] Chunk(string str)
         {
             List<string> normalized = new List<string>();
             string[] splits = str.Split(' ');

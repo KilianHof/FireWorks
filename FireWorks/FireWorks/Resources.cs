@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace FireWorks
 {
+    /// <summary>
+    /// Resource objects are used to store information about items that were used in a Deployment.
+    /// </summary>
     public class Resources
     {
         public string Description { get; set; }
         public int InventoryNumber { get; set; }
         public string Name { get; set; }
         public string Identifier = "Resource";
-
+        
 
         public Resources(string d, int inv, string n)
         {

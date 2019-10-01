@@ -74,7 +74,9 @@ namespace FireWorks
                         if (!existing[i])
                         {
                             Byte[] info;
+#pragma warning disable IDE0063 // Use simple 'using' statement
                             using (FileStream fs = File.Create(_paths[i]))
+#pragma warning restore IDE0063 // Use simple 'using' statement
                             {
                                 StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.Default);
                                 if (i == 1)
@@ -157,11 +159,11 @@ namespace FireWorks
                 }
             }
         }
-      
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <returns>returns a string[] containing Users</returns>
+
+        /// <summary>
+        /// Gets a list of all users from file.
+        /// </summary>
+        /// <returns>returns a string[] containing Users</returns>
         public string[] GetListOfUsers()
         {
             List<string> results = new List<string>();
@@ -219,7 +221,7 @@ namespace FireWorks
                         List<Vehicle> v = new List<Vehicle>();
                         List<Resources> r = new List<Resources>();
                         List<FireFighter> f = new List<FireFighter>();
-                        string cutting = line;          
+                        string cutting = line;
                         object testNull;
 
                         int firstIndex = cutting.IndexOf('[') + 1;          // first occourence marks array
@@ -383,7 +385,7 @@ namespace FireWorks
             return tmp;
         }
 
-        public object[] ReadAllFiles()
+        public object[] ReadAllLists()
         {
             List<Deployment> Deploys = ReadFile<Deployment>();
             List<User> Employs = ReadFile<User>();

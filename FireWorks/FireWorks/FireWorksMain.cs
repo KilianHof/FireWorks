@@ -20,26 +20,14 @@ namespace FireWorks
         public void Run()
         {
 
-
-
-
-
-
-
-
-
-
-
-
-
             TUI _t = new TUI();
             FileIO _filer = new FileIO(_t);
             _filer.CheckForFiles();
             Authenticator auth = new Authenticator(_t, _filer);
-            object[] lists = _filer.ReadAllFiles();
+            object[] lists = _filer.ReadAllLists();
             UserFunctions _uf = new UserFunctions(_t, lists);
 
-            if (Globals.debug)
+            if (Globals.debug && false)
             {
                 int testsize = 100000;
                 Stopwatch stopWatch = new Stopwatch();
@@ -106,6 +94,6 @@ namespace FireWorks
     }
     public static class Globals
     {
-        public const bool debug = false;
+        public const bool debug = true;
     }
 }

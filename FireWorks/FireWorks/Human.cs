@@ -44,8 +44,8 @@ namespace FireWorks
             ADMIN = 2,
             LOCKED = 3
         }
+        public string Status { get; set; }
         public string PIN;
-
         public string GetPIN()
         {
             return PIN;
@@ -66,7 +66,6 @@ namespace FireWorks
             }
         }
 
-        public string Status { get; set; }
 
         public User(string fname, string lname, int id, string status, string pin)
         {

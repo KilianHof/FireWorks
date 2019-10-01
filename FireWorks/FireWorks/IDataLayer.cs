@@ -2,11 +2,16 @@
 
 namespace FireWorks
 {
+    /// <summary>
+    /// Interface for communication with Files/databases.
+    /// 
+    /// Contains methods to save and read all lists.
+    /// Aswell as a function to get a list of users.
+    /// </summary>
     public interface IDataLayer
     {
         string[] GetListOfUsers();
-        List<T> ReadFile<T>();
-        void SaveListToFile<T>(List<T> liste);
         void SaveAllLists(object[] lists);
+        object[] ReadAllLists();
     }
 }
