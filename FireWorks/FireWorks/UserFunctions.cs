@@ -109,25 +109,25 @@ namespace FireWorks
                     _t.Display("Viewing Deployments(" + DeployCount + "):\n" +
                                "(1)List last X Deployments.\n" +
                                "(2)List by X.\n");
-                    if (DeployCount == 0)   //Checkt die anzahl der Einsätze
+                    if (DeployCount == 0)   //Checkt die Anzahl der Einsätze
                     {
                         _t.Display("The deployment file seems to be empty.\nBefore you view deployments you should create one!\n");
                         return;
                     }
-                    int UserChoice = ValidInputRange(_t.GetInt(), 1, 2);
+                    int UserChoice = ValidInputRange(_t.GetInt(), 1, 2);    //untersucht ob die Angabe 1/2 oder dazwischen ist
                     int howMany;
                     if (UserChoice == 1)
                     {
                         _t.Display("How many deployments do you wish to view?(" + DeployCount + ") \n");
-                        howMany = ValidInputRange(_t.GetInt(), 1, DeployCount);
+                        howMany = ValidInputRange(_t.GetInt(), 1, DeployCount); //ist die gesuchte zahl zwischen 1 und der existierenden Anzahl?
                         _t.Display("Last " + howMany + " Deployments: \n");
                         toDisplay = "";
 
-                        for (int i = 0; i < howMany; i++)
+                        for (int i = 0; i < howMany; i++)   //fügt die Einsätze einem String hinzu-
                         {
                             toDisplay += "(" + (i + 1) + ") At: " + GetListDeployments().ElementAt((DeployCount-1)-i).Location + " Time: " + GetListDeployments().ElementAt((DeployCount - 1) - i).DateAndTime + "\n";
                         }
-                        _t.Display(toDisplay);
+                        _t.Display(toDisplay);  //-stellt diesen String dar
                         _t.Display("To go into detail type corresponding number.\n");
                         howMany = ValidInputRange(_t.GetInt(), 1, DeployCount);
                         _t.Display(GetListDeployments().ElementAt((DeployCount-1)-(howMany - 1)).ToString() + "\n");
@@ -141,7 +141,7 @@ namespace FireWorks
                         _t.Display("How many deployments do you wish to view?(" + DeployCount + ") \n");
                         howMany = ValidInputRange(_t.GetInt(), 1, DeployCount);
 
-                        List<Deployment> deploys = GetListDeployments();
+                        List<Deployment> deploys = GetListDeployments(); // fügt der liste "deploys" alle einsätze hinzu
                         if (UserChoice == 1 && GetListFireFighter().Count == 0)
                         {
                             _t.Display("Seems like you dont have any Firefighters in your basedata!\n");
@@ -155,7 +155,7 @@ namespace FireWorks
                             _t.Display("Select for which Firefighter you wish to search:\n");
                             ViewList(firefighters);
                             UserChoice = ValidInputRange(_t.GetInt(), 1, firefighters.Count());
-                            tmp = firefighters.ElementAt(UserChoice - 1);
+                            tmp = firefighters.ElementAt(UserChoice - 1); //-1 da listen(und arrays) bei 0 anfangen
 
                             int amountD = deploys.Count();
                             int amountF;
@@ -167,7 +167,7 @@ namespace FireWorks
                                 {
                                     if (deploys.ElementAt(k).FireFighters[j].Equals(tmp) && counter < howMany)
                                     {
-                                        _t.Display("(" + (k + 1) + ") At: " + deploys.ElementAt(k).Location + " Time: " + deploys.ElementAt(k).DateAndTime + "\n");
+                                        _t.Display("(" + (k + 1) + ") At: " + deploys.ElementAt(k).Location + " Time: " + deploys.ElementAt(k).DateAndTime + "\n"); //gibt nacheinander Feuerwehrmitglieder an
                                         counter++;
                                     }
                                 }
@@ -176,7 +176,7 @@ namespace FireWorks
                             {
                                 _t.Display("To go into detail type corresponding number.\n");
                                 UserChoice = ValidInputRange(_t.GetInt(), 1, counter);
-                                _t.Display(GetListDeployments().ElementAt(UserChoice - 1).ToString() + "\n");
+                                _t.Display(GetListDeployments().ElementAt(UserChoice - 1).ToString() + "\n");   //sucht Einsatz nach ID heraus (-1 da [siehe bei vorletztem "if"])
                             }
                             else
                             {
@@ -194,7 +194,7 @@ namespace FireWorks
                             Vehicle tmp;
                             _t.Display("Select for which car you wish to search:\n");
                             ViewList(vehicles);
-                            UserChoice = ValidInputRange(_t.GetInt(), 1, vehicles.Count());
+                            UserChoice = ValidInputRange(_t.GetInt(), 1, vehicles.Count()); //sucht Fahrzeug nach ID
                             tmp = vehicles.ElementAt(UserChoice - 1);
 
                             int amountD = deploys.Count();
@@ -207,7 +207,7 @@ namespace FireWorks
                                 {
                                     if (deploys.ElementAt(k).Cars[j].Equals(tmp) && counter < howMany)
                                     {
-                                        _t.Display("(" + (k + 1) + ") At: " + deploys.ElementAt(k).Location + " Time: " + deploys.ElementAt(k).DateAndTime + "\n");
+                                        _t.Display("(" + (k + 1) + ") At: " + deploys.ElementAt(k).Location + " Time: " + deploys.ElementAt(k).DateAndTime + "\n"); //sucht nach Einsätzen mit gewähltem Fahrzeug
                                         counter++;
                                     }
                                 }
@@ -227,7 +227,7 @@ namespace FireWorks
 
                     break;
                 case "-d":
-                    int number = 0;
+                    int number = 0; //erstellt einen Einsatzeintrag
 
                     Vehicle[] v = new Vehicle[number];
                     FireFighter[] p = new FireFighter[number];
@@ -401,16 +401,16 @@ namespace FireWorks
                             switch (ValidInputRange(_t.GetInt(), 1, 4))
                             {
                                 case 1:
-                                    liste.Add((T)(object)Edit(new Pkw("TYPE", 0, 0)));
+                                    liste.Add((T)(object)Edit(new Pkw("TYPE", 0, 0))); //erstellt ein neues objekt als teil der Liste
                                     break;
                                 case 2:
-                                    liste.Add((T)(object)Edit(new Firetruck("TYPE", 0, 0, false, 0)));
+                                    liste.Add((T)(object)Edit(new Firetruck("TYPE", 0, 0, false, 0))); //erstellt ein neues objekt als teil der Liste
                                     break;
                                 case 3:
-                                    liste.Add((T)(object)Edit(new Turntableladder("TYPE", 0, 0, false, 0)));
+                                    liste.Add((T)(object)Edit(new Turntableladder("TYPE", 0, 0, false, 0))); //erstellt ein neues objekt als teil der Liste
                                     break;
                                 case 4:
-                                    liste.Add((T)(object)Edit(new Ambulance("TYPE", 0, 0, 0)));
+                                    liste.Add((T)(object)Edit(new Ambulance("TYPE", 0, 0, 0))); //erstellt ein neues objekt als teil der Liste
                                     break;
                             }
                             break;
