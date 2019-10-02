@@ -84,7 +84,7 @@ namespace FireWorks
         }
         public bool GasTimerCheck()
         {
-            DateTime CurrentDate = DateTime.Now;
+            DateTime CurrentDate = DateTime.Now;    //Berechnet die Differenz zwischen der jetzigen Zeit und dem Zeitpunkt der letzten Gasmesserüberprüfung, checkt ob die Differenz über 30 Tagen liegt
             TimeSpan diff = CurrentDate.Subtract(LastExaminationDate);
             diff = diff.Duration();
             if (diff.TotalDays > 30)

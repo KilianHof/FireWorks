@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RBTREE;
+//using RBTREE;
 
 
 
@@ -24,7 +24,7 @@ namespace FireWorks
             FileIO _filer = new FileIO(_t);
             _filer.CheckForFiles();
             Authenticator auth = new Authenticator(_t, _filer);
-            object[] lists = _filer.ReadAllLists();
+            object[] lists = _filer.ReadAllLists(); //liest die Listen in "Arrays" ein
             UserFunctions _uf = new UserFunctions(_t, lists);
 
             if (Globals.debug && false)
@@ -56,13 +56,13 @@ namespace FireWorks
 
 
             
-                LLRBTree<int, Deployment> tree = new LLRBTree<int, Deployment>();
+                //LLRBTree<int, Deployment> tree = new LLRBTree<int, Deployment>();
                 stopWatch = new Stopwatch();
                 stopWatch.Start();
                 test = new Deployment("here", new Vehicle[0], new Resources[0], new FireFighter[0], "hi", (l.Count+1));
                 for (int i = 1; i < testsize+1; i++)
                 {
-                    tree.Insert(i, test);
+                    //tree.Insert(i, test);
 
                     if (i % (testsize/20) == 0)
                         _t.Display((i / (testsize/100)).ToString() + "%\n");
@@ -70,7 +70,7 @@ namespace FireWorks
     
                 for (int i = 1; i < testsize + 1; i++)
                 {
-                    tree.Delete(i);
+                    //tree.Delete(i);
                     if (i % (testsize / 20) == 0)
                         _t.Display((i / (testsize / 100)).ToString() + "%\n");
                 }
@@ -94,6 +94,6 @@ namespace FireWorks
     }
     public static class Globals
     {
-        public const bool debug = false;
+        public const bool debug = false; //Schaltet den DEBUG-Modus an und aus
     }
 }

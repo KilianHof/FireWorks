@@ -15,14 +15,14 @@ namespace FireWorks
             ADMIN = 2,
             LOCKED = 3
         }
-        private const int DEPLOYMENTS = 0;
+        private const int DEPLOYMENTS = 0;  //quasi "Alias"
         private const int EMPLOYEES = 1;
         private const int VEHICLES = 2;
         private const int RESOURCES = 3;
         private const int FIREFIGHTERS = 4;
         private readonly IUserLayer _t;
 
-        private List<Deployment> AllDeployments;
+        private List<Deployment> AllDeployments;    //erstellt Listen wo alle Objekte der Art gelagert werden.
         private List<User> AllEmployees;
         private List<Vehicle> AllVehicles;
         private List<Resources> AllResources;
@@ -45,7 +45,7 @@ namespace FireWorks
         public List<FireFighter> GetListFireFighter() { return AllFireFighter; }
         public void Routine(string mode)
         {
-            switch (mode)
+            switch (mode)   //Sortiert Nutzer ins richtige Menü ein basierend auf seinem Status
             {
                 case "ADMIN":
                     ShowAdminOptions();
@@ -72,7 +72,7 @@ namespace FireWorks
         }
         public void AdminMode(string sel)
         {
-            switch (sel)
+            switch (sel)    //Adminmenü
             {
                 case "-e":
                     _t.Display("Choose Base data to work with:\n" +
@@ -102,14 +102,14 @@ namespace FireWorks
         {
             string toDisplay;
             int DeployCount;
-            switch (sel)
+            switch (sel)    //Nutzermenü
             {
                 case "-v":
                     DeployCount = GetListDeployments().Count();
                     _t.Display("Viewing Deployments(" + DeployCount + "):\n" +
                                "(1)List last X Deployments.\n" +
                                "(2)List by X.\n");
-                    if (DeployCount == 0)
+                    if (DeployCount == 0)   //Checkt die anzahl der Einsätze
                     {
                         _t.Display("The deployment file seems to be empty.\nBefore you view deployments you should create one!\n");
                         return;
