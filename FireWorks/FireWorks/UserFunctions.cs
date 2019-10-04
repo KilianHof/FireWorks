@@ -246,7 +246,7 @@ namespace FireWorks
                     }
                     else
                     {
-                        number = ValidInputRange(_t.GetInt(), 0, cars.Count);
+                        number = ValidInputRange(_t.GetInt(), 0, cars.Count);   //ist die Zahl der Fahrzeuge valide?
                         v = new Vehicle[number];
                         for (int i = 0; i < number; i++)
                         {
@@ -262,7 +262,7 @@ namespace FireWorks
                     }
                     else
                     {
-                        number = ValidInputRange(_t.GetInt(), 0, staff.Count);
+                        number = ValidInputRange(_t.GetInt(), 0, staff.Count);  //ist die Zahl der Feuerwehrmänner valide?
                         p = new FireFighter[number];
                         for (int i = 0; i < number; i++)
                         {
@@ -278,7 +278,7 @@ namespace FireWorks
                     }
                     else
                     {
-                        number = ValidInputRange(_t.GetInt(), 0, res.Count);
+                        number = ValidInputRange(_t.GetInt(), 0, res.Count);    //ist die zahl der resourcen valide?
                         r = new Resources[number];
                         for (int i = 0; i < number; i++)
                         {
@@ -488,7 +488,7 @@ namespace FireWorks
 
             return str;
         }
-        public int EditHelperInt(string message)
+        public int EditHelperInt(string message)    //overload, wenn min und max angegeben sind wird an die andere function weitergeleitet
         {
             int number;
             _t.Display(message);
@@ -500,7 +500,7 @@ namespace FireWorks
             }
             return number;
         }
-        public int EditHelperInt(string message, int min, int max) // range
+        public int EditHelperInt(string message, int min, int max) // min-max größe des integers
         {
             int number;
             _t.Display(message);

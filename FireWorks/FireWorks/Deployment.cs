@@ -161,7 +161,7 @@ namespace FireWorks
             report += "    "+SumUpHoses()+"\n";
             report += "Der Einsatzleiter gab diesen Kommentar zum Einsatz:\n";
             report += Comment + "\n";
-            report += "Wir danken dem Team der Circlon Werksfeuerwehr für ihre Leistung und den " +Number+ ". Abgeschlossenen Einsatz.\n\n";
+            report += "Wir danken dem Team der Circlon Werksfeuerwehr für ihre Leistung und den " +(Number+1)+ ". Abgeschlossenen Einsatz.\n\n";
             return report;
         }
     }
