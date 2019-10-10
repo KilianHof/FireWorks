@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Edmx Version="3.0" xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <Runtime>
+    <ConceptualModels>
+      <Schema Namespace="thistimeitwillworkforsure" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Deployment" customannotation:ClrType="FireWorks.Deployment, thistimeitwillworkforsure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateAndTime" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="FireFighter" customannotation:ClrType="FireWorks.FireFighter, thistimeitwillworkforsure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" BaseType="Self.Human" />
+        <EntityType Name="Human" customannotation:ClrType="FireWorks.Human, thistimeitwillworkforsure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="User" customannotation:ClrType="FireWorks.User, thistimeitwillworkforsure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" BaseType="Self.Human">
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Resources" customannotation:ClrType="FireWorks.Resources, thistimeitwillworkforsure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Distributer" customannotation:ClrType="FireWorks.Distributer, thistimeitwillworkforsure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" BaseType="Self.Resources" />
+        <EntityType Name="Gasanalyzer" customannotation:ClrType="FireWorks.Gasanalyzer, thistimeitwillworkforsure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" BaseType="Self.Resources" />
+        <EntityType Name="Hose" customannotation:ClrType="FireWorks.Hose, thistimeitwillworkforsure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" BaseType="Self.Resources" />
+        <EntityType Name="Jetnozzle" customannotation:ClrType="FireWorks.Jetnozzle, thistimeitwillworkforsure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" BaseType="Self.Resources" />
+        <EntityType Name="Vehicle" customannotation:ClrType="FireWorks.Vehicle, thistimeitwillworkforsure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EnginePower" Type="Int32" Nullable="false" />
+          <Property Name="Seats" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ambulance" customannotation:ClrType="FireWorks.Ambulance, thistimeitwillworkforsure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" BaseType="Self.Vehicle">
+          <Property Name="PatientWeight" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pkw" customannotation:ClrType="FireWorks.Pkw, thistimeitwillworkforsure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" BaseType="Self.Vehicle" />
+        <EntityType Name="ToolCarrier" customannotation:ClrType="FireWorks.ToolCarrier, thistimeitwillworkforsure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" BaseType="Self.Vehicle">
+          <Property Name="Chainsaw" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Firetruck" customannotation:ClrType="FireWorks.Firetruck, thistimeitwillworkforsure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" BaseType="Self.ToolCarrier">
+          <Property Name="FillQuantity" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Turntableladder" customannotation:ClrType="FireWorks.Turntableladder, thistimeitwillworkforsure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" BaseType="Self.ToolCarrier">
+          <Property Name="LadderHeight" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="DBContext" customannotation:UseClrTypes="true">
+          <EntitySet Name="Deployments" EntityType="Self.Deployment" />
+          <EntitySet Name="Humans" EntityType="Self.Human" />
+          <EntitySet Name="Resources" EntityType="Self.Resources" />
+          <EntitySet Name="Vehicles" EntityType="Self.Vehicle" />
+        </EntityContainer>
+      </Schema>
+    </ConceptualModels>
+    <Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CodeFirstDatabase" CdmEntityContainer="DBContext">
+          <EntitySetMapping Name="Deployments">
+            <EntityTypeMapping TypeName="thistimeitwillworkforsure.Deployment">
+              <MappingFragment StoreEntitySet="Deployment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DateAndTime" ColumnName="DateAndTime" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Humans">
+            <EntityTypeMapping TypeName="thistimeitwillworkforsure.FireFighter">
+              <MappingFragment StoreEntitySet="Human">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <Condition Value="FireFighter" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(thistimeitwillworkforsure.Human)">
+              <MappingFragment StoreEntitySet="Human">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="thistimeitwillworkforsure.User">
+              <MappingFragment StoreEntitySet="Human">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <Condition Value="User" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="thistimeitwillworkforsure.Human">
+              <MappingFragment StoreEntitySet="Human">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <Condition Value="Human" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resources">
+            <EntityTypeMapping TypeName="IsTypeOf(thistimeitwillworkforsure.Resources)">
+              <MappingFragment StoreEntitySet="Resources">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="thistimeitwillworkforsure.Distributer">
+              <MappingFragment StoreEntitySet="Resources">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <Condition Value="Distributer" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="thistimeitwillworkforsure.Gasanalyzer">
+              <MappingFragment StoreEntitySet="Resources">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <Condition Value="Gasanalyzer" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="thistimeitwillworkforsure.Hose">
+              <MappingFragment StoreEntitySet="Resources">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <Condition Value="Hose" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="thistimeitwillworkforsure.Jetnozzle">
+              <MappingFragment StoreEntitySet="Resources">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <Condition Value="Jetnozzle" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="thistimeitwillworkforsure.Resources">
+              <MappingFragment StoreEntitySet="Resources">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <Condition Value="Resources" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vehicles">
+            <EntityTypeMapping TypeName="IsTypeOf(thistimeitwillworkforsure.Vehicle)">
+              <MappingFragment StoreEntitySet="Vehicle">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="EnginePower" ColumnName="EnginePower" />
+                <ScalarProperty Name="Seats" ColumnName="Seats" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="thistimeitwillworkforsure.Ambulance">
+              <MappingFragment StoreEntitySet="Vehicle">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PatientWeight" ColumnName="PatientWeight" />
+                <Condition Value="Ambulance" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="thistimeitwillworkforsure.Pkw">
+              <MappingFragment StoreEntitySet="Vehicle">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <Condition Value="Pkw" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="thistimeitwillworkforsure.ToolCarrier">
+              <MappingFragment StoreEntitySet="Vehicle">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Chainsaw" ColumnName="Chainsaw" />
+                <Condition Value="ToolCarrier" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="thistimeitwillworkforsure.Firetruck">
+              <MappingFragment StoreEntitySet="Vehicle">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Chainsaw" ColumnName="Chainsaw" />
+                <ScalarProperty Name="FillQuantity" ColumnName="FillQuantity" />
+                <Condition Value="Firetruck" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="thistimeitwillworkforsure.Turntableladder">
+              <MappingFragment StoreEntitySet="Vehicle">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Chainsaw" ColumnName="Chainsaw" />
+                <ScalarProperty Name="LadderHeight" ColumnName="LadderHeight" />
+                <Condition Value="Turntableladder" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="thistimeitwillworkforsure.Vehicle">
+              <MappingFragment StoreEntitySet="Vehicle">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <Condition Value="Vehicle" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </Mappings>
+    <StorageModels>
+      <Schema Namespace="CodeFirstDatabaseSchema" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Deployment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateAndTime" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Location" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Comment" Type="nvarchar(max)" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Human">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="LastName" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Status" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Resources">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vehicle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="EnginePower" Type="int" Nullable="false" />
+          <Property Name="Seats" Type="int" Nullable="false" />
+          <Property Name="PatientWeight" Type="int" Nullable="true" />
+          <Property Name="Chainsaw" Type="bit" Nullable="true" />
+          <Property Name="FillQuantity" Type="int" Nullable="true" />
+          <Property Name="LadderHeight" Type="int" Nullable="true" />
+          <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="CodeFirstDatabase">
+          <EntitySet Name="Deployment" EntityType="Self.Deployment" Schema="dbo" Table="Deployments" />
+          <EntitySet Name="Human" EntityType="Self.Human" Schema="dbo" Table="Humen" />
+          <EntitySet Name="Resources" EntityType="Self.Resources" Schema="dbo" Table="Resources" />
+          <EntitySet Name="Vehicle" EntityType="Self.Vehicle" Schema="dbo" Table="Vehicles" />
+        </EntityContainer>
+      </Schema>
+    </StorageModels>
+  </Runtime>
+  <Designer>
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="ProcessDependentTemplatesOnSave" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <Diagrams >
+      <Diagram DiagramId="ddbc0dde285444abaf2429cc3d308d2d" Name="Diagram1">
+        <EntityTypeShape EntityType="thistimeitwillworkforsure.Deployment" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="thistimeitwillworkforsure.FireFighter" Width="1.5" PointX="10.125" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="thistimeitwillworkforsure.Human" Width="1.5" PointX="12.125" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="thistimeitwillworkforsure.User" Width="1.5" PointX="10.125" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="thistimeitwillworkforsure.Resources" Width="1.5" PointX="7.625" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="thistimeitwillworkforsure.Distributer" Width="1.5" PointX="8.5" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="thistimeitwillworkforsure.Gasanalyzer" Width="1.5" PointX="9.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="thistimeitwillworkforsure.Hose" Width="1.5" PointX="5.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="thistimeitwillworkforsure.Jetnozzle" Width="1.5" PointX="6.625" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="thistimeitwillworkforsure.Vehicle" Width="1.5" PointX="4.625" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="thistimeitwillworkforsure.Ambulance" Width="1.5" PointX="2.625" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="thistimeitwillworkforsure.Pkw" Width="1.5" PointX="3.5" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="thistimeitwillworkforsure.ToolCarrier" Width="1.5" PointX="6.5" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="thistimeitwillworkforsure.Firetruck" Width="1.5" PointX="7.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="thistimeitwillworkforsure.Turntableladder" Width="1.5" PointX="5.375" PointY="7.125" IsExpanded="true" />
+        <InheritanceConnector EntityType="thistimeitwillworkforsure.FireFighter" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="thistimeitwillworkforsure.User" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="thistimeitwillworkforsure.Distributer" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="thistimeitwillworkforsure.Gasanalyzer" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="thistimeitwillworkforsure.Hose" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="thistimeitwillworkforsure.Jetnozzle" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="thistimeitwillworkforsure.Ambulance" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="thistimeitwillworkforsure.Pkw" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="thistimeitwillworkforsure.ToolCarrier" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="thistimeitwillworkforsure.Firetruck" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="thistimeitwillworkforsure.Turntableladder" ManuallyRouted="false" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</Edmx>

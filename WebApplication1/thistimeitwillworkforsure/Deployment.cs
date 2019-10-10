@@ -18,11 +18,11 @@ namespace FireWorks
         public Resources[] Resources { get; set; }
         public FireFighter[] FireFighters { get; set; }
         public string Comment { get; set; }
-        public int Number { get; set; }
+        public int Id { get; set; }
 
         public Deployment() //nullconstructor only to be used if there is no entry yet.
         {
-            Number = 0;
+            Id = 0;
         }
         /// <summary>
         /// Default constructor for Deployments
@@ -41,7 +41,7 @@ namespace FireWorks
             Resources = Res;
             FireFighters = Ff;
             Comment = Com;
-            Number = Num;
+            Id = Num;
         }
         /// <summary>
         /// Copy constructor only to be used when reading from files.
@@ -61,7 +61,7 @@ namespace FireWorks
             Resources = Res;
             FireFighters = Ff;
             Comment = Com;
-            Number = Num;
+            Id = Num;
         }
         /// <summary>
         /// ToString method returns object as formatted JSON.
@@ -82,8 +82,8 @@ namespace FireWorks
                
             Deployment dep = (Deployment)obj;
 
-            if (Number < dep.Number) return 1;
-            if (Number > dep.Number) return -1;
+            if (Id < dep.Id) return 1;
+            if (Id > dep.Id) return -1;
             //if both "if's" arent true objects must be equal. No number is given twice.
             return 0;
         }
@@ -161,7 +161,7 @@ namespace FireWorks
             report += "    "+SumUpHoses()+"<br />";
             report += "Der Einsatzleiter gab diesen Kommentar zum Einsatz:<br />";
             report += Comment + "<br />";
-            report += "Wir danken dem Team der Circlon Werksfeuerwehr für ihre Leistung und den " +(Number)+ ". Abgeschlossenen Einsatz.<br /><br />";
+            report += "Wir danken dem Team der Circlon Werksfeuerwehr für ihre Leistung und den " +(Id)+ ". Abgeschlossenen Einsatz.<br /><br />";
             return report;
         }
     }

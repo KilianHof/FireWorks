@@ -12,7 +12,7 @@ namespace FireWorks
     public class Resources
     {
         public string Description { get; set; }
-        public int InventoryNumber { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Identifier = "Resource";
         
@@ -20,7 +20,7 @@ namespace FireWorks
         public Resources(string d, int inv, string n)
         {
             Description = d;
-            InventoryNumber = inv;
+            Id = inv;
             Name = n;
         }
         public string GetIdentifier()
@@ -29,7 +29,7 @@ namespace FireWorks
         }
         public override string ToString()
         {
-            return Description + " " + InventoryNumber;
+            return Description + " " + Id;
         }
     }
     public class Hose : Resources

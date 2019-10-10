@@ -275,7 +275,7 @@ namespace FireWorks
                                 f.Add(JSONConverter.JSONToGeneric<FireFighter>(item));
                             }
                         }
-                        Deployment fin = new Deployment(prototype.DateAndTime, prototype.Location, v.ToArray(), r.ToArray(), f.ToArray(), prototype.Comment, prototype.Number);
+                        Deployment fin = new Deployment(prototype.DateAndTime, prototype.Location, v.ToArray(), r.ToArray(), f.ToArray(), prototype.Comment, prototype.Id);
                         tmp.Add(fin);
                         needCast = true;
                     }

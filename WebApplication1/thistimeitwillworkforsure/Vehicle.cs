@@ -9,6 +9,7 @@ namespace FireWorks
     public class Vehicle
     {
         public string Identifier = "Vehicle";
+        public int Id { get; set; }
         public string Type { get; set; }
         public int EnginePower { get; set; }
         public int Seats { get; set; }

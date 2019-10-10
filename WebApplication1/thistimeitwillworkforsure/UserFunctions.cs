@@ -335,7 +335,7 @@ namespace FireWorks
                     {
                         clear = false;
                         _t.Display("A gasanalyzer needs to be examined!<br />" +
-                            "Inventorynumber= " + tmp.InventoryNumber + "<br />");
+                            "Inventorynumber= " + tmp.Id + "<br />");
                     }
                 }
             }
@@ -658,8 +658,8 @@ namespace FireWorks
                 Answer = EditHelperString("Description: " + tmp.Description + "<br />");
                 if (Answer != ".") tmp.Description = Answer;
 
-                Number = EditHelperInt("Inventory Number: " + tmp.InventoryNumber + "<br />");
-                if (Number != 0) tmp.InventoryNumber = Number;
+                Number = EditHelperInt("Inventory Number: " + tmp.Id + "<br />");
+                if (Number != 0) tmp.Id = Number;
             }
             if (t.GetType() == typeof(Hose))
             {
@@ -669,8 +669,8 @@ namespace FireWorks
                 Answer = EditHelperString("Description: " + tmp.Description + "<br />");
                 if (Answer != ".") tmp.Description = Answer;
 
-                Number = EditHelperInt("Inventory Number: " + tmp.InventoryNumber + "<br />");
-                if (Number != 0) tmp.InventoryNumber = Number;
+                Number = EditHelperInt("Inventory Number: " + tmp.Id + "<br />");
+                if (Number != 0) tmp.Id = Number;
 
                 Number = EditHelperInt("Hose length(5, 10, 20, 30): " + tmp.HoseLength + "<br />");
                 if ((Number != 0 && Number % 10 == 0 && Number <= 30) || Number == 5) tmp.HoseLength = Number;
@@ -689,8 +689,8 @@ namespace FireWorks
                 Answer = EditHelperString("Description: " + tmp.Description + "<br />");
                 if (Answer != ".") tmp.Description = Answer;
 
-                Number = EditHelperInt("Inventory Number: " + tmp.InventoryNumber + "<br />");
-                if (Number != 0) tmp.InventoryNumber = Number;
+                Number = EditHelperInt("Inventory Number: " + tmp.Id + "<br />");
+                if (Number != 0) tmp.Id = Number;
             }
             if (t.GetType() == typeof(Jetnozzle))
             {
@@ -700,8 +700,8 @@ namespace FireWorks
                 Answer = EditHelperString("Description: " + tmp.Description + "<br />");
                 if (Answer != ".") tmp.Description = Answer;
 
-                Number = EditHelperInt("Inventory Number: " + tmp.InventoryNumber + "<br />");
-                if (Number != 0) tmp.InventoryNumber = Number;
+                Number = EditHelperInt("Inventory Number: " + tmp.Id + "<br />");
+                if (Number != 0) tmp.Id = Number;
             }
             if (t.GetType() == typeof(Distributer))
             {
@@ -711,8 +711,8 @@ namespace FireWorks
                 Answer = EditHelperString("Description: " + tmp.Description + "<br />");
                 if (Answer != ".") tmp.Description = Answer;
 
-                Number = EditHelperInt("Inventory Number: " + tmp.InventoryNumber + "<br />");
-                if (Number != 0) tmp.InventoryNumber = Number;
+                Number = EditHelperInt("Inventory Number: " + tmp.Id + "<br />");
+                if (Number != 0) tmp.Id = Number;
             }
             return t;
         }
