@@ -17,15 +17,29 @@ namespace FireWorks
     {
         
         public FireWorksMain() { }
+        public static bool testEvent(int value)
+        {
+            Console.WriteLine("auiwdhwahd");
+            return true; 
+        }
         public void Run()
         {
 
             TUI _t = new TUI();
+            _t.NeedTest += testEvent;
             FileIO _filer = new FileIO(_t);
             _filer.CheckForFiles();
             Authenticator auth = new Authenticator(_t, _filer);
             object[] lists = _filer.ReadAllLists(); //liest die Listen in "Arrays" ein
             UserFunctions _uf = new UserFunctions(_t, lists);
+
+
+
+            Deployment d = new Deployment();
+
+            
+
+
 
             if (Globals.debug && false)
             {
@@ -95,5 +109,10 @@ namespace FireWorks
     public static class Globals
     {
         public const bool debug = false; //Schaltet den DEBUG-Modus an und aus
+    }
+
+    public class Eventhandler
+    {
+        
     }
 }

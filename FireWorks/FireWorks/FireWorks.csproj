@@ -81,6 +81,7 @@
     <Compile Include="TUI.cs" />
     <Compile Include="UserFunctions.cs" />
     <Compile Include="Vehicle.cs" />
+    <Compile Include="WUI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

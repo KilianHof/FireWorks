@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace FireWorks
 {
+    public delegate bool testEvent(int value);
     class TUI : IUserLayer
     {
         private int width = 120;
@@ -24,7 +25,7 @@ namespace FireWorks
         
         const char vertRight = '╠';
         const char vertLeft = '╣';
-
+        public event testEvent NeedTest;
         public TUI()
         {
             Console.SetWindowSize(width, height);
@@ -39,7 +40,7 @@ namespace FireWorks
         }
         public void Display(string str)
         {
-            
+            bool m =NeedTest(3);
             if (isFancy)
             {
                 message += str+"\n";
