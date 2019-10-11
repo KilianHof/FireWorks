@@ -210,6 +210,14 @@
     <Compile Include="Migrations\201910101206188_Main.Designer.cs">
       <DependentUpon>201910101206188_Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910110740313_Main_2.cs" />
+    <Compile Include="Migrations\201910110740313_Main_2.Designer.cs">
+      <DependentUpon>201910110740313_Main_2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910110745418_thistimeforsure.cs" />
+    <Compile Include="Migrations\201910110745418_thistimeforsure.Designer.cs">
+      <DependentUpon>201910110745418_thistimeforsure.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.cs" />
@@ -240,6 +248,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201910101206188_Main.resx">
       <DependentUpon>201910101206188_Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910110740313_Main_2.resx">
+      <DependentUpon>201910110740313_Main_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910110745418_thistimeforsure.resx">
+      <DependentUpon>201910110745418_thistimeforsure.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

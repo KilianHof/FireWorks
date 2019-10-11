@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 using System.IO;
 
 namespace FireWorks
@@ -29,26 +30,37 @@ namespace FireWorks
         /// </summary>
         public void CheckForFiles()
         {
-            string f = @"C:\Users\khof\Desktop\FWFiles";
-            f += @"\Files";
-            if (!Directory.Exists(f))
+            if (Globals.sql == false)
             {
-                Directory.CreateDirectory(f);
-            }
-            string[] _path = new string[] {
+                string f = @"C:\Users\khof\Desktop\FWFiles";
+                f += @"\Files";
+                if (!Directory.Exists(f))
+                {
+                    Directory.CreateDirectory(f);
+                }
+                string[] _path = new string[] {
                 f +@"\Deployments.txt",
                 f +@"\Employee.txt",
                 f +@"\Vehicles.txt",
                 f +@"\Resources.txt",
                 f +@"\FireFighters.txt",
             };
-            _paths = _path;
-            bool[] pathsExist = new bool[] { true, true, true, true, true };
-            for (int i = 0; i < _paths.Length; i++)
-            {
-                if (!(File.Exists(_paths[i]))) { pathsExist[i] = false; }
+                _paths = _path;
+                bool[] pathsExist = new bool[] { true, true, true, true, true };
+                for (int i = 0; i < _paths.Length; i++)
+                {
+                    if (!(File.Exists(_paths[i]))) { pathsExist[i] = false; }
+                }
+                Init(pathsExist);
             }
-            Init(pathsExist);
+            if (Globals.sql == true)
+            {
+                string connetionString;
+                SqlConnection cnn;
+                connetionString = @"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=thistimeitwillworkforsure.DBContext;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                cnn = new SqlConnection(connetionString);
+                cnn.Open();
+            }
         }
         /// <summary>
         /// Intialization of FileIO missing files are created.
@@ -390,13 +402,45 @@ namespace FireWorks
 
         public object[] ReadAllLists()
         {
-            List<Deployment> Deploys = ReadFile<Deployment>();
-            List<User> Employs = ReadFile<User>();
-            List<Vehicle> Vehicles = ReadFile<Vehicle>();
-            List<Resources> Resources = ReadFile<Resources>();
-            List<FireFighter> FireFighters = ReadFile<FireFighter>();
-            return new object[] { Deploys, Employs, Vehicles, Resources, FireFighters };
+            if (Globals.sql == true)
+            {
+                string connetionString;
+                SqlConnection cnn;
+                connetionString = @"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=thistimeitwillworkforsure.DBContext;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                cnn = new SqlConnection(connetionString);
+                cnn.Open();
+                SqlDataReader myReader = null;
+                SqlCommand myCommand = new SqlCommand("select * from Humen",
+                                                         cnn);
+                myReader = myCommand.ExecuteReader();
+                
+                object test = myReader[1];
+                User Admin1 = (User)Convert.ChangeType(myReader[0], typeof(User));
+                
+                List<User> Employs = null;
 
+                while (myReader[5] != null)
+                {
+
+                }
+
+
+
+                List<Deployment> Deploys = ReadFile<Deployment>();
+                List<Vehicle> Vehicles = ReadFile<Vehicle>();
+                List<Resources> Resources = ReadFile<Resources>();
+                List<FireFighter> FireFighters = ReadFile<FireFighter>();
+                return new object[] { Deploys, Employs, Vehicles, Resources, FireFighters };
+            }
+            if (Globals.sql == false)
+            {
+                List<Deployment> Deploys = ReadFile<Deployment>();
+                List<User> Employs = ReadFile<User>();
+                List<Vehicle> Vehicles = ReadFile<Vehicle>();
+                List<Resources> Resources = ReadFile<Resources>();
+                List<FireFighter> FireFighters = ReadFile<FireFighter>();
+                return new object[] { Deploys, Employs, Vehicles, Resources, FireFighters };
+            }
         }
         public void SaveListToFile<T>(List<T> liste)
         {

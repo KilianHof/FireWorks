@@ -8,7 +8,7 @@ namespace thistimeitwillworkforsure
 {
     public class DBContext : DbContext
     {
-        public DbSet<FireWorks.FireFighter> Firefighters { get; set; }
+        public DbSet<FireWorks.User> Users { get; set; }
         public DbSet<FireWorks.Vehicle> Vehicles { get; set; }
         public DbSet<FireWorks.Resources> Resources { get; set; }
         public DbSet<FireWorks.Human> Humans { get; set; }

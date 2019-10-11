@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -101,6 +103,7 @@ namespace FireWorks
     }
     public static class Globals
     {
+        public const bool sql = true; //Schaltet zwischen SQL und .txt Dateimanagement
         public const bool debug = false; //Schaltet den DEBUG-Modus an und aus
         public static string textout = "";
         public static string textin = "";

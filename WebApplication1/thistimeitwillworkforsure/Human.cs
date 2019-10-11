@@ -45,7 +45,7 @@ namespace FireWorks
             LOCKED = 3
         }
         public string Status { get; set; }
-        public string PIN;
+        public string PIN { get; set; }
         public string GetPIN()
         {
             return PIN;
