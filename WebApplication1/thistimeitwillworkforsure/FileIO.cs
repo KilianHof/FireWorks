@@ -55,11 +55,20 @@ namespace FireWorks
             }
             if (Globals.sql == true)
             {
-                string connetionString;
+                try
+                {
+string connetionString;
                 SqlConnection cnn;
                 connetionString = @"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=thistimeitwillworkforsure.DBContext;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
                 cnn = new SqlConnection(connetionString);
                 cnn.Open();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                
             }
         }
         /// <summary>
@@ -404,33 +413,19 @@ namespace FireWorks
         {
             if (Globals.sql == true)
             {
-                string connetionString;
-                SqlConnection cnn;
-                connetionString = @"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=thistimeitwillworkforsure.DBContext;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-                cnn = new SqlConnection(connetionString);
-                cnn.Open();
-                SqlDataReader myReader = null;
-                SqlCommand myCommand = new SqlCommand("select * from Humen",
-                                                         cnn);
-                myReader = myCommand.ExecuteReader();
                 
-                object test = myReader[1];
-                User Admin1 = (User)Convert.ChangeType(myReader[0], typeof(User));
-                
-                List<User> Employs = null;
 
-                while (myReader[5] != null)
+                using (var context= new thistimeitwillworkforsure.DBContext())
                 {
-
+                    var Userlist = context.Humans.ToList();
                 }
-
 
 
                 List<Deployment> Deploys = ReadFile<Deployment>();
                 List<Vehicle> Vehicles = ReadFile<Vehicle>();
                 List<Resources> Resources = ReadFile<Resources>();
                 List<FireFighter> FireFighters = ReadFile<FireFighter>();
-                return new object[] { Deploys, Employs, Vehicles, Resources, FireFighters };
+                return new object[] { Deploys, /*Employs,*/ Vehicles, Resources, FireFighters };
             }
             if (Globals.sql == false)
             {
