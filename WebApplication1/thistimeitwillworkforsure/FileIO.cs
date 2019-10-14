@@ -30,33 +30,7 @@ namespace FireWorks
         /// </summary>
         public void CheckForFiles()
         {
-            if (Globals.sql == false)
-            {
-                string f = @"C:\Users\khof\Desktop\FWFiles";
-                f += @"\Files";
-                if (!Directory.Exists(f))
-                {
-                    Directory.CreateDirectory(f);
-                }
-                string[] _path = new string[] {
-                f +@"\Deployments.txt",
-                f +@"\Employee.txt",
-                f +@"\Vehicles.txt",
-                f +@"\Resources.txt",
-                f +@"\FireFighters.txt",
-            };
-                _paths = _path;
-                bool[] pathsExist = new bool[] { true, true, true, true, true };
-                for (int i = 0; i < _paths.Length; i++)
-                {
-                    if (!(File.Exists(_paths[i]))) { pathsExist[i] = false; }
-                }
-                Init(pathsExist);
-            }
-            if (Globals.sql == true)
-            {
-                
-            }
+            
         }
         /// <summary>
         /// Intialization of FileIO missing files are created.
@@ -407,19 +381,10 @@ namespace FireWorks
 
                 return new object[] { Deploys, Employs, Vehicles, Resources, FireFighters };
 
+                
 
 
 
-
-            }
-            if (Globals.sql == false)
-            {
-                List<Deployment> Deploys = ReadFile<Deployment>();
-                List<User> Employs = ReadFile<User>();
-                List<Vehicle> Vehicles = ReadFile<Vehicle>();
-                List<Resources> Resources = ReadFile<Resources>();
-                List<FireFighter> FireFighters = ReadFile<FireFighter>();
-                return new object[] { Deploys, Employs, Vehicles, Resources, FireFighters };
             }
         }
         public void SaveListToFile<T>(List<T> liste)

@@ -69,7 +69,6 @@ namespace FireWorks
                     {
                         if (!char.IsDigit(value[i]))
                             return;
-                        //throw excep?
                     }
                 this.PIN = value;
             }

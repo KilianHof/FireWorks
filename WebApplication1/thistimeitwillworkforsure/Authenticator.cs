@@ -68,7 +68,6 @@ namespace FireWorks
                         //select User;
                     return new string[2] { currentuser.Status, currentuser.FirstName };
                 }
-                _t.Display("No matching PIN found<br />");
             }
             else
             {
