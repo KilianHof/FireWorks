@@ -14,7 +14,6 @@ namespace FireWorks
 
         public Human()
         {
-
         }
         public Human(int id, string fname, string lname)
         {
@@ -53,7 +52,6 @@ namespace FireWorks
         public string PIN { get; set; }
         public User()
         {
-
         }
         public string GetPIN()
         {

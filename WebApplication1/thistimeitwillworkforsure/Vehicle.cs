@@ -15,10 +15,8 @@ namespace FireWorks
         public int Seats { get; set; } 
         public Vehicle()
         {
-
         }
         public Vehicle(string type, int engine, int seats)
-
         {
             Type = type;
             EnginePower = engine;
@@ -45,7 +43,6 @@ namespace FireWorks
                 return (Type == p.Type) && (EnginePower == p.EnginePower) && (Seats == p.Seats);
             }
         }
-
         public override int GetHashCode()
         {
             var hashCode = 877455370;
@@ -59,7 +56,6 @@ namespace FireWorks
     {
         public ToolCarrier()
         {
-
         }
         public bool Chainsaw { get; set; }
         public ToolCarrier(string type, int engine, int seats, bool cs) :
@@ -74,7 +70,6 @@ namespace FireWorks
         public int LadderHeight { get; set; }
         Turntableladder()
         {
-
         }
         public Turntableladder(string type, int engine, int seats, bool cs, int ladder) :
         base(type, engine, seats, cs)
@@ -88,7 +83,6 @@ namespace FireWorks
         public int FillQuantity { get; set; }
         Firetruck()
         {
-
         }
         public Firetruck(string type, int engine, int seats, bool cs, int fill) :
         base(type, engine, seats, cs)
@@ -98,12 +92,10 @@ namespace FireWorks
     }
     public class Ambulance : Vehicle
     {
-
         public new string Identifier = "Ambulance";
         public int PatientWeight { get; set; }
         public Ambulance()
         {
-
         }
         public Ambulance(string type, int engine, int seats, int Pweight) :
         base(type, engine, seats)
@@ -117,7 +109,6 @@ namespace FireWorks
         public new string Identifier = "Pkw";
         public Pkw()
         {
-
         }
         public Pkw(string type, int engine, int seats) :
         base(type, engine, seats)

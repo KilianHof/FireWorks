@@ -19,7 +19,6 @@ namespace FireWorks
         public FireFighter[] FireFighters { get; set; }
         public string Comment { get; set; }
         public int Id { get; set; }
-
         public Deployment() //nullconstructor only to be used if there is no entry yet.
         {
             

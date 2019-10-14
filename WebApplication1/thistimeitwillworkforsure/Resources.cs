@@ -15,10 +15,9 @@ namespace FireWorks
         public int Id { get; set; }
         public string Name { get; set; }
         public string Identifier = "Resource";
-        
+
         public Resources()
         {
-
         }
         public Resources(string d, int inv, string n)
         {
@@ -41,7 +40,6 @@ namespace FireWorks
         public char Letter;
         public Hose()
         {
-
         }
         public char GetLetter()
         {
@@ -78,7 +76,6 @@ namespace FireWorks
         public DateTime LastExaminationDate;
         public Gasanalyzer()
         {
-
         }
         public DateTime GetLastExaminationDate()
         {
@@ -111,7 +108,6 @@ namespace FireWorks
         public new string Identifier = "Distributer";
         public Distributer()
         {
-
         }
         public Distributer(string d, int inv) :
                base(d, inv, "Distributer")
@@ -123,7 +119,6 @@ namespace FireWorks
         public new string Identifier = "Jetnozzle";
         public Jetnozzle()
         {
-
         }
         public Jetnozzle(string d, int inv) :
                base(d, inv, "Jetnozzle")

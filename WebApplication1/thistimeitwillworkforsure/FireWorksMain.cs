@@ -7,11 +7,6 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//using RBTREE;
-
-
-
-
 
 namespace FireWorks
 {
@@ -20,7 +15,6 @@ namespace FireWorks
         
         public void Run()
         {
-
             TUI _t = new TUI();
             FileIO _filer = new FileIO(_t);
             _filer.CheckForFiles();
@@ -28,13 +22,7 @@ namespace FireWorks
             object[] lists = _filer.ReadAllLists(); //liest die Listen in "Arrays" ein
             UserFunctions _uf = new UserFunctions(_t, lists);
 
-
-
             Deployment d = new Deployment();
-
-            
-
-
 
             if (Globals.debug && false)
             {

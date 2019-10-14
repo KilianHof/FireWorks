@@ -25,7 +25,6 @@ namespace FireWorks
         /// </summary>
         /// <param name="str">String thats being converted.</param>
         /// <returns>A object.</returns>
-
         public static T JSONToGeneric<T>(string str)
         {
             try
