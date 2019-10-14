@@ -12,13 +12,18 @@ namespace FireWorks
         public int Id { get; set; }
         public string Type { get; set; }
         public int EnginePower { get; set; }
-        public int Seats { get; set; }
+        public int Seats { get; set; } 
+        public Vehicle()
+        {
+
+        }
         public Vehicle(string type, int engine, int seats)
+
         {
             Type = type;
             EnginePower = engine;
             Seats = seats;
-        }
+        } 
         public string GetIdentifier()
         {
             return Identifier;
@@ -52,6 +57,10 @@ namespace FireWorks
     }
     public class ToolCarrier : Vehicle
     {
+        public ToolCarrier()
+        {
+
+        }
         public bool Chainsaw { get; set; }
         public ToolCarrier(string type, int engine, int seats, bool cs) :
         base(type, engine, seats)
@@ -63,6 +72,10 @@ namespace FireWorks
     {
         public new string Identifier = "Turntableladder";
         public int LadderHeight { get; set; }
+        Turntableladder()
+        {
+
+        }
         public Turntableladder(string type, int engine, int seats, bool cs, int ladder) :
         base(type, engine, seats, cs)
         {
@@ -73,6 +86,10 @@ namespace FireWorks
     {
         public new string Identifier = "Firetruck";
         public int FillQuantity { get; set; }
+        Firetruck()
+        {
+
+        }
         public Firetruck(string type, int engine, int seats, bool cs, int fill) :
         base(type, engine, seats, cs)
         {
@@ -84,6 +101,10 @@ namespace FireWorks
 
         public new string Identifier = "Ambulance";
         public int PatientWeight { get; set; }
+        public Ambulance()
+        {
+
+        }
         public Ambulance(string type, int engine, int seats, int Pweight) :
         base(type, engine, seats)
         {
@@ -94,6 +115,10 @@ namespace FireWorks
     {
 
         public new string Identifier = "Pkw";
+        public Pkw()
+        {
+
+        }
         public Pkw(string type, int engine, int seats) :
         base(type, engine, seats)
         {

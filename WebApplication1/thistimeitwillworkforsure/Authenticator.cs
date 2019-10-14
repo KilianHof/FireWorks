@@ -1,4 +1,10 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.SqlClient;
+using System.IO;
 namespace FireWorks
 {
     /// <summary>
@@ -50,18 +56,17 @@ namespace FireWorks
             if (IsValidInput(Input))
             {
                 {
-                    string[] users = filer.GetListOfUsers();
-                    foreach (var item in users)
+                    List<User> Employs;
+                    using (var context = new thistimeitwillworkforsure.DBContext())
                     {
-                        User tmp = JSONConverter.JSONToGeneric<User>(item);
-                        if (tmp.GetType() == typeof(User))
-                        {
-                            if (Input.GetHashCode().ToString().Equals(tmp.PIN))
-                            {
-                                return new string[2] { tmp.Status, tmp.FirstName };
-                            }
-                        }
+                        Employs = context.Users.ToList();
                     }
+                    bool matchingPIN = Employs.Any(User => User.PIN == Input);
+                    User currentuser = Employs.Single(x => x.PIN == Input);
+                        //from User in Employs.Single
+                        //where User.PIN == Input
+                        //select User;
+                    return new string[2] { currentuser.Status, currentuser.FirstName };
                 }
                 _t.Display("No matching PIN found<br />");
             }

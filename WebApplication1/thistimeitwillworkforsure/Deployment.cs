@@ -22,7 +22,7 @@ namespace FireWorks
 
         public Deployment() //nullconstructor only to be used if there is no entry yet.
         {
-            Id = 0;
+            
         }
         /// <summary>
         /// Default constructor for Deployments

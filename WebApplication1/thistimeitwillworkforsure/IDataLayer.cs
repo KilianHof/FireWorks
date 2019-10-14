@@ -10,7 +10,6 @@ namespace FireWorks
     /// </summary>
     public interface IDataLayer
     {
-        string[] GetListOfUsers();
         void SaveAllLists(object[] lists);
         object[] ReadAllLists();
     }

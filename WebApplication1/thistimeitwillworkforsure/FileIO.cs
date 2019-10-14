@@ -55,19 +55,6 @@ namespace FireWorks
             }
             if (Globals.sql == true)
             {
-                try
-                {
-string connetionString;
-                SqlConnection cnn;
-                connetionString = @"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=thistimeitwillworkforsure.DBContext;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-                cnn = new SqlConnection(connetionString);
-                cnn.Open();
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                }
                 
             }
         }
@@ -183,32 +170,7 @@ string connetionString;
                 }
             }
         }
-        /// <summary>
-        /// Gets a list of all users from file.
-        /// </summary>
-        /// <returns>returns a string[] containing Users</returns>
-        public string[] GetListOfUsers()
-        {
-            List<string> results = new List<string>();
-            string Path = _paths[Employees];
-            if (File.Exists(Path))
-            {
-                int lineCount = File.ReadLines(Path).Count();
-                if (!(lineCount == 0))
-                    for (int i = 1; i <= lineCount; i++)
-                    {
-                        results.Add(File.ReadLines(Path).Skip(i - 1).Take(1).First());
-                    }
-                else
-                {
-                    _t.Display("cannot read line \"0\" or negative.(file empty?)" + "<br />");
-                    _t.Display("No lines indicates no stored users." + "<br />");
-                }
-                return results.ToArray();
-            }
-            _t.Display("cannot read file: " + Path + "<br />");
-            return results.ToArray();
-        }
+        
         /// <summary>
         /// reads files.
         /// </summary>
@@ -413,19 +375,42 @@ string connetionString;
         {
             if (Globals.sql == true)
             {
-                
-
-                using (var context= new thistimeitwillworkforsure.DBContext())
+                List<Deployment> Deploys;
+                using (var context = new thistimeitwillworkforsure.DBContext())
                 {
-                    var Userlist = context.Humans.ToList();
+                    Deploys = context.Deployments.ToList();
                 }
 
+                List<Resources> Resources;
+                using (var context = new thistimeitwillworkforsure.DBContext())
+                {
+                    Resources = context.Resources.ToList();
+                }
 
-                List<Deployment> Deploys = ReadFile<Deployment>();
-                List<Vehicle> Vehicles = ReadFile<Vehicle>();
-                List<Resources> Resources = ReadFile<Resources>();
-                List<FireFighter> FireFighters = ReadFile<FireFighter>();
-                return new object[] { Deploys, /*Employs,*/ Vehicles, Resources, FireFighters };
+                List<Vehicle> Vehicles;
+                using (var context = new thistimeitwillworkforsure.DBContext())
+                {
+                    Vehicles = context.Vehicles.ToList();
+                }
+
+                List<User> Employs;
+                using (var context= new thistimeitwillworkforsure.DBContext())
+                {
+                    Employs = context.Users.ToList();
+                }
+
+                List<FireFighter> FireFighters;
+                using (var context = new thistimeitwillworkforsure.DBContext())
+                {
+                    FireFighters = context.FireFighters.ToList();
+                }
+
+                return new object[] { Deploys, Employs, Vehicles, Resources, FireFighters };
+
+
+
+
+
             }
             if (Globals.sql == false)
             {
@@ -439,31 +424,117 @@ string connetionString;
         }
         public void SaveListToFile<T>(List<T> liste)
         {
-            int path = Pathfinder<T>();
-            string[] str = new string[liste.Count];
-            int i = 0;
 
-            if (liste.Count == 0) { return; }
-            if (path == -1) { return; }
-            if (!File.Exists(_paths[path])) { _t.Display("cannot read file: " + _paths[path] + "<br />"); return; }
 
-            foreach (var item in liste)
+            var query =
+                from User in liste
+                select User;
+            //foreach (User liste in query)
+
+                using (var context = new thistimeitwillworkforsure.DBContext())
             {
-                str[i] += JSONConverter.ObjectToJSON(item);
-                i++;
+                
             }
 
 
-            File.WriteAllLines(_paths[path], str);
+
+            //int path = Pathfinder<T>();
+            //string[] str = new string[liste.Count];
+            //int i = 0;
+
+                //if (liste.Count == 0) { return; }
+                //if (path == -1) { return; }
+                //if (!File.Exists(_paths[path])) { _t.Display("cannot read file: " + _paths[path] + "<br />"); return; }
+
+                //foreach (var item in liste)
+                //{
+                //    str[i] += JSONConverter.ObjectToJSON(item);
+                //    i++;
+                //}
+
+
+                //File.WriteAllLines(_paths[path], str);
 
         }
         public void SaveAllLists(object[] lists)
         {
-            SaveListToFile<Deployment>((List<Deployment>)lists[Deployments]); //warum kann ich das vereinfachen?
-            SaveListToFile<User>((List<User>)lists[Employees]);
-            SaveListToFile<Vehicle>((List<Vehicle>)lists[Vehicles]);
-            SaveListToFile<Resources>((List<Resources>)lists[Resources]);
-            SaveListToFile<FireFighter>((List<FireFighter>)lists[Firefighters]);
+
+            SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; Initial Catalog = thistimeitwillworkforsure.DBContext; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False");
+            con.Open();
+            string sql = @"TRUNCATE TABLE Users;";
+            SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.ExecuteNonQuery();
+            con.Close();
+
+            con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; Initial Catalog = thistimeitwillworkforsure.DBContext; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False");
+            con.Open();
+            sql = @"TRUNCATE TABLE FireFighters;";
+            cmd = new SqlCommand(sql, con);
+            cmd.ExecuteNonQuery();
+            con.Close();
+
+            con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; Initial Catalog = thistimeitwillworkforsure.DBContext; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False");
+            con.Open();
+            sql = @"TRUNCATE TABLE Vehicles;";
+            cmd = new SqlCommand(sql, con);
+            cmd.ExecuteNonQuery();
+            con.Close();
+
+            con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; Initial Catalog = thistimeitwillworkforsure.DBContext; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False");
+            con.Open();
+            sql = @"TRUNCATE TABLE Deployments;";
+            cmd = new SqlCommand(sql, con);
+            cmd.ExecuteNonQuery();
+            con.Close();
+
+            con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; Initial Catalog = thistimeitwillworkforsure.DBContext; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False");
+            con.Open();
+            sql = @"TRUNCATE TABLE Resources;";
+            cmd = new SqlCommand(sql, con);
+            cmd.ExecuteNonQuery();
+            con.Close();
+
+            using (var context = new thistimeitwillworkforsure.DBContext())
+            {
+                foreach (var User in (List<User>)lists[Employees])
+                {
+                    context.Users.Add(User);
+                }
+                context.SaveChanges();
+            }
+            using (var context = new thistimeitwillworkforsure.DBContext())
+            {
+                foreach (var fireFighter in (List<FireFighter>)lists[Firefighters])
+                {
+                    context.FireFighters.Add(fireFighter);
+                }
+                context.SaveChanges();
+            }
+            using (var context = new thistimeitwillworkforsure.DBContext())
+            {
+                foreach (var vehicle in (List<Vehicle>)lists[Vehicles])
+                {
+                    context.Vehicles.Add(vehicle);
+                }
+                context.SaveChanges();
+            }
+            using (var context = new thistimeitwillworkforsure.DBContext())
+            {
+                foreach (var deployment in (List<Deployment>)lists[Deployments])
+                {
+                    context.Deployments.Add(deployment);
+                }
+                context.SaveChanges();
+            }
+            using (var context = new thistimeitwillworkforsure.DBContext())
+            {
+                foreach (var resources in (List<Resources>)lists[Resources])
+                {
+                    context.Resources.Add(resources);
+                }
+                context.SaveChanges();
+            }
+
         }
         /// <summary>
         /// 

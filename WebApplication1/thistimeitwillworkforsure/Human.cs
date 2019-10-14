@@ -14,6 +14,7 @@ namespace FireWorks
 
         public Human()
         {
+
         }
         public Human(int id, string fname, string lname)
         {
@@ -28,6 +29,10 @@ namespace FireWorks
     }
     public class FireFighter : Human
     {
+        public FireFighter()
+        {
+
+        }
         public FireFighter(string fname, string lname, int id)
         {
             LastName = lname;
@@ -46,6 +51,10 @@ namespace FireWorks
         }
         public string Status { get; set; }
         public string PIN { get; set; }
+        public User()
+        {
+
+        }
         public string GetPIN()
         {
             return PIN;
