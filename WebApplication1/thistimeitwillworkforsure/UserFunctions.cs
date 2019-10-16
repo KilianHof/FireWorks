@@ -227,70 +227,78 @@ namespace FireWorks
 
                     break;
                 case "-d":
-                    int number = 0; //erstellt einen Einsatzeintrag
-
-                    Vehicle[] v = new Vehicle[number];
-                    FireFighter[] p = new FireFighter[number];
-                    Resources[] r = new Resources[number];
-
                     List<Deployment> liste = GetListDeployments();
+                    if (Globals.DLL == false)
+                    {
+                        int number = 0; //erstellt einen Einsatzeintrag
 
-                    _t.Display("Where was the Deployment?<br />");
-                    string loc = _t.GetString();
-                    _t.Display("How many Vehicles participated in the Deployment?<br />");
-                    List<Vehicle> cars = GetListVehicles();
-                    if (cars.Count == 0)
-                    {
-                        _t.Display("It appears as if you have no vehicles in your basedata<br />" +
-                            "You might wish to ask your local admin to create some for you.<br /><br />");
-                    }
-                    else
-                    {
-                        number = ValidInputRange(_t.GetInt(), 0, cars.Count);   //ist die Zahl der Fahrzeuge valide?
-                        v = new Vehicle[number];
-                        for (int i = 0; i < number; i++)
-                        {
-                            v[i] = cars.ElementAt(ObjectSelection(cars) - 1);
-                        }
-                    }
-                    _t.Display("How much staff participated in the Deployment?<br />");
-                    List<FireFighter> staff = GetListFireFighter();
-                    if (staff.Count == 0)
-                    {
-                        _t.Display("It appears as if you have no staff in your basedata<br />" +
-                            "You might wish to ask your local admin to create some for you.<br /><br />");
-                    }
-                    else
-                    {
-                        number = ValidInputRange(_t.GetInt(), 0, staff.Count);  //ist die Zahl der Feuerwehrmänner valide?
-                        p = new FireFighter[number];
-                        for (int i = 0; i < number; i++)
-                        {
-                            p[i] = staff.ElementAt(ObjectSelection(staff) - 1);
-                        }
-                    }
-                    _t.Display("How many resources were used in the Deployment?<br />");
-                    List<Resources> res = GetListResources();
-                    if (res.Count == 0)
-                    {
-                        _t.Display("It appears as if you have no resources in your basedata<br />" +
-                            "You might wish to ask your local admin to create some for you.<br /><br />");
-                    }
-                    else
-                    {
-                        number = ValidInputRange(_t.GetInt(), 0, res.Count);    //ist die zahl der resourcen valide?
-                        r = new Resources[number];
-                        for (int i = 0; i < number; i++)
-                        {
-                            r[i] = res.ElementAt(ObjectSelection(res) - 1);
-                        }
-                    }
-                    _t.Display("Any comments?<br />");
-                    string com = _t.GetString();
+                        Vehicle[] v = new Vehicle[number];
+                        FireFighter[] p = new FireFighter[number];
+                        Resources[] r = new Resources[number];
 
-                    DeploymentFactory DF = new DeploymentFactory();
-                    Deployment test = DF.NewDeployment(loc, v, r, p, com, AllDeployments.Count()+1);
-                    liste.Add(test);
+                        _t.Display("Where was the Deployment?<br />");
+                        string loc = _t.GetString();
+                        _t.Display("How many Vehicles participated in the Deployment?<br />");
+                        List<Vehicle> cars = GetListVehicles();
+                        if (cars.Count == 0)
+                        {
+                            _t.Display("It appears as if you have no vehicles in your basedata<br />" +
+                                "You might wish to ask your local admin to create some for you.<br /><br />");
+                        }
+                        else
+                        {
+                            number = ValidInputRange(_t.GetInt(), 0, cars.Count);   //ist die Zahl der Fahrzeuge valide?
+                            v = new Vehicle[number];
+                            for (int i = 0; i < number; i++)
+                            {
+                                v[i] = cars.ElementAt(ObjectSelection(cars) - 1);
+                            }
+                        }
+                        _t.Display("How much staff participated in the Deployment?<br />");
+                        List<FireFighter> staff = GetListFireFighter();
+                        if (staff.Count == 0)
+                        {
+                            _t.Display("It appears as if you have no staff in your basedata<br />" +
+                                "You might wish to ask your local admin to create some for you.<br /><br />");
+                        }
+                        else
+                        {
+                            number = ValidInputRange(_t.GetInt(), 0, staff.Count);  //ist die Zahl der Feuerwehrmänner valide?
+                            p = new FireFighter[number];
+                            for (int i = 0; i < number; i++)
+                            {
+                                p[i] = staff.ElementAt(ObjectSelection(staff) - 1);
+                            }
+                        }
+                        _t.Display("How many resources were used in the Deployment?<br />");
+                        List<Resources> res = GetListResources();
+                        if (res.Count == 0)
+                        {
+                            _t.Display("It appears as if you have no resources in your basedata<br />" +
+                                "You might wish to ask your local admin to create some for you.<br /><br />");
+                        }
+                        else
+                        {
+                            number = ValidInputRange(_t.GetInt(), 0, res.Count);    //ist die zahl der resourcen valide?
+                            r = new Resources[number];
+                            for (int i = 0; i < number; i++)
+                            {
+                                r[i] = res.ElementAt(ObjectSelection(res) - 1);
+                            }
+                        }
+                        _t.Display("Any comments?<br />");
+                        string com = _t.GetString();
+
+                        DeploymentFactory DF = new DeploymentFactory();
+                        Deployment test = DF.NewDeployment(loc, v, r, p, com, AllDeployments.Count() + 1);
+                        liste.Add(test);
+                    }else {
+                        Deployer.DeployerProgram tmp = new Deployer.DeployerProgram();
+                        Deployer.Deployment yeet = tmp.Main();
+                        DeploymentFactory tempo = new DeploymentFactory();
+                        Deployment temporary = tempo.NewDeployment(yeet.Location, null, null, null, yeet.Comment, yeet.Id);
+                        liste.Add(temporary);
+                    }
                     GasExaminationCheck();
                     break;
                 case "-g":

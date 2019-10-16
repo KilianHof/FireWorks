@@ -12,8 +12,7 @@ namespace Deployer
     {
         public Deployment Main()
         {
-            DeploymentFactory tmp = new DeploymentFactory();
-            Deployment depl = tmp.NewDeployment("Ort", null, null, null, "Lorem Ipsum", 1);
+            Deployment depl = DeploymentFactory.NewDeployment("Ort", null, null, null, "Lorem Ipsum", 1);
             return depl;
         }
     }
