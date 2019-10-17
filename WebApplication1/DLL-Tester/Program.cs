@@ -4,10 +4,10 @@ namespace DLL_Tester
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Deployer.DeployerProgram tmp = new Deployer.DeployerProgram();
-            Deployer.Deployment yeet = tmp.Main();
+            Deployer.Deployment test = tmp.Main();
         }
     }
 }

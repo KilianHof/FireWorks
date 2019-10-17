@@ -294,9 +294,9 @@ namespace FireWorks
                         liste.Add(test);
                     }else {
                         Deployer.DeployerProgram tmp = new Deployer.DeployerProgram();
-                        Deployer.Deployment yeet = tmp.Main();
+                        Deployer.Deployment test = tmp.Main();
                         DeploymentFactory tempo = new DeploymentFactory();
-                        Deployment temporary = tempo.NewDeployment(yeet.Location, null, null, null, yeet.Comment, yeet.Id);
+                        Deployment temporary = tempo.NewDeployment(test.Location, null, null, null, test.Comment, test.Id);
                         liste.Add(temporary);
                     }
                     GasExaminationCheck();

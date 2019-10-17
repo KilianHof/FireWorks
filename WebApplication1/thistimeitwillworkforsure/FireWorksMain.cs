@@ -30,7 +30,6 @@ namespace FireWorks
 
 
 
-            Deployment d = new Deployment();
 
             
 
@@ -38,6 +37,7 @@ namespace FireWorks
 
             if (Globals.debug)
             {
+            Deployment d = new Deployment();
                 int testsize = 1000;
                 Stopwatch stopWatch = new Stopwatch();
                 stopWatch.Start();

@@ -15,7 +15,7 @@ namespace FireWorks
 
     public class FileIO : IDataLayer
     {
-        private static string[] _paths;
+        private static readonly string[] _paths;
 
         private const int Deployments = 0;
         private const int Employees = 1;
