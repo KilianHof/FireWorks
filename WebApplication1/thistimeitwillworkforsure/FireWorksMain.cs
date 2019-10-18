@@ -105,14 +105,10 @@ namespace FireWorks
     {
         public const bool sql = true; //Schaltet zwischen SQL und .txt Dateimanagement
         public const bool debug = false; //Schaltet den DEBUG-Modus an und aus
-        public const bool DLL = true;
+        public const bool DLL = false;
         public static string textout = "";
         public static string textin = "";
         public static int Submitted = 0;
     }
 
-    public class Eventhandler
-    {
-        
-    }
 }

@@ -10,7 +10,15 @@ namespace FireWorks
     /// <summary>
     /// Factroy for creating Deployment objects.
     /// </summary>
-    public class DeploymentFactory
+
+
+    public interface IDeploy
+    {
+        Deployment NewDeployment(string loc, Vehicle[] veh, Resources[] res, FireFighter[] Ff, string com, int num);
+    }
+
+
+    public class DeploymentFactory : IDeploy
     {
         /// <summary>
         /// Calls the Constructor of Deployment objects with needed params.
@@ -24,7 +32,20 @@ namespace FireWorks
         /// <returns></returns>
         public Deployment NewDeployment(string loc, Vehicle[] veh, Resources[] res, FireFighter[] Ff, string com, int num)
         {
-            return new Deployment(loc, veh, res, Ff, com, num);
+               var tmp = new Deployment(loc, veh, res, Ff, com, num);
+            return tmp;
+        }
+    }
+    public class DeploymentDLL : IDeploy
+    {
+
+        public Deployment NewDeployment(string loc, Vehicle[] veh, Resources[] res, FireFighter[] Ff, string com, int num)
+        {
+            Deployer.DeployerProgram tmp = new Deployer.DeployerProgram();
+            Deployer.Deployment test = tmp.Main();
+            DeploymentFactory tempo = new DeploymentFactory();
+            Deployment temporary = tempo.NewDeployment(test.Location, null, null, null, test.Comment, test.Id);
+            return temporary;
         }
     }
 }

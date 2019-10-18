@@ -125,12 +125,12 @@ namespace FireWorks
 
                         for (int i = 0; i < howMany; i++)   //fügt die Einsätze einem String hinzu-
                         {
-                            toDisplay += "(" + (i + 1) + ") At: " + GetListDeployments().ElementAt((DeployCount-1)-i).Location + " Time: " + GetListDeployments().ElementAt((DeployCount - 1) - i).DateAndTime + "<br />";
+                            toDisplay += "(" + (i + 1) + ") At: " + GetListDeployments().ElementAt((DeployCount - 1) - i).Location + " Time: " + GetListDeployments().ElementAt((DeployCount - 1) - i).DateAndTime + "<br />";
                         }
                         _t.Display(toDisplay);  //-stellt diesen String dar
                         _t.Display("To go into detail type corresponding number.<br />");
                         howMany = ValidInputRange(_t.GetInt(), 1, DeployCount);
-                        _t.Display(GetListDeployments().ElementAt((DeployCount-1)-(howMany - 1)).ToString() + "<br />");
+                        _t.Display(GetListDeployments().ElementAt((DeployCount - 1) - (howMany - 1)).ToString() + "<br />");
                     }
                     else
                     {
@@ -227,9 +227,8 @@ namespace FireWorks
 
                     break;
                 case "-d":
-                    List<Deployment> liste = GetListDeployments();
-                    if (Globals.DLL == false)
                     {
+                        List<Deployment> liste = GetListDeployments();
                         int number = 0; //erstellt einen Einsatzeintrag
 
                         Vehicle[] v = new Vehicle[number];
@@ -289,15 +288,21 @@ namespace FireWorks
                         _t.Display("Any comments?<br />");
                         string com = _t.GetString();
 
-                        DeploymentFactory DF = new DeploymentFactory();
-                        Deployment test = DF.NewDeployment(loc, v, r, p, com, AllDeployments.Count() + 1);
-                        liste.Add(test);
-                    }else {
-                        Deployer.DeployerProgram tmp = new Deployer.DeployerProgram();
-                        Deployer.Deployment test = tmp.Main();
-                        DeploymentFactory tempo = new DeploymentFactory();
-                        Deployment temporary = tempo.NewDeployment(test.Location, null, null, null, test.Comment, test.Id);
-                        liste.Add(temporary);
+                        if (Globals.DLL == false)
+                        {
+                            DeploymentFactory DF = new DeploymentFactory();
+                            Deployment test = DF.NewDeployment(loc, v, r, p, com, AllDeployments.Count() + 1);
+                            liste.Add(test);
+                        }
+                        else
+                        {
+                            var DeploymentDLL = new DeploymentDLL();
+                            var DF = DeploymentDLL.NewDeployment(loc, v, r, p, com, AllDeployments.Count() + 1);
+                            Deployment tmp = new Deployment(DF.Location, DF.Cars, DF.Resources, DF.FireFighters, DF.Comment, DF.Id);
+                            liste.Add(tmp);
+                        }
+
+
                     }
                     GasExaminationCheck();
                     break;

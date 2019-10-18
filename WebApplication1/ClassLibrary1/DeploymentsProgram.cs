@@ -17,7 +17,7 @@ namespace Deployer
         }
     }
 
-    public class Deployment : IComparable
+    public class Deployment
     {
         public string DateAndTime { get; set; }
         public string Location { get; set; }
