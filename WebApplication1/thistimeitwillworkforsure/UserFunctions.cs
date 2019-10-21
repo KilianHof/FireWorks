@@ -296,7 +296,9 @@ namespace FireWorks
                         }
                         else
                         {
+#pragma warning disable CS0162 // Unreachable code detected
                             var DeploymentDLL = new DeploymentDLL();
+#pragma warning restore CS0162 // Unreachable code detected
                             var DF = DeploymentDLL.NewDeployment(loc, v, r, p, com, AllDeployments.Count() + 1);
                             Deployment tmp = new Deployment(DF.Location, DF.Cars, DF.Resources, DF.FireFighters, DF.Comment, DF.Id);
                             liste.Add(tmp);

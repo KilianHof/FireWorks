@@ -37,7 +37,9 @@ namespace FireWorks
 
             if (Globals.debug)
             {
+#pragma warning disable CS0162 // Unreachable code detected
             Deployment d = new Deployment();
+#pragma warning restore CS0162 // Unreachable code detected
                 int testsize = 1000;
                 Stopwatch stopWatch = new Stopwatch();
                 stopWatch.Start();

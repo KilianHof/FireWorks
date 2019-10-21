@@ -17,7 +17,9 @@ namespace FireWorks
     class Authenticator
     {
         private readonly IUserLayer _t;
+#pragma warning disable IDE0052 // Remove unread private members
         private readonly IDataLayer filer;
+#pragma warning restore IDE0052 // Remove unread private members
         public Authenticator(IUserLayer ux, IDataLayer fil) { _t = ux; filer = fil; }
         private const int _pinLength = 4;
         /// <summary>

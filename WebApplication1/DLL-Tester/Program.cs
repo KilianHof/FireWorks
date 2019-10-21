@@ -6,8 +6,8 @@ namespace DLL_Tester
     {
         static void Main()
         {
-            Deployer.DeployerProgram tmp = new Deployer.DeployerProgram();
-            Deployer.Deployment test = tmp.Main();
+            //Deployer.DeployerProgram tmp = new Deployer.DeployerProgram();
+            //Deployer.Deployment test = tmp.Main();
         }
     }
 }

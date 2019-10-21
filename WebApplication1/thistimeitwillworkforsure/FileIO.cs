@@ -31,121 +31,14 @@ namespace FireWorks
         /// </summary>
         public void CheckForFiles()
         {
-            
+
         }
         /// <summary>
         /// Intialization of FileIO missing files are created.
         /// </summary>
         /// <param name="existing"></param>
-        private void Init(bool[] existing)
-        {
-
-            bool isFine = true; //checkt ob eine datei fehlt. wenn eine datei fehlt wird "isFine" auf falsch gesetzt.
-            foreach (var item in existing)
-            {
-                if (!item)
-                    isFine = false;
-            }
-            if (!isFine)
-            {
-                _t.Display("Seems like some files dont exist. Do you wish to initialize missing files?(Admin PIN=0000)<br />");
-                if (_t.GetBool())
-                {
-
-                    _t.Display("Do you wish to create some default basedata?");
-                    bool CreationMode = _t.GetBool();
-
-                    for (int i = 0; i < _paths.Length; i++)
-                    {
-                        if (!existing[i])
-                        {
-                            Byte[] info;
-#pragma warning disable IDE0063 // Use simple 'using' statement
-                            using (FileStream fs = File.Create(_paths[i]))
-#pragma warning restore IDE0063 // Use simple 'using' statement
-                            {
-                                StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.Default);
-                                if (i == 1)
-                                {
-                                    string PIN = "0000";
-                                    info = new UTF8Encoding(true).GetBytes(@"{""PIN"":""" + PIN.GetHashCode().ToString() + @""",""Status"":""ADMIN"",""Id"":1,""FirstName"":""FirstName"",""LastName"":""LastName""}");
-                                    fs.Write(info, 0, info.Length);
-
-                                }
-                                else
-                                {
-                                    if (CreationMode)
-                                    {
-                                        Byte[] newline = Encoding.ASCII.GetBytes(Environment.NewLine);
-                                        string temp = "";
-                                        switch (i)
-                                        {
-                                            case 2:
-                                                Pkw p = new Pkw("Pkw", 80, 4);
-                                                Firetruck ft = new Firetruck("LFZ", 200, 4, false, 400);
-                                                Ambulance a = new Ambulance("Ambulance", 150, 6, 300);
-                                                Turntableladder tl = new Turntableladder("Turntableladder", 300, 4, true, 20);
-
-                                                temp = JSONConverter.ObjectToJSON(p);
-                                                sw.WriteLine(temp);
-
-                                                temp = JSONConverter.ObjectToJSON(ft);
-                                                sw.WriteLine(temp);
-
-                                                temp = JSONConverter.ObjectToJSON(a);
-                                                sw.WriteLine(temp);
-
-                                                temp = JSONConverter.ObjectToJSON(tl);
-                                                sw.Write(temp);
-                                                break;
-                                            case 3:
-                                                Hose h = new Hose("A regular Hose", 1, 'B', 20);
-                                                Gasanalyzer ga = new Gasanalyzer("A regular gasanalyzer", 2);
-                                                Distributer d = new Distributer("A regular Distributer", 3);
-                                                Jetnozzle jn = new Jetnozzle("A regular Jetnozzle", 4);
-
-                                                temp = JSONConverter.ObjectToJSON(h);
-                                                sw.WriteLine(temp);
-
-                                                temp = JSONConverter.ObjectToJSON(ga);
-                                                sw.WriteLine(temp);
-
-                                                temp = JSONConverter.ObjectToJSON(d);
-                                                sw.WriteLine(temp);
-
-                                                temp = JSONConverter.ObjectToJSON(jn);
-                                                sw.Write(temp);
-                                                break;
-                                            case 4:
-                                                FireFighter ff1 = new FireFighter("Max", "Mustermann", 1);
-                                                FireFighter ff2 = new FireFighter("Marina", "Musterfrau", 2);
-
-                                                temp = JSONConverter.ObjectToJSON(ff1);
-                                                sw.WriteLine(temp);
-
-                                                temp = JSONConverter.ObjectToJSON(ff2);
-                                                sw.Write(temp);
-                                                break;
-                                            default:
-                                                info = new UTF8Encoding(true).GetBytes("");
-                                                fs.Write(info, 0, info.Length);
-                                                break;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        info = new UTF8Encoding(true).GetBytes("");
-                                        fs.Write(info, 0, info.Length);
-                                    }
-                                }
-                                sw.Close();
-                            }
-                        }
-                    }
-                }
-            }
-        }
         
+
         /// <summary>
         /// reads files.
         /// </summary>
@@ -361,30 +254,32 @@ namespace FireWorks
                     tmpDeploys.Add(JsonConvert.DeserializeObject<Deployment>(Deployment.JSON));
                 }
 
-                List<Resource> Resources;
+                List<Resource> Resources;       //need cast
                 using (var context = new thistimeitwillworkforsure.DBContext())
                 {
                     Resources = context.Resources.ToList();
                 }
-                List<Resource> tmpResources = new List<Resource>();
+                List<object> tmpResources = new List<object>();
                 foreach (var Resource in Resources)
                 {
-                    tmpResources.Add(JsonConvert.DeserializeObject<Resource>(Resource.JSON));
+                    tmpResources.Add(ObjectCast<Resource>(Resource.JSON));
                 }
+                Resources = ConvertList<Resource>(tmpResources);
 
-                List<Vehicle> Vehicles;
+                List<Vehicle> Vehicles;     //need cast
                 using (var context = new thistimeitwillworkforsure.DBContext())
                 {
                     Vehicles = context.Vehicles.ToList();
                 }
-                List<Vehicle> tmpVehicles = new List<Vehicle>();
+                List<object> tmpVehicles = new List<object>();
                 foreach (var Vehicle in Vehicles)
                 {
-                    tmpVehicles.Add(JsonConvert.DeserializeObject<Vehicle>(Vehicle.JSON));
+                    tmpVehicles.Add(ObjectCast<Vehicle>(Vehicle.JSON));
                 }
+                Vehicles = ConvertList<Vehicle>(tmpVehicles);
 
                 List<User> Employs;
-                using (var context= new thistimeitwillworkforsure.DBContext())
+                using (var context = new thistimeitwillworkforsure.DBContext())
                 {
                     Employs = context.Users.ToList();
                 }
@@ -405,7 +300,7 @@ namespace FireWorks
                     tmpFireFighters.Add(JsonConvert.DeserializeObject<FireFighter>(FireFighter.JSON));
                 }
 
-                return new object[] { tmpDeploys, tmpUsers, tmpVehicles, tmpResources, tmpFireFighters };
+                return new object[] { tmpDeploys, tmpUsers, Vehicles, Resources, tmpFireFighters };
 
             }
         }
@@ -418,9 +313,9 @@ namespace FireWorks
                 select User;
             //foreach (User liste in query)
 
-                using (var context = new thistimeitwillworkforsure.DBContext())
+            using (var context = new thistimeitwillworkforsure.DBContext())
             {
-                
+
             }
 
         }
@@ -467,8 +362,6 @@ namespace FireWorks
             con.Close();
             cmd.Dispose();
 
-            JSONConverter conv = new JSONConverter();
-            
             using (var context = new thistimeitwillworkforsure.DBContext())
             {
                 foreach (var User in (List<User>)lists[Employees])
@@ -479,7 +372,7 @@ namespace FireWorks
                 {
                     context.Users.Add(User);
                 }
-                    context.SaveChanges();
+                context.SaveChanges();
             }
             using (var context = new thistimeitwillworkforsure.DBContext())
             {
