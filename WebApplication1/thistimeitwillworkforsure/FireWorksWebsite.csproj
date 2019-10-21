@@ -223,9 +223,13 @@
     <Compile Include="Migrations\201910140717518_final.Designer.cs">
       <DependentUpon>201910140717518_final.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910210809334_JSON.cs" />
+    <Compile Include="Migrations\201910210809334_JSON.Designer.cs">
+      <DependentUpon>201910210809334_JSON.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Dataclasses\Resources.cs" />
+    <Compile Include="Dataclasses\Resource.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -262,6 +266,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910140717518_final.resx">
       <DependentUpon>201910140717518_final.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910210809334_JSON.resx">
+      <DependentUpon>201910210809334_JSON.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

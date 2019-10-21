@@ -8,6 +8,7 @@ namespace FireWorks
 {
     public class Vehicle
     {
+        public string JSON { get; set; }
         public string Identifier = "Vehicle";
         public int Id { get; set; }
         public string Type { get; set; }

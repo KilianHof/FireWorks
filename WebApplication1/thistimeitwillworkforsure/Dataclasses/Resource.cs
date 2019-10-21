@@ -9,18 +9,19 @@ namespace FireWorks
     /// <summary>
     /// Resource objects are used to store information about items that were used in a Deployment.
     /// </summary>
-    public class Resources
+    public class Resource
     {
+        public string JSON { get; set; }
         public string Description { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }
         public string Identifier = "Resource";
         
-        public Resources()
+        public Resource()
         {
 
         }
-        public Resources(string d, int inv, string n)
+        public Resource(string d, int inv, string n)
         {
             Description = d;
             Id = inv;
@@ -35,7 +36,7 @@ namespace FireWorks
             return Description + " " + Id;
         }
     }
-    public class Hose : Resources
+    public class Hose : Resource
     {
         public new string Identifier = "Hose";
         public char Letter;
@@ -72,7 +73,7 @@ namespace FireWorks
             HoseLength = len;
         }
     }
-    public class Gasanalyzer : Resources
+    public class Gasanalyzer : Resource
     {
         public new string Identifier = "Gasanalyzer";
         public DateTime LastExaminationDate;
@@ -106,7 +107,7 @@ namespace FireWorks
             return false;
         }
     }
-    public class Distributer : Resources
+    public class Distributer : Resource
     {
         public new string Identifier = "Distributer";
         public Distributer()
@@ -118,7 +119,7 @@ namespace FireWorks
         {
         }
     }
-    public class Jetnozzle : Resources
+    public class Jetnozzle : Resource
     {
         public new string Identifier = "Jetnozzle";
         public Jetnozzle()

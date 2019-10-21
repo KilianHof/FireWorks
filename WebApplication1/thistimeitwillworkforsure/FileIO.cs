@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace FireWorks
 {
@@ -168,9 +169,9 @@ namespace FireWorks
                         tmp.Add(ObjectCast<Vehicle>(line));
                         needCast = true;
                     }
-                    if (trial.GetType() == typeof(Resources))
+                    if (trial.GetType() == typeof(Resource))
                     {
-                        tmp.Add(ObjectCast<Resources>(line));
+                        tmp.Add(ObjectCast<Resource>(line));
                         needCast = true;
                     }
                     if (trial.GetType() == typeof(Deployment))
@@ -178,7 +179,7 @@ namespace FireWorks
                         Deployment prototype = (Deployment)trial;
 
                         List<Vehicle> v = new List<Vehicle>();
-                        List<Resources> r = new List<Resources>();
+                        List<Resource> r = new List<Resource>();
                         List<FireFighter> f = new List<FireFighter>();
                         string cutting = line;
 
@@ -213,7 +214,7 @@ namespace FireWorks
                             ResObjects = (string[])testNull;
                             foreach (var item in ResObjects)
                             {
-                                r.Add((Resources)ObjectCast<Resources>(item));
+                                r.Add((Resource)ObjectCast<Resource>(item));
                             }
                         }
                         firstIndex = cutting.IndexOf('[') + 1;          // first occourence marks array
@@ -284,9 +285,9 @@ namespace FireWorks
         private object ObjectCast<T>(string line)
         {
             object trial = JSONConverter.JSONToGeneric<T>(line);
-            if (trial.GetType() == typeof(Resources))
+            if (trial.GetType() == typeof(Resource))
             {
-                Resources prototype = (Resources)trial;
+                Resource prototype = (Resource)trial;
                 if (prototype.GetIdentifier() == "Hose")
                 {
                     return (JSONConverter.JSONToGeneric<Hose>(line));
@@ -354,11 +355,21 @@ namespace FireWorks
                 {
                     Deploys = context.Deployments.ToList();
                 }
+                List<Deployment> tmpDeploys = new List<Deployment>();
+                foreach (var Deployment in Deploys)
+                {
+                    tmpDeploys.Add(JsonConvert.DeserializeObject<Deployment>(Deployment.JSON));
+                }
 
-                List<Resources> Resources;
+                List<Resource> Resources;
                 using (var context = new thistimeitwillworkforsure.DBContext())
                 {
                     Resources = context.Resources.ToList();
+                }
+                List<Resource> tmpResources = new List<Resource>();
+                foreach (var Resource in Resources)
+                {
+                    tmpResources.Add(JsonConvert.DeserializeObject<Resource>(Resource.JSON));
                 }
 
                 List<Vehicle> Vehicles;
@@ -366,11 +377,21 @@ namespace FireWorks
                 {
                     Vehicles = context.Vehicles.ToList();
                 }
+                List<Vehicle> tmpVehicles = new List<Vehicle>();
+                foreach (var Vehicle in Vehicles)
+                {
+                    tmpVehicles.Add(JsonConvert.DeserializeObject<Vehicle>(Vehicle.JSON));
+                }
 
                 List<User> Employs;
                 using (var context= new thistimeitwillworkforsure.DBContext())
                 {
                     Employs = context.Users.ToList();
+                }
+                List<User> tmpUsers = new List<User>();
+                foreach (var User in Employs)
+                {
+                    tmpUsers.Add(JsonConvert.DeserializeObject<User>(User.JSON));
                 }
 
                 List<FireFighter> FireFighters;
@@ -378,12 +399,13 @@ namespace FireWorks
                 {
                     FireFighters = context.FireFighters.ToList();
                 }
+                List<FireFighter> tmpFireFighters = new List<FireFighter>();
+                foreach (var FireFighter in FireFighters)
+                {
+                    tmpFireFighters.Add(JsonConvert.DeserializeObject<FireFighter>(FireFighter.JSON));
+                }
 
-                return new object[] { Deploys, Employs, Vehicles, Resources, FireFighters };
-
-                
-
-
+                return new object[] { tmpDeploys, tmpUsers, tmpVehicles, tmpResources, tmpFireFighters };
 
             }
         }
@@ -445,16 +467,26 @@ namespace FireWorks
             con.Close();
             cmd.Dispose();
 
+            JSONConverter conv = new JSONConverter();
+            
             using (var context = new thistimeitwillworkforsure.DBContext())
             {
                 foreach (var User in (List<User>)lists[Employees])
                 {
+                    User.JSON = JsonConvert.SerializeObject(User, Formatting.None);
+                }
+                foreach (var User in (List<User>)lists[Employees])
+                {
                     context.Users.Add(User);
                 }
-                context.SaveChanges();
+                    context.SaveChanges();
             }
             using (var context = new thistimeitwillworkforsure.DBContext())
             {
+                foreach (var fireFighter in (List<FireFighter>)lists[Firefighters])
+                {
+                    fireFighter.JSON = JsonConvert.SerializeObject(fireFighter, Formatting.None);
+                }
                 foreach (var fireFighter in (List<FireFighter>)lists[Firefighters])
                 {
                     context.FireFighters.Add(fireFighter);
@@ -465,6 +497,10 @@ namespace FireWorks
             {
                 foreach (var vehicle in (List<Vehicle>)lists[Vehicles])
                 {
+                    vehicle.JSON = JsonConvert.SerializeObject(vehicle, Formatting.None);
+                }
+                foreach (var vehicle in (List<Vehicle>)lists[Vehicles])
+                {
                     context.Vehicles.Add(vehicle);
                 }
                 context.SaveChanges();
@@ -473,13 +509,21 @@ namespace FireWorks
             {
                 foreach (var deployment in (List<Deployment>)lists[Deployments])
                 {
+                    deployment.JSON = JsonConvert.SerializeObject(deployment, Formatting.None);
+                }
+                foreach (var deployment in (List<Deployment>)lists[Deployments])
+                {
                     context.Deployments.Add(deployment);
                 }
                 context.SaveChanges();
             }
             using (var context = new thistimeitwillworkforsure.DBContext())
             {
-                foreach (var resources in (List<Resources>)lists[Resources])
+                foreach (var resources in (List<Resource>)lists[Resources])
+                {
+                    resources.JSON = JsonConvert.SerializeObject(resources, Formatting.None);
+                }
+                foreach (var resources in (List<Resource>)lists[Resources])
                 {
                     context.Resources.Add(resources);
                 }
@@ -515,7 +559,7 @@ namespace FireWorks
             if (IsSubclassOfRawGeneric(typeof(T), typeof(Deployment))) { path = Deployments; }
             if (IsSubclassOfRawGeneric(typeof(T), typeof(User))) { path = Employees; }
             if (IsSubclassOfRawGeneric(typeof(T), typeof(Vehicle))) { path = Vehicles; }
-            if (IsSubclassOfRawGeneric(typeof(T), typeof(Resources))) { path = Resources; }
+            if (IsSubclassOfRawGeneric(typeof(T), typeof(Resource))) { path = Resources; }
             if (IsSubclassOfRawGeneric(typeof(T), typeof(FireFighter))) { path = Firefighters; }
 
             return path;

@@ -31,7 +31,7 @@ namespace thistimeitwillworkforsure.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.Resources",
+                "dbo.Resource",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -62,7 +62,7 @@ namespace thistimeitwillworkforsure.Migrations
         public override void Down()
         {
             DropTable("dbo.Vehicles");
-            DropTable("dbo.Resources");
+            DropTable("dbo.Resource");
             DropTable("dbo.Humen");
             DropTable("dbo.Deployments");
         }

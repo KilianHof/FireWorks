@@ -25,7 +25,7 @@ namespace FireWorks
         private List<Deployment> AllDeployments;    //erstellt Listen wo alle Objekte der Art gelagert werden.
         private List<User> AllEmployees;
         private List<Vehicle> AllVehicles;
-        private List<Resources> AllResources;
+        private List<Resource> AllResources;
         private List<FireFighter> AllFireFighter;
 
         public UserFunctions(IUserLayer t, object[] lists) { _t = t; Init(lists); }
@@ -35,13 +35,13 @@ namespace FireWorks
             AllDeployments = (List<Deployment>)lists[DEPLOYMENTS];
             AllEmployees = (List<User>)lists[EMPLOYEES];
             AllVehicles = (List<Vehicle>)lists[VEHICLES];
-            AllResources = (List<Resources>)lists[RESOURCES];
+            AllResources = (List<Resource>)lists[RESOURCES];
             AllFireFighter = (List<FireFighter>)lists[FIREFIGHTERS];
         }
         public List<Deployment> GetListDeployments() { return AllDeployments; }
         public List<User> GetListEmployees() { return AllEmployees; }
         public List<Vehicle> GetListVehicles() { return AllVehicles; }
-        public List<Resources> GetListResources() { return AllResources; }
+        public List<Resource> GetListResources() { return AllResources; }
         public List<FireFighter> GetListFireFighter() { return AllFireFighter; }
         public void Routine(string mode)
         {
@@ -78,7 +78,7 @@ namespace FireWorks
                     _t.Display("Choose Base data to work with:<br />" +
                                "(1)Employees<br />" +
                                "(2)Vehicles<br />" +
-                               "(3)Resources<br />" +
+                               "(3)Resource<br />" +
                                "(4)Firefighters<br />");
                     int dataSet = ValidInputRange(_t.GetInt(), 1, 4);
                     _t.Display("(1)View<br />" +
@@ -233,7 +233,7 @@ namespace FireWorks
 
                         Vehicle[] v = new Vehicle[number];
                         FireFighter[] p = new FireFighter[number];
-                        Resources[] r = new Resources[number];
+                        Resource[] r = new Resource[number];
 
                         _t.Display("Where was the Deployment?<br />");
                         string loc = _t.GetString();
@@ -270,7 +270,7 @@ namespace FireWorks
                             }
                         }
                         _t.Display("How many resources were used in the Deployment?<br />");
-                        List<Resources> res = GetListResources();
+                        List<Resource> res = GetListResources();
                         if (res.Count == 0)
                         {
                             _t.Display("It appears as if you have no resources in your basedata<br />" +
@@ -279,7 +279,7 @@ namespace FireWorks
                         else
                         {
                             number = ValidInputRange(_t.GetInt(), 0, res.Count);    //ist die zahl der resourcen valide?
-                            r = new Resources[number];
+                            r = new Resource[number];
                             for (int i = 0; i < number; i++)
                             {
                                 r[i] = res.ElementAt(ObjectSelection(res) - 1);
@@ -338,7 +338,7 @@ namespace FireWorks
         public void GasExaminationCheck()
         {
             bool clear = true;
-            List<Resources> list = GetListResources();
+            List<Resource> list = GetListResources();
             foreach (var item in list)
             {
                 if (item.GetType() == typeof(Gasanalyzer))
@@ -403,7 +403,7 @@ namespace FireWorks
                     switch (dataSet)
                     {
                         case 1:
-                            liste.Add((T)(object)Edit(new User("Firstname", "Lastname", 0, "USER", "15947562")));
+                            liste.Add((T)(object)Edit(new User("Firstname", "Lastname", 0, "USER", "0000")));
                             break;
                         case 2:
                             _t.Display("What kind of Vehicle?" + "<br />" +
@@ -450,7 +450,7 @@ namespace FireWorks
                                     liste.Add((T)(object)Edit(new Distributer("Hose", 0)));
                                     break;
                                 case 5:
-                                    liste.Add((T)(object)Edit(new Resources("Description", 1, "Name")));
+                                    liste.Add((T)(object)Edit(new Resource("Description", 1, "Name")));
                                     break;
                             }
                             break;
@@ -663,10 +663,10 @@ namespace FireWorks
                 if (Number != 0) tmp.EnginePower = Number;
             }
 
-            if (t.GetType() == typeof(Resources))
+            if (t.GetType() == typeof(Resource))
             {
                 _t.Display(" \".\"(dot) for no changes (0 in case of number)" + "<br />");
-                Resources tmp = (Resources)(object)t;
+                Resource tmp = (Resource)(object)t;
 
                 Answer = EditHelperString("Description: " + tmp.Description + "<br />");
                 if (Answer != ".") tmp.Description = Answer;

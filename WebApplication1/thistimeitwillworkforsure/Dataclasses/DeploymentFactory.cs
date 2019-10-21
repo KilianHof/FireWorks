@@ -14,7 +14,7 @@ namespace FireWorks
 
     public interface IDeploy
     {
-        Deployment NewDeployment(string loc, Vehicle[] veh, Resources[] res, FireFighter[] Ff, string com, int num);
+        Deployment NewDeployment(string loc, Vehicle[] veh, Resource[] res, FireFighter[] Ff, string com, int num);
     }
 
 
@@ -30,7 +30,7 @@ namespace FireWorks
         /// <param name="com">Comment</param>
         /// <param name="num">Number</param>
         /// <returns></returns>
-        public Deployment NewDeployment(string loc, Vehicle[] veh, Resources[] res, FireFighter[] Ff, string com, int num)
+        public Deployment NewDeployment(string loc, Vehicle[] veh, Resource[] res, FireFighter[] Ff, string com, int num)
         {
                var tmp = new Deployment(loc, veh, res, Ff, com, num);
             return tmp;
@@ -39,7 +39,7 @@ namespace FireWorks
     public class DeploymentDLL : IDeploy
     {
 
-        public Deployment NewDeployment(string loc, Vehicle[] veh, Resources[] res, FireFighter[] Ff, string com, int num)
+        public Deployment NewDeployment(string loc, Vehicle[] veh, Resource[] res, FireFighter[] Ff, string com, int num)
         {
             Deployer.DeployerProgram tmp = new Deployer.DeployerProgram();
             Deployer.Deployment test = tmp.Main();

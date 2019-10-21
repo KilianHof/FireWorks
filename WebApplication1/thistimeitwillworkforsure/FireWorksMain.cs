@@ -43,7 +43,7 @@ namespace FireWorks
                 stopWatch.Start();
                 Deployment test;
                 List<Deployment> l = (List<Deployment>)lists[0];
-                test = new Deployment("here", new Vehicle[0], new Resources[0], new FireFighter[0], "hi", (l.Count + 1));
+                test = new Deployment("here", new Vehicle[0], new Resource[0], new FireFighter[0], "hi", (l.Count + 1));
                 List<Deployment> list = (List<Deployment>)lists[0];
                 for (int i = 1; i < testsize+1; i++)
                 {
@@ -68,7 +68,7 @@ namespace FireWorks
                 //LLRBTree<int, Deployment> tree = new LLRBTree<int, Deployment>();
                 stopWatch = new Stopwatch();
                 stopWatch.Start();
-                test = new Deployment("here", new Vehicle[0], new Resources[0], new FireFighter[0], "hi", (l.Count+1));
+                test = new Deployment("here", new Vehicle[0], new Resource[0], new FireFighter[0], "hi", (l.Count+1));
                 for (int i = 1; i < testsize+1; i++)
                 {
                     //tree.Insert(i, test);

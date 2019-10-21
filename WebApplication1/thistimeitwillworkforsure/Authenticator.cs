@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.IO;
+using Newtonsoft.Json;
 namespace FireWorks
 {
     /// <summary>
@@ -61,8 +62,13 @@ namespace FireWorks
                     {
                         Employs = context.Users.ToList();
                     }
-                    bool matchingPIN = Employs.Any(User => User.PIN == Input);
-                    User currentuser = Employs.Single(x => x.PIN == Input);
+                    List<User> tmpUsers = new List<User>();
+                    foreach (var User in Employs)
+                    {
+                        tmpUsers.Add(JsonConvert.DeserializeObject<User>(User.JSON));
+                    }
+                    bool matchingPIN = tmpUsers.Any(User => User.PIN == Input);
+                    User currentuser = tmpUsers.Single(x => x.PIN == Input);
                         //from User in Employs.Single
                         //where User.PIN == Input
                         //select User;
