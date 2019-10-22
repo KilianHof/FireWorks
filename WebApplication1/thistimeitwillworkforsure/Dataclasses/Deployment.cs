@@ -150,7 +150,7 @@ namespace FireWorks
                 }
             }
             int numberOfResources = Resources.Length;
-            report += "Desweiteren wurden " + numberOfResources + " Einsatzfahrzeuge benötigt.<br />";
+            report += "Desweiteren wurden " + numberOfResources + " Einsatzmittel benötigt.<br />";
             if (numberOfResources != 0)
             {
                 report += "Genutzte Ressourcen:<br />";

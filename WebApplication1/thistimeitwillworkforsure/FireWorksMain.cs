@@ -9,31 +9,17 @@ using System.Text;
 using System.Threading.Tasks;
 //using RBTREE;
 
-
-
-
-
 namespace FireWorks
 {
     class FireWorksMain
     {
-        
         public void Run()
         {
-
             TUI _t = new TUI();
             FileIO _filer = new FileIO(_t);
-            _filer.CheckForFiles();
             Authenticator auth = new Authenticator(_t, _filer);
             object[] lists = _filer.ReadAllLists(); //liest die Listen in "Arrays" ein
             UserFunctions _uf = new UserFunctions(_t, lists);
-
-
-
-
-            
-
-
 
             if (Globals.debug)
             {
@@ -63,10 +49,7 @@ namespace FireWorks
                 // Get the elapsed time as a TimeSpan value.
                 TimeSpan ts = stopWatch.Elapsed;
                 _t.Display(ts.ToString() + "<br />");
-            
 
-
-            
                 //LLRBTree<int, Deployment> tree = new LLRBTree<int, Deployment>();
                 stopWatch = new Stopwatch();
                 stopWatch.Start();
@@ -90,7 +73,6 @@ namespace FireWorks
                 ts = stopWatch.Elapsed;
                 _t.Display(ts.ToString() + "<br />");
             }
-
             bool loop = true;
             string[] user = auth.LogIn();
             while (loop)
@@ -112,5 +94,4 @@ namespace FireWorks
         public static string textin = "";
         public static int Submitted = 0;
     }
-
 }

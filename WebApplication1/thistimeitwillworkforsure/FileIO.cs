@@ -27,19 +27,6 @@ namespace FireWorks
         private readonly IUserLayer _t;
         public FileIO(IUserLayer tui) { _t = tui; }
         /// <summary>
-        /// Checks if the needed files exist and calls Init() to create missing files.
-        /// </summary>
-        public void CheckForFiles()
-        {
-
-        }
-        /// <summary>
-        /// Intialization of FileIO missing files are created.
-        /// </summary>
-        /// <param name="existing"></param>
-        
-
-        /// <summary>
         /// reads files.
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -299,25 +286,10 @@ namespace FireWorks
                 {
                     tmpFireFighters.Add(JsonConvert.DeserializeObject<FireFighter>(FireFighter.JSON));
                 }
-
+                //
                 return new object[] { tmpDeploys, tmpUsers, Vehicles, Resources, tmpFireFighters };
 
             }
-        }
-        public void SaveListToFile<T>(List<T> liste)
-        {
-
-
-            var query =
-                from User in liste
-                select User;
-            //foreach (User liste in query)
-
-            using (var context = new thistimeitwillworkforsure.DBContext())
-            {
-
-            }
-
         }
         public void SaveAllLists(object[] lists)
         {
