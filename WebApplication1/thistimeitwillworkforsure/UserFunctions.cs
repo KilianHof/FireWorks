@@ -739,7 +739,7 @@ namespace FireWorks
             _t.Display("Options:<br />" +
                        "-v    View Deployments.<br />" +
                        "-d    Generate Deployment.<br />" +
-                       "-g    Set Gasanalyzer examination.<br />" +
+                       "-g    Check Gasanalyzer examination date.<br />" +
                        "-w    Generate Deploymentreport .<br />" +
                        "-q    Quits<br />");
         }

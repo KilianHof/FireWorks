@@ -235,7 +235,7 @@ namespace FireWorks
                     tmpDeploys.Add(JsonConvert.DeserializeObject<Deployment>(Deployment.JSON));
                 }
 
-                List<Resource> Resources;       //need cast
+                List<Resource> Resources;
                 using (var context = new thistimeitwillworkforsure.DBContext())
                 {
                     Resources = context.Resources.ToList();
@@ -247,7 +247,7 @@ namespace FireWorks
                 }
                 Resources = ConvertList<Resource>(tmpResources);
 
-                List<Vehicle> Vehicles;     //need cast
+                List<Vehicle> Vehicles;
                 using (var context = new thistimeitwillworkforsure.DBContext())
                 {
                     Vehicles = context.Vehicles.ToList();
@@ -384,6 +384,8 @@ namespace FireWorks
                     context.Resources.Add(resources);
                 }
                 context.SaveChanges();
+
+                Globals.textout = ""; //resets text
             }
         }
         /// <summary>
