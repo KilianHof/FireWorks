@@ -60,7 +60,6 @@ namespace FireWorks
         {
             return PIN;
         }
-
         public void SetPIN(string value)
         {
             if (!value.ToString().Equals("null"))

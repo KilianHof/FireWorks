@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace FireWorks
 {
     class UserFunctions
-
     {
         private enum UserStates
         {
@@ -224,7 +223,6 @@ namespace FireWorks
                             }
                         }
                     }
-
                     break;
                 case "-d":
                     {
@@ -303,8 +301,6 @@ namespace FireWorks
                             Deployment tmp = new Deployment(DF.Location, DF.Cars, DF.Resources, DF.FireFighters, DF.Comment, DF.Id);
                             liste.Add(tmp);
                         }
-
-
                     }
                     GasExaminationCheck();
                     break;

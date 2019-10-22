@@ -55,7 +55,6 @@ namespace FireWorks
         private string[] CheckPIN()
         {
             string Input = _t.GetString();
-
             if (IsValidInput(Input))
             {
                 {

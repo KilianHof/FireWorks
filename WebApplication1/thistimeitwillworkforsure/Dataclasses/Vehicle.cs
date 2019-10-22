@@ -46,7 +46,6 @@ namespace FireWorks
                 return (Type == p.Type) && (EnginePower == p.EnginePower) && (Seats == p.Seats);
             }
         }
-
         public override int GetHashCode()
         {
             var hashCode = 877455370;
@@ -123,6 +122,7 @@ namespace FireWorks
         public Pkw(string type, int engine, int seats) :
         base(type, engine, seats)
         {
+
         }
     }
 }

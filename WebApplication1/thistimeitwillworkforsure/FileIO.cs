@@ -35,7 +35,6 @@ namespace FireWorks
         {
             bool needCast = false;
             int path = Pathfinder<T>();
-
             List<object> tmp = new List<object>();
             List<T> test = new List<T>();
             object trial;
@@ -118,9 +117,7 @@ namespace FireWorks
                         needCast = true;
                     }
                     test.Add(JSONConverter.JSONToGeneric<T>(line));
-
                 }
-
                 if (needCast) return ConvertList<T>(tmp);
                 return test;
             }
@@ -146,15 +143,12 @@ namespace FireWorks
 
                 lastIndex++;
                 value = value.Substring(lastIndex, value.Length - lastIndex);
-
-
             } while (value[0] == ',');
             lastIndex = value.IndexOf('}') + 1;                            // set last index to end of 
             obj = value.Substring(0, lastIndex);
             toArray.Add(obj);
 
             return toArray.ToArray();
-
         }
         /// <summary>
         /// Used to turn Json strings to Objects.
@@ -286,14 +280,11 @@ namespace FireWorks
                 {
                     tmpFireFighters.Add(JsonConvert.DeserializeObject<FireFighter>(FireFighter.JSON));
                 }
-                //
                 return new object[] { tmpDeploys, tmpUsers, Vehicles, Resources, tmpFireFighters };
-
             }
         }
         public void SaveAllLists(object[] lists)
         {
-
             SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; Initial Catalog = thistimeitwillworkforsure.DBContext; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False");
             con.Open();
             string sql = @"TRUNCATE TABLE Users;";
@@ -409,7 +400,6 @@ namespace FireWorks
                 if (generic == cur) { return true; }
                 toCheck = toCheck.BaseType;
             }
-
             return false;
         }
         /// <summary>

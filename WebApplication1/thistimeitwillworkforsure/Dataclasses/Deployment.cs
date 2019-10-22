@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace FireWorks
 {
     /// <summary>
-    /// Deployment object contains all the information of a given Deployment
+    /// Deployment object contains all the information of a given Deployment.
     /// </summary>
 
     public class Deployment : IComparable
