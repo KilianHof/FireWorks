@@ -23,7 +23,7 @@ namespace FireWorks
         public Authenticator(IUserLayer ux, IDataLayer fil) { _t = ux; filer = fil; }
         private const int _pinLength = 4;
         /// <summary>
-        /// Calls helper functions to ask for a PIN
+        /// Calls helper functions to ask for a PIN.
         /// </summary>
         /// <returns>
         /// String array[2] containing Status and User name for a successful login attempt.
@@ -71,7 +71,6 @@ namespace FireWorks
                     bool matchingPIN = tmpUsers.Any(User => User.PIN == Input);
                     try
                     {
-
                     User currentuser = tmpUsers.Single(x => x.PIN == Input);
                         //from User in Employs.Single
                         //where User.PIN == Input
@@ -80,7 +79,6 @@ namespace FireWorks
                     }
                     catch (Exception)
                     {
-
                         throw;
                     }
                 }
@@ -93,10 +91,10 @@ namespace FireWorks
         }
         /// <summary>
         /// Checks for Length = _pinLength.
-        /// And if the string only contains digits.
+        /// Also checks if the string only contains digits.
         /// </summary>
         /// <param name="toCheck"></param>
-        /// <returns>Returns true for a Valid format.</returns>
+        /// <returns>Returns true for a valid format.</returns>
         public bool IsValidInput(string toCheck)
         {
             if (!(toCheck.Length == _pinLength))

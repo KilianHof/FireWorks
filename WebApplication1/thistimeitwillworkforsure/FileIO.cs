@@ -27,7 +27,7 @@ namespace FireWorks
         private readonly IUserLayer _t;
         public FileIO(IUserLayer tui) { _t = tui; }
         /// <summary>
-        /// reads files.
+        /// Reads files.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns>returns a list of objects of type T</returns>
@@ -125,7 +125,7 @@ namespace FireWorks
             return test;
         }
         /// <summary>
-        /// A helper function used to Disassemble a Json string.
+        /// A helper function used to disassemble a Json string.
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>

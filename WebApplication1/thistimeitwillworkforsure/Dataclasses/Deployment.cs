@@ -74,7 +74,7 @@ namespace FireWorks
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
         /// <summary>
-        /// CompareTo implementation to be able to sort deployments
+        /// CompareTo implementation to be able to sort deployments.
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
@@ -90,10 +90,10 @@ namespace FireWorks
             return 0;
         }
         /// <summary>
-        /// Sums up all used Hoses
+        /// Sums up all used Hoses.
         /// </summary>
         /// <returns>
-        /// returns string containing the summed Hoses
+        /// Returns string containing the summed up Hoses.
         /// </returns>
         public string SumUpHoses()
         {
@@ -120,7 +120,7 @@ namespace FireWorks
             return "B: " + B + " C: " + C + " D: " + D;
         }
         /// <summary>
-        /// Generate a Report in flowng text.
+        /// Generate a report in flowing text.
         /// </summary>
         /// <returns>
         /// A string containing the report.

@@ -21,7 +21,7 @@ namespace FireWorks
     public class DeploymentFactory : IDeploy
     {
         /// <summary>
-        /// Calls the Constructor of Deployment objects with needed params.
+        /// Calls the Constructor of Deployment objects with needed parameters.
         /// </summary>
         /// <param name="loc">Location.</param>
         /// <param name="veh">Vehicles</param>
