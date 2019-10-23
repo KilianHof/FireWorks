@@ -14,7 +14,7 @@ namespace FireWorks
     /// The entered PIN gets compared with each pin in the Users file.
     /// If a match is found the status of the user is returned as well as his name.
     /// </summary>
-    class Authenticator
+    public class Authenticator
     {
         private readonly IUserLayer _t;
 #pragma warning disable IDE0052 // Remove unread private members
@@ -88,7 +88,7 @@ namespace FireWorks
         /// </summary>
         /// <param name="toCheck"></param>
         /// <returns>Returns true for a Valid format.</returns>
-        private bool IsValidInput(string toCheck)
+        public bool IsValidInput(string toCheck)
         {
             if (!(toCheck.Length == _pinLength))
                 return false;

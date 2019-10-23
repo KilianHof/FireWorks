@@ -39,7 +39,7 @@ namespace FireWorks
             program.Run();
         }
     }
-    class TUI : IUserLayer
+    public class TUI : IUserLayer
     {
         private int width = 120;
         private int height = 30;
