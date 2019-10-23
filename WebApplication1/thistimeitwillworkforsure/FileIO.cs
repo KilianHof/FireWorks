@@ -23,7 +23,7 @@ namespace FireWorks
         private const int Vehicles = 2;
         private const int Resources = 3;
         private const int Firefighters = 4;
-
+        
         private readonly IUserLayer _t;
         public FileIO(IUserLayer tui) { _t = tui; }
         /// <summary>

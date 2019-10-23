@@ -69,11 +69,20 @@ namespace FireWorks
                         tmpUsers.Add(JsonConvert.DeserializeObject<User>(User.JSON));
                     }
                     bool matchingPIN = tmpUsers.Any(User => User.PIN == Input);
+                    try
+                    {
+
                     User currentuser = tmpUsers.Single(x => x.PIN == Input);
                         //from User in Employs.Single
                         //where User.PIN == Input
                         //select User;
                     return new string[2] { currentuser.Status, currentuser.FirstName };
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
                 }
             }
             else

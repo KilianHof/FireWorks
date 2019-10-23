@@ -21,7 +21,7 @@ namespace FireWorks
             return JsonConvert.SerializeObject(o, Formatting.None);
         }
         /// <summary>
-        /// Takes JSON and turns into a Deployment object.
+        /// Takes JSON and turns into an object.
         /// </summary>
         /// <param name="str">String thats being converted.</param>
         /// <returns>A object.</returns>
